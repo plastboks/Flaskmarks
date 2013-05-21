@@ -1,12 +1,12 @@
 Flask Bookmarks
 ===============
 
-My simple and self educational Pyramid based bookmark app
+My simple and self educational Flask + sqlalchemy based bookmark app
 
 Install
 =======
 
-Actiate the virtualenv
+Activate the virtualenv (ex: `. venv/bin/activate`)
 
 run `sh deploy.sh`
 
