@@ -1,0 +1,20 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Sign In</h1>
+<div id="login">
+  <form action="" method="post" name="login">
+    {{form.hidden_tag()}}
+    <p>
+      <label>User</label>
+      {{ form.username(size=80) }}
+    </p>
+    <p>
+      <label>Password</label>
+      {{ form.password(size=80) }}
+    </p>
+      <input type="submit" value="Sign in">
+  </form>
+</div>
+{% endblock %}

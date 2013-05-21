@@ -1,0 +1,2 @@
+CSRF_ENABLED = True
+SECRET_KEY = 'super-duper-secret-key'
