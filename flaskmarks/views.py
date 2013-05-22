@@ -16,7 +16,6 @@ from flask.ext.login import (
     )
 
 from flaskmarks import app
-from cryptacular.bcrypt import BCRYPTPasswordManager
 
 from forms import (
     LoginForm,
@@ -35,15 +34,20 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login(): 
-  form = LoginForm()
-  if form.validate_on_submit():
-    u = User.by_username(form.username.data)
-    manager = BCRYPTPasswordManager()
-    if u and manager.check(u.password, form.password.data):
-        flash('Successful login request for %s' % (form.username.data))
-    else:
-        flash('Failed login request for %s' % (form.username.data))
-    return redirect('/index')
-  return render_template('login.html',
-          title = 'Login',
-          form = form)
+    form = LoginForm()
+    if form.validate_on_submit():
+        u = User.by_username(form.username.data)
+        if u and u.authenticate_user(form.password.data):
+            flash('Successful login request for %s' % (form.username.data))
+            #login_user(u)
+        else:
+            flash('Failed login request for %s' % (form.username.data))
+        return redirect('/index')
+    return render_template('login.html',
+            title = 'Login',
+            form = form)
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
