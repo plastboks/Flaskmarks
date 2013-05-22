@@ -8,9 +8,14 @@ class User(db.Model):
     email = db.Column(db.Unicode(255), unique=True, nullable=False)
     password = db.Column(db.Unicode(255), nullable=False)
     last_logged = db.Column(db.DateTime)
-    bookmarks = db.relationship('Bookmark', backref='owner_id', lazy='dynamic')
+    #bookmarks = db.relationship('Bookmark', backref='owner_id', lazy='dynamic')
+
     def __repr__(self):
         return '<User %r>' % (self.username)
+
+    @classmethod
+    def by_username(self, username):
+        return self.query.filter(User.username == username).first()
 
 
 class Bookmark(db.Model):
