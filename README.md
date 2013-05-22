@@ -10,6 +10,12 @@ Activate the virtualenv (ex: `. venv/bin/activate`)
 
 run `sh deploy.sh`
 
+run `python db_create.py`
+
+run `python db_migrate.py`
+
+run `python db_upgrade.py`
+
 make a copy of config.py.example to config.py and edit accordingly, then run `python run.py`
 
 Credits

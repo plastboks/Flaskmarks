@@ -37,3 +37,7 @@ nosetests.xml
 
 # app spesific ignores
 config.py
+db_repository
+
+# database spesific ignores
+*.sqlite
