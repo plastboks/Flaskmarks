@@ -47,14 +47,17 @@ from models import (
 def load_user(id):
     return User.query.get(int(id))
 
+
 @app.before_request
 def before_request():
     g.user = current_user
+
 
 @app.errorhandler(401)
 def unauthorized(error):
     flash('Unauthorized access')
     return redirect(url_for('login'))
+
 
 @app.route('/')
 @app.route('/index')
@@ -108,4 +111,4 @@ def logout():
     logout_user()
     identity_changed.send(current_app._get_current_object(),
                           identity=AnonymousIdentity())
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
