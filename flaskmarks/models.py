@@ -10,9 +10,6 @@ class User(db.Model):
     password = db.Column(db.Unicode(255), nullable=False)
     last_logged = db.Column(db.DateTime)
 
-    def __repr__(self):
-        return '<User %r>' % (self.username)
-
     @classmethod
     def by_username(self, username):
         return self.query.filter(User.username == username).first()
@@ -20,6 +17,21 @@ class User(db.Model):
     def authenticate_user(self, password):
         manager = BCRYPTPasswordManager()
         return manager.check(self.password, password)
+
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return True
+
+    def get_id(self):
+        return unicode(self.id)
+
+    def __repr__(self):
+        return '<User %r>' % (self.username)
 
 
 class Bookmark(db.Model):

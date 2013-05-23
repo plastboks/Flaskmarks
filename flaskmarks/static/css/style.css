@@ -1,0 +1,14 @@
+body {
+    width: 650px;
+    margin: 0 auto;
+}
+
+#header ul {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+#header ul li {
+    display: inline;
+}

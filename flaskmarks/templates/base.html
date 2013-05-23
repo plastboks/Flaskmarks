@@ -1,8 +1,23 @@
-<html>
-  <head>
-    <title>Bookmarkapp - {{title}}</title>
-  </head>
-  <body>
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title>Bookmarkapp - {{title}}</title>
+  <link href="/static/css/normalize.css" rel="stylesheet" media="screen">
+  <link href="/static/css/style.css" rel="stylesheet" media="screen">
+</head>
+<body>
+  <div id="header">
+    <ul>
+        {% if g.user.is_authenticated() %}
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        {% else %}
+        <li><a href="{{ url_for('login') }}">Login</a></li>
+        <li><a href="{{ url_for('register') }}">Register</a></li>
+        {% endif %}
+    </ul>
+  </div>
   {% with messages = get_flashed_messages() %}
   {% if messages %}
   <ul>
@@ -14,5 +29,5 @@
   {% endwith %}
   {% block content %}
   {% endblock %}
-  </body>
+</body>
 </html>
