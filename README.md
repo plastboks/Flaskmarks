@@ -18,10 +18,13 @@ run `python db_upgrade.py`
 
 make a copy of config.py.example to config.py and edit accordingly, then run `python run.py`
 
+
 Credits
 =======
 
 This app is heavily inspired by the flaks sqlalchemy tutorial @ http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
 
 
-
+Useful Links
+============
+* http://pythonhosted.org/Flask-Principal/
