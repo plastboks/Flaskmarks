@@ -6,6 +6,7 @@ from flask import (
     url_for,
     g,
     request,
+    current_app,
     )
 
 from flask.ext.login import (
@@ -13,6 +14,13 @@ from flask.ext.login import (
     logout_user,
     current_user,
     login_required,
+    )
+
+from flask.ext.principal import (
+    Principal,
+    Identity,
+    AnonymousIdentity,
+    identity_changed,
     )
 
 from cryptacular.bcrypt import (
@@ -43,12 +51,15 @@ def load_user(id):
 def before_request():
     g.user = current_user
 
+@app.errorhandler(401)
+def unauthorized(error):
+    flash('Unauthorized access')
+    return redirect(url_for('login'))
 
 @app.route('/')
 @app.route('/index')
+@login_required
 def index():
-    if not g.user.is_authenticated():
-        return redirect(url_for('login'))
     user = g.user
     return render_template('index.html',
         title = 'Home',
@@ -80,6 +91,8 @@ def login():
         if u and u.authenticate_user(form.password.data):
             flash('Successful login request for %s' % (form.username.data))
             login_user(u)
+            identity_changed.send(current_app._get_current_object(),
+                                  identity=Identity(u.id))
             return redirect(url_for('index'))
         else:
             flash('Failed login request for %s' % (form.username.data))
@@ -90,6 +103,9 @@ def login():
 
 
 @app.route('/logout')
+@login_required
 def logout():
     logout_user()
+    identity_changed.send(current_app._get_current_object(),
+                          identity=AnonymousIdentity())
     return redirect(url_for('index'))

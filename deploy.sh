@@ -1,5 +1,6 @@
 pip install cryptacular
 pip install sqlalchemy==0.7.10
+pip install flask-principal
 pip install flask
 pip install flask-login
 pip install flask-sqlalchemy
