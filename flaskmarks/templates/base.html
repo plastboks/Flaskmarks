@@ -9,7 +9,7 @@
 <body>
   <div id="header">
     <p>
-        <ul id="primary Menu">
+        <ul class="primarymenu">
             {% if g.user.is_authenticated() %}
             <li><a href="{{ url_for('index') }}">Home</a></li>
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
@@ -20,10 +20,10 @@
         </ul>
     </p>
     <p>
-        <ul>
+        <ul class="secondarymenu">
         {% block secondarymenu %}
             {% if g.user.is_authenticated() %}
-                <li><a href="{{ url_for('new_bookmark') }}" >New Bookmark</a></li>
+                <li><a href="{{ url_for('new_bookmark') }}">New Bookmark</a></li>
             {% endif %}
         {% endblock %}
         </ul>

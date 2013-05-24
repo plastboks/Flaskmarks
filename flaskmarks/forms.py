@@ -38,10 +38,10 @@ class RegisterForm(Form):
 
 class NewBookmarkForm(Form):
     title = TextField('title',
-                      [validators.Length(min=4, max=320)],
+                      [validators.Length(min=4, max=255)],
                       filters=[strip_filter])
     url = TextField('url',
-                    [validators.Length(min=4, max=320),
+                    [validators.Length(min=4, max=512),
                      validators.URL(require_tld=False,
                                     message='Not a valid URL')],
                     filters=[strip_filter])

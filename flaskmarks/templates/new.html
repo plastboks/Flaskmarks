@@ -1,6 +1,4 @@
-<!-- extend from base layout -->
 {% extends "base.html" %}
-
 {% block content %}
 <h1>Add new bookmark</h1>
 <div id="login">
@@ -21,7 +19,7 @@
       {{ form.url.label('URL') }} <br />
       {{ form.url(size=20) }}
     </p>
-      <input type="submit" value="Submit">
+      <input type="submit" value="Add bookmark" />
   </form>
 </div>
 {% endblock %}

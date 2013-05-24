@@ -1,10 +1,8 @@
-<!-- extend from base layout -->
 {% extends "base.html" %}
-
 {% block content %}
 <h1>Sign In</h1>
 <div id="login">
-  <form action="{{ url_for('login') }}" method="post" name="login">
+  <form action="{{ url_for('login') }}" method="POST">
     {{form.hidden_tag()}}
     <p>
       {{ form.username.label('Username')}} <br />
