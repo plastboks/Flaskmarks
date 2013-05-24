@@ -7,6 +7,7 @@ from flask import (
     g,
     request,
     current_app,
+    abort,
     )
 
 from flask.ext.login import (
@@ -60,6 +61,12 @@ def unauthorized(error):
     return redirect(url_for('login'))
 
 
+@app.errorhandler(403)
+def forbidden(error):
+    flash('Forbidden access')
+    return redirect(url_for('index'))
+
+
 @app.route('/')
 @app.route('/index')
 @login_required
@@ -90,6 +97,38 @@ def new_bookmark():
                             form = form)
 
 
+@app.route('/bookmark/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_bookmark(id):
+    u = g.user
+    b = Bookmark.by_id(u.id, id) 
+    form = NewBookmarkForm(obj=b)
+    if not b:
+        abort(403)
+    if form.validate_on_submit():
+        form.populate_obj(b)
+        db.session.add(b)
+        db.session.commit()
+        flash('Bookmark %s updated' % (form.title.data))
+        return redirect(url_for('index'))
+    return render_template('edit.html',
+                           title = 'Edit',
+                           form = form)
+
+
+@app.route('/bookmark/delete/<int:id>')
+@login_required
+def delete_bookmark(id):
+    u = g.user
+    b = Bookmark.by_id(u.id, id) 
+    if b:
+        db.session.delete(b)
+        db.session.commit()
+        flash('Bookmark %s deleted' % (b.title))
+        return redirect(url_for('index'))
+    abort(403)
+
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
@@ -108,7 +147,9 @@ def register():
 
 
 @app.route('/login', methods=['GET', 'POST'])
-def login(): 
+def login():
+    if g.user.is_authenticated():
+        return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
         u = User.by_username(form.username.data)

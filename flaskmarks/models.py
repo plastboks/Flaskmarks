@@ -1,4 +1,5 @@
 from flaskmarks import db
+from sqlalchemy import and_
 from cryptacular.bcrypt import BCRYPTPasswordManager
 import datetime
 
@@ -47,6 +48,10 @@ class Bookmark(db.Model):
     @classmethod
     def my_bookmarks(self, userid):
         return self.query.filter(self.owner_id == userid).all()
+
+    @classmethod
+    def by_id(self, oID, bID):
+        return self.query.filter(and_(self.id == bID, self.owner_id == oID)).first()
     
     def __repr__(self):
         return '<Bookmark %r>' % (self.title)

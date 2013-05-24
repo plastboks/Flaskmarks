@@ -45,3 +45,4 @@ class NewBookmarkForm(Form):
                      validators.URL(require_tld=False,
                                     message='Not a valid URL')],
                     filters=[strip_filter])
+
