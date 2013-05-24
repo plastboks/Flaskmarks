@@ -8,15 +8,26 @@
 </head>
 <body>
   <div id="header">
-    <ul>
-        {% if g.user.is_authenticated() %}
-        <li><a href="{{ url_for('index') }}">Home</a></li>
-        <li><a href="{{ url_for('logout') }}">Logout</a></li>
-        {% else %}
-        <li><a href="{{ url_for('login') }}">Login</a></li>
-        <li><a href="{{ url_for('register') }}">Register</a></li>
-        {% endif %}
-    </ul>
+    <p>
+        <ul id="primary Menu">
+            {% if g.user.is_authenticated() %}
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% else %}
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('register') }}">Register</a></li>
+            {% endif %}
+        </ul>
+    </p>
+    <p>
+        <ul>
+        {% block secondarymenu %}
+            {% if g.user.is_authenticated() %}
+                <li><a href="{{ url_for('new_bookmark') }}" >New Bookmark</a></li>
+            {% endif %}
+        {% endblock %}
+        </ul>
+    </p>
   </div>
   {% with messages = get_flashed_messages() %}
   {% if messages %}

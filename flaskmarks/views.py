@@ -35,6 +35,7 @@ from flaskmarks import (
 from forms import (
     LoginForm,
     RegisterForm,
+    NewBookmarkForm,
     )
 
 from models import (
@@ -63,10 +64,30 @@ def unauthorized(error):
 @app.route('/index')
 @login_required
 def index():
-    user = g.user
+    u = g.user
+    b = Bookmark.my_bookmarks(u.id)
     return render_template('index.html',
-        title = 'Home',
-        user = user)
+                            title = 'Home',
+                            user = u,
+                            bookmarks = b)
+
+
+@app.route('/bookmark/new', methods=['GET', 'POST'])
+@login_required
+def new_bookmark():
+    form = NewBookmarkForm()
+    if form.validate_on_submit():
+        u = g.user
+        b = Bookmark()
+        form.populate_obj(b)
+        b.owner_id = u.id
+        db.session.add(b)
+        db.session.commit()
+        flash('New bookmark %s added' % (form.title.data))
+        return redirect(url_for('index'))
+    return render_template('new.html',
+                            title = 'New',
+                            form = form)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -80,10 +101,10 @@ def register():
         db.session.add(u)
         db.session.commit()
         flash('New user %s registered' % (form.username.data))
-        return redirect(url_for('index'))
+        return redirect(url_for('login'))
     return render_template('register.html',
-                           form = form,
-                           title = 'Register')
+                            form = form,
+                            title = 'Register')
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -101,8 +122,8 @@ def login():
             flash('Failed login request for %s' % (form.username.data))
             return redirect(url_for('login'))
     return render_template('login.html',
-                           title = 'Login',
-                           form = form)
+                            title = 'Login',
+                            form = form)
 
 
 @app.route('/logout')

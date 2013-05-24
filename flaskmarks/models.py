@@ -43,6 +43,10 @@ class Bookmark(db.Model):
     url = db.Column(db.Unicode(512), nullable=False)
     created = db.Column(db.DateTime)
     updated = db.Column(db.DateTime)
-
+    
+    @classmethod
+    def my_bookmarks(self, userid):
+        return self.query.filter(self.owner_id == userid).all()
+    
     def __repr__(self):
         return '<Bookmark %r>' % (self.title)

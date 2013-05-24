@@ -35,3 +35,13 @@ class RegisterForm(Form):
     confirm = PasswordField('confirm',
                             filters=[strip_filter])
 
+
+class NewBookmarkForm(Form):
+    title = TextField('title',
+                      [validators.Length(min=4, max=320)],
+                      filters=[strip_filter])
+    url = TextField('url',
+                    [validators.Length(min=4, max=320),
+                     validators.URL(require_tld=False,
+                                    message='Not a valid URL')],
+                    filters=[strip_filter])

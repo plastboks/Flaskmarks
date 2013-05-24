@@ -3,8 +3,8 @@
 
 {% block content %}
 <h1>Register</h1>
-<div id="login">
-  <form action="{{ url_for('register') }}" method="post" name="login">
+<div id="register">
+  <form action="{{ url_for('register') }}" method="POST">
     {{form.hidden_tag()}}
     <p>
       {% for error in form.username.errors %}
@@ -32,7 +32,7 @@
       {{ form.confirm.label('Confirm Password')}} <br />
       {{ form.confirm(size=20) }}
     </p>
-      <input type="submit" value="Sign in">
+      <input type="submit" value="Register">
   </form>
 </div>
 {% endblock %}

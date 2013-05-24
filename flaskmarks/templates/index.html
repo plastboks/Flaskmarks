@@ -1,5 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
+{% if not bookmarks %}
 <h1>Hello {{ g.user.username }}</h1>
-<h2>Welcome to this awesome bookmark app</h2>
+<h2>Welcome to this awesome bookmark app.</h2> 
+<h3>Click "New bookmark" to add a bookmark</h3>
+{% else %}
+    <h1>My bookmarks </h1>
+    <table id="bookmarks">
+        <thead>
+            <th>Title</th>
+            <th>URL</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+            {% for bookmark in bookmarks %}
+                <tr>
+                    <td>
+                        {{ bookmark.title }}
+                    </td>
+                    <td>
+                        <a href="{{ bookmark.url }}" class="clickIncrement">
+                            {{ bookmark.url }}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#edit" class="">
+                            Edit
+                        </a> 
+                        <a href="#delete" class="">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
 {% endblock %}

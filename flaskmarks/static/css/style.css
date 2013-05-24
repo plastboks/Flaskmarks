@@ -12,3 +12,11 @@ body {
 #header ul li {
     display: inline;
 }
+
+#bookmarks {
+    width: 100%;
+}
+
+#bookmarks th {
+    text-align: left;
+}
