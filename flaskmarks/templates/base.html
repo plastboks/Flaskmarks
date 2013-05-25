@@ -10,6 +10,7 @@
 </head>
 <body>
   <div id="header">
+    {% if g.user.is_authenticated() %}
     <div id="search">
         <form action="/search" method="GET">
           <label for="q">Search</label>
@@ -20,6 +21,7 @@
         <a href="/index">Reset search</a>
         {% endif %}
     </div>
+    {% endif %}
     <div id="primsection">
         <ul class="primarymenu">
             {% if g.user.is_authenticated() %}
