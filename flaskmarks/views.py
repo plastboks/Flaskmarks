@@ -20,13 +20,6 @@ from flask.ext.login import (
     login_required,
     )
 
-from flask.ext.principal import (
-    Principal,
-    Identity,
-    AnonymousIdentity,
-    identity_changed,
-    )
-
 from cryptacular.bcrypt import (
     BCRYPTPasswordManager as bMan,
     )
@@ -243,8 +236,6 @@ def login():
             db.session.commit()
             flash('Successful login request for %s' % (form.username.data))
             login_user(u)
-            identity_changed.send(current_app._get_current_object(),
-                                  identity=Identity(u.id))
             return redirect(url_for('index'))
         else:
             flash('Failed login request for %s' % (form.username.data))
@@ -257,7 +248,5 @@ def login():
 @login_required
 def logout():
     logout_user()
-    identity_changed.send(current_app._get_current_object(),
-                          identity=AnonymousIdentity())
     return redirect(url_for('login'))
 
