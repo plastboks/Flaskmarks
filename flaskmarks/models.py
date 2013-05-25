@@ -42,7 +42,6 @@ class Bookmark(db.Model):
     __tablename__ = 'bookmarks'
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    owner_inc = db.Column(db.Integer)
     title = db.Column(db.Unicode(255), nullable=False)
     url = db.Column(db.Unicode(512), nullable=False)
     tags = db.Column(db.Unicode(512))
