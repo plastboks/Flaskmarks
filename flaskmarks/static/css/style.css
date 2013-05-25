@@ -13,10 +13,32 @@ body {
     display: inline;
 }
 
+#header #search {
+  float: right;
+  font-size: 0.9em;
+}
+
+#header #primsectoin {
+
+}
+
+#header #secsection {
+
+}
+
 #bookmarks {
     width: 100%;
+    font-size: 0.9em;
 }
 
 #bookmarks th {
     text-align: left;
+}
+
+#bookmarks .tagscolumn {
+    font-size: 0.75em;
+}
+
+.bookmarkform input[type='text'] {
+    width: 100%;
 }

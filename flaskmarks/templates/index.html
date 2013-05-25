@@ -1,39 +1,58 @@
 {% extends "base.html" %}
 {% block content %}
-{% if not bookmarks %}
+{% if not bookmarks and not 'Results' in header %}
 <h1>Hello {{ g.user.username }}</h1>
 <h2>Welcome to this awesome bookmark app.</h2> 
 <h3>Click "New bookmark" to add a bookmark</h3>
 {% else %}
-    <h1>My bookmarks </h1>
-    <table id="bookmarks">
-        <thead>
-            <th>Title</th>
-            <th>URL</th>
-            <th>Action</th>
-        </thead>
-        <tbody>
-            {% for bookmark in bookmarks %}
-                <tr>
-                    <td>
-                        {{ bookmark.title }}
-                    </td>
-                    <td>
-                        <a href="{{ bookmark.url }}" class="clickIncrement">
-                            {{ bookmark.url }}
-                        </a>
-                    </td>
-                    <td>
-                        <a href="{{ url_for('edit_bookmark', id=bookmark.id) }}" class="">
-                            Edit
-                        </a> 
-                        <a href="{{ url_for('delete_bookmark', id=bookmark.id) }}" class="">
-                            Delete
-                        </a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <h1>{{ header }}</h1>
+    {% if bookmarks %}
+      <table id="bookmarks">
+          <thead>
+              <th>Title</th>
+              <th>URL</th>
+              <th>Tags</th>
+              <th>Action</th>
+          </thead>
+          <tbody>
+              {% for bookmark in bookmarks %}
+                  <tr>
+                      <td class='titlecolumn'>
+                          {{ bookmark.title }}
+                      </td>
+                      <td class='linkcolumn'>
+                          <a href="{{ bookmark.url }}" class="clickIncrement" target="_blank" data-id="{{ bookmark.id }}">
+                              Click
+                          </a>
+                      </td>
+                      <td class='tagscolumn'>
+                        {% if bookmark.tags %}
+                          {% for w in bookmark.tags.split(' ') %}
+                            <a href="{{ url_for('search_tags', slug = w) }}">{{ w }}</a>
+                          {% endfor %}
+                        {% endif %}
+                      </td>
+                      <td class='actioncolumn'>
+                          <a href="{{ url_for('edit_bookmark', id=bookmark.id) }}" class="edit">
+                              Edit
+                          </a> 
+                          <a href="{{ url_for('delete_bookmark', id=bookmark.id) }}" class="delete">
+                              Delete
+                          </a>
+                      </td>
+                  </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+    {% else %}
+      <h2>No results</h2>
+      <h3>Try again</h3>
+      <form action="/search" method="GET">
+        <label for="q">Search</label>
+        <input name="q" value="{{ request.args['q'] }}" type="text"/>
+        <input type="submit" value="Search" />
+      </form>
+      <a href="/index">Reset search</a>
+    {% endif %}
 {% endif %}
 {% endblock %}

@@ -45,4 +45,6 @@ class NewBookmarkForm(Form):
                      validators.URL(require_tld=False,
                                     message='Not a valid URL')],
                     filters=[strip_filter])
-
+    tags = TextField('tags',
+                      [validators.Length(min=0, max=255)],
+                      filters=[strip_filter])

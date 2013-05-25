@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Add new bookmark</h1>
-<div id="login">
+<div id="new" class="bookmarkform">
   <form action="{{ url_for('new_bookmark') }}" method="POST">
     {{form.hidden_tag()}}
     <p>
@@ -15,9 +15,15 @@
       {% for error in form.url.errors %}
         {{ error }} <br />
       {% endfor %}
-      {{ form.url.error }}
       {{ form.url.label('URL') }} <br />
       {{ form.url(size=20) }}
+    </p>
+    <p>
+      {% for error in form.tags.errors %}
+        {{ error }} <br />
+      {% endfor %}
+      {{ form.tags.label('Tags') }} <br />
+      {{ form.tags(size=20) }}
     </p>
       <input type="submit" value="Add bookmark" />
   </form>
