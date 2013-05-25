@@ -42,16 +42,21 @@
         </ul>
     </div>
   </div>
-  {% with messages = get_flashed_messages() %}
-  {% if messages %}
-  <ul>
-  {% for message in messages %}
-      <li>{{ message }} </li>
-  {% endfor %}
-  </ul>
-  {% endif %}
-  {% endwith %}
-  {% block content %}
-  {% endblock %}
+  <div id="content">
+      <div id="flashmessages">
+          {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }} </li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+          {% endwith %}
+      </div>
+      {% block content %}
+      {% endblock %}
+  </div>
+  <div id="footer"></div>
 </body>
 </html>

@@ -39,8 +39,8 @@ from flaskmarks import (
 
 from forms import (
     LoginForm,
-    RegisterForm,
-    NewBookmarkForm,
+    UserForm,
+    BookmarkForm,
     )
 
 from models import (
@@ -92,7 +92,7 @@ def index():
 @app.route('/bookmark/new', methods=['GET', 'POST'])
 @login_required
 def new_bookmark():
-    form = NewBookmarkForm()
+    form = BookmarkForm()
     if form.validate_on_submit():
         u = g.user
         b = Bookmark()
@@ -116,7 +116,7 @@ def new_bookmark():
 def edit_bookmark(id):
     u = g.user
     b = Bookmark.by_id(u.id, id) 
-    form = NewBookmarkForm(obj=b)
+    form = BookmarkForm(obj=b)
     if not b:
         abort(403)
     if form.validate_on_submit():
@@ -197,7 +197,7 @@ def ajax_bookmark_inc():
 @login_required
 def profile():
     u = g.user
-    form = RegisterForm(obj=u)
+    form = UserForm(obj=u)
     if form.validate_on_submit():
         pm = bMan()
         form.populate_obj(u)
@@ -212,7 +212,7 @@ def profile():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    form = RegisterForm()
+    form = UserForm()
     if form.validate_on_submit():
         u = User()
         pm = bMan()

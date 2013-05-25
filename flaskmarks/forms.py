@@ -11,15 +11,15 @@ strip_filter = lambda x: x.strip() if x else None
 
 class LoginForm(Form):
     username = TextField('username',
-                      [validators.Length(min=1, max=255)],
-                      filters=[strip_filter])
+                         [validators.Length(min=1, max=255)],
+                         filters=[strip_filter])
     password = PasswordField('password',
-                          [validators.Length(min=1, max=255)],
-                          filters=[strip_filter])
+                             [validators.Length(min=1, max=255)],
+                             filters=[strip_filter])
     remember_me = BooleanField('remember_me', default=False)
   
 
-class RegisterForm(Form):
+class UserForm(Form):
     username = TextField('username',
                          [validators.Length(min=4, max=32)],
                          filters=[strip_filter])
@@ -36,7 +36,7 @@ class RegisterForm(Form):
                             filters=[strip_filter])
 
 
-class NewBookmarkForm(Form):
+class BookmarkForm(Form):
     title = TextField('title',
                       [validators.Length(min=4, max=255)],
                       filters=[strip_filter])
