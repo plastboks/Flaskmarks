@@ -1,4 +1,4 @@
-from flaskmarks import db
+from flaskmarks import db, config
 from sqlalchemy import (
     and_,
     or_,
@@ -56,7 +56,7 @@ class Bookmark(db.Model):
     def my_bookmarks(self, page, userid):
         return self.query.filter(self.owner_id == userid)\
                          .order_by(desc(self.clicks))\
-                         .paginate(page, 30, False)
+                         .paginate(page, config['ITEMS_PER_PAGE'], False)
 
     @classmethod
     def by_id(self, oID, bID):
@@ -71,7 +71,8 @@ class Bookmark(db.Model):
         return self.query.filter(and_(
                                  self.tags.like(tag), 
                                  self.owner_id == oID))\
-                         .paginate(page, 30, False)
+                         .order_by(desc(self.clicks))\
+                         .paginate(page, config['ITEMS_PER_PAGE'], False)
     
     @classmethod
     def by_string(self, page, oID, string):
@@ -79,7 +80,8 @@ class Bookmark(db.Model):
         return self.query.filter(self.owner_id == oID)\
                          .filter(or_(self.title.like(string),\
                                      self.url.like(string)))\
-                         .paginate(page, 30, False)
+                         .order_by(desc(self.clicks))\
+                         .paginate(page, config['ITEMS_PER_PAGE'], False)
 
     def __repr__(self):
         return '<Bookmark %r>' % (self.title)

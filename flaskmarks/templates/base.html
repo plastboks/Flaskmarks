@@ -30,7 +30,9 @@
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
             {% else %}
             <li><a href="{{ url_for('login') }}">Login</a></li>
+            {% if config['CAN_REGISTER'] %}
             <li><a href="{{ url_for('register') }}">Register</a></li>
+            {% endif %}
             {% endif %}
         </ul>
     </div>

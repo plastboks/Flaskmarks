@@ -3,6 +3,12 @@ body {
     margin: 0 auto;
 }
 
+a {
+    text-decoration: none;  
+    color: dimgray;
+}
+
+
 /**
  *
  * Header area
@@ -19,16 +25,15 @@ body {
 }
 
 #header #search {
-  float: right;
-  font-size: 0.9em;
+    float: right;
+    font-size: 0.9em;
 }
 
-#header #primsectoin {
-
+#header #primsection {
+    margin-top: 10px;
 }
 
 #header #secsection {
-
 }
 
 
@@ -53,24 +58,26 @@ body {
  */
 
 #flashmessages ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 #flashmessages li {
+    display: block;
+    margin: 5px 0px;
 }
 
 #flashmessages ul .error {
-  border: 1px solid red;
-  padding: 5px;
-  background: salmon;
+    border: 1px solid red;
+    padding: 5px;
+    background: salmon;
 }
 
 #flashmessages ul .info {
-  border: 1px solid green;
-  padding: 5px;
-  background: greenyellow;
+    border: 1px solid green;
+    padding: 5px;
+    background: greenyellow;
 }
 
 #bookmarks {

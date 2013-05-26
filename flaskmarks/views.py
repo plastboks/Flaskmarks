@@ -200,6 +200,8 @@ def profile():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    if not app.config['CAN_REGISTER']:
+        abort(403)
     form = UserForm()
     if form.validate_on_submit():
         u = User()
