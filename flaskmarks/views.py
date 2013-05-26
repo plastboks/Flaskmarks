@@ -57,13 +57,13 @@ def before_request():
 
 @app.errorhandler(401)
 def unauthorized(error):
-    flash('Unauthorized access')
+    flash('Unauthorized access', category='error')
     return redirect(url_for('login'))
 
 
 @app.errorhandler(403)
 def forbidden(error):
-    flash('Forbidden access')
+    flash('Forbidden access', category='error')
     return redirect(url_for('index'))
 
 
@@ -96,7 +96,7 @@ def new_bookmark():
         b.clicks = 0
         db.session.add(b)
         db.session.commit()
-        flash('New bookmark %s added' % (form.title.data))
+        flash('New bookmark %s added' % (form.title.data), category='info')
         return redirect(url_for('index'))
     return render_template('new.html',
                             title = 'New',
@@ -114,7 +114,7 @@ def edit_bookmark(id):
         b.updated = datetime.utcnow()
         db.session.add(b)
         db.session.commit()
-        flash('Bookmark %s updated' % (form.title.data))
+        flash('Bookmark %s updated' % (form.title.data), category='info')
         return redirect(url_for('index'))
     return render_template('edit.html',
                            title = 'Edit',
@@ -127,7 +127,7 @@ def delete_bookmark(id):
     if b:
         db.session.delete(b)
         db.session.commit()
-        flash('Bookmark %s deleted' % (b.title))
+        flash('Bookmark %s deleted' % (b.title), category='info')
         return redirect(url_for('index'))
     abort(403)
 
@@ -192,7 +192,7 @@ def profile():
         u.password = pm.encode(form.password.data)
         db.session.add(u)
         db.session.commit()
-        flash('User %s updated' % (form.username.data))
+        flash('User %s updated' % (form.username.data), category='info')
         return redirect(url_for('login'))
     return render_template('profile.html',
                             form = form,
@@ -208,7 +208,7 @@ def register():
         u.password = pm.encode(form.password.data)
         db.session.add(u)
         db.session.commit()
-        flash('New user %s registered' % (form.username.data))
+        flash('New user %s registered' % (form.username.data), category='info')
         return redirect(url_for('login'))
     return render_template('register.html',
                             form = form,
@@ -229,11 +229,13 @@ def login():
             u.last_logged = datetime.utcnow()
             db.session.add(u)
             db.session.commit()
-            flash('Successful login request for %s' % (u.username))
+            flash('Successful login request for %s' % (u.username),\
+                  category='info')
             login_user(u)
             return redirect(url_for('index'))
         else:
-            flash('Failed login request for %s' % (form.username.data))
+            flash('Failed login request for %s' % (form.username.data),\
+                  category='error')
             return redirect(url_for('login'))
     return render_template('login.html',
                             title = 'Login',
