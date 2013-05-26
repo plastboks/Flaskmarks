@@ -1,6 +1,7 @@
 from flaskmarks import db
 from sqlalchemy import (
     and_,
+    or_,
     desc,
     )
 from cryptacular.bcrypt import BCRYPTPasswordManager
@@ -15,8 +16,9 @@ class User(db.Model):
     last_logged = db.Column(db.DateTime)
 
     @classmethod
-    def by_username(self, username):
-        return self.query.filter(User.username == username).first()
+    def by_uname_or_email(self, uname):
+        return self.query.filter(or_(User.username == uname,\
+                                     User.email == uname)).first()
 
     def authenticate_user(self, password):
         manager = BCRYPTPasswordManager()

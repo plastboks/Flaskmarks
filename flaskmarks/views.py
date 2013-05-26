@@ -229,12 +229,12 @@ def login():
         return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
-        u = User.by_username(form.username.data)
+        u = User.by_uname_or_email(form.username.data)
         if u and u.authenticate_user(form.password.data):
             u.last_logged = datetime.utcnow()
             db.session.add(u)
             db.session.commit()
-            flash('Successful login request for %s' % (form.username.data))
+            flash('Successful login request for %s' % (u.username))
             login_user(u)
             return redirect(url_for('index'))
         else:
