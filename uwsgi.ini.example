@@ -1,0 +1,10 @@
+[uwsgi]
+socket = /tmp/flaskmarks.sock
+master = true
+processes = 1
+threads = 2
+module = flaskmarks
+callable = app
+virtualenv = ..
+uid = www-data
+gid = www-data

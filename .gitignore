@@ -38,6 +38,8 @@ nosetests.xml
 # app spesific ignores
 config.py
 db_repository
+uwsgi.ini
 
 # database spesific ignores
 *.sqlite
+

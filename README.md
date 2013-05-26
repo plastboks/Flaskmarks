@@ -21,6 +21,19 @@ run `python db_upgrade.py`
 then at last run `python run.py`
 
 
+Deploy
+======
+
+make a cope of uwsgi.ini.example to uwsgi.ini and edit accordingly.
+
+install uwsgi `pip install uwsgi` globaly
+
+copy flaskmarks.nginx.example to your nginx sites folder and enable
+
+run `uwsgi uwsgi.ini`
+
+restart nginx
+
 
 Credits
 =======
