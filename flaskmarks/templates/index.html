@@ -12,6 +12,7 @@
               <th>Title</th>
               <th>URL</th>
               <th>Tags</th>
+              <th>Clicks</th>
               <th>Action</th>
           </thead>
           <tbody>
@@ -31,6 +32,9 @@
                             <a href="{{ url_for('search_tags', slug = w) }}">{{ w }}</a>
                           {% endfor %}
                         {% endif %}
+                      </td>
+                      <td>
+                        <span>{{ bookmark.clicks }}</span>
                       </td>
                       <td class='actioncolumn'>
                           <a href="{{ url_for('edit_bookmark', id=bookmark.id) }}" class="edit">
