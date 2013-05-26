@@ -5,7 +5,7 @@
   <form action="{{ url_for('login') }}" method="POST">
     {{form.hidden_tag()}}
     <p>
-      {{ form.username.label('Username')}} <br />
+      {{ form.username.label('Username or Email')}} <br />
       {{ form.username(size=20) }}
     </p>
     <p>

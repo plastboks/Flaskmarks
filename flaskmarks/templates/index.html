@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-{% if not bookmarks and not 'Results' in header %}
+{% if not bookmarks.items and not 'Results' in header %}
 <h1>Hello {{ g.user.username }}</h1>
 <h2>Welcome to this awesome bookmark app.</h2> 
 <h3>Click "New bookmark" to add a bookmark</h3>
 {% else %}
     <h1>{{ header }}</h1>
-    {% if bookmarks %}
+    {% if bookmarks.items %}
       <table id="bookmarks">
           <thead>
               <th>Title</th>
@@ -16,7 +16,7 @@
               <th>Action</th>
           </thead>
           <tbody>
-              {% for bookmark in bookmarks %}
+              {% for bookmark in bookmarks.items %}
                   <tr>
                       <td class='titlecolumn'>
                           {{ bookmark.title }}
@@ -48,7 +48,15 @@
               {% endfor %}
           </tbody>
       </table>
-    {% else %}
+      <div id="paginate">
+      {% if bookmarks.has_prev %}
+        <a href="{{ url_for('index', page = bookmarks.prev_num) }}"><< Prev page</a>
+      {% endif %}
+      {% if bookmarks.has_next %}
+        <a href="{{ url_for('index', page = bookmarks.next_num) }}">Next page >></a>
+      {% endif %}
+      </div>
+      {% else %}
       <h2>No results</h2>
       <h3>Try again</h3>
       <form action="/search" method="GET">

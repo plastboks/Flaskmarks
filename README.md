@@ -31,3 +31,4 @@ This app is heavily inspired by the flaks sqlalchemy tutorial @ http://blog.migu
 Useful Links
 ============
 * http://pythonhosted.org/Flask-Principal/
+* http://pythonhosted.org/Flask-SQLAlchemy/

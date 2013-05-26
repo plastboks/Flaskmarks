@@ -53,10 +53,10 @@ class Bookmark(db.Model):
     updated = db.Column(db.DateTime)
     
     @classmethod
-    def my_bookmarks(self, userid):
+    def my_bookmarks(self, page, userid):
         return self.query.filter(self.owner_id == userid)\
                          .order_by(desc(self.clicks))\
-                         .all()
+                         .paginate(page, 30, False)
 
     @classmethod
     def by_id(self, oID, bID):
@@ -66,20 +66,20 @@ class Bookmark(db.Model):
                          .first()
 
     @classmethod
-    def by_tag(self, oID, tag):
+    def by_tag(self, page, oID, tag):
         tag = "%"+tag+"%"
         return self.query.filter(and_(
                                  self.tags.like(tag), 
                                  self.owner_id == oID))\
-                         .all()
+                         .paginate(page, 30, False)
     
     @classmethod
-    def by_string(self, oID, string):
+    def by_string(self, page, oID, string):
         string = "%"+string+"%"
         return self.query.filter(self.owner_id == oID)\
                          .filter(or_(self.title.like(string),\
                                      self.url.like(string)))\
-                         .all()
+                         .paginate(page, 30, False)
 
     def __repr__(self):
         return '<Bookmark %r>' % (self.title)

@@ -72,13 +72,12 @@ def forbidden(error):
 #################
 @app.route('/')
 @app.route('/index')
+@app.route('/index/<int:page>')
 @login_required
-def index():
-    u = g.user
-    b = Bookmark.my_bookmarks(u.id)
+def index(page = 1):
+    b = Bookmark.my_bookmarks(page, g.user.id)
     return render_template('index.html',
                             title = 'Home',
-                            user = u,
                             header = 'My bookmarks',
                             bookmarks = b)
 
@@ -87,10 +86,9 @@ def index():
 def new_bookmark():
     form = BookmarkForm()
     if form.validate_on_submit():
-        u = g.user
         b = Bookmark()
         form.populate_obj(b)
-        b.owner_id = u.id
+        b.owner_id = g.user.id
         b.created = datetime.utcnow()
         b.tags = ' '.join(
                       [t.strip() for t in form.tags.data.strip().split(',')])\
@@ -107,8 +105,7 @@ def new_bookmark():
 @app.route('/bookmark/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit_bookmark(id):
-    u = g.user
-    b = Bookmark.by_id(u.id, id) 
+    b = Bookmark.by_id(g.user.id, id) 
     form = BookmarkForm(obj=b)
     if not b:
         abort(403)
@@ -126,8 +123,7 @@ def edit_bookmark(id):
 @app.route('/bookmark/delete/<int:id>')
 @login_required
 def delete_bookmark(id):
-    u = g.user
-    b = Bookmark.by_id(u.id, id) 
+    b = Bookmark.by_id(g.user.id, id) 
     if b:
         db.session.delete(b)
         db.session.commit()
@@ -140,23 +136,23 @@ def delete_bookmark(id):
 # Search section #
 ##################
 @app.route('/search/tag/<slug>')
+@app.route('/search/tag/<slug>/<int:page>')
 @login_required
-def search_tags(slug):
-    u = g.user
-    b = Bookmark.by_tag(u.id, slug)
+def search_tags(slug, page = 1):
+    b = Bookmark.by_tag(g.user.id, page, slug)
     return render_template('index.html',
                             title = 'Results',
                             header = 'Results for '+slug,
                             bookmarks = b)
 
 @app.route('/search', methods=['GET'])
+@app.route('/search/<int:page>', methods=['GET'])
 @login_required
-def search_string():
-    u = g.user
+def search_string(page = 1):
     q = request.args['q']
     if not q:
         return redirect(url_for('index'))
-    b = Bookmark.by_string(u.id, q)
+    b = Bookmark.by_string(page, g.user.id, q)
     return render_template('index.html',
                             title = 'Results',
                             header = 'Results for '+q,
@@ -168,10 +164,9 @@ def search_string():
 @app.route('/bookmark/inc')
 @login_required
 def ajax_bookmark_inc():
-    u = g.user
     if request.args.get('id'):
         id = int(request.args.get('id'))
-        b = Bookmark.by_id(u.id, id)
+        b = Bookmark.by_id(g.user.id, id)
         if b:
           if not b.clicks:
               b.clicks = 0;
