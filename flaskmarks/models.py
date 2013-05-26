@@ -3,6 +3,7 @@ from sqlalchemy import (
     and_,
     or_,
     desc,
+    asc,
     )
 from cryptacular.bcrypt import BCRYPTPasswordManager
 import datetime
@@ -75,9 +76,9 @@ class Bookmark(db.Model):
     @classmethod
     def by_string(self, oID, string):
         string = "%"+string+"%"
-        return self.query.filter(and_(
-                                 self.owner_id == oID,
-                                 self.title.like(string)))\
+        return self.query.filter(self.owner_id == oID)\
+                         .filter(or_(self.title.like(string),\
+                                     self.url.like(string)))\
                          .all()
 
     def __repr__(self):
