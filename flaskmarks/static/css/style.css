@@ -89,8 +89,27 @@ a {
     text-align: left;
 }
 
-#bookmarks .tagscolumn {
+#bookmarks tr {
+    height: 40px;
+}
+
+#bookmarks .titlecolumn .clickIncrement {
+    font-size: 0.9;
+    color: gray;
+}
+
+#bookmarks .titlecolumn .tag {
     font-size: 0.75em;
+    color: mediumvioletred;
+}
+
+#bookmarks .actioncolumn a {
+    font-size: 0.75em;
+}
+
+#bookmarks .clickscolumn {
+    font-size: 0.75em;
+    color: orangered;
 }
 
 .bookmarkform input[type='text'] {
