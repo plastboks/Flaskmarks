@@ -22,6 +22,12 @@ a {
 
 #header ul li {
     display: inline;
+    border: 1px solid papayawhip;
+    padding: 2px;
+    background: snow;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
 #header #search {
@@ -56,7 +62,6 @@ a {
  * Content area
  *
  */
-
 #flashmessages ul {
     list-style: none;
     margin: 0;
