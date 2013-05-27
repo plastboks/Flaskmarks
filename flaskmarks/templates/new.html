@@ -10,6 +10,7 @@
       {% endfor %}
       {{ form.title.label('Title') }} <br />
       {{ form.title(size=20) }}
+      <span class="description">Left blank, the title will be retrieved automatically.</span>
     </p>
     <p>
       {% for error in form.url.errors %}

@@ -11,6 +11,8 @@ from flask import (
     jsonify,
     )
 
+from BeautifulSoup import BeautifulSoup as BSoup
+from urllib import urlopen
 from datetime import datetime
 
 from flask.ext.login import (
@@ -96,9 +98,12 @@ def new_bookmark():
                       [t.strip() for t in form.tags.data.strip().split(',')])\
                     .lower()
         b.clicks = 0
+        if not form.title.data:
+            soup = BSoup(urlopen(form.url.data))
+            b.title = soup.title.string
         db.session.add(b)
         db.session.commit()
-        flash('New bookmark %s added' % (form.title.data), category='info')
+        flash('New bookmark %s added' % (b.title), category='info')
         return redirect(url_for('index'))
     return render_template('new.html',
                             title = 'New',

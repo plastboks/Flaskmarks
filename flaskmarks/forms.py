@@ -11,7 +11,7 @@ strip_filter = lambda x: x.strip() if x else None
 
 class LoginForm(Form):
     username = TextField('username',
-                         [validators.Length(min=1, max=255)],
+                         [validators.Length(min=4, max=255)],
                          filters=[strip_filter])
     password = PasswordField('password',
                              [validators.Length(min=1, max=255)],
@@ -38,7 +38,7 @@ class UserForm(Form):
 
 class BookmarkForm(Form):
     title = TextField('title',
-                      [validators.Length(min=4, max=255)],
+                      [validators.Length(min=0, max=255)],
                       filters=[strip_filter])
     url = TextField('url',
                     [validators.Length(min=4, max=512),

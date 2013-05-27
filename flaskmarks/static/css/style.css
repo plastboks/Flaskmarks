@@ -152,6 +152,10 @@ a {
     margin: 0px 30px;
 }
 
+.description {
+    color: dimgray;
+    font-size: 0.75em;
+}
 
 /**
  *
