@@ -23,22 +23,22 @@ class User(db.Model):
         return self.query.filter(or_(User.username == uname,\
                                      User.email == uname)).first()
 
-    def my_suggestions(self):
-        return Bookmark.query.filter(and_(Bookmark.owner_id == self.id,\
-                                          Bookmark.clicks == 0))\
-                             .order_by(func.random())\
-                             .limit(config['SUGGESTIONS_COUNT']).all()
+    def my(self):
+        return Bookmark.query.filter(Bookmark.owner_id == self.id)
 
-    def my_recent(self):
-        return Bookmark.query.filter(Bookmark.owner_id == self.id)\
-                             .order_by(desc(Bookmark.created))\
-                             .limit(config['RECENTLY_ADDED']).all()
+    def suggestions(self):
+        return self.my().filter(Bookmark.clicks == 0)\
+                        .order_by(func.random())\
+                        .limit(config['SUGGESTIONS_COUNT']).all()
 
-    def my_bookmarks(self, page):
-        return Bookmark.query.filter(Bookmark.owner_id == self.id)\
-                             .order_by(desc(Bookmark.clicks),\
+    def recent(self):
+        return self.my().order_by(desc(Bookmark.created))\
+                        .limit(config['RECENTLY_ADDED']).all()
+
+    def bookmarks(self, page):
+        return self.my().order_by(desc(Bookmark.clicks),\
                                        desc(Bookmark.created))\
-                             .paginate(page, config['ITEMS_PER_PAGE'], False)
+                        .paginate(page, config['ITEMS_PER_PAGE'], False)
 
     def authenticate_user(self, password):
         manager = BCRYPTPasswordManager()

@@ -77,15 +77,13 @@ def forbidden(error):
 @app.route('/index/<int:page>')
 @login_required
 def index(page = 1):
-    sb = g.user.my_suggestions()
-    ra = g.user.my_recent()
-    b = g.user.my_bookmarks(page)
+    u = g.user
     return render_template('index.html',
                             title = 'Home',
                             header = 'My bookmarks',
-                            bookmarks = b,
-                            suggestions = sb,
-                            recently = ra)
+                            bookmarks = u.bookmarks(page),
+                            suggestions = u.suggestions(),
+                            recently = u.recent())
 
 @app.route('/bookmark/new', methods=['GET', 'POST'])
 @login_required
@@ -275,3 +273,4 @@ def bookmark_meta(id):
     if b:
         return render_template('meta.html', url=b.url)
     abort(403)
+
