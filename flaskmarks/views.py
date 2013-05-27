@@ -258,3 +258,20 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
+
+#################
+# Other Section #
+#################
+@app.route('/redirect/<int:id>')
+@login_required
+def bookmark_redirect(id):
+    url = url_for('bookmark_meta', id=id)
+    return render_template('meta.html', url=url)
+
+@app.route('/meta/<int:id>')
+@login_required
+def bookmark_meta(id):
+    b = Bookmark.by_id(g.user.id, id)
+    if b:
+        return render_template('meta.html', url=b.url)
+    abort(403)
