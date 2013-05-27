@@ -16,11 +16,29 @@ class User(db.Model):
     email = db.Column(db.Unicode(255), unique=True, nullable=False)
     password = db.Column(db.Unicode(255), nullable=False)
     last_logged = db.Column(db.DateTime)
+    bookmarks = db.relationship('Bookmark', backref='owner', lazy='dynamic')
 
     @classmethod
     def by_uname_or_email(self, uname):
         return self.query.filter(or_(User.username == uname,\
                                      User.email == uname)).first()
+
+    def my_suggestions(self):
+        return Bookmark.query.filter(and_(Bookmark.owner_id == self.id,\
+                                          Bookmark.clicks == 0))\
+                             .order_by(func.random())\
+                             .limit(config['SUGGESTIONS_COUNT']).all()
+
+    def my_recent(self):
+        return Bookmark.query.filter(Bookmark.owner_id == self.id)\
+                             .order_by(desc(Bookmark.created))\
+                             .limit(config['RECENTLY_ADDED']).all()
+
+    def my_bookmarks(self, page):
+        return Bookmark.query.filter(Bookmark.owner_id == self.id)\
+                             .order_by(desc(Bookmark.clicks),\
+                                       desc(Bookmark.created))\
+                             .paginate(page, config['ITEMS_PER_PAGE'], False)
 
     def authenticate_user(self, password):
         manager = BCRYPTPasswordManager()
@@ -52,25 +70,6 @@ class Bookmark(db.Model):
     clicks = db.Column(db.Integer, default=0)
     created = db.Column(db.DateTime)
     updated = db.Column(db.DateTime)
-    
-    @classmethod
-    def my_bookmarks(self, page, userid):
-        return self.query.filter(self.owner_id == userid)\
-                         .order_by(desc(self.clicks), desc(self.created))\
-                         .paginate(page, config['ITEMS_PER_PAGE'], False)
-
-    @classmethod
-    def my_suggestion(self, userid):
-        return self.query.filter(and_(self.owner_id == userid,\
-                                      self.clicks == 0))\
-                         .order_by(func.random())\
-                         .limit(config['SUGGESTIONS_COUNT']).all()
-
-    @classmethod
-    def my_recently(self, userid):
-        return self.query.filter(self.owner_id == userid)\
-                         .order_by(desc(self.created))\
-                         .limit(config['RECENTLY_ADDED']).all()
 
     @classmethod
     def by_id(self, oID, bID):

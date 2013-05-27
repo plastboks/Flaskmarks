@@ -77,9 +77,9 @@ def forbidden(error):
 @app.route('/index/<int:page>')
 @login_required
 def index(page = 1):
-    sb = Bookmark.my_suggestion(g.user.id)
-    ra = Bookmark.my_recently(g.user.id)
-    b = Bookmark.my_bookmarks(page, g.user.id)
+    sb = g.user.my_suggestions()
+    ra = g.user.my_recent()
+    b = g.user.my_bookmarks(page)
     return render_template('index.html',
                             title = 'Home',
                             header = 'My bookmarks',
