@@ -235,7 +235,7 @@ def login():
             db.session.commit()
             flash('Successful login request for %s' % (u.username),\
                   category='info')
-            login_user(u)
+            login_user(u, remember = form.remember_me.data)
             return redirect(url_for('index'))
         else:
             flash('Failed login request for %s' % (form.username.data),\
