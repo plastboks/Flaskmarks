@@ -1,0 +1,8 @@
+<form action="/search" method="GET">
+  <label for="q">Search</label>
+  <input name="q" value="{{ request.args['q'] }}" type="text"/>
+  <input type="submit" value="Search" />
+</form>
+{% if request.args.get('q') %}
+<a href="/index">Reset search</a>
+{% endif %}

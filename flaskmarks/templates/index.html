@@ -6,121 +6,15 @@
 <h3>Click "New bookmark" to add a bookmark</h3>
 {% else %}
     <h1>{{ header }}</h1>
-    {% if config['EXTRA_BOX'] %}
-    <div class="extrabox">
-      {% if suggestions and config['SUGGESTIONS']%}
-        <div id="suggestions">
-        <h3>Random suggestion</h3>
-          <table class="bookmarks">
-          {% for suggestion in suggestions %}
-              <tr>
-                  <td class='titlecolumn'>
-                      <a href="{{ suggestion.url }}" class="clickIncrement" target="_blank" data-id="{{ suggestion.id }}", title="{{suggestion.title}}">
-                        {{ suggestion.title|truncate(90) }} -
-                        <a href="{{ url_for('edit_bookmark', id=suggestion.id) }}" class="edit">
-                            Edit
-                        </a> 
-                        <a href="{{ url_for('delete_bookmark', id=suggestion.id) }}" class="delete">
-                            Delete
-                        </a>
-                      </a><br />
-                      {% if suggestion.tags %}
-                        {% for w in suggestion.tags.split(' ') %}
-                          <a href="{{ url_for('search_tags', slug = w) }}" class="tag">{{ w }}</a>
-                        {% endfor %}
-                      {% endif %}
-                  </td>
-              </tr>
-          {% endfor %}
-          </table>
-          </div>
-      {% endif %}
-      {% if recently and config['RECENTLY']%}
-        <div id="recently">
-        <h3>Recently added</h3>
-          <table class="bookmarks">
-          {% for recent in recently %}
-              <tr>
-                  <td class='titlecolumn'>
-                      <a href="{{ recent.url }}" class="clickIncrement" target="_blank" data-id="{{ recent.id }}", title="{{recent.title}}">
-                        {{ recent.title|truncate(90) }} -
-                        <a href="{{ url_for('edit_bookmark', id=recent.id) }}" class="edit">
-                            Edit
-                        </a> 
-                        <a href="{{ url_for('delete_bookmark', id=recent.id) }}" class="delete">
-                            Delete
-                        </a>
-                      </a><br />
-                      {% if recent.tags %}
-                        {% for w in recent.tags.split(' ') %}
-                          <a href="{{ url_for('search_tags', slug = w) }}" class="tag">{{ w }}</a>
-                        {% endfor %}
-                      {% endif %}
-                  </td>
-              </tr>
-          {% endfor %}
-          </table>
-          </div>
-      {% endif %}
-    </div>
+    {% if config['EXTRA_BOX'] and not 'Results' in header %}
+      {% include "extra.html" %}
     {% endif %}
     {% if bookmarks.items %}
-      <div class="bookmarksbox">
-        <table class="bookmarks">
-            <thead>
-                <th>Title</th>
-                <th>Clicks</th>
-                <th>Action</th>
-            </thead>
-            <tbody>
-                {% for bookmark in bookmarks.items %}
-                    <tr>
-                        <td class='titlecolumn'>
-                            <a href="{{ bookmark.url }}" class="clickIncrement" target="_blank" data-id="{{ bookmark.id }}", title="{{bookmark.title}}">
-                              {{ bookmark.title|truncate(90) }}
-                            </a><br />
-                            {% if bookmark.tags %}
-                              {% for w in bookmark.tags.split(' ') %}
-                                <a href="{{ url_for('search_tags', slug = w) }}" class="tag">{{ w }}</a>
-                              {% endfor %}
-                            {% endif %}
-                        </td>
-                        <td class="clickscolumn">
-                          <span>{{ bookmark.clicks }}</span>
-                        </td>
-                        <td class='actioncolumn'>
-                            <a href="{{ url_for('edit_bookmark', id=bookmark.id) }}" class="edit">
-                                Edit
-                            </a> 
-                            <a href="{{ url_for('delete_bookmark', id=bookmark.id) }}" class="delete">
-                                Delete
-                            </a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-      </div>
-      <div id="paginate">
-      {% if bookmarks.has_prev %}
-        <a href="{{ url_for('index', page = 1) }}"><<</a>
-        <a href="{{ url_for('index', page = bookmarks.prev_num) }}"><</a>
-      {% endif %}
-      Page {{ bookmarks.page }}
-      {% if bookmarks.has_next %}
-        <a href="{{ url_for('index', page = bookmarks.next_num) }}">></a>
-        <a href="{{ url_for('index', page = bookmarks.pages) }}">>></a>
-      {% endif %}
-      </div>
-      {% else %}
+      {% include "table.html" %}
+    {% else %}
       <h2>No results</h2>
       <h3>Try again</h3>
-      <form action="/search" method="GET">
-        <label for="q">Search</label>
-        <input name="q" value="{{ request.args['q'] }}" type="text"/>
-        <input type="submit" value="Search" />
-      </form>
-      <a href="/index">Reset search</a>
+      {% include "searchform.html" %}
     {% endif %}
 {% endif %}
 {% endblock %}

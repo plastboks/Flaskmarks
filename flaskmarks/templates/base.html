@@ -12,52 +12,13 @@
   <div id="header">
     {% if g.user.is_authenticated() %}
     <div id="search">
-        <form action="/search" method="GET">
-          <label for="q">Search</label>
-          <input name="q" value="{{ request.args['q'] }}" type="text"/>
-          <input type="submit" value="Search" />
-        </form>
-        {% if request.args['q'] %}
-        <a href="/index">Reset search</a>
-        {% endif %}
+        {% include "searchform.html" %}
     </div>
     {% endif %}
-    <div id="primsection">
-        <ul class="primarymenu">
-            {% if g.user.is_authenticated() %}
-            <li><a href="{{ url_for('profile') }}">Profile</a></li>
-            <li><a href="{{ url_for('logout') }}">Logout</a></li>
-            {% else %}
-            <li><a href="{{ url_for('login') }}">Login</a></li>
-            {% if config['CAN_REGISTER'] %}
-            <li><a href="{{ url_for('register') }}">Register</a></li>
-            {% endif %}
-            {% endif %}
-        </ul>
-    </div>
-    <div id="secsection">
-        <ul class="secondarymenu">
-        {% if g.user.is_authenticated() %}
-          {% block secondarymenu %}
-                  <li><a href="{{ url_for('index') }}">My Bookmarks</a></li>
-                  <li><a href="{{ url_for('new_bookmark') }}">New</a></li>
-          {% endblock %}
-        {% endif %}
-        </ul>
-    </div>
+    {% include "menus.html" %}
   </div>
   <div id="content">
-      <div id="flashmessages">
-          {% with messages = get_flashed_messages(with_categories=True) %}
-          {% if messages %}
-            <ul>
-            {% for message in messages %}
-                <li class="{{ message[0] }}">{{ message[1] }} </li>
-            {% endfor %}
-            </ul>
-          {% endif %}
-          {% endwith %}
-      </div>
+      {% include "flash.html" %}
       {% block content %}
       {% endblock %}
   </div>
