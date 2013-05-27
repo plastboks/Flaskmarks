@@ -78,12 +78,14 @@ def forbidden(error):
 @login_required
 def index(page = 1):
     sb = Bookmark.my_suggestion(g.user.id)
+    ra = Bookmark.my_recently(g.user.id)
     b = Bookmark.my_bookmarks(page, g.user.id)
     return render_template('index.html',
                             title = 'Home',
                             header = 'My bookmarks',
                             bookmarks = b,
-                            suggestions = sb)
+                            suggestions = sb,
+                            recently = ra)
 
 @app.route('/bookmark/new', methods=['GET', 'POST'])
 @login_required

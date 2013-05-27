@@ -85,13 +85,13 @@ a {
     background: greenyellow;
 }
 
-.suggestionbox {
+.extrabox {
     border: 1px solid gold;
     padding: 5px;
     background: seashell;
 }
 
-.suggestionbox h3 {
+.extrabox h3 {
     padding: 0;
     margin: 0;
     color: dimgray;

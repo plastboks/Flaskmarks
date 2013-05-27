@@ -56,7 +56,7 @@ class Bookmark(db.Model):
     @classmethod
     def my_bookmarks(self, page, userid):
         return self.query.filter(self.owner_id == userid)\
-                         .order_by(desc(self.clicks))\
+                         .order_by(desc(self.clicks), desc(self.created))\
                          .paginate(page, config['ITEMS_PER_PAGE'], False)
 
     @classmethod
@@ -65,6 +65,12 @@ class Bookmark(db.Model):
                                       self.clicks == 0))\
                          .order_by(func.random())\
                          .limit(config['SUGGESTIONS_COUNT']).all()
+
+    @classmethod
+    def my_recently(self, userid):
+        return self.query.filter(self.owner_id == userid)\
+                         .order_by(desc(self.created))\
+                         .limit(config['RECENTLY_ADDED']).all()
 
     @classmethod
     def by_id(self, oID, bID):
