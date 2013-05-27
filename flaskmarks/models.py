@@ -4,6 +4,7 @@ from sqlalchemy import (
     or_,
     desc,
     asc,
+    func,
     )
 from cryptacular.bcrypt import BCRYPTPasswordManager
 import datetime
@@ -57,6 +58,13 @@ class Bookmark(db.Model):
         return self.query.filter(self.owner_id == userid)\
                          .order_by(desc(self.clicks))\
                          .paginate(page, config['ITEMS_PER_PAGE'], False)
+
+    @classmethod
+    def my_suggestion(self, userid):
+        return self.query.filter(and_(self.owner_id == userid,\
+                                      self.clicks == 0))\
+                         .order_by(func.random())\
+                         .limit(config['SUGGESTIONS_COUNT']).all()
 
     @classmethod
     def by_id(self, oID, bID):

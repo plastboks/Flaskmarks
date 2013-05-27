@@ -10,6 +10,8 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'flaskmarks.sqlit
 SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 
 
-ITEMS_PER_PAGE = 20
+ITEMS_PER_PAGE = 15
+SUGGESTIONS = True
+SUGGESTIONS_COUNT = 1
 
 CAN_REGISTER = True

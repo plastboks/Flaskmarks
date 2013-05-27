@@ -80,34 +80,56 @@ a {
     background: greenyellow;
 }
 
-#bookmarks {
+.suggestionbox {
+    border: 1px solid gold;
+    padding: 5px;
+    background: seashell;
+}
+
+.suggestionbox h3 {
+    padding: 0;
+    margin: 0;
+    color: dimgray;
+}
+
+.bookmarksbox {
+    padding: 5px;
+    background: mintcream;
+    border: 1px solid lightblue;
+    margin-top: 10px;
+}
+
+.bookmarks {
     width: 100%;
     font-size: 0.9em;
 }
 
-#bookmarks th {
+.bookmarks th {
+    color: dimgray;
     text-align: left;
 }
 
-#bookmarks tr {
+.bookmarks tr {
     height: 40px;
 }
 
-#bookmarks .titlecolumn .clickIncrement {
+.bookmarks .titlecolumn .clickIncrement {
     font-size: 0.9;
     color: gray;
 }
 
-#bookmarks .titlecolumn .tag {
+.bookmarks .titlecolumn .tag {
     font-size: 0.75em;
     color: mediumvioletred;
 }
 
-#bookmarks .actioncolumn a {
+.bookmarks .edit,
+.bookmarks .actioncolumn a,
+.bookmarks .delete {
     font-size: 0.75em;
 }
 
-#bookmarks .clickscolumn {
+.bookmarks .clickscolumn {
     font-size: 0.75em;
     color: orangered;
 }
