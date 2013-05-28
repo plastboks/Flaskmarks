@@ -36,12 +36,12 @@
 </div>
 <div id="paginate">
 {% if bookmarks.has_prev %}
-  <a href="{{ url_for('index', page = 1) }}"><<</a>
-  <a href="{{ url_for('index', page = bookmarks.prev_num) }}"><</a>
+  <a href="{{ url_for(request.endpoint, page = 1, q = request.args.get('q')) }}"><<</a>
+  <a href="{{ url_for(request.endpoint, page = bookmarks.prev_num, q = request.args.get('q')) }}"><</a>
 {% endif %}
-Page {{ bookmarks.page }}
+Page {{ bookmarks.page }} of {{ bookmarks.pages }}
 {% if bookmarks.has_next %}
-  <a href="{{ url_for('index', page = bookmarks.next_num) }}">></a>
-  <a href="{{ url_for('index', page = bookmarks.pages) }}">>></a>
+  <a href="{{ url_for(request.endpoint, page=bookmarks.next_num, q = request.args.get('q')) }}">></a>
+  <a href="{{ url_for(request.endpoint, page = bookmarks.pages, q = request.args.get('q')) }}">>></a>
 {% endif %}
 </div>

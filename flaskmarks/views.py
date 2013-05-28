@@ -36,6 +36,7 @@ from forms import (
     LoginForm,
     UserForm,
     BookmarkForm,
+    UserProfileForm
     )
 
 from models import (
@@ -112,7 +113,7 @@ def new_bookmark():
 @app.route('/bookmark/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit_bookmark(id):
-    b = Bookmark.by_id(g.user.id, id) 
+    b = g.user.bid(id)
     form = BookmarkForm(obj=b)
     if not b:
         abort(403)
@@ -130,7 +131,7 @@ def edit_bookmark(id):
 @app.route('/bookmark/delete/<int:id>')
 @login_required
 def delete_bookmark(id):
-    b = Bookmark.by_id(g.user.id, id) 
+    b = g.user.bid(id)
     if b:
         db.session.delete(b)
         db.session.commit()
@@ -146,7 +147,7 @@ def delete_bookmark(id):
 @app.route('/search/tag/<slug>/<int:page>')
 @login_required
 def search_tags(slug, page = 1):
-    b = Bookmark.by_tag(g.user.id, page, slug)
+    b = g.user.btag(page, slug)
     return render_template('index.html',
                             title = 'Results',
                             header = 'Results for '+slug,
@@ -156,10 +157,10 @@ def search_tags(slug, page = 1):
 @app.route('/search/<int:page>', methods=['GET'])
 @login_required
 def search_string(page = 1):
-    q = request.args['q']
+    q = request.args.get('q')
     if not q:
         return redirect(url_for('index'))
-    b = Bookmark.by_string(page, g.user.id, q)
+    b = g.user.bstring(page, q)
     return render_template('index.html',
                             title = 'Results',
                             header = 'Results for '+q,
@@ -173,7 +174,7 @@ def search_string(page = 1):
 def ajax_bookmark_inc():
     if request.args.get('id'):
         id = int(request.args.get('id'))
-        b = Bookmark.by_id(g.user.id, id)
+        b = g.user.bid(id)
         if b:
           if not b.clicks:
               b.clicks = 0;
@@ -192,11 +193,14 @@ def ajax_bookmark_inc():
 @login_required
 def profile():
     u = g.user
-    form = UserForm(obj=u)
+    form = UserProfileForm(obj=u)
     if form.validate_on_submit():
-        pm = bMan()
         form.populate_obj(u)
-        u.password = pm.encode(form.password.data)
+        if form.password.data:
+            pm = bMan()
+            u.password = pm.encode(form.password.data)
+        else:
+            del u.password
         db.session.add(u)
         db.session.commit()
         flash('User %s updated' % (form.username.data), category='info')
@@ -269,7 +273,7 @@ def bookmark_redirect(id):
 @app.route('/meta/<int:id>')
 @login_required
 def bookmark_meta(id):
-    b = Bookmark.by_id(g.user.id, id)
+    b = g.user.bid(id)
     if b:
         return render_template('meta.html', url=b.url)
     abort(403)

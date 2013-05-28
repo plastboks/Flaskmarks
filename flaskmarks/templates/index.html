@@ -6,7 +6,7 @@
 <h3>Click "New bookmark" to add a bookmark</h3>
 {% else %}
     <h1>{{ header }}</h1>
-    {% if config['EXTRA_BOX'] and not 'Results' in header %}
+    {% if (g.user.recently or g.user.suggestion) and not 'Results' in header %}
       {% include "extra.html" %}
     {% endif %}
     {% if bookmarks.items %}

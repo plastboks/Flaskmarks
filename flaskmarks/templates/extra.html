@@ -1,5 +1,5 @@
 <div class="extrabox">
-  {% if suggestions and config['SUGGESTIONS']%}
+  {% if g.user.suggestion and suggestions %}
     <div id="suggestions">
     <h3>Random suggestion</h3>
       <table class="bookmarks">
@@ -27,7 +27,7 @@
       </table>
       </div>
   {% endif %}
-  {% if recently and config['RECENTLY']%}
+  {% if g.user.recently and recently %}
     <div id="recently">
     <h3>Recently added</h3>
       <table class="bookmarks">

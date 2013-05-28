@@ -4,6 +4,7 @@ from flask.ext.wtf import (
     BooleanField,
     Required,
     PasswordField,
+    SelectField,
     validators,
     )
 
@@ -28,13 +29,23 @@ class UserForm(Form):
                        validators.Email(message='Not a valid email address')],
                       filters=[strip_filter])
     password = PasswordField('password',
-                             [validators.Length(min=6, max=64),
+                             [validators.Optional(), 
+                              validators.Length(min=6, max=64),
                               validators.EqualTo('confirm',
                                                  message='Passwords must match')],
                              filters=[strip_filter])
     confirm = PasswordField('confirm',
                             filters=[strip_filter])
 
+
+class UserProfileForm(UserForm):
+    per_page = SelectField('per_page', 
+                           coerce=int,
+                           choices=[(n, n) for n in range(10, 21)])
+    suggestion = BooleanField('suggestion', default=True)
+    recently = SelectField('recently',
+                           coerce=int,
+                           choices=[(n,n) for n in range(5)])
 
 class BookmarkForm(Form):
     title = TextField('title',

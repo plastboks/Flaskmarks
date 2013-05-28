@@ -16,6 +16,9 @@ class User(db.Model):
     email = db.Column(db.Unicode(255), unique=True, nullable=False)
     password = db.Column(db.Unicode(255), nullable=False)
     last_logged = db.Column(db.DateTime)
+    per_page = db.Column(db.SmallInteger)
+    suggestion = db.Column(db.Boolean)
+    recently = db.Column(db.SmallInteger)
     bookmarks = db.relationship('Bookmark', backref='owner', lazy='dynamic')
 
     @classmethod
@@ -33,12 +36,22 @@ class User(db.Model):
 
     def recent(self):
         return self.my().order_by(desc(Bookmark.created))\
-                        .limit(config['RECENTLY_ADDED']).all()
+                        .limit(self.recently).all()
 
     def bookmarks(self, page):
         return self.my().order_by(desc(Bookmark.clicks),\
                                        desc(Bookmark.created))\
-                        .paginate(page, config['ITEMS_PER_PAGE'], False)
+                        .paginate(page, self.per_page, False)
+
+    def bid(self, id):
+        return self.my().filter(Bookmark.id == id)\
+                        .first()
+
+    def btag(self, page, tag):
+        return Bookmark.by_tag(page, self.id, self.per_page, tag)
+
+    def bstring(self, page, string):
+        return Bookmark.by_string(page, self.id, self.per_page, string)
 
     def authenticate_user(self, password):
         manager = BCRYPTPasswordManager()
@@ -71,30 +84,24 @@ class Bookmark(db.Model):
     created = db.Column(db.DateTime)
     updated = db.Column(db.DateTime)
 
-    @classmethod
-    def by_id(self, oID, bID):
-        return self.query.filter(and_(
-                                 self.id == bID, 
-                                 self.owner_id == oID))\
-                         .first()
 
     @classmethod
-    def by_tag(self, page, oID, tag):
+    def by_tag(self, page, oID, per_page, tag):
         tag = "%"+tag+"%"
         return self.query.filter(and_(
                                  self.tags.like(tag), 
                                  self.owner_id == oID))\
                          .order_by(desc(self.clicks))\
-                         .paginate(page, config['ITEMS_PER_PAGE'], False)
+                         .paginate(page, per_page, False)
     
     @classmethod
-    def by_string(self, page, oID, string):
+    def by_string(self, page, oID, per_page, string):
         string = "%"+string+"%"
         return self.query.filter(self.owner_id == oID)\
                          .filter(or_(self.title.like(string),\
                                      self.url.like(string)))\
                          .order_by(desc(self.clicks))\
-                         .paginate(page, config['ITEMS_PER_PAGE'], False)
+                         .paginate(page, per_page, False)
 
     def __repr__(self):
         return '<Bookmark %r>' % (self.title)

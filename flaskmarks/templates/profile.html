@@ -20,6 +20,27 @@
       {{ form.email(size=20) }}
     </p>
     <p>
+      {% for error in form.per_page.errors %}
+        {{ error }} <br />
+      {% endfor %}
+      {{ form.per_page.label('Bookmarks per page') }}
+      {{ form.per_page() }}
+    </p>
+    <p>
+      {% for error in form.suggestion.errors %}
+        {{ error }} <br />
+      {% endfor %}
+      {{ form.suggestion.label('Show suggestion') }}
+      {{ form.suggestion() }}
+    </p>
+    <p>
+      {% for error in form.recently.errors %}
+        {{ error }} <br />
+      {% endfor %}
+      {{ form.recently.label('Recently added') }}
+      {{ form.recently() }}
+    </p>
+    <p>
       {% for error in form.password.errors %}
         {{ error }} <br />
       {% endfor %}
