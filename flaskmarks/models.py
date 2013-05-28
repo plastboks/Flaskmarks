@@ -16,9 +16,9 @@ class User(db.Model):
     email = db.Column(db.Unicode(255), unique=True, nullable=False)
     password = db.Column(db.Unicode(255), nullable=False)
     last_logged = db.Column(db.DateTime)
-    per_page = db.Column(db.SmallInteger)
-    suggestion = db.Column(db.Boolean)
-    recently = db.Column(db.SmallInteger)
+    per_page = db.Column(db.SmallInteger, default=10)
+    suggestion = db.Column(db.Boolean, default=True)
+    recently = db.Column(db.SmallInteger, default=2)
     bookmarks = db.relationship('Bookmark', backref='owner', lazy='dynamic')
 
     @classmethod
