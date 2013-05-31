@@ -20,7 +20,7 @@ class LoginForm(Form):
     remember_me = BooleanField('remember_me', default=False)
   
 
-class UserForm(Form):
+class UserRegisterForm(Form):
     username = TextField('username',
                          [validators.Length(min=4, max=32)],
                          filters=[strip_filter])
@@ -29,8 +29,7 @@ class UserForm(Form):
                        validators.Email(message='Not a valid email address')],
                       filters=[strip_filter])
     password = PasswordField('password',
-                             [validators.Optional(), 
-                              validators.Length(min=6, max=64),
+                             [validators.Length(min=6, max=64),
                               validators.EqualTo('confirm',
                                                  message='Passwords must match')],
                              filters=[strip_filter])
@@ -38,7 +37,13 @@ class UserForm(Form):
                             filters=[strip_filter])
 
 
-class UserProfileForm(UserForm):
+class UserProfileForm(UserRegisterForm):
+    password = PasswordField('password',
+                             [validators.Optional(), 
+                              validators.Length(min=6, max=64),
+                              validators.EqualTo('confirm',
+                                                 message='Passwords must match')],
+                             filters=[strip_filter])
     per_page = SelectField('per_page', 
                            coerce=int,
                            choices=[(n, n) for n in range(10, 21)])

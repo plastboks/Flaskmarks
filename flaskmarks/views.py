@@ -34,9 +34,9 @@ from flaskmarks import (
 
 from forms import (
     LoginForm,
-    UserForm,
     BookmarkForm,
-    UserProfileForm
+    UserRegisterForm,
+    UserProfileForm,
     )
 
 from models import (
@@ -213,7 +213,7 @@ def profile():
 def register():
     if not app.config['CAN_REGISTER']:
         abort(403)
-    form = UserForm()
+    form = UserRegisterForm()
     if form.validate_on_submit():
         u = User()
         pm = bMan()
