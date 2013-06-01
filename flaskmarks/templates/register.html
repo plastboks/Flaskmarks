@@ -2,9 +2,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Register</h1>
 <div id="register">
-  <form action="{{ url_for('register') }}" method="POST">
+  <h1>Register</h1>
+  <form action="{{ url_for('register') }}" method="POST" class="roundcorner5">
     {{form.hidden_tag()}}
     <p>
       {% for error in form.username.errors %}

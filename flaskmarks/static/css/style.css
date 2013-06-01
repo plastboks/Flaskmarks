@@ -8,6 +8,15 @@ a {
     color: dimgray;
 }
 
+.roundcorner5 {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.clear {
+    clear:both
+}
 
 /**
  *
@@ -35,6 +44,13 @@ a {
     font-size: 0.9em;
 }
 
+#header #search input[type='text'],
+#header #search input[type='submit'] {
+    border: 1px solid gray;
+}
+
+
+
 #header #primsection {
     margin-top: 10px;
 }
@@ -45,15 +61,33 @@ a {
 
 /**
  *
- * Login area
+ * Login/register area
  *
  */
 #login h1 {
 }
 
-#login {
+#login,
+#register {
     margin: 0 auto;
-    width: 25%;
+    width: 250px;
+}
+
+#login form,
+#register form {
+    padding: 20px;
+    width: 225px;
+    border: 1px solid lavender;
+    background: whitesmoke;
+}
+
+#login input[type='text'],
+#login input[type='submit'],
+#login input[type='password'],
+#register input[type='text'],
+#register input[type='submit'],
+#register input[type='password'] {
+    border: 1px solid gray;
 }
 
 
@@ -160,6 +194,48 @@ a {
 .description {
     color: dimgray;
     font-size: 0.75em;
+}
+
+
+/**
+ *
+ * Profile area
+ *
+ */
+#profile .column {
+    float: left; 
+    margin-right: 20px;
+    border: 1px solid lavender;
+    background: ghostwhite;
+    padding: 10px;
+}
+
+#profile .info {
+    margin: 0px 0px 20px 0px;
+    border: 1px solid lavender;
+    background: ghostwhite;
+    padding: 10px;
+}
+
+#profile .info p {
+    padding: 0px;
+    margin: 3px;
+    font-size: 0.9em;
+}
+
+#profile .column input[type="text"],
+#profile .column input[type="password"]{
+    border: 1px solid grey;
+}
+
+#profile .submit {
+    display: block;
+    padding-top: 10px;
+    clear:both;
+}
+
+#profile .submit input[type="submit"]{
+    border: 1px solid gray;
 }
 
 /**

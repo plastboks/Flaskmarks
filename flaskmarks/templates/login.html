@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
 <div id="login">
-  <h1>Sign In</h1>
-  <form action="{{ url_for('login') }}" method="POST">
+  <h1>Login</h1>
+  <form action="{{ url_for('login') }}" method="POST" class="roundcorner5">
     {{form.hidden_tag()}}
     <p>
       {{ form.username.label('Username or Email')}} <br />
@@ -13,10 +13,10 @@
       {{ form.password(size=20) }}
     </p>
     <p>
-      {{ form.password.label('Remember me')}} <br />
+      {{ form.password.label('Remember me')}}
       {{ form.remember_me() }}
     </p>
-      <input type="submit" value="Sign in">
+      <input type="submit" value="Login">
   </form>
 </div>
 {% endblock %}
