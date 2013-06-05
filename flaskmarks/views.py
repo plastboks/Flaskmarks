@@ -197,6 +197,8 @@ def ajax_bookmark_inc():
 @login_required
 def profile():
     u = g.user
+    bc = g.user.bookmark_count()
+    lc = g.user.bookmark_last_created()
     form = UserProfileForm(obj=u)
     if form.validate_on_submit():
         form.populate_obj(u)
@@ -211,7 +213,9 @@ def profile():
         return redirect(url_for('login'))
     return render_template('profile.html',
                             form = form,
-                            title = 'Register')
+                            title = 'Profile',
+                            bc = bc,
+                            lc = lc)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():

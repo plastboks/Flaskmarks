@@ -47,6 +47,12 @@ class User(db.Model):
         return self.my().filter(Bookmark.id == id)\
                         .first()
 
+    def bookmark_count(self):
+        return self.my().count()
+
+    def bookmark_last_created(self):
+        return self.my().order_by(desc(Bookmark.created)).first()
+
     def btag(self, page, tag):
         return Bookmark.by_tag(page, self.id, self.per_page, tag)
 
