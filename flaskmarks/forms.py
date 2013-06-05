@@ -6,6 +6,7 @@ from flask.ext.wtf import (
     PasswordField,
     SelectField,
     validators,
+    HiddenField,
     )
 
 strip_filter = lambda x: x.strip() if x else None
@@ -53,6 +54,7 @@ class UserProfileForm(UserRegisterForm):
                            choices=[(n,n) for n in range(5)])
 
 class BookmarkForm(Form):
+    referrer = HiddenField([validators.URL(require_tld=False)])
     title = TextField('title',
                       [validators.Length(min=0, max=255)],
                       filters=[strip_filter])

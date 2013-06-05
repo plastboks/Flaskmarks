@@ -14,6 +14,7 @@ from flask import (
 from BeautifulSoup import BeautifulSoup as BSoup
 from urllib import urlopen
 from datetime import datetime
+from urlparse import urlparse, urljoin
 
 from flask.ext.login import (
     login_user,
@@ -123,7 +124,10 @@ def edit_bookmark(id):
         db.session.add(b)
         db.session.commit()
         flash('Bookmark %s updated' % (form.title.data), category='info')
+        if form.referrer.data and is_safe_url(form.referrer.data):
+          return redirect(form.referrer.data)
         return redirect(url_for('index'))
+    form.referrer.data = request.referrer
     return render_template('edit.html',
                            title = 'Edit',
                            form = form)
@@ -278,3 +282,9 @@ def bookmark_meta(id):
         return render_template('meta.html', url=b.url)
     abort(403)
 
+# yanked from flask.pocoo.org/snippets/62
+def is_safe_url(target):
+    ref_url = urlparse(request.host_url)
+    test_url = urlparse(urljoin(request.host_url, target))
+    return test_url.scheme in ('http', 'https') and \
+           ref_url.netloc == test_url.netloc
