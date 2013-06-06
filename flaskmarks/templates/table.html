@@ -17,6 +17,12 @@
                           <a href="{{ url_for('search_tags', slug = w) }}" class="tag">{{ w }}</a>
                         {% endfor %}
                       {% endif %}
+                      <span class="lastvisit">last visit:</span>
+                      {% if bookmark.last_clicked %}
+                      <span class="lastclick">{{ bookmark.last_clicked | datewords }}</span>
+                      {% else %}
+                      <span class="neverclick">never</span>
+                      {% endif %}
                   </td>
                   <td class="clickscolumn">
                     <span>{{ bookmark.clicks }}</span>

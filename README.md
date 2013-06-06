@@ -46,4 +46,5 @@ Useful Links
 * http://pythonhosted.org/Flask-Principal/
 * http://pythonhosted.org/Flask-SQLAlchemy/
 * http://jinja.pocoo.org/
+* http://jinja.pocoo.org/docs/templates/#builtin-filters
 * http://flask.pocoo.org/mailinglist/archive/2011/11/17/change-request-s-http-referer-header/#fc7dc5b7a1682ccbb4947a8013987761

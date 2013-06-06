@@ -173,6 +173,22 @@ a {
     color: orangered;
 }
 
+.bookmarks .lastvisit {
+    font-size: 0.75em;
+    padding-left: 10px;
+    color: gray;
+}
+
+.bookmarks .neverclick {
+    font-size: 0.75em;
+    color: orangered;
+}
+
+.bookmarks .lastclick {
+    font-size: 0.75em;
+    color: olivedrab;
+}
+
 .bookmarkform input[type='text'] {
     width: 100%;
 }

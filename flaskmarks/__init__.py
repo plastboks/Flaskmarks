@@ -9,4 +9,8 @@ lm = LoginManager()
 lm.init_app(app)
 db = SQLAlchemy(app)
 
-from flaskmarks import views, models
+from flaskmarks import (
+  views, 
+  models, 
+  filters,
+  )
