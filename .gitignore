@@ -44,3 +44,6 @@ uwsgi.ini
 *.sqlite
 *.sqlite*
 
+
+# exclude man dir for now
+man

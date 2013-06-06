@@ -1,3 +1,13 @@
+## @package flaskmarks
+# 
+# @version 0.12
+# 
+# @author Alexander Skjolden
+#
+# @date 2013-06-06
+#
+
+
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
