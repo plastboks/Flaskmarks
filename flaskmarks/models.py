@@ -106,6 +106,7 @@ class Bookmark(db.Model):
         string = "%"+string+"%"
         return self.query.filter(self.owner_id == oID)\
                          .filter(or_(self.title.like(string),\
+                                     self.tags.like(string),\
                                      self.url.like(string)))\
                          .order_by(desc(self.clicks))\
                          .paginate(page, per_page, False)
