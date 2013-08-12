@@ -182,6 +182,7 @@ def ajax_bookmark_inc():
         if b:
           if not b.clicks:
               b.clicks = 0;
+          b.last_clicked = datetime.utcnow()
           b.clicks += 1
           db.session.add(b)
           db.session.commit()

@@ -87,6 +87,7 @@ class Bookmark(db.Model):
     url = db.Column(db.Unicode(512), nullable=False)
     tags = db.Column(db.Unicode(512))
     clicks = db.Column(db.Integer, default=0)
+    last_clicked = db.Column(db.DateTime)
     created = db.Column(db.DateTime)
     updated = db.Column(db.DateTime)
 
@@ -105,6 +106,7 @@ class Bookmark(db.Model):
         string = "%"+string+"%"
         return self.query.filter(self.owner_id == oID)\
                          .filter(or_(self.title.like(string),\
+                                     self.tags.like(string),\
                                      self.url.like(string)))\
                          .order_by(desc(self.clicks))\
                          .paginate(page, per_page, False)
