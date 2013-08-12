@@ -82,7 +82,7 @@ def index(page = 1):
     u = g.user
     return render_template('index.html',
                             title = 'Home',
-                            header = 'My bookmarks',
+                            header = '',
                             bookmarks = u.bookmarks(page),
                             suggestions = u.suggestions(),
                             recently = u.recent())

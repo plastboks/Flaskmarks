@@ -1,6 +1,12 @@
 <div id="primsection">
     <ul class="primarymenu">
         {% if g.user.is_authenticated() %}
+          {% block secondarymenu %}
+                  <li><a href="{{ url_for('index') }}">Home</a></li>
+                  <li><a href="{{ url_for('new_bookmark') }}">New</a></li>
+          {% endblock %}
+        {% endif %}
+        {% if g.user.is_authenticated() %}
         <li><a href="{{ url_for('profile') }}">Profile</a></li>
         <li><a href="{{ url_for('logout') }}">Logout</a></li>
         {% else %}
@@ -9,15 +15,5 @@
         <li><a href="{{ url_for('register') }}">Register</a></li>
         {% endif %}
         {% endif %}
-    </ul>
-</div>
-<div id="secsection">
-    <ul class="secondarymenu">
-    {% if g.user.is_authenticated() %}
-      {% block secondarymenu %}
-              <li><a href="{{ url_for('index') }}">My Bookmarks</a></li>
-              <li><a href="{{ url_for('new_bookmark') }}">New</a></li>
-      {% endblock %}
-    {% endif %}
     </ul>
 </div>
