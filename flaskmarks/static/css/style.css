@@ -19,6 +19,9 @@ a {
     clear:both
 }
 
+h1 {
+    color: #585858;
+}
 /**
  *
  * Header area
@@ -208,8 +211,26 @@ a {
     color: olivedrab;
 }
 
+.bookmarkform label {
+    color: gray;
+    margin-bottom: 5px;
+}
+
 .bookmarkform input[type='text'] {
     width: 100%;
+    background: #FBFBFB;
+    border: 1px solid #E5E5E5;
+    margin: 2px 6px 16px 0px;
+    padding: 3px;
+    font-size: 24px;
+}
+
+.bookmarkform input[type='submit'] {
+    width: 100%;
+    font-size: 1.4em;
+    border: 1px solid dodgerblue;
+    background: lightskyblue;
+    color: dimgray;
 }
 
 #content {
