@@ -6,7 +6,7 @@
       {% for suggestion in suggestions %}
           <tr>
               <td class='titlecolumn'>
-                  <a href="{{ suggestion.url }}" class="clickIncrement" target="_blank" data-id="{{ suggestion.id }}", title="{{suggestion.title}}" rel="noreferrer">
+                  <a href="{{ suggestion.url }}" class="link clickIncrement" target="_blank" data-id="{{ suggestion.id }}", title="{{suggestion.title}}" rel="noreferrer">
                     {{ suggestion.title|truncate(90) }} -
                     </a>
                     <a href="{{ url_for('edit_bookmark', id=suggestion.id) }}" class="edit">
@@ -34,7 +34,7 @@
       {% for recent in recently %}
           <tr>
               <td class='titlecolumn'>
-                  <a href="{{ recent.url }}" class="clickIncrement" target="_blank" data-id="{{ recent.id }}", title="{{recent.title}}" rel="noreferrer">
+                  <a href="{{ recent.url }}" class="link clickIncrement" target="_blank" data-id="{{ recent.id }}", title="{{recent.title}}" rel="noreferrer">
                     {{ recent.title|truncate(90) }} -
                     </a>
                     <a href="{{ url_for('edit_bookmark', id=recent.id) }}" class="edit">

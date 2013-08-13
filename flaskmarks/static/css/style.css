@@ -32,9 +32,10 @@ a {
 
 #header ul li {
     display: inline;
-    border: 1px solid papayawhip;
-    padding: 2px;
-    background: snow;
+    border: 1px solid lightgray;
+    padding: 2px 4px;
+    margin-right: 5px;
+    background: #FAFAFA;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
@@ -45,9 +46,12 @@ a {
     font-size: 0.9em;
 }
 
-#header #search input[type='text'],
-#header #search input[type='submit'] {
+#header #search input[type='text'] {
     border: 1px solid gray;
+}
+
+#header #search input[type='submit'] {
+    display: none;
 }
 
 
@@ -121,9 +125,9 @@ a {
 }
 
 .extrabox {
-    border: 1px solid gold;
     padding: 5px;
-    background: seashell;
+    border: 1px solid lightgray;
+    background: #FAFAFA;
 }
 
 .extrabox h3 {
@@ -134,8 +138,8 @@ a {
 
 .bookmarksbox {
     padding: 5px;
-    background: mintcream;
-    border: 1px solid lightblue;
+    border: 1px solid lightgray;
+    background: #FAFAFA;
     margin-top: 10px;
 }
 
@@ -149,8 +153,16 @@ a {
     text-align: left;
 }
 
+.bookmarks thead {
+    display: none;
+}
+
 .bookmarks tr {
     height: 40px;
+}
+
+.bookmarks .titlecolumn {
+    width: 700px;
 }
 
 .bookmarks .titlecolumn .clickIncrement {
@@ -163,6 +175,10 @@ a {
     color: mediumvioletred;
 }
 
+.bookmarks .titlecolumn a.link {
+    color: lightslategray;
+}
+
 .bookmarks .edit,
 .bookmarks .actioncolumn a,
 .bookmarks .delete {
@@ -172,6 +188,8 @@ a {
 .bookmarks .clickscolumn {
     font-size: 0.75em;
     color: orangered;
+    text-align: center;
+    width: 40px;
 }
 
 .bookmarks .lastvisit {
@@ -199,9 +217,10 @@ a {
 }
 
 #paginate {
-    font-size: 0.8em;
+    font-size: 0.7em;
     padding: 20px 0px 0px 0px;
     text-align: center;
+    color: dimgray;
 }
 
 #paginate a {
