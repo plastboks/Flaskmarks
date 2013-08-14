@@ -15,6 +15,12 @@ a {
     border-radius: 5px;
 }
 
+.shadow4 {
+    -webkit-box-shadow: 0 4px 10px #C8C8C8;
+    box-shadow: 0 4px 10px #C8C8C8;
+    -webkit-border-radius: 11px;
+}
+
 .clear {
     clear:both
 }
@@ -47,10 +53,14 @@ h1 {
 #header #search {
     float: right;
     font-size: 0.9em;
+    margin-top: 20px;
+    margin-right: 5px;
 }
 
 #header #search input[type='text'] {
-    border: 1px solid gray;
+    border: 1px solid lightgray;
+    font-size: 14px;
+    width: 300px;
 }
 
 #header #search input[type='submit'] {
@@ -61,6 +71,9 @@ h1 {
 
 #header #primsection {
     margin-top: 10px;
+    padding: 5px 10px;;
+    background: #FAFAFA;
+    border: 1px solid #CCC;
 }
 
 #header #secsection {
@@ -128,8 +141,8 @@ h1 {
 }
 
 .extrabox {
-    padding: 5px;
-    border: 1px solid lightgray;
+    padding: 10px;
+    border: 1px solid #CCC;
     background: #FAFAFA;
 }
 
@@ -140,10 +153,10 @@ h1 {
 }
 
 .bookmarksbox {
-    padding: 5px;
-    border: 1px solid lightgray;
+    padding: 10px;
+    border: 1px solid #CCC;
     background: #FAFAFA;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .bookmarks {
@@ -165,7 +178,7 @@ h1 {
 }
 
 .bookmarks .titlecolumn {
-    width: 700px;
+    width: 690px;
 }
 
 .bookmarks .titlecolumn .clickIncrement {
@@ -301,7 +314,8 @@ h1 {
  *
  */
 #footer {
-    padding: 30px 0px;
+    padding: 10px 0px;
     font-size: 0.7em;
     text-align: center;
+    color: gray;
 }

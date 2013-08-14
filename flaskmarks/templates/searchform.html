@@ -1,6 +1,5 @@
 <form action="/search" method="GET">
-  <label for="q">Search</label>
-  <input name="q" value="{{ request.args['q'] }}" type="text"/>
+  <input name="q" value="{{ request.args['q'] }}" type="text" class="roundcorner5" placeholder='Search'/>
   <input type="submit" value="Search" />
 </form>
 {% if request.args.get('q') %}
