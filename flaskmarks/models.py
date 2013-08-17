@@ -5,9 +5,10 @@ from sqlalchemy import (
     desc,
     asc,
     func,
-    )
+)
 from cryptacular.bcrypt import BCRYPTPasswordManager
 import datetime
+
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -23,7 +24,7 @@ class User(db.Model):
 
     @classmethod
     def by_uname_or_email(self, uname):
-        return self.query.filter(or_(User.username == uname,\
+        return self.query.filter(or_(User.username == uname,
                                      User.email == uname)).first()
 
     def my(self):
@@ -39,8 +40,8 @@ class User(db.Model):
                         .limit(self.recently).all()
 
     def bookmarks(self, page):
-        return self.my().order_by(desc(Bookmark.clicks),\
-                                       desc(Bookmark.created))\
+        return self.my().order_by(desc(Bookmark.clicks),
+                                  desc(Bookmark.created))\
                         .paginate(page, self.per_page, False)
 
     def bid(self, id):
@@ -91,22 +92,21 @@ class Bookmark(db.Model):
     created = db.Column(db.DateTime)
     updated = db.Column(db.DateTime)
 
-
     @classmethod
     def by_tag(self, page, oID, per_page, tag):
         tag = "%"+tag+"%"
         return self.query.filter(and_(
-                                 self.tags.like(tag), 
+                                 self.tags.like(tag),
                                  self.owner_id == oID))\
                          .order_by(desc(self.clicks))\
                          .paginate(page, per_page, False)
-    
+
     @classmethod
     def by_string(self, page, oID, per_page, string):
         string = "%"+string+"%"
         return self.query.filter(self.owner_id == oID)\
-                         .filter(or_(self.title.like(string),\
-                                     self.tags.like(string),\
+                         .filter(or_(self.title.like(string),
+                                     self.tags.like(string),
                                      self.url.like(string)))\
                          .order_by(desc(self.clicks))\
                          .paginate(page, per_page, False)
