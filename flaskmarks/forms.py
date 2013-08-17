@@ -10,6 +10,8 @@ from flask.ext.wtf import (
     )
 
 strip_filter = lambda x: x.strip() if x else None
+pmm = 'Passwords must match'
+
 
 class LoginForm(Form):
     username = TextField('username',
@@ -19,7 +21,7 @@ class LoginForm(Form):
                              [validators.Length(min=1, max=255)],
                              filters=[strip_filter])
     remember_me = BooleanField('remember_me', default=False)
-  
+
 
 class UserRegisterForm(Form):
     username = TextField('username',
@@ -32,7 +34,7 @@ class UserRegisterForm(Form):
     password = PasswordField('password',
                              [validators.Length(min=6, max=64),
                               validators.EqualTo('confirm',
-                                                 message='Passwords must match')],
+                                                 message=pmm)],
                              filters=[strip_filter])
     confirm = PasswordField('confirm',
                             filters=[strip_filter])
@@ -40,18 +42,19 @@ class UserRegisterForm(Form):
 
 class UserProfileForm(UserRegisterForm):
     password = PasswordField('password',
-                             [validators.Optional(), 
+                             [validators.Optional(),
                               validators.Length(min=6, max=64),
                               validators.EqualTo('confirm',
-                                                 message='Passwords must match')],
+                                                 message=pmm)],
                              filters=[strip_filter])
-    per_page = SelectField('per_page', 
+    per_page = SelectField('per_page',
                            coerce=int,
                            choices=[(n, n) for n in range(10, 21)])
     suggestion = BooleanField('suggestion', default=True)
     recently = SelectField('recently',
                            coerce=int,
-                           choices=[(n,n) for n in range(5)])
+                           choices=[(n, n) for n in range(5)])
+
 
 class BookmarkForm(Form):
     referrer = HiddenField([validators.URL(require_tld=False)])
@@ -64,5 +67,5 @@ class BookmarkForm(Form):
                                     message='Not a valid URL')],
                     filters=[strip_filter])
     tags = TextField('tags',
-                      [validators.Length(min=0, max=255)],
-                      filters=[strip_filter])
+                     [validators.Length(min=0, max=255)],
+                     filters=[strip_filter])
