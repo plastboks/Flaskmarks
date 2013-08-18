@@ -6,9 +6,11 @@
     {{form.hidden_tag()}}
     <div class="info roundcorner5">
       <p>Total bookmarks: {{ bc }}</p>
+      <p>Total feeds: {{ fc }}</p>
       <p>Last logon: {{ g.user.last_logged }}</p>
       {% if bc %}
-      <p>Last created bookmark: {{ lc.created }}</p>
+      <p>Last created bookmark: {{ lcb.created }}</p>
+      <p>Last created feed: {{ lcf.created }}</p>
       {% endif %}
     </div>
     <div class="column roundcorner5 clear">
@@ -44,7 +46,7 @@
         {% for error in form.per_page.errors %}
           {{ error }} <br />
         {% endfor %}
-        {{ form.per_page.label('Bookmarks per page') }}
+        {{ form.per_page.label('Items per page') }}
         {{ form.per_page() }}
       </p>
       <p>
