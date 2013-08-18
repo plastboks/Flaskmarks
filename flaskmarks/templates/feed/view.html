@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ feed.title }}</h1>
+<div id="view" class="bookmarksbox roudcorners5 shadow4">
+  {% for entry in data['entries'] %}
+    <ul>
+      <li><a href="{{ entry['link'] }}" rel="noreferrer" class="link" target="_blank">{{ entry['title'] }}</a></li>
+    </ul>
+  {% endfor %}
+</div>
+{% endblock %}
