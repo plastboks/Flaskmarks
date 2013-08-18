@@ -267,6 +267,38 @@ h1 {
     font-size: 0.75em;
 }
 
+/**
+ *
+ * Feed section
+ *
+ */ 
+#content .feedlist {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+}
+
+#content .feedlist ul {
+    list-style: none;
+    margin: 0;
+    padding: 2px 0px 4px 2px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid lightgray;
+}
+
+#content .feedlist ul .link {
+    font-size: 1.1em;
+}
+
+#content .feedlist ul .date {
+    font-size: 0.6em;
+    color: #D3D3D3;
+}
+
+#content .feedlist ul .summary {
+    font-size: 0.9em;
+    color: #5A5A5A;
+}
 
 /**
  *
