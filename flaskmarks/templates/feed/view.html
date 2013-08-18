@@ -2,10 +2,16 @@
 {% block content %}
 <h1>{{ feed.title }}</h1>
 <div id="view" class="bookmarksbox roudcorners5 shadow4">
+  <ul class="feedlist">
   {% for entry in data['entries'] %}
-    <ul>
-      <li><a href="{{ entry['link'] }}" rel="noreferrer" class="link" target="_blank">{{ entry['title'] }}</a></li>
-    </ul>
+      <li class='entry'>
+        <ul>
+          <li class='link'><a href="{{ entry['link'] }}" rel="noreferrer" class="link" target="_blank">{{ entry['title'] }}</a></li>
+          <li class='date'>{{ entry['published'] }} / {{ entry['updated'] }}</li>
+          <li class='summary'>{{ entry['content'][0]['value'] }}</li>
+        </ul>
+      </li>
   {% endfor %}
+  </ul>
 </div>
 {% endblock %}
