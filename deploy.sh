@@ -10,3 +10,4 @@ pip install flask-wtf
 pip install WebHelpers2
 pip install flup
 pip install pep8
+pip install feedparser

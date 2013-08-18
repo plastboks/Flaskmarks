@@ -1,0 +1,53 @@
+<div class="bookmarksbox roundcorner5 shadow4">
+  <table class="bookmarks">
+      <thead>
+          <th>Title</th>
+          <th>Clicks</th>
+          <th>Actions</th>
+      </thead>
+      <tbody>
+          {% for feed in feeds.items %}
+              <tr>
+                  <td class='titlecolumn'>
+                      <a href="{{ feed.url }}" class="link clickIncrement" target="_blank" data-id="{{ feed.id }}", title="{{feed.title}}" rel="noreferrer">
+                        {{ feed.title|truncate(90) }}
+                      </a><br />
+                      {% if feed.tags %}
+                        {% for w in feed.tags.split(' ') %}
+                          <a href="{{ url_for('search_tags', slug = w) }}" class="tag">{{ w }}</a>
+                        {% endfor %}
+                      {% endif %}
+                      <span class="lastvisit">last visit:</span>
+                      {% if feed.last_clicked %}
+                      <span class="lastclick">{{ feed.last_clicked | datewords }}</span>
+                      {% else %}
+                      <span class="neverclick">never</span>
+                      {% endif %}
+                  </td>
+                  <td class="clickscolumn">
+                    <span>{{ feed.clicks }}</span>
+                  </td>
+                  <td class='actioncolumn'>
+                      <a href="{{ url_for('edit_feed', id=feed.id) }}" class="edit">
+                          <img src="/static/icons/edit.png" title="Edit" alt="Edit"/>
+                      </a> 
+                      <a href="{{ url_for('delete_feed', id=feed.id) }}" class="delete">
+                          <img src="/static/icons/delete.png" title="Delete" alt="Delete"/>
+                      </a>
+                  </td>
+              </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
+<div id="paginate">
+{% if feeds.has_prev %}
+  <a href="{{ url_for(request.endpoint, page = 1, q = request.args.get('q')) }}"><<</a>
+  <a href="{{ url_for(request.endpoint, page = feeds.prev_num, q = request.args.get('q')) }}"><</a>
+{% endif %}
+Page {{ feeds.page }} of {{ feeds.pages }}
+{% if feeds.has_next %}
+  <a href="{{ url_for(request.endpoint, page=feeds.next_num, q = request.args.get('q')) }}">></a>
+  <a href="{{ url_for(request.endpoint, page = feeds.pages, q = request.args.get('q')) }}">>></a>
+{% endif %}
+</div>

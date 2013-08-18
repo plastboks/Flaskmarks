@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Edit Bookmark</h1>
+<div id="edit" class="bookmarkform">
+  <form action="" method="POST">
+    {{form.hidden_tag()}}
+    <p>
+      {% for error in form.title.errors %}
+        {{ error }} <br />
+      {% endfor %}
+      {{ form.title.label('Title') }} <br />
+      {{ form.title(size=20) }}
+    </p>
+    <p>
+      {% for error in form.url.errors %}
+        {{ error }} <br />
+      {% endfor %}
+      {{ form.url.label('URL') }} <br />
+      {{ form.url(size=20) }}
+    </p>
+    <p>
+      {% for error in form.tags.errors %}
+        {{ error }} <br />
+      {% endfor %}
+      {{ form.tags.label('Tags') }} <br />
+      {{ form.tags(size=20) }}
+    </p>
+      <input type="submit" value="Edit feed" />
+  </form>
+</div>
+{% endblock %}

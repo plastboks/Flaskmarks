@@ -42,9 +42,10 @@ h1 {
 #header ul li {
     display: inline;
     border: 1px solid lightgray;
-    padding: 2px 4px;
-    margin-right: 5px;
+    padding: 2px 2px;
+    margin-right: 2px;
     background: #FAFAFA;
+    font-size: 0.9em;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;

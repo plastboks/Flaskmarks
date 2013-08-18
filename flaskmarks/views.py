@@ -38,11 +38,13 @@ from forms import (
     BookmarkForm,
     UserRegisterForm,
     UserProfileForm,
+    FeedForm,
 )
 
 from models import (
     User,
     Bookmark,
+    Feed,
 )
 
 
@@ -84,8 +86,8 @@ def index(page=1):
                            title='Home',
                            header='',
                            bookmarks=u.bookmarks(page),
-                           suggestions=u.suggestions(),
-                           recently=u.recent())
+                           suggestions=u.bsuggestions(),
+                           recently=u.brecent())
 
 
 @app.route('/bookmark/new', methods=['GET', 'POST'])
@@ -107,7 +109,7 @@ def new_bookmark():
         db.session.commit()
         flash('New bookmark %s added' % (b.title), category='info')
         return redirect(url_for('index'))
-    return render_template('new.html',
+    return render_template('bookmark/new.html',
                            title='New',
                            form=form)
 
@@ -129,7 +131,7 @@ def edit_bookmark(id):
             return redirect(form.referrer.data)
         return redirect(url_for('index'))
     form.referrer.data = request.referrer
-    return render_template('edit.html',
+    return render_template('bookmark/edit.html',
                            title='Edit',
                            form=form)
 
@@ -142,6 +144,88 @@ def delete_bookmark(id):
         db.session.delete(b)
         db.session.commit()
         flash('Bookmark %s deleted' % (b.title), category='info')
+        return redirect(url_for('index'))
+    abort(403)
+
+
+#############
+# Feed CRUD #
+#############
+@app.route('/feeds')
+@app.route('/feeds/<int:page>')
+@login_required
+def feeds(page=1):
+    u = g.user
+    return render_template('feed/index.html',
+                           title='Feeds',
+                           header='',
+                           feeds=u.feeds(page),
+                           suggestions=u.fsuggestions(),
+                           recently=u.frecent())
+
+
+@app.route('/feed/view/<int:id>', methods=['GET'])
+@login_required
+def view_feed():
+    f = g.user.fid(id)
+    if not f:
+        abort(403)
+    return render_template('feed/view.html')
+
+@app.route('/feed/new', methods=['GET', 'POST'])
+@login_required
+def new_feed():
+    form = FeedForm()
+    if form.validate_on_submit():
+        f = Feed()
+        form.populate_obj(f)
+        f.owner_id = g.user.id
+        f.created = datetime.utcnow()
+        f.tags = ' '.join([t.strip() for t in form.tags.data.strip().split(',')])\
+                    .lower()
+        f.clicks = 0
+        if not form.title.data:
+            soup = BSoup(urlopen(form.url.data))
+            f.title = soup.title.string
+        db.session.add(f)
+        db.session.commit()
+        flash('New feed %s added' % (f.title), category='info')
+        return redirect(url_for('index'))
+    return render_template('feed/new.html',
+                           title='New feed',
+                           form=form)
+
+
+@app.route('/feed/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_feed(id):
+    f = g.user.fid(id)
+    form = FeedForm(obj=f)
+    if not f:
+        abort(403)
+    if form.validate_on_submit():
+        form.populate_obj(f)
+        f.updated = datetime.utcnow()
+        db.session.add(f)
+        db.session.commit()
+        flash('Feed %s updated' % (form.title.data), category='info')
+        if form.referrer.data and is_safe_url(form.referrer.data):
+            return redirect(form.referrer.data)
+        return redirect(url_for('feeds'))
+    form.referrer.data = request.referrer
+    return render_template('feed/edit.html',
+                           title='Edit feed',
+                           form=form)
+
+
+@app.route('/feed/delete/<int:id>')
+@login_required
+def delete_feed(id):
+    f = g.user.fid(id)
+    if f:
+        db.session.delete(f)
+        db.session.commit()
+        flash('Feed %s deleted' % (f.title), category='info')
         return redirect(url_for('index'))
     abort(403)
 
