@@ -10,7 +10,7 @@
 </head>
 <body>
   <div id="header">
-    <h1>Mnemosy.de</h1>
+    <h1>{{ config['SITE_TITLE'] }}</h1>
     {% if g.user.is_authenticated() %}
     <div id="search">
         {% include "searchform.html" %}
