@@ -79,11 +79,12 @@ def forbidden(error):
 #################
 @app.route('/')
 @app.route('/index')
-@app.route('/index/<int:page>')
+@app.route('/bookmarks')
+@app.route('/bookmarks/<int:page>')
 @login_required
-def index(page=1):
+def bookmarks(page=1):
     u = g.user
-    return render_template('index.html',
+    return render_template('bookmark/index.html',
                            title='Home',
                            header='',
                            bookmarks=u.bookmarks(page),
@@ -176,6 +177,7 @@ def view_feed(id):
                            feed=f,
                            data=data,
                            )
+
 
 @app.route('/feed/new', methods=['GET', 'POST'])
 @login_required
@@ -310,7 +312,9 @@ def ajax_feed_inc():
 def profile():
     u = g.user
     bc = g.user.bookmark_count()
-    lc = g.user.bookmark_last_created()
+    lcb = g.user.bookmark_last_created()
+    fc = g.user.feed_count()
+    lcf = g.user.feed_last_created()
     form = UserProfileForm(obj=u)
     if form.validate_on_submit():
         form.populate_obj(u)
@@ -323,11 +327,13 @@ def profile():
         db.session.commit()
         flash('User %s updated' % (form.username.data), category='info')
         return redirect(url_for('login'))
-    return render_template('profile.html',
+    return render_template('account/profile.html',
                            form=form,
                            title='Profile',
                            bc=bc,
-                           lc=lc,
+                           lcb=lcb,
+                           fc=fc,
+                           lcf=lcf,
                            )
 
 
@@ -345,7 +351,7 @@ def register():
         db.session.commit()
         flash('New user %s registered' % (form.username.data), category='info')
         return redirect(url_for('login'))
-    return render_template('register.html',
+    return render_template('account/register.html',
                            form=form,
                            title='Register',
                            )
@@ -373,7 +379,7 @@ def login():
             flash('Failed login request for %s' % (form.username.data),
                   category='error')
             return redirect(url_for('login'))
-    return render_template('login.html',
+    return render_template('account/login.html',
                            title='Login',
                            form=form,
                            )

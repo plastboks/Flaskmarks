@@ -7,10 +7,10 @@
 {% else %}
     <h1>{{ header }}</h1>
     {% if (g.user.recently or g.user.suggestion) and not 'Results' in header %}
-      {% include "extra.html" %}
+      {% include "bookmark/extra.html" %}
     {% endif %}
     {% if bookmarks.items %}
-      {% include "table.html" %}
+      {% include "bookmark/table.html" %}
     {% else %}
       <h2>No results</h2>
       <h3>Try again</h3>

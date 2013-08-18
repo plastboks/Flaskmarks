@@ -35,32 +35,31 @@ class User(db.Model):
 
     def bsuggestions(self):
         return self.bmy().filter(Bookmark.clicks == 0)\
-                        .order_by(func.random())\
-                        .limit(config['SUGGESTIONS_COUNT']).all()
+                         .order_by(func.random())\
+                         .limit(config['SUGGESTIONS_COUNT']).all()
 
     def fsuggestions(self):
         return self.fmy().filter(Feed.clicks == 0)\
-                        .order_by(func.random())\
-                        .limit(config['SUGGESTIONS_COUNT']).all()
+                         .order_by(func.random())\
+                         .limit(config['SUGGESTIONS_COUNT']).all()
 
     def brecent(self):
         return self.bmy().order_by(desc(Bookmark.created))\
-                        .limit(self.recently).all()
+                         .limit(self.recently).all()
 
     def frecent(self):
         return self.fmy().order_by(desc(Feed.created))\
-                        .limit(self.recently).all()
-
+                         .limit(self.recently).all()
 
     def bookmarks(self, page):
         return self.bmy().order_by(desc(Bookmark.clicks),
-                                  desc(Bookmark.created))\
-                        .paginate(page, self.per_page, False)
+                                   desc(Bookmark.created))\
+                         .paginate(page, self.per_page, False)
 
     def feeds(self, page):
         return self.fmy().order_by(desc(Feed.clicks),
-                                  desc(Feed.created))\
-                        .paginate(page, self.per_page, False)
+                                   desc(Feed.created))\
+                         .paginate(page, self.per_page, False)
 
     def bid(self, id):
         return self.bmy().filter(Bookmark.id == id)\
@@ -75,6 +74,12 @@ class User(db.Model):
 
     def bookmark_last_created(self):
         return self.bmy().order_by(desc(Bookmark.created)).first()
+
+    def feed_count(self):
+        return self.fmy().count()
+
+    def feed_last_created(self):
+        return self.fmy().order_by(desc(Feed.created)).first()
 
     def btag(self, page, tag):
         return Bookmark.by_tag(page, self.id, self.per_page, tag)

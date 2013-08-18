@@ -2,7 +2,7 @@
     <ul class="primarymenu">
         {% if g.user.is_authenticated() %}
           {% block secondarymenu %}
-                  <li><a href="{{ url_for('index') }}">Bookmarks</a></li>
+                  <li><a href="{{ url_for('bookmarks') }}">Bookmarks</a></li>
                   <li><a href="{{ url_for('new_bookmark') }}">New Bookmark</a></li>
                   <li><a href="{{ url_for('feeds') }}">Feeds</a></li>
                   <li><a href="{{ url_for('new_feed') }}">New Feed</a></li>
