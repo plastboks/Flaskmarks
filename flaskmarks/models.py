@@ -27,32 +27,54 @@ class User(db.Model):
         return self.query.filter(or_(User.username == uname,
                                      User.email == uname)).first()
 
-    def my(self):
+    def bmy(self):
         return Bookmark.query.filter(Bookmark.owner_id == self.id)
 
-    def suggestions(self):
-        return self.my().filter(Bookmark.clicks == 0)\
+    def fmy(self):
+        return Feed.query.filter(Feed.owner_id == self.id)
+
+    def bsuggestions(self):
+        return self.bmy().filter(Bookmark.clicks == 0)\
                         .order_by(func.random())\
                         .limit(config['SUGGESTIONS_COUNT']).all()
 
-    def recent(self):
-        return self.my().order_by(desc(Bookmark.created))\
+    def fsuggestions(self):
+        return self.fmy().filter(Feed.clicks == 0)\
+                        .order_by(func.random())\
+                        .limit(config['SUGGESTIONS_COUNT']).all()
+
+    def brecent(self):
+        return self.bmy().order_by(desc(Bookmark.created))\
                         .limit(self.recently).all()
 
+    def frecent(self):
+        return self.fmy().order_by(desc(Feed.created))\
+                        .limit(self.recently).all()
+
+
     def bookmarks(self, page):
-        return self.my().order_by(desc(Bookmark.clicks),
+        return self.bmy().order_by(desc(Bookmark.clicks),
                                   desc(Bookmark.created))\
                         .paginate(page, self.per_page, False)
 
+    def feeds(self, page):
+        return self.fmy().order_by(desc(Feed.clicks),
+                                  desc(Feed.created))\
+                        .paginate(page, self.per_page, False)
+
     def bid(self, id):
-        return self.my().filter(Bookmark.id == id)\
+        return self.bmy().filter(Bookmark.id == id)\
+                        .first()
+
+    def fid(self, id):
+        return self.fmy().filter(Feed.id == id)\
                         .first()
 
     def bookmark_count(self):
-        return self.my().count()
+        return self.bmy().count()
 
     def bookmark_last_created(self):
-        return self.my().order_by(desc(Bookmark.created)).first()
+        return self.bmy().order_by(desc(Bookmark.created)).first()
 
     def btag(self, page, tag):
         return Bookmark.by_tag(page, self.id, self.per_page, tag)
@@ -113,3 +135,16 @@ class Bookmark(db.Model):
 
     def __repr__(self):
         return '<Bookmark %r>' % (self.title)
+
+
+class Feed(db.Model):
+    __tablename__ = 'feeds'
+    id = db.Column(db.Integer, primary_key=True)
+    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    title = db.Column(db.Unicode(255), nullable=False)
+    url = db.Column(db.Unicode(512), nullable=False)
+    tags = db.Column(db.Unicode(512))
+    clicks = db.Column(db.Integer, default=0)
+    last_clicked = db.Column(db.DateTime)
+    created = db.Column(db.DateTime)
+    updated = db.Column(db.DateTime)

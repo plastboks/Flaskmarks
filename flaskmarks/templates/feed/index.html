@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+{% if not feeds.items and not 'Results' in header %}
+<h1>Hello {{ g.user.username }}</h1>
+<h2>Welcome to this awesome feed app.</h2> 
+<h3>Click "New feed" to add a feed</h3>
+{% else %}
+    <h1>{{ header }}</h1>
+    {% if (g.user.recently or g.user.suggestion) and not 'Results' in header %}
+      {% include "feed/extra.html" %}
+    {% endif %}
+    {% if feeds.items %}
+      {% include "feed/table.html" %}
+    {% else %}
+      <h2>No results</h2>
+      <h3>Try again</h3>
+      {% include "searchform.html" %}
+    {% endif %}
+{% endif %}
+{% endblock %}

@@ -69,3 +69,18 @@ class BookmarkForm(Form):
     tags = TextField('tags',
                      [validators.Length(min=0, max=255)],
                      filters=[strip_filter])
+
+
+class FeedForm(Form):
+    referrer = HiddenField([validators.URL(require_tld=False)])
+    title = TextField('title',
+                      [validators.Length(min=0, max=255)],
+                      filters=[strip_filter])
+    url = TextField('url',
+                    [validators.Length(min=4, max=512),
+                     validators.URL(require_tld=False,
+                                    message='Not a valid URL')],
+                    filters=[strip_filter])
+    tags = TextField('tags',
+                     [validators.Length(min=0, max=255)],
+                     filters=[strip_filter])
