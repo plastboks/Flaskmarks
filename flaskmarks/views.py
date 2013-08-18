@@ -15,6 +15,7 @@ from BeautifulSoup import BeautifulSoup as BSoup
 from urllib import urlopen
 from datetime import datetime
 from urlparse import urlparse, urljoin
+import feedparser
 
 from flask.ext.login import (
     login_user,
@@ -166,11 +167,15 @@ def feeds(page=1):
 
 @app.route('/feed/view/<int:id>', methods=['GET'])
 @login_required
-def view_feed():
+def view_feed(id):
     f = g.user.fid(id)
+    data = feedparser.parse(f.url)
     if not f:
         abort(403)
-    return render_template('feed/view.html')
+    return render_template('feed/view.html',
+                           feed=f,
+                           data=data,
+                           )
 
 @app.route('/feed/new', methods=['GET', 'POST'])
 @login_required
@@ -273,6 +278,24 @@ def ajax_bookmark_inc():
             b.last_clicked = datetime.utcnow()
             b.clicks += 1
             db.session.add(b)
+            db.session.commit()
+            return jsonify(status='success')
+        return jsonify(status='forbidden')
+    return jsonify(status='error')
+
+
+@app.route('/feed/inc')
+@login_required
+def ajax_feed_inc():
+    if request.args.get('id'):
+        id = int(request.args.get('id'))
+        f = g.user.fid(id)
+        if f:
+            if not f.clicks:
+                f.clicks = 0
+            f.last_clicked = datetime.utcnow()
+            f.clicks += 1
+            db.session.add(f)
             db.session.commit()
             return jsonify(status='success')
         return jsonify(status='forbidden')

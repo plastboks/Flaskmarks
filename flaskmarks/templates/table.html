@@ -9,7 +9,7 @@
           {% for bookmark in bookmarks.items %}
               <tr>
                   <td class='titlecolumn'>
-                      <a href="{{ bookmark.url }}" class="link clickIncrement" target="_blank" data-id="{{ bookmark.id }}", title="{{bookmark.title}}" rel="noreferrer">
+                      <a href="{{ bookmark.url }}" class="link clickIncrement" target="_blank" data-id="{{ bookmark.id }}" data-url="bookmark/inc" title="{{bookmark.title}}" rel="noreferrer">
                         {{ bookmark.title|truncate(90) }}
                       </a><br />
                       {% if bookmark.tags %}

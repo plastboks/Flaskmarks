@@ -64,11 +64,11 @@ class User(db.Model):
 
     def bid(self, id):
         return self.bmy().filter(Bookmark.id == id)\
-                        .first()
+                         .first()
 
     def fid(self, id):
         return self.fmy().filter(Feed.id == id)\
-                        .first()
+                         .first()
 
     def bookmark_count(self):
         return self.bmy().count()

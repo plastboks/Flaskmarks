@@ -9,7 +9,7 @@
           {% for feed in feeds.items %}
               <tr>
                   <td class='titlecolumn'>
-                      <a href="{{ feed.url }}" class="link clickIncrement" target="_blank" data-id="{{ feed.id }}", title="{{feed.title}}" rel="noreferrer">
+                      <a href="{{ url_for('view_feed', id=feed.id) }}" class="link clickIncrement" data-id="{{ feed.id }}" data-url="feed/inc" title="{{feed.title}}">
                         {{ feed.title|truncate(90) }}
                       </a><br />
                       {% if feed.tags %}
