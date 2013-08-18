@@ -2,6 +2,7 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 SITE_TITLE = 'Flaskmarks'
+SITE_FOOTER = 'Flaskmark awesome bookmark and feed app'
 
 CSRF_ENABLED = True
 SECRET_KEY = 'super-duper-secret-key'
