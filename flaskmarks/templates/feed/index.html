@@ -2,7 +2,6 @@
 {% block content %}
 {% if not feeds.items and not 'Results' in header %}
 <h1>Hello {{ g.user.username }}</h1>
-<h2>Welcome to this awesome feed app.</h2> 
 <h3>Click "New feed" to add a feed</h3>
 {% else %}
     <h1>{{ header }}</h1>

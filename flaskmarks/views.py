@@ -71,7 +71,7 @@ def unauthorized(error):
 @app.errorhandler(403)
 def forbidden(error):
     flash('Forbidden access', category='error')
-    return redirect(url_for('index'))
+    return redirect(url_for('bookmarks'))
 
 
 #################
@@ -110,7 +110,7 @@ def new_bookmark():
         db.session.add(b)
         db.session.commit()
         flash('New bookmark %s added' % (b.title), category='info')
-        return redirect(url_for('index'))
+        return redirect(url_for('bookmarks'))
     return render_template('bookmark/new.html',
                            title='New',
                            form=form)
@@ -131,7 +131,7 @@ def edit_bookmark(id):
         flash('Bookmark %s updated' % (form.title.data), category='info')
         if form.referrer.data and is_safe_url(form.referrer.data):
             return redirect(form.referrer.data)
-        return redirect(url_for('index'))
+        return redirect(url_for('bookmarks'))
     form.referrer.data = request.referrer
     return render_template('bookmark/edit.html',
                            title='Edit',
@@ -146,7 +146,7 @@ def delete_bookmark(id):
         db.session.delete(b)
         db.session.commit()
         flash('Bookmark %s deleted' % (b.title), category='info')
-        return redirect(url_for('index'))
+        return redirect(url_for('bookmarks'))
     abort(403)
 
 
@@ -197,7 +197,7 @@ def new_feed():
         db.session.add(f)
         db.session.commit()
         flash('New feed %s added' % (f.title), category='info')
-        return redirect(url_for('index'))
+        return redirect(url_for('feeds'))
     return render_template('feed/new.html',
                            title='New feed',
                            form=form)
@@ -233,7 +233,7 @@ def delete_feed(id):
         db.session.delete(f)
         db.session.commit()
         flash('Feed %s deleted' % (f.title), category='info')
-        return redirect(url_for('index'))
+        return redirect(url_for('feeds'))
     abort(403)
 
 
@@ -245,7 +245,7 @@ def delete_feed(id):
 @login_required
 def search_tags(slug, page=1):
     b = g.user.btag(page, slug)
-    return render_template('index.html',
+    return render_template('bookmark/index.html',
                            title='Results',
                            header='Results for ' + slug,
                            bookmarks=b)
@@ -257,9 +257,9 @@ def search_tags(slug, page=1):
 def search_string(page=1):
     q = request.args.get('q')
     if not q:
-        return redirect(url_for('index'))
+        return redirect(url_for('bookmarks'))
     b = g.user.bstring(page, q)
-    return render_template('index.html',
+    return render_template('bookmark/index.html',
                            title='Results',
                            header='Results for ' + q,
                            bookmarks=b)
@@ -363,7 +363,7 @@ def register():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if g.user.is_authenticated():
-        return redirect(url_for('index'))
+        return redirect(url_for('bookmarks'))
     form = LoginForm()
     if form.validate_on_submit():
         u = User.by_uname_or_email(form.username.data)
@@ -374,7 +374,7 @@ def login():
             flash('Successful login request for %s' % (u.username),
                   category='info')
             login_user(u, remember=form.remember_me.data)
-            return redirect(url_for('index'))
+            return redirect(url_for('bookmarks'))
         else:
             flash('Failed login request for %s' % (form.username.data),
                   category='error')

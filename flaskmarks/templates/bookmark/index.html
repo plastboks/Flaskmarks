@@ -2,7 +2,6 @@
 {% block content %}
 {% if not bookmarks.items and not 'Results' in header %}
 <h1>Hello {{ g.user.username }}</h1>
-<h2>Welcome to this awesome bookmark app.</h2> 
 <h3>Click "New bookmark" to add a bookmark</h3>
 {% else %}
     <h1>{{ header }}</h1>
