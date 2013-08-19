@@ -3,6 +3,7 @@ Flask Bookmarks
 
 My simple and self educational Flask + sqlalchemy based bookmark app
 
+
 Install
 =======
 
@@ -10,7 +11,7 @@ Activate the virtualenv (ex: `. venv/bin/activate`)
 
 make a copy of config.py.example to config.py and edit accordingly.
 
-run `sh install.sh`
+run `pip install -r requirements.txt`
 
 run `python db_create.py`
 
@@ -40,6 +41,11 @@ Credits
 
 This app is heavily inspired by the flaks sqlalchemy tutorial @ http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
 
+
+Branches
+========
+
+There will at any given point be at least two branches in this repository. One master (stable) branch, and one develop (unstable...) branch. The develop branch might contain unfinished code and/or wonky solutions for features. I will strive to make shure that code merged into master is as well thought of as possible (given the small size of this application).
 
 Useful Links
 ============

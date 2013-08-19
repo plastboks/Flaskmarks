@@ -1,0 +1,15 @@
+#requirements
+
+cryptacular
+BeautifulSoup
+sqlalchemy==0.7.10
+flask
+flask-login
+flask-sqlalchemy
+sqlalchemy-migrate
+flask-whooshalchemy
+flask-wtf
+WebHelpers2
+flup
+pep8
+feedparser
