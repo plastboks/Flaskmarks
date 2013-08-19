@@ -10,7 +10,7 @@ Activate the virtualenv (ex: `. venv/bin/activate`)
 
 make a copy of config.py.example to config.py and edit accordingly.
 
-run `sh deploy.sh`
+run `sh install.sh`
 
 run `python db_create.py`
 
