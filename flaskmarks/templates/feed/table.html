@@ -14,7 +14,7 @@
                       </a><br />
                       {% if feed.tags %}
                         {% for w in feed.tags.split(' ') %}
-                          <a href="{{ url_for('search_tags', slug = w) }}" class="tag">{{ w }}</a>
+                          <a href="{{ url_for('feed_q_tag', slug=w) }}" class="tag">{{ w }}</a>
                         {% endfor %}
                       {% endif %}
                       <span class="lastvisit">last visit:</span>

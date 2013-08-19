@@ -84,8 +84,14 @@ class User(db.Model):
     def btag(self, page, tag):
         return Bookmark.by_tag(page, self.id, self.per_page, tag)
 
+    def ftag(self, page, tag):
+        return Feed.by_tag(page, self.id, self.per_page, tag)
+
     def bstring(self, page, string):
         return Bookmark.by_string(page, self.id, self.per_page, string)
+
+    def fstring(self, page, string):
+        return Feed.by_string(page, self.id, self.per_page, string)
 
     def authenticate_user(self, password):
         manager = BCRYPTPasswordManager()
@@ -153,3 +159,26 @@ class Feed(db.Model):
     last_clicked = db.Column(db.DateTime)
     created = db.Column(db.DateTime)
     updated = db.Column(db.DateTime)
+
+    @classmethod
+    def by_tag(self, page, oID, per_page, tag):
+        string = "%"+tag+"%"
+        return self.query.filter(self.owner_id == oID)\
+                         .filter(or_(self.title.like(string),
+                                     self.tags.like(string),
+                                     self.url.like(string)))\
+                         .order_by(desc(self.clicks))\
+                         .paginate(page, per_page, False)
+
+    @classmethod
+    def by_string(self, page, oID, per_page, string):
+        string = "%"+string+"%"
+        return self.query.filter(self.owner_id == oID)\
+                         .filter(or_(self.title.like(string),
+                                     self.tags.like(string),
+                                     self.url.like(string)))\
+                         .order_by(desc(self.clicks))\
+                         .paginate(page, per_page, False)
+
+    def __repr__(self):
+        return '<Feed %r>' % (self.title)

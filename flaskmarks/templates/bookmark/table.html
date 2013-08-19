@@ -14,7 +14,7 @@
                       </a><br />
                       {% if bookmark.tags %}
                         {% for w in bookmark.tags.split(' ') %}
-                          <a href="{{ url_for('search_tags', slug = w) }}" class="tag">{{ w }}</a>
+                          <a href="{{ url_for('bookmark_q_tag', slug = w) }}" class="tag">{{ w }}</a>
                         {% endfor %}
                       {% endif %}
                       <span class="lastvisit">last visit:</span>

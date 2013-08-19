@@ -1,7 +1,9 @@
 <form action="/search" method="GET">
-  <input name="q" value="{{ request.args['q'] }}" type="text" class="roundcorner5" placeholder='Search'/>
+  <input name="q" value="{{ request.args['q'] }}" type="text" class="roundcorner5" placeholder='Search'/><br />
+  <input type="radio" name="t" value="bookmarks"> Bookmarks
+  <input type="radio" name="t" value="feeds"> Feeds
+  {% if request.args.get('q') %}
+  <a href="/index">Reset search</a>
+  {% endif %}
   <input type="submit" value="Search" />
 </form>
-{% if request.args.get('q') %}
-<a href="/index">Reset search</a>
-{% endif %}

@@ -240,15 +240,26 @@ def delete_feed(id):
 ##################
 # Search section #
 ##################
-@app.route('/search/tag/<slug>')
-@app.route('/search/tag/<slug>/<int:page>')
+@app.route('/bookmark/tag/<slug>')
+@app.route('/bookmark/tag/<slug>/<int:page>')
 @login_required
-def search_tags(slug, page=1):
+def bookmark_q_tag(slug, page=1):
     b = g.user.btag(page, slug)
     return render_template('bookmark/index.html',
-                           title='Results',
-                           header='Results for ' + slug,
+                           title='Bookmark results',
+                           header='Bookmark results for ' + slug,
                            bookmarks=b)
+
+
+@app.route('/feed/tag/<slug>')
+@app.route('/feed/tag/<slug>/<int:page>')
+@login_required
+def feed_q_tag(slug, page=1):
+    f = g.user.ftag(page, slug)
+    return render_template('feed/index.html',
+                           title='Feed results',
+                           header='Feed results for ' + slug,
+                           feeds=f)
 
 
 @app.route('/search', methods=['GET'])
@@ -256,13 +267,22 @@ def search_tags(slug, page=1):
 @login_required
 def search_string(page=1):
     q = request.args.get('q')
+    t = request.args.get('t')
     if not q:
         return redirect(url_for('bookmarks'))
-    b = g.user.bstring(page, q)
-    return render_template('bookmark/index.html',
-                           title='Results',
-                           header='Results for ' + q,
-                           bookmarks=b)
+
+    if t == 'feeds':
+        f = g.user.fstring(page, q)
+        return render_template('feed/index.html',
+                               title='Feed results',
+                               header='Feed results for ' + q,
+                               feeds=f)
+    else:
+        b = g.user.bstring(page, q)
+        return render_template('bookmark/index.html',
+                               title='Bookmark results',
+                               header='Bookmark results for ' + q,
+                               bookmarks=b)
 
 
 ################

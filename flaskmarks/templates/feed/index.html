@@ -5,7 +5,7 @@
 <h3>Click "New feed" to add a feed</h3>
 {% else %}
     <h1>{{ header }}</h1>
-    {% if (g.user.recently or g.user.suggestion) and not 'Results' in header %}
+    {% if (g.user.recently or g.user.suggestion) and not 'Feed results' in header %}
       {% include "feed/extra.html" %}
     {% endif %}
     {% if feeds.items %}

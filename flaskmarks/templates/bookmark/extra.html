@@ -18,7 +18,7 @@
                   </a><br />
                   {% if suggestion.tags %}
                     {% for w in suggestion.tags.split(' ') %}
-                      <a href="{{ url_for('search_tags', slug = w) }}" class="tag">{{ w }}</a>
+                      <a href="{{ url_for('bookmark_q_tag', slug = w) }}" class="tag">{{ w }}</a>
                     {% endfor %}
                   {% endif %}
               </td>
@@ -46,7 +46,7 @@
                   </a><br />
                   {% if recent.tags %}
                     {% for w in recent.tags.split(' ') %}
-                      <a href="{{ url_for('search_tags', slug = w) }}" class="tag">{{ w }}</a>
+                      <a href="{{ url_for('bookmark_q_tag', slug = w) }}" class="tag">{{ w }}</a>
                     {% endfor %}
                   {% endif %}
               </td>
