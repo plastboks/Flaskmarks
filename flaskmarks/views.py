@@ -123,6 +123,13 @@ def view_mark(id):
     if m.type != 'feed':
         abort(404)
     data = feedparser.parse(m.url)
+    if m:
+        if not m.clicks:
+            m.clicks = 0
+        m.last_clicked = datetime.utcnow()
+        m.clicks += 1
+        db.session.add(m)
+        db.session.commit()
     return render_template('mark/view.html',
                            mark=m,
                            data=data,
