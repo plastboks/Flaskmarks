@@ -310,8 +310,16 @@ h1 {
     border-bottom: 1px solid lightgray;
 }
 
+#content .feedlist ul .makebookmark a{
+    float: right;
+    width: 20px;
+    height: 20px;
+    background: url('../icons/book.png') no-repeat 0px 2px;
+}
+
 #content .feedlist ul .link {
     font-size: 1.1em;
+    display: inline;
 }
 
 #content .feedlist ul .date {

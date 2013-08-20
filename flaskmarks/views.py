@@ -109,6 +109,10 @@ def new_mark():
         db.session.commit()
         flash('New mark %s added' % (m.title), category='info')
         return redirect(url_for('marks'))
+    if request.args.get('url'):
+        form.url.data = request.args.get('url')
+    if request.args.get('title'):
+        form.title.data = request.args.get('title')
     return render_template('mark/new.html',
                            title='New mark',
                            form=form)
