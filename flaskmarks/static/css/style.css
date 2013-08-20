@@ -252,6 +252,17 @@ h1 {
     font-size: 24px;
 }
 
+.markform #type {
+    margin: 0px;
+    padding: 5px 0px;
+    list-style: none;
+}
+
+.markform #type li {
+    display: inline;  
+    padding-right: 10px;
+}
+
 .markform input[type='submit'] {
     width: 100%;
     font-size: 1.4em;
