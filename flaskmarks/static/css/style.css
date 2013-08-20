@@ -184,15 +184,15 @@ h1 {
 }
 
 .marks .feed {
-  background: url('../icons/feed.png') no-repeat;
+  background: url('../icons/feed.png') no-repeat 0px 7px;
 }
 
 .marks .bookmark {
-  background: url('../icons/book.png') no-repeat;
+  background: url('../icons/book.png') no-repeat 0px 7px;
 }
 
 .marks .titlecolumn {
-    width: 690px;
+    width: 670px;
 }
 
 .marks .titlecolumn .clickIncrement {

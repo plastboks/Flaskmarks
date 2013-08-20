@@ -132,7 +132,7 @@ def view_mark(id):
 @login_required
 def edit_mark(id):
     m = g.user.mid(id)
-    form = MarkForm(obj=b)
+    form = MarkForm(obj=m)
     if not m:
         abort(403)
     if form.validate_on_submit():
