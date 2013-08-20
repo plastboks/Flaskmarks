@@ -32,6 +32,7 @@ After the introduction of feeds, the whole bookmark model was renamed and extend
   * Move the current flaskmarks.sqlite file to something like flaskmarks.sqlite.old. (A good practice is also to take an backup)
   * Run `python db_create.py` (this creates a new flaskmarks.sqlite file)
   * Run `python db_merge.py flaskmarks.sqlite.old flaskmarks.sqlite`
+
 This process runs trough the old database and copies it into the new. It is therefor important that the flaskmarks.sqlite does not contain anything other than the schema.
 
 
