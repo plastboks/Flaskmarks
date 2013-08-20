@@ -7,11 +7,11 @@
           <tr>
               <td class='titlecolumn'>
                   {% if suggestion.type == 'bookmark' %}
-                    <a href="{{ suggestion.url }}" class="link clickIncrement" target="_blank" data-id="{{ suggestion.id }}" data-url="mark/inc" title="{{suggestion.title}}" rel="noreferrer">
+                    <a href="{{ suggestion.url }}" class="link clickIncrement" target="_blank" data-id="{{ suggestion.id }}" data-url="/mark/inc" title="{{suggestion.title}}" rel="noreferrer">
                       {{ suggestion.title|truncate(90) }}
                     </a>
                   {% elif suggestion.type == 'feed' %}
-                    <a href="{{ url_for('view_mark', id=suggestion.id) }}" class="link clickIncrement" data-id="{{ suggestion.id }}" data-url="mark/inc" title="{{suggestion.title}}" rel="noreferrer">
+                    <a href="{{ url_for('view_mark', id=suggestion.id) }}" class="link clickIncrement" data-id="{{ suggestion.id }}" data-url="/mark/inc" title="{{suggestion.title}}" rel="noreferrer">
                       {{ suggestion.title|truncate(90) }}
                     </a>
                   {% endif %}
@@ -41,11 +41,11 @@
           <tr>
               <td class='titlecolumn'>
                   {% if recent.type == 'bookmark' %}
-                    <a href="{{ recent.url }}" class="link clickIncrement" target="_blank" data-id="{{ recent.id }}" data-url="mark/inc" title="{{recent.title}}" rel="noreferrer">
+                    <a href="{{ recent.url }}" class="link clickIncrement" target="_blank" data-id="{{ recent.id }}" data-url="/mark/inc" title="{{recent.title}}" rel="noreferrer">
                       {{ recent.title|truncate(90) }}
                     </a>
                   {% elif recent.type == 'feed' %}
-                    <a href="{{ url_for('view_mark', id=recent.id) }}" class="link clickIncrement" data-id="{{ recent.id }}" data-url="mark/inc" title="{{recent.title}}" rel="noreferrer">
+                    <a href="{{ url_for('view_mark', id=recent.id) }}" class="link clickIncrement" data-id="{{ recent.id }}" data-url="/mark/inc" title="{{recent.title}}" rel="noreferrer">
                       {{ recent.title|truncate(90) }}
                     </a>
                   {% endif %}
