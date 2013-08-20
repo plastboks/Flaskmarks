@@ -83,7 +83,7 @@ def forbidden(error):
 def marks(page=1):
     u = g.user
     return render_template('mark/index.html',
-                           title='Home',
+                           title='Marks - page %d' % page,
                            header='',
                            marks=u.marks(page),
                            suggestions=u.suggestions(),
@@ -137,6 +137,7 @@ def view_mark(id):
     return render_template('mark/view.html',
                            mark=m,
                            data=data,
+                           title=m.title,
                            )
 
 @app.route('/mark/edit/<int:id>', methods=['GET', 'POST'])
