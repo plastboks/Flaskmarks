@@ -25,11 +25,11 @@ then at last run `python run.py`
 Deploy
 ======
 
-make a copy of uwsgi.ini.example to uwsgi.ini and edit accordingly.
+make a copy of examples/uwsgi.ini.example and edit accordingly.
 
 install uwsgi `pip install uwsgi` globally
 
-copy flaskmarks.nginx.example to your nginx sites folder and enable
+copy examples/flaskmarks.nginx.example to your nginx sites folder and enable
 
 run `uwsgi uwsgi.ini`
 
