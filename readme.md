@@ -7,26 +7,19 @@ My simple and self educational Flask + sqlalchemy based bookmark app
 Install
 =======
 
-Activate the virtualenv (ex: `. venv/bin/activate`)
-
-make a copy of config.py.example to config.py and edit accordingly.
-
-run `pip install -r requirements.txt`
-
-run `python db_create.py`
-
-run `python db_migrate.py`
-
-run `python db_upgrade.py`
-
-then at last run `python run.py`
+* Activate the virtualenv (ex: `. venv/bin/activate`)
+* make a copy of config.py.example to config.py and edit accordingly.
+* run `pip install -r requirements.txt`
+* run `python db_create.py`
+* run `python db_migrate.py`
+* run `python db_upgrade.py`
+* run `python run.py`
 
 
 Upgrade
 =======
 
 This is done by running: `python db_migrate && python db_upgrade`. 
-
 
 After the introduction of feeds, the whole bookmark model was renamed and extended. Due to this a script called 'db_merge.py' was created. This upgrade is done by;
   * Move the current flaskmarks.sqlite file to something like flaskmarks.sqlite.old. (A good practice is also to take an backup)
@@ -39,21 +32,17 @@ This process runs trough the old database and copies it into the new. It is ther
 Deploy
 ======
 
-make a copy of examples/uwsgi.ini.example and edit accordingly.
-
-install uwsgi `pip install uwsgi` globally
-
-copy examples/flaskmarks.nginx.example to your nginx sites folder and enable
-
-run `uwsgi uwsgi.ini`
-
-restart nginx
+* make a copy of examples/uwsgi.ini.example and edit accordingly.
+* install uwsgi `pip install uwsgi` (globally?)
+* copy examples/flaskmarks.nginx.example to your nginx sites folder and enable
+* run `uwsgi uwsgi.ini`
+* restart nginx
 
 
 Credits
 =======
 
-This app is heavily inspired by the flaks sqlalchemy tutorial @ http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
+This app is heavily inspired by the flaks sqlalchemy tutorial @ http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world. Icons used in this app is mainly from the FamFamFam icon package 'Silk Icons' (http://www.famfamfam.com/lab/icons/silk/)
 
 
 Branches
