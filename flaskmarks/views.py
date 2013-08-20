@@ -201,7 +201,7 @@ def search_string(page=1):
 def ajax_mark_inc():
     if request.args.get('id'):
         id = int(request.args.get('id'))
-        m = g.user.id(id)
+        m = g.user.mid(id)
         if m:
             if not m.clicks:
                 m.clicks = 0
