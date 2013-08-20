@@ -153,84 +153,97 @@ h1 {
     color: dimgray;
 }
 
-.bookmarksbox {
+.marksbox {
     padding: 10px;
     border: 1px solid #CCC;
     background: #FAFAFA;
     margin-top: 20px;
 }
 
-.bookmarks {
+.marks {
     width: 100%;
     font-size: 0.9em;
 }
 
-.bookmarks th {
+.marks th {
     color: dimgray;
     text-align: left;
 }
 
-.bookmarks thead {
+.marks thead {
     display: none;
 }
 
-.bookmarks tr {
+.marks tr {
     height: 40px;
 }
 
-.bookmarks .titlecolumn {
+.marks .type {
+  width: 20px;
+  height: 20px;
+}
+
+.marks .feed {
+  background: url('../icons/feed.png') no-repeat;
+}
+
+.marks .bookmark {
+  background: url('../icons/book.png') no-repeat;
+}
+
+.marks .titlecolumn {
     width: 690px;
 }
 
-.bookmarks .titlecolumn .clickIncrement {
+.marks .titlecolumn .clickIncrement {
     font-size: 0.9;
     color: gray;
 }
 
-.bookmarks .titlecolumn .tag {
+.marks .titlecolumn .tag {
     font-size: 0.75em;
     color: mediumvioletred;
 }
 
-.bookmarks .titlecolumn a.link {
+.marks .titlecolumn a.link {
     color: lightslategray;
 }
 
-.bookmarks .edit,
-.bookmarks .actioncolumn a,
-.bookmarks .delete {
+.marks .edit,
+.marks .actioncolumn a,
+.marks .delete {
     font-size: 0.75em;
 }
 
-.bookmarks .clickscolumn {
+.marks .clickscolumn {
     font-size: 0.75em;
     color: orangered;
     text-align: center;
     width: 40px;
 }
 
-.bookmarks .lastvisit {
+.marks .lastvisit {
     font-size: 0.75em;
     padding-left: 10px;
     color: gray;
 }
 
-.bookmarks .neverclick {
+.marks .neverclick {
     font-size: 0.75em;
     color: orangered;
 }
 
-.bookmarks .lastclick {
+.marks .lastclick {
     font-size: 0.75em;
     color: olivedrab;
 }
 
-.bookmarkform label {
+.markform label {
     color: gray;
     margin-bottom: 5px;
 }
 
-.bookmarkform input[type='text'] {
+.markform input[type='text'] {
     width: 100%;
     background: #FBFBFB;
     border: 1px solid #E5E5E5;
@@ -239,7 +252,7 @@ h1 {
     font-size: 24px;
 }
 
-.bookmarkform input[type='submit'] {
+.markform input[type='submit'] {
     width: 100%;
     font-size: 1.4em;
     border: 1px solid dodgerblue;

@@ -36,16 +36,14 @@ from flaskmarks import (
 
 from forms import (
     LoginForm,
-    BookmarkForm,
+    MarkForm,
     UserRegisterForm,
     UserProfileForm,
-    FeedForm,
 )
 
 from models import (
     User,
-    Bookmark,
-    Feed,
+    Mark,
 )
 
 
@@ -71,195 +69,113 @@ def unauthorized(error):
 @app.errorhandler(403)
 def forbidden(error):
     flash('Forbidden access', category='error')
-    return redirect(url_for('bookmarks'))
+    return redirect(url_for('marks'))
 
 
 #################
-# Bookmark CRUD #
+# Mark CRUD #
 #################
 @app.route('/')
 @app.route('/index')
-@app.route('/bookmarks')
-@app.route('/bookmarks/<int:page>')
+@app.route('/marks')
+@app.route('/marks/<int:page>')
 @login_required
-def bookmarks(page=1):
+def marks(page=1):
     u = g.user
-    return render_template('bookmark/index.html',
+    return render_template('mark/index.html',
                            title='Home',
                            header='',
-                           bookmarks=u.bookmarks(page),
-                           suggestions=u.bsuggestions(),
-                           recently=u.brecent())
+                           marks=u.marks(page),
+                           suggestions=u.suggestions(),
+                           recently=u.recent())
 
 
-@app.route('/bookmark/new', methods=['GET', 'POST'])
+@app.route('/mark/new', methods=['GET', 'POST'])
 @login_required
-def new_bookmark():
-    form = BookmarkForm()
+def new_mark():
+    form = MarkForm()
     if form.validate_on_submit():
-        b = Bookmark()
-        form.populate_obj(b)
-        b.owner_id = g.user.id
-        b.created = datetime.utcnow()
-        b.tags = ' '.join([t.strip() for t in form.tags.data.strip().split(',')])\
+        m = Mark()
+        form.populate_obj(m)
+        m.owner_id = g.user.id
+        m.created = datetime.utcnow()
+        m.tags = ' '.join([t.strip() for t in form.tags.data.strip().split(',')])\
                     .lower()
-        b.clicks = 0
+        m.clicks = 0
         if not form.title.data:
             soup = BSoup(urlopen(form.url.data))
-            b.title = soup.title.string
-        db.session.add(b)
+            m.title = soup.title.string
+        db.session.add(m)
         db.session.commit()
-        flash('New bookmark %s added' % (b.title), category='info')
-        return redirect(url_for('bookmarks'))
-    return render_template('bookmark/new.html',
-                           title='New',
+        flash('New mark %s added' % (m.title), category='info')
+        return redirect(url_for('marks'))
+    return render_template('mark/new.html',
+                           title='New mark',
                            form=form)
 
 
-@app.route('/bookmark/edit/<int:id>', methods=['GET', 'POST'])
+@app.route('/mark/view/<int:id>', methods=['GET'])
 @login_required
-def edit_bookmark(id):
-    b = g.user.bid(id)
-    form = BookmarkForm(obj=b)
-    if not b:
+def view_mark(id):
+    m = g.user.mid(id)
+    if not m:
         abort(403)
-    if form.validate_on_submit():
-        form.populate_obj(b)
-        b.updated = datetime.utcnow()
-        db.session.add(b)
-        db.session.commit()
-        flash('Bookmark %s updated' % (form.title.data), category='info')
-        if form.referrer.data and is_safe_url(form.referrer.data):
-            return redirect(form.referrer.data)
-        return redirect(url_for('bookmarks'))
-    form.referrer.data = request.referrer
-    return render_template('bookmark/edit.html',
-                           title='Edit',
-                           form=form)
-
-
-@app.route('/bookmark/delete/<int:id>')
-@login_required
-def delete_bookmark(id):
-    b = g.user.bid(id)
-    if b:
-        db.session.delete(b)
-        db.session.commit()
-        flash('Bookmark %s deleted' % (b.title), category='info')
-        return redirect(url_for('bookmarks'))
-    abort(403)
-
-
-#############
-# Feed CRUD #
-#############
-@app.route('/feeds')
-@app.route('/feeds/<int:page>')
-@login_required
-def feeds(page=1):
-    u = g.user
-    return render_template('feed/index.html',
-                           title='Feeds',
-                           header='',
-                           feeds=u.feeds(page),
-                           suggestions=u.fsuggestions(),
-                           recently=u.frecent())
-
-
-@app.route('/feed/view/<int:id>', methods=['GET'])
-@login_required
-def view_feed(id):
-    f = g.user.fid(id)
-    data = feedparser.parse(f.url)
-    if not f:
-        abort(403)
-    return render_template('feed/view.html',
-                           feed=f,
+    if m.type != 'feed':
+        abort(404)
+    data = feedparser.parse(m.url)
+    return render_template('mark/view.html',
+                           mark=m,
                            data=data,
                            )
 
-
-@app.route('/feed/new', methods=['GET', 'POST'])
+@app.route('/mark/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
-def new_feed():
-    form = FeedForm()
-    if form.validate_on_submit():
-        f = Feed()
-        form.populate_obj(f)
-        f.owner_id = g.user.id
-        f.created = datetime.utcnow()
-        f.tags = ' '.join([t.strip() for t in form.tags.data.strip().split(',')])\
-                    .lower()
-        f.clicks = 0
-        if not form.title.data:
-            soup = BSoup(urlopen(form.url.data))
-            f.title = soup.title.string
-        db.session.add(f)
-        db.session.commit()
-        flash('New feed %s added' % (f.title), category='info')
-        return redirect(url_for('feeds'))
-    return render_template('feed/new.html',
-                           title='New feed',
-                           form=form)
-
-
-@app.route('/feed/edit/<int:id>', methods=['GET', 'POST'])
-@login_required
-def edit_feed(id):
-    f = g.user.fid(id)
-    form = FeedForm(obj=f)
-    if not f:
+def edit_mark(id):
+    m = g.user.mid(id)
+    form = MarkForm(obj=b)
+    if not m:
         abort(403)
     if form.validate_on_submit():
-        form.populate_obj(f)
-        f.updated = datetime.utcnow()
-        db.session.add(f)
+        form.populate_obj(m)
+        m.updated = datetime.utcnow()
+        db.session.add(m)
         db.session.commit()
-        flash('Feed %s updated' % (form.title.data), category='info')
+        flash('Mark %s updated' % (form.title.data), category='info')
         if form.referrer.data and is_safe_url(form.referrer.data):
             return redirect(form.referrer.data)
-        return redirect(url_for('feeds'))
+        return redirect(url_for('marks'))
     form.referrer.data = request.referrer
-    return render_template('feed/edit.html',
-                           title='Edit feed',
+    return render_template('mark/edit.html',
+                           title='Edit mark - %s' % m.title,
                            form=form)
 
 
-@app.route('/feed/delete/<int:id>')
+@app.route('/mark/delete/<int:id>')
 @login_required
-def delete_feed(id):
-    f = g.user.fid(id)
-    if f:
-        db.session.delete(f)
+def delete_mark(id):
+    m = g.user.mid(id)
+    if m:
+        db.session.delete(m)
         db.session.commit()
-        flash('Feed %s deleted' % (f.title), category='info')
-        return redirect(url_for('feeds'))
+        flash('Mark %s deleted' % (m.title), category='info')
+        return redirect(url_for('marks'))
     abort(403)
+
+
 
 
 ##################
 # Search section #
 ##################
-@app.route('/bookmark/tag/<slug>')
-@app.route('/bookmark/tag/<slug>/<int:page>')
+@app.route('/mark/tag/<slug>')
+@app.route('/mark/tag/<slug>/<int:page>')
 @login_required
-def bookmark_q_tag(slug, page=1):
-    b = g.user.btag(page, slug)
-    return render_template('bookmark/index.html',
-                           title='Bookmark results',
-                           header='Bookmark results for ' + slug,
-                           bookmarks=b)
-
-
-@app.route('/feed/tag/<slug>')
-@app.route('/feed/tag/<slug>/<int:page>')
-@login_required
-def feed_q_tag(slug, page=1):
-    f = g.user.ftag(page, slug)
-    return render_template('feed/index.html',
-                           title='Feed results',
-                           header='Feed results for ' + slug,
-                           feeds=f)
+def mark_q_tag(slug, page=1):
+    m = g.user.tag(page, slug)
+    return render_template('mark/index.html',
+                           title='Mark results',
+                           header='Mark results for ' + slug,
+                           marks=m)
 
 
 @app.route('/search', methods=['GET'])
@@ -267,57 +183,31 @@ def feed_q_tag(slug, page=1):
 @login_required
 def search_string(page=1):
     q = request.args.get('q')
-    t = request.args.get('t')
     if not q:
-        return redirect(url_for('bookmarks'))
+        return redirect(url_for('marks'))
 
-    if t == 'feeds':
-        f = g.user.fstring(page, q)
-        return render_template('feed/index.html',
-                               title='Feed results',
-                               header='Feed results for ' + q,
-                               feeds=f)
-    else:
-        b = g.user.bstring(page, q)
-        return render_template('bookmark/index.html',
-                               title='Bookmark results',
-                               header='Bookmark results for ' + q,
-                               bookmarks=b)
+    m = g.user.string(page, q)
+    return render_template('mark/index.html',
+                           title='Mark results',
+                           header='Mark results for ' + q,
+                           marks=m)
 
 
 ################
 # AJAX section #
 ################
-@app.route('/bookmark/inc')
+@app.route('/mark/inc')
 @login_required
-def ajax_bookmark_inc():
+def ajax_mark_inc():
     if request.args.get('id'):
         id = int(request.args.get('id'))
-        b = g.user.bid(id)
-        if b:
-            if not b.clicks:
-                b.clicks = 0
-            b.last_clicked = datetime.utcnow()
-            b.clicks += 1
-            db.session.add(b)
-            db.session.commit()
-            return jsonify(status='success')
-        return jsonify(status='forbidden')
-    return jsonify(status='error')
-
-
-@app.route('/feed/inc')
-@login_required
-def ajax_feed_inc():
-    if request.args.get('id'):
-        id = int(request.args.get('id'))
-        f = g.user.fid(id)
-        if f:
-            if not f.clicks:
-                f.clicks = 0
-            f.last_clicked = datetime.utcnow()
-            f.clicks += 1
-            db.session.add(f)
+        m = g.user.id(id)
+        if m:
+            if not m.clicks:
+                m.clicks = 0
+            m.last_clicked = datetime.utcnow()
+            m.clicks += 1
+            db.session.add(m)
             db.session.commit()
             return jsonify(status='success')
         return jsonify(status='forbidden')
@@ -331,10 +221,8 @@ def ajax_feed_inc():
 @login_required
 def profile():
     u = g.user
-    bc = g.user.bookmark_count()
-    lcb = g.user.bookmark_last_created()
-    fc = g.user.feed_count()
-    lcf = g.user.feed_last_created()
+    mc = g.user.mark_count()
+    lcm = g.user.mark_last_created()
     form = UserProfileForm(obj=u)
     if form.validate_on_submit():
         form.populate_obj(u)
@@ -350,10 +238,8 @@ def profile():
     return render_template('account/profile.html',
                            form=form,
                            title='Profile',
-                           bc=bc,
-                           lcb=lcb,
-                           fc=fc,
-                           lcf=lcf,
+                           mc=mc,
+                           lcm=lcm,
                            )
 
 
@@ -383,7 +269,7 @@ def register():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if g.user.is_authenticated():
-        return redirect(url_for('bookmarks'))
+        return redirect(url_for('marks'))
     form = LoginForm()
     if form.validate_on_submit():
         u = User.by_uname_or_email(form.username.data)
@@ -394,7 +280,7 @@ def login():
             flash('Successful login request for %s' % (u.username),
                   category='info')
             login_user(u, remember=form.remember_me.data)
-            return redirect(url_for('bookmarks'))
+            return redirect(url_for('marks'))
         else:
             flash('Failed login request for %s' % (form.username.data),
                   category='error')
@@ -417,14 +303,14 @@ def logout():
 #################
 @app.route('/redirect/<int:id>')
 @login_required
-def bookmark_redirect(id):
-    url = url_for('bookmark_meta', id=id)
+def mark_redirect(id):
+    url = url_for('mark_meta', id=id)
     return render_template('meta.html', url=url)
 
 
 @app.route('/meta/<int:id>')
 @login_required
-def bookmark_meta(id):
+def mark_meta(id):
     b = g.user.bid(id)
     if b:
         return render_template('meta.html', url=b.url)

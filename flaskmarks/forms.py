@@ -5,6 +5,7 @@ from flask.ext.wtf import (
     Required,
     PasswordField,
     SelectField,
+    RadioField,
     validators,
     HiddenField,
     )
@@ -56,31 +57,20 @@ class UserProfileForm(UserRegisterForm):
                            choices=[(n, n) for n in range(5)])
 
 
-class BookmarkForm(Form):
+class MarkForm(Form):
     referrer = HiddenField([validators.URL(require_tld=False)])
-    title = TextField('title',
+    title = TextField('Title',
                       [validators.Length(min=0, max=255)],
                       filters=[strip_filter])
-    url = TextField('url',
+    url = TextField('URL',
                     [validators.Length(min=4, max=512),
                      validators.URL(require_tld=False,
                                     message='Not a valid URL')],
                     filters=[strip_filter])
-    tags = TextField('tags',
-                     [validators.Length(min=0, max=255)],
-                     filters=[strip_filter])
-
-
-class FeedForm(Form):
-    referrer = HiddenField([validators.URL(require_tld=False)])
-    title = TextField('title',
-                      [validators.Length(min=0, max=255)],
-                      filters=[strip_filter])
-    url = TextField('url',
-                    [validators.Length(min=4, max=512),
-                     validators.URL(require_tld=False,
-                                    message='Not a valid URL')],
-                    filters=[strip_filter])
-    tags = TextField('tags',
+    type = RadioField('Type',
+                      coerce=unicode,
+                      choices=[('bookmark', 'Bookmark'), ('feed', 'Feed')],
+                      default='bookmark')
+    tags = TextField('Tags',
                      [validators.Length(min=0, max=255)],
                      filters=[strip_filter])

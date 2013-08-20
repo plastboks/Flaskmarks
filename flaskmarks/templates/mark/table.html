@@ -1,0 +1,62 @@
+<div class="marksbox roundcorner5 shadow4">
+  <table class="marks">
+      <thead>
+          <th>Type</th>
+          <th>Title</th>
+          <th>Clicks</th>
+          <th>Actions</th>
+      </thead>
+      <tbody>
+          {% for mark in marks.items %}
+              <tr>
+                  <td class="type {{mark.type}}"></td>
+                  <td class='titlecolumn'>
+                      {% if mark.type == 'bookmark' %}
+                        <a href="{{ mark.url }}" class="link clickIncrement" target="_blank" data-id="{{ mark.id }}" data-url="mark/inc" title="{{mark.title}}" rel="noreferrer">
+                          {{ mark.title|truncate(90) }}
+                        </a>
+                      {% elif mark.type == 'feed' %}
+                        <a href="{{ url_for('view_mark', id=mark.id) }}" class="link clickIncrement" data-id="{{ mark.id }}" data-url="mark/inc" title="{{mark.title}}" rel="noreferrer">
+                          {{ mark.title|truncate(90) }}
+                        </a>
+                      {% endif %}
+                      <br />
+                      {% if mark.tags %}
+                        {% for w in mark.tags.split(' ') %}
+                          <a href="{{ url_for('mark_q_tag', slug = w) }}" class="tag">{{ w }}</a>
+                        {% endfor %}
+                      {% endif %}
+                      <span class="lastvisit">last visit:</span>
+                      {% if mark.last_clicked %}
+                      <span class="lastclick">{{ mark.last_clicked | datewords }}</span>
+                      {% else %}
+                      <span class="neverclick">never</span>
+                      {% endif %}
+                  </td>
+                  <td class="clickscolumn">
+                    <span>{{ mark.clicks }}</span>
+                  </td>
+                  <td class='actioncolumn'>
+                      <a href="{{ url_for('edit_mark', id=mark.id) }}" class="edit">
+                          <img src="/static/icons/edit.png" title="Edit" alt="Edit"/>
+                      </a> 
+                      <a href="{{ url_for('delete_mark', id=mark.id) }}" class="delete">
+                          <img src="/static/icons/delete.png" title="Delete" alt="Delete"/>
+                      </a>
+                  </td>
+              </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
+<div id="paginate">
+{% if marks.has_prev %}
+  <a href="{{ url_for(request.endpoint, page = 1, q = request.args.get('q')) }}"><<</a>
+  <a href="{{ url_for(request.endpoint, page = marks.prev_num, q = request.args.get('q')) }}"><</a>
+{% endif %}
+Page {{ marks.page }} of {{ marks.pages }}
+{% if marks.has_next %}
+  <a href="{{ url_for(request.endpoint, page=marks.next_num, q = request.args.get('q')) }}">></a>
+  <a href="{{ url_for(request.endpoint, page = marks.pages, q = request.args.get('q')) }}">>></a>
+{% endif %}
+</div>

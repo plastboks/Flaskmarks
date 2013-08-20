@@ -20,78 +20,46 @@ class User(db.Model):
     per_page = db.Column(db.SmallInteger, default=10)
     suggestion = db.Column(db.Boolean, default=True)
     recently = db.Column(db.SmallInteger, default=2)
-    bookmarks = db.relationship('Bookmark', backref='owner', lazy='dynamic')
+
+    marks = db.relationship('Mark', backref='owner', lazy='dynamic')
 
     @classmethod
     def by_uname_or_email(self, uname):
         return self.query.filter(or_(User.username == uname,
                                      User.email == uname)).first()
 
-    def bmy(self):
-        return Bookmark.query.filter(Bookmark.owner_id == self.id)
+    def my(self):
+        return Mark.query.filter(Mark.owner_id == self.id)
 
-    def fmy(self):
-        return Feed.query.filter(Feed.owner_id == self.id)
+    def suggestions(self):
+        return self.my().filter(Mark.clicks == 0)\
+                        .order_by(func.random())\
+                        .limit(config['SUGGESTIONS_COUNT']).all()
 
-    def bsuggestions(self):
-        return self.bmy().filter(Bookmark.clicks == 0)\
-                         .order_by(func.random())\
-                         .limit(config['SUGGESTIONS_COUNT']).all()
-
-    def fsuggestions(self):
-        return self.fmy().filter(Feed.clicks == 0)\
-                         .order_by(func.random())\
-                         .limit(config['SUGGESTIONS_COUNT']).all()
-
-    def brecent(self):
-        return self.bmy().order_by(desc(Bookmark.created))\
+    def recent(self):
+        return self.my().order_by(desc(Mark.created))\
                          .limit(self.recently).all()
 
-    def frecent(self):
-        return self.fmy().order_by(desc(Feed.created))\
-                         .limit(self.recently).all()
+    def marks(self, page):
+        return self.my().order_by(desc(Mark.clicks),
+                                  desc(Mark.created))\
+                        .paginate(page, self.per_page, False)
 
-    def bookmarks(self, page):
-        return self.bmy().order_by(desc(Bookmark.clicks),
-                                   desc(Bookmark.created))\
-                         .paginate(page, self.per_page, False)
+    def mid(self, id):
+        return self.my().filter(Mark.id == id)\
+                        .first()
 
-    def feeds(self, page):
-        return self.fmy().order_by(desc(Feed.clicks),
-                                   desc(Feed.created))\
-                         .paginate(page, self.per_page, False)
+    def mark_count(self):
+        return self.my().count()
 
-    def bid(self, id):
-        return self.bmy().filter(Bookmark.id == id)\
-                         .first()
+    def mark_last_created(self):
+        return self.my().order_by(desc(Mark.created)).first()
 
-    def fid(self, id):
-        return self.fmy().filter(Feed.id == id)\
-                         .first()
+    def tag(self, page, tag):
+        return Mark.by_tag(page, self.id, self.per_page, tag)
 
-    def bookmark_count(self):
-        return self.bmy().count()
-
-    def bookmark_last_created(self):
-        return self.bmy().order_by(desc(Bookmark.created)).first()
-
-    def feed_count(self):
-        return self.fmy().count()
-
-    def feed_last_created(self):
-        return self.fmy().order_by(desc(Feed.created)).first()
-
-    def btag(self, page, tag):
-        return Bookmark.by_tag(page, self.id, self.per_page, tag)
-
-    def ftag(self, page, tag):
-        return Feed.by_tag(page, self.id, self.per_page, tag)
-
-    def bstring(self, page, string):
-        return Bookmark.by_string(page, self.id, self.per_page, string)
-
-    def fstring(self, page, string):
-        return Feed.by_string(page, self.id, self.per_page, string)
+    def string(self, page, string):
+        return Mark.by_string(page, self.id, self.per_page, string)
 
     def authenticate_user(self, password):
         manager = BCRYPTPasswordManager()
@@ -113,10 +81,11 @@ class User(db.Model):
         return '<User %r>' % (self.username)
 
 
-class Bookmark(db.Model):
-    __tablename__ = 'bookmarks'
+class Mark(db.Model):
+    __tablename__ = 'marks'
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    type = db.Column(db.Unicode(255), nullable=False)
     title = db.Column(db.Unicode(255), nullable=False)
     url = db.Column(db.Unicode(512), nullable=False)
     tags = db.Column(db.Unicode(512))
@@ -145,40 +114,5 @@ class Bookmark(db.Model):
                          .paginate(page, per_page, False)
 
     def __repr__(self):
-        return '<Bookmark %r>' % (self.title)
+        return '<Mark %r>' % (self.title)
 
-
-class Feed(db.Model):
-    __tablename__ = 'feeds'
-    id = db.Column(db.Integer, primary_key=True)
-    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    title = db.Column(db.Unicode(255), nullable=False)
-    url = db.Column(db.Unicode(512), nullable=False)
-    tags = db.Column(db.Unicode(512))
-    clicks = db.Column(db.Integer, default=0)
-    last_clicked = db.Column(db.DateTime)
-    created = db.Column(db.DateTime)
-    updated = db.Column(db.DateTime)
-
-    @classmethod
-    def by_tag(self, page, oID, per_page, tag):
-        string = "%"+tag+"%"
-        return self.query.filter(self.owner_id == oID)\
-                         .filter(or_(self.title.like(string),
-                                     self.tags.like(string),
-                                     self.url.like(string)))\
-                         .order_by(desc(self.clicks))\
-                         .paginate(page, per_page, False)
-
-    @classmethod
-    def by_string(self, page, oID, per_page, string):
-        string = "%"+string+"%"
-        return self.query.filter(self.owner_id == oID)\
-                         .filter(or_(self.title.like(string),
-                                     self.tags.like(string),
-                                     self.url.like(string)))\
-                         .order_by(desc(self.clicks))\
-                         .paginate(page, per_page, False)
-
-    def __repr__(self):
-        return '<Feed %r>' % (self.title)
