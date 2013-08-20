@@ -99,8 +99,9 @@ def new_mark():
         form.populate_obj(m)
         m.owner_id = g.user.id
         m.created = datetime.utcnow()
-        m.tags = ' '.join([t.strip() for t in form.tags.data.strip().split(',')])\
-                    .lower()
+        if form.tags.data:
+            m.tags = ' '.join([t.strip() for t in form.tags.data.strip().split(',')])\
+                      .lower()
         m.clicks = 0
         if not form.title.data:
             soup = BSoup(urlopen(form.url.data))

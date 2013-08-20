@@ -9,7 +9,7 @@
           <li class='makebookmark'><a href="{{ url_for('new_mark', title=entry['title'], url=entry['links'][0]['href']) }}" class="link"></a></li>
           <li class='link'><a href="{{ entry['links'][0]['href'] }}" rel="noreferrer" class="link" target="_blank">{{ entry['title'] }}</a></li>
           <li class='date'>{{ entry['published'] }} / {{ entry['updated'] }}</li>
-          <li class='summary'>{{ entry['summary'] }}</li>
+          <li class='summary'><pre>{{ entry['summary'] }}</pre></li>
         </ul>
       </li>
   {% endfor %}
