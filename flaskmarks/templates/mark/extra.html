@@ -2,23 +2,23 @@
   {% if g.user.suggestion and suggestions %}
     <div id="suggestions">
     <h3>Random suggestion</h3>
-      <table class="bookmarks">
+      <table class="marks">
       {% for suggestion in suggestions %}
           <tr>
               <td class='titlecolumn'>
                   <a href="{{ suggestion.url }}" class="link clickIncrement" target="_blank" data-id="{{ suggestion.id }}", title="{{suggestion.title}}" rel="noreferrer">
                     {{ suggestion.title|truncate(90) }} -
                     </a>
-                    <a href="{{ url_for('edit_bookmark', id=suggestion.id) }}" class="edit">
+                    <a href="{{ url_for('edit_mark', id=suggestion.id) }}" class="edit">
                         Edit
                     </a> 
-                    <a href="{{ url_for('delete_bookmark', id=suggestion.id) }}" class="delete">
+                    <a href="{{ url_for('delete_mark', id=suggestion.id) }}" class="delete">
                         Delete
                     </a>
                   </a><br />
                   {% if suggestion.tags %}
                     {% for w in suggestion.tags.split(' ') %}
-                      <a href="{{ url_for('bookmark_q_tag', slug = w) }}" class="tag">{{ w }}</a>
+                      <a href="{{ url_for('mark_q_tag', slug = w) }}" class="tag">{{ w }}</a>
                     {% endfor %}
                   {% endif %}
               </td>
@@ -30,23 +30,23 @@
   {% if g.user.recently and recently %}
     <div id="recently">
     <h3>Recently added</h3>
-      <table class="bookmarks">
+      <table class="marks">
       {% for recent in recently %}
           <tr>
               <td class='titlecolumn'>
                   <a href="{{ recent.url }}" class="link clickIncrement" target="_blank" data-id="{{ recent.id }}", title="{{recent.title}}" rel="noreferrer">
                     {{ recent.title|truncate(90) }} -
                     </a>
-                    <a href="{{ url_for('edit_bookmark', id=recent.id) }}" class="edit">
+                    <a href="{{ url_for('edit_mark', id=recent.id) }}" class="edit">
                         Edit
                     </a> 
-                    <a href="{{ url_for('delete_bookmark', id=recent.id) }}" class="delete">
+                    <a href="{{ url_for('delete_mark', id=recent.id) }}" class="delete">
                         Delete
                     </a>
                   </a><br />
                   {% if recent.tags %}
                     {% for w in recent.tags.split(' ') %}
-                      <a href="{{ url_for('bookmark_q_tag', slug = w) }}" class="tag">{{ w }}</a>
+                      <a href="{{ url_for('mark_q_tag', slug = w) }}" class="tag">{{ w }}</a>
                     {% endfor %}
                   {% endif %}
               </td>

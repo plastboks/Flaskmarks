@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>{{ feed.title }}</h1>
-<div id="view" class="bookmarksbox roudcorners5 shadow4">
+<h1>{{ mark.title }}</h1>
+<div id="view" class="marksbox roudcorners5 shadow4">
   <ul class="feedlist">
   {% for entry in data['entries'] %}
       <li class='entry'>

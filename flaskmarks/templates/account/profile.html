@@ -5,12 +5,11 @@
   <form action="{{ url_for('profile') }}" method="POST">
     {{form.hidden_tag()}}
     <div class="info roundcorner5">
-      <p>Total bookmarks: {{ bc }}</p>
-      <p>Total feeds: {{ fc }}</p>
+      <p>Total marks: {{ mc }}</p>
+      <p>Last created mark: {{ lcm.created }}</p>
       <p>Last logon: {{ g.user.last_logged }}</p>
+      <p>Last created feed: {{ lcm.created }}</p>
       {% if bc %}
-      <p>Last created bookmark: {{ lcb.created }}</p>
-      <p>Last created feed: {{ lcf.created }}</p>
       {% endif %}
     </div>
     <div class="column roundcorner5 clear">

@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-{% if not feeds.items and not 'Results' in header %}
+{% if not marks.items and not 'Results' in header %}
 <h1>Hello {{ g.user.username }}</h1>
-<h3>Click "New feed" to add a feed</h3>
+<h3>Click "New mark" to add a mark</h3>
 {% else %}
     <h1>{{ header }}</h1>
-    {% if (g.user.recently or g.user.suggestion) and not 'Feed results' in header %}
-      {% include "feed/extra.html" %}
+    {% if (g.user.recently or g.user.suggestion) and not 'Mark results' in header %}
+      {% include "mark/extra.html" %}
     {% endif %}
-    {% if feeds.items %}
-      {% include "feed/table.html" %}
+    {% if marks.items %}
+      {% include "mark/table.html" %}
     {% else %}
       <h2>No results</h2>
       <h3>Try again</h3>
