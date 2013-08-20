@@ -4,15 +4,14 @@
 <div id="profile">
   <form action="{{ url_for('profile') }}" method="POST">
     {{form.hidden_tag()}}
-    <div class="info roundcorner5">
-      <p>Total marks: {{ mc }}</p>
+    <div class="info roundcorner5 shadow4">
+      <p>Total marks: {{ mc }} (Bookmarks: {{ bc }}, Feeds: {{ fc }})</p>
       <p>Last created mark: {{ lcm.created }}</p>
       <p>Last logon: {{ g.user.last_logged }}</p>
-      <p>Last created feed: {{ lcm.created }}</p>
       {% if bc %}
       {% endif %}
     </div>
-    <div class="column roundcorner5 clear">
+    <div class="column roundcorner5 shadow4 clear">
       <p>
         {% for error in form.username.errors %}
           {{ error }} <br />
@@ -40,7 +39,7 @@
         {{ form.confirm(size=20) }}
       </p>
     </div>
-    <div class="column roundcorner5">
+    <div class="column roundcorner5 shadow4">
       <p>
         {% for error in form.per_page.errors %}
           {{ error }} <br />

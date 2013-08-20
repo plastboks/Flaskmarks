@@ -4,7 +4,7 @@
 {% block content %}
 <div id="register">
   <h1>Register</h1>
-  <form action="{{ url_for('register') }}" method="POST" class="roundcorner5">
+  <form action="{{ url_for('register') }}" method="POST" class="roundcorner5 shadow4">
     {{form.hidden_tag()}}
     <p>
       {% for error in form.username.errors %}

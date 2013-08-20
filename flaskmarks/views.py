@@ -234,6 +234,8 @@ def ajax_mark_inc():
 def profile():
     u = g.user
     mc = g.user.mark_count()
+    bc = g.user.bookmark_count()
+    fc = g.user.feed_count()
     lcm = g.user.mark_last_created()
     form = UserProfileForm(obj=u)
     if form.validate_on_submit():
@@ -251,6 +253,8 @@ def profile():
                            form=form,
                            title='Profile',
                            mc=mc,
+                           bc=bc,
+                           fc=fc,
                            lcm=lcm,
                            )
 

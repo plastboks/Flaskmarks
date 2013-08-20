@@ -370,7 +370,11 @@ h1 {
 }
 
 #profile .submit input[type="submit"]{
-    border: 1px solid gray;
+    width: 100%;
+    font-size: 1.4em;
+    border: 1px solid dodgerblue;
+    background: lightskyblue;
+    color: dimgray;
 }
 
 /**
