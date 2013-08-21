@@ -3,33 +3,53 @@
     <div id="suggestions">
     <h3>Random suggestion</h3>
       <table class="marks">
-      {% for suggestion in suggestions %}
-          <tr>
-              <td class='titlecolumn'>
-                  {% if suggestion.type == 'bookmark' %}
-                    <a href="{{ suggestion.url }}" class="link clickIncrement" target="_blank" data-id="{{ suggestion.id }}" data-url="/mark/inc" title="{{suggestion.title}}" rel="noreferrer">
-                      {{ suggestion.title|truncate(90) }}
-                    </a>
-                  {% elif suggestion.type == 'feed' %}
-                    <a href="{{ url_for('view_mark', id=suggestion.id) }}" class="link clickIncrement" data-id="{{ suggestion.id }}" data-url="/mark/inc" title="{{suggestion.title}}" rel="noreferrer">
-                      {{ suggestion.title|truncate(90) }}
-                    </a>
-                  {% endif %}
-                  <a href="{{ url_for('edit_mark', id=suggestion.id) }}" class="edit">
-                      Edit
-                  </a> 
-                  <a href="{{ url_for('delete_mark', id=suggestion.id) }}" class="delete">
-                      Delete
-                  </a>
-                  <br />
-                  {% if suggestion.tags %}
-                    {% for w in suggestion.tags.split(' ') %}
-                      <a href="{{ url_for('mark_q_tag', slug = w) }}" class="tag">{{ w }}</a>
-                    {% endfor %}
-                  {% endif %}
-              </td>
-          </tr>
-      {% endfor %}
+        <thead>
+            <th>Type</th>
+            <th>Title</th>
+            <th>Clicks</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            {% for mark in suggestions %}
+                <tr>
+                    <td class="type {{mark.type}}"></td>
+                    <td class='titlecolumn'>
+                        {% if mark.type == 'bookmark' %}
+                          <a href="{{ mark.url }}" class="link clickIncrement" target="_blank" data-id="{{ mark.id }}" data-url="/mark/inc" title="{{mark.title}}" rel="noreferrer">
+                            {{ mark.title|truncate(90) }}
+                          </a>
+                        {% elif mark.type == 'feed' %}
+                          <a href="{{ url_for('view_mark', id=mark.id) }}" class="link clickIncrement" data-id="{{ mark.id }}" data-url="/mark/inc" title="{{mark.title}}" rel="noreferrer">
+                            {{ mark.title|truncate(90) }}
+                          </a>
+                        {% endif %}
+                        <br />
+                        {% if mark.tags %}
+                          {% for w in mark.tags.split(' ') %}
+                            <a href="{{ url_for('mark_q_tag', slug = w) }}" class="tag">{{ w }}</a>
+                          {% endfor %}
+                        {% endif %}
+                        <span class="lastvisit">last visit:</span>
+                        {% if mark.last_clicked %}
+                        <span class="lastclick">{{ mark.last_clicked | datewords }}</span>
+                        {% else %}
+                        <span class="neverclick">never</span>
+                        {% endif %}
+                    </td>
+                    <td class="clickscolumn">
+                      <span>{{ mark.clicks }}</span>
+                    </td>
+                    <td class='actioncolumn'>
+                        <a href="{{ url_for('edit_mark', id=mark.id) }}" class="edit">
+                            <img src="/static/icons/edit.png" title="Edit" alt="Edit"/>
+                        </a> 
+                        <a href="{{ url_for('delete_mark', id=mark.id) }}" class="delete">
+                            <img src="/static/icons/delete.png" title="Delete" alt="Delete"/>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
       </table>
       </div>
   {% endif %}
@@ -37,33 +57,53 @@
     <div id="recently">
     <h3>Recently added</h3>
       <table class="marks">
-      {% for recent in recently %}
-          <tr>
-              <td class='titlecolumn'>
-                  {% if recent.type == 'bookmark' %}
-                    <a href="{{ recent.url }}" class="link clickIncrement" target="_blank" data-id="{{ recent.id }}" data-url="/mark/inc" title="{{recent.title}}" rel="noreferrer">
-                      {{ recent.title|truncate(90) }}
-                    </a>
-                  {% elif recent.type == 'feed' %}
-                    <a href="{{ url_for('view_mark', id=recent.id) }}" class="link clickIncrement" data-id="{{ recent.id }}" data-url="/mark/inc" title="{{recent.title}}" rel="noreferrer">
-                      {{ recent.title|truncate(90) }}
-                    </a>
-                  {% endif %}
-                  <a href="{{ url_for('edit_mark', id=recent.id) }}" class="edit">
-                      Edit
-                  </a> 
-                  <a href="{{ url_for('delete_mark', id=recent.id) }}" class="delete">
-                      Delete
-                  </a>
-                  <br />
-                  {% if recent.tags %}
-                    {% for w in recent.tags.split(' ') %}
-                      <a href="{{ url_for('mark_q_tag', slug = w) }}" class="tag">{{ w }}</a>
-                    {% endfor %}
-                  {% endif %}
-              </td>
-          </tr>
-      {% endfor %}
+        <thead>
+            <th>Type</th>
+            <th>Title</th>
+            <th>Clicks</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            {% for mark in recently %}
+                <tr>
+                    <td class="type {{mark.type}}"></td>
+                    <td class='titlecolumn'>
+                        {% if mark.type == 'bookmark' %}
+                          <a href="{{ mark.url }}" class="link clickIncrement" target="_blank" data-id="{{ mark.id }}" data-url="/mark/inc" title="{{mark.title}}" rel="noreferrer">
+                            {{ mark.title|truncate(90) }}
+                          </a>
+                        {% elif mark.type == 'feed' %}
+                          <a href="{{ url_for('view_mark', id=mark.id) }}" class="link clickIncrement" data-id="{{ mark.id }}" data-url="/mark/inc" title="{{mark.title}}" rel="noreferrer">
+                            {{ mark.title|truncate(90) }}
+                          </a>
+                        {% endif %}
+                        <br />
+                        {% if mark.tags %}
+                          {% for w in mark.tags.split(' ') %}
+                            <a href="{{ url_for('mark_q_tag', slug = w) }}" class="tag">{{ w }}</a>
+                          {% endfor %}
+                        {% endif %}
+                        <span class="lastvisit">last visit:</span>
+                        {% if mark.last_clicked %}
+                        <span class="lastclick">{{ mark.last_clicked | datewords }}</span>
+                        {% else %}
+                        <span class="neverclick">never</span>
+                        {% endif %}
+                    </td>
+                    <td class="clickscolumn">
+                      <span>{{ mark.clicks }}</span>
+                    </td>
+                    <td class='actioncolumn'>
+                        <a href="{{ url_for('edit_mark', id=mark.id) }}" class="edit">
+                            <img src="/static/icons/edit.png" title="Edit" alt="Edit"/>
+                        </a> 
+                        <a href="{{ url_for('delete_mark', id=mark.id) }}" class="delete">
+                            <img src="/static/icons/delete.png" title="Delete" alt="Delete"/>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
       </table>
       </div>
   {% endif %}
