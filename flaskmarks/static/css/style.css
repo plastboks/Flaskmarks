@@ -240,6 +240,15 @@ h1 {
     color: gray;
 }
 
+.marks .clone {
+    font-size: 0.75em;
+    padding-left: 10px;
+}
+
+.marks .clone a {
+    color: #197ABA;
+}
+
 .marks .neverclick {
     font-size: 0.75em;
     color: orangered;

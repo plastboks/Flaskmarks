@@ -114,6 +114,8 @@ def new_mark():
         form.url.data = request.args.get('url')
     if request.args.get('title'):
         form.title.data = request.args.get('title')
+    if request.args.get('type') == 'feed':
+        form.type.data = 'feed'
     return render_template('mark/new.html',
                            title='New mark',
                            form=form)

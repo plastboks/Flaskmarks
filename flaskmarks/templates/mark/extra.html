@@ -29,6 +29,7 @@
                             <a href="{{ url_for('mark_q_tag', slug = w) }}" class="tag">{{ w }}</a>
                           {% endfor %}
                         {% endif %}
+                        <span class="clone"><a href="{{ url_for('new_mark', url=mark.url, type=mark.type) }}">clone</a></span>
                         <span class="lastvisit">last visit:</span>
                         {% if mark.last_clicked %}
                         <span class="lastclick">{{ mark.last_clicked | datewords }}</span>
@@ -83,6 +84,7 @@
                             <a href="{{ url_for('mark_q_tag', slug = w) }}" class="tag">{{ w }}</a>
                           {% endfor %}
                         {% endif %}
+                        <span class="clone"><a href="{{ url_for('new_mark', url=mark.url, type=mark.type) }}">clone</a></span>
                         <span class="lastvisit">last visit:</span>
                         {% if mark.last_clicked %}
                         <span class="lastclick">{{ mark.last_clicked | datewords }}</span>
