@@ -251,7 +251,7 @@ def profile():
         db.session.add(u)
         db.session.commit()
         flash('User %s updated' % (form.username.data), category='info')
-        return redirect(url_for('login'))
+        return redirect(url_for('profile'))
     return render_template('account/profile.html',
                            form=form,
                            title='Profile',

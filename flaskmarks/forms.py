@@ -51,7 +51,9 @@ class UserProfileForm(UserRegisterForm):
     per_page = SelectField('per_page',
                            coerce=int,
                            choices=[(n, n) for n in range(10, 21)])
-    suggestion = BooleanField('suggestion', default=True)
+    suggestion = SelectField('Suggestions',
+                             coerce=int,
+                             choices=[(n, n) for n in range(5)])
     recently = SelectField('recently',
                            coerce=int,
                            choices=[(n, n) for n in range(5)])
