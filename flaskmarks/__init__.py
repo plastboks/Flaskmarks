@@ -1,7 +1,7 @@
 ## @package flaskmarks
-# 
+#
 # @version 0.12
-# 
+#
 # @author Alexander Skjolden
 #
 # @date 2013-06-06
@@ -20,7 +20,7 @@ lm.init_app(app)
 db = SQLAlchemy(app)
 
 from flaskmarks import (
-  views, 
-  models, 
-  filters,
-  )
+    views,
+    models,
+    filters,
+)

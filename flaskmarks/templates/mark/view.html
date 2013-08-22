@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ mark.title }}</h1>
+<div id="view" class="marksbox roundcorner5 shadow4">
+  <ul class="feedlist">
+  {% for entry in data['entries'] %}
+      <li class='entry'>
+        <ul>
+          <li class='makebookmark'><a href="{{ url_for('new_mark', title=entry['title'], url=entry['links'][0]['href']) }}" class="link"></a></li>
+          <li class='link'><a href="{{ entry['links'][0]['href'] }}" rel="noreferrer" class="link" target="_blank">{{ entry['title'] }}</a></li>
+          <li class='date'>{{ entry['published'] }} / {{ entry['updated'] }}</li>
+          <li class='summary'><pre>{{ entry['summary'] }}</pre></li>
+        </ul>
+      </li>
+  {% endfor %}
+  </ul>
+</div>
+{% endblock %}

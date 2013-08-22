@@ -2,8 +2,9 @@ $(function(){
 
     $('.clickIncrement').on('click', function(){
         var id = $(this).attr('data-id');
+        url = $(this).attr('data-url');
         $.ajax({
-          url: '/bookmark/inc',
+          url: url,
           data: {id : id},
           type: 'GET',
           dataType: 'json',

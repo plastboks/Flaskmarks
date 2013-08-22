@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+{% if not marks.items and not 'Results' in header %}
+<h1>Hello {{ g.user.username }}</h1>
+<h3>Click "New mark" to add a mark</h3>
+{% else %}
+    <h1>{{ header }}</h1>
+    {% if (g.user.recently or g.user.suggestion) and not 'Mark results' in header %}
+      {% include "mark/extra.html" %}
+    {% endif %}
+    {% if marks.items %}
+      {% include "mark/table.html" %}
+    {% else %}
+      <h2>No results</h2>
+      <h3>Try again</h3>
+      {% include "searchform.html" %}
+    {% endif %}
+{% endif %}
+{% endblock %}

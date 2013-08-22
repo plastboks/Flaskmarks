@@ -1,6 +1,14 @@
+@charset "UTF-8";
+/* CSS Document */
+
+
 body {
-    width: 800px;
-    margin: 0 auto;
+   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+   font-weight: 400;
+   background: #eaeaea url('../images/bg.png');
+   width: 800px;
+   margin: 0 auto;
+   padding-top: 10px;
 }
 
 a {
@@ -12,10 +20,21 @@ a {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+    background: #F7F7F7;
+}
+
+.shadow4 {
+    -webkit-box-shadow: 0 3px 10px #D3D3D3;
+    box-shadow: 0 3px 10px #D3D3D3;
 }
 
 .clear {
     clear:both
+}
+
+h1 {
+    color: #585858;
+    font-size: 1.5em;
 }
 
 /**
@@ -31,9 +50,11 @@ a {
 
 #header ul li {
     display: inline;
-    border: 1px solid papayawhip;
-    padding: 2px;
-    background: snow;
+    border: 1px solid lightgray;
+    padding: 2px 2px;
+    margin-right: 2px;
+    background: #FAFAFA;
+    font-size: 0.9em;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
@@ -42,17 +63,27 @@ a {
 #header #search {
     float: right;
     font-size: 0.9em;
+    margin-top: 20px;
+    margin-right: 5px;
 }
 
-#header #search input[type='text'],
+#header #search input[type='text'] {
+    border: 1px solid lightgray;
+    font-size: 14px;
+    width: 300px;
+}
+
 #header #search input[type='submit'] {
-    border: 1px solid gray;
+    display: none;
 }
 
 
 
 #header #primsection {
     margin-top: 10px;
+    padding: 5px 10px;;
+    background: #FAFAFA;
+    border: 1px solid #CCC;
 }
 
 #header #secsection {
@@ -120,77 +151,149 @@ a {
 }
 
 .extrabox {
-    border: 1px solid gold;
-    padding: 5px;
-    background: seashell;
+    padding: 10px;
+    border: 1px solid #CCC;
+    background: #FAFAFA;
 }
 
 .extrabox h3 {
-    padding: 0;
+    padding: 3px 0px;
     margin: 0;
-    color: dimgray;
+    font-weight: 300;
+    color: #A0A0A0;
+    font-size: 0.95em;
+    border-bottom: 1px solid whitesmoke;
 }
 
-.bookmarksbox {
-    padding: 5px;
-    background: mintcream;
-    border: 1px solid lightblue;
-    margin-top: 10px;
+.marksbox {
+    padding: 10px;
+    border: 1px solid #CCC;
+    background: #FAFAFA;
+    margin-top: 20px;
 }
 
-.bookmarks {
+.marks {
     width: 100%;
     font-size: 0.9em;
 }
 
-.bookmarks th {
+.marks th {
     color: dimgray;
     text-align: left;
 }
 
-.bookmarks tr {
+.marks thead {
+    display: none;
+}
+
+.marks tr {
     height: 40px;
 }
 
-.bookmarks .titlecolumn .clickIncrement {
+.marks .type {
+  width: 20px;
+  height: 20px;
+}
+
+.marks .feed {
+  background: url('../icons/feed.png') no-repeat 0px 7px;
+}
+
+.marks .bookmark {
+  background: url('../icons/book.png') no-repeat 0px 7px;
+}
+
+.marks .titlecolumn {
+    width: 670px;
+}
+
+.marks .titlecolumn .clickIncrement {
     font-size: 0.9;
     color: gray;
 }
 
-.bookmarks .titlecolumn .tag {
+.marks .titlecolumn .tag {
     font-size: 0.75em;
     color: mediumvioletred;
 }
 
-.bookmarks .edit,
-.bookmarks .actioncolumn a,
-.bookmarks .delete {
+.marks .titlecolumn a.link {
+    color: lightslategray;
+}
+
+.marks .edit,
+.marks .actioncolumn a,
+.marks .delete {
     font-size: 0.75em;
 }
 
-.bookmarks .clickscolumn {
+.marks .clickscolumn {
     font-size: 0.75em;
     color: orangered;
+    text-align: center;
+    width: 40px;
 }
 
-.bookmarks .lastvisit {
+.marks .lastvisit {
     font-size: 0.75em;
     padding-left: 10px;
     color: gray;
 }
 
-.bookmarks .neverclick {
+.marks .clone {
+    font-size: 0.75em;
+    padding-left: 10px;
+}
+
+.marks .clone a {
+    color: #197ABA;
+}
+
+.marks .neverclick {
     font-size: 0.75em;
     color: orangered;
 }
 
-.bookmarks .lastclick {
+.marks .lastclick {
     font-size: 0.75em;
     color: olivedrab;
 }
 
-.bookmarkform input[type='text'] {
+.markform {
+  padding: 20px;  
+}
+
+.markform label {
+    color: gray;
+    margin-bottom: 5px;
+}
+
+.markform input[type='text'] {
+    width: 99%;
+    background: #FBFBFB;
+    border: 1px solid #E5E5E5;
+    margin: 2px 6px 16px 0px;
+    padding: 3px;
+    font-size: 24px;
+}
+
+.markform #type {
+    margin: 0px;
+    padding: 5px 0px;
+    list-style: none;
+}
+
+.markform #type li {
+    display: inline;  
+    padding-right: 10px;
+}
+
+.markform input[type='submit'] {
     width: 100%;
+    font-size: 1.4em;
+    border: 1px solid dodgerblue;
+    background: lightskyblue;
+    color: dimgray;
 }
 
 #content {
@@ -198,9 +301,10 @@ a {
 }
 
 #paginate {
-    font-size: 0.8em;
+    font-size: 0.7em;
     padding: 20px 0px 0px 0px;
     text-align: center;
+    color: dimgray;
 }
 
 #paginate a {
@@ -212,6 +316,47 @@ a {
     font-size: 0.75em;
 }
 
+/**
+ *
+ * Feed section
+ *
+ */ 
+#content .feedlist {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+}
+
+#content .feedlist ul {
+    list-style: none;
+    margin: 0;
+    padding: 2px 0px 4px 2px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid lightgray;
+}
+
+#content .feedlist ul .makebookmark a{
+    float: right;
+    width: 20px;
+    height: 20px;
+    background: url('../icons/book.png') no-repeat 0px 2px;
+}
+
+#content .feedlist ul .link {
+    font-size: 1.1em;
+    display: inline;
+}
+
+#content .feedlist ul .date {
+    font-size: 0.6em;
+    color: #D3D3D3;
+}
+
+#content .feedlist ul .summary {
+    font-size: 0.75em;
+    color: #5A5A5A;
+}
+
 
 /**
  *
@@ -221,15 +366,15 @@ a {
 #profile .column {
     float: left; 
     margin-right: 20px;
-    border: 1px solid lavender;
-    background: ghostwhite;
+    border: 1px solid #CCC;
+    background: #FAFAFA;
     padding: 10px;
 }
 
 #profile .info {
     margin: 0px 0px 20px 0px;
-    border: 1px solid lavender;
-    background: ghostwhite;
+    border: 1px solid #CCC;
+    background: #FAFAFA;
     padding: 10px;
 }
 
@@ -251,7 +396,11 @@ a {
 }
 
 #profile .submit input[type="submit"]{
-    border: 1px solid gray;
+    width: 100%;
+    font-size: 1.4em;
+    border: 1px solid dodgerblue;
+    background: lightskyblue;
+    color: dimgray;
 }
 
 /**
@@ -260,7 +409,8 @@ a {
  *
  */
 #footer {
-    padding: 30px 0px;
+    padding: 10px 0px;
     font-size: 0.7em;
     text-align: center;
+    color: gray;
 }

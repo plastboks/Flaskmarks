@@ -1,9 +1,9 @@
-<div id="primsection">
+<div id="primsection" class='shadow4 roundcorner5'>
     <ul class="primarymenu">
         {% if g.user.is_authenticated() %}
           {% block secondarymenu %}
-                  <li><a href="{{ url_for('index') }}">Home</a></li>
-                  <li><a href="{{ url_for('new_bookmark') }}">New</a></li>
+                  <li><a href="{{ url_for('marks') }}">Marks</a></li>
+                  <li><a href="{{ url_for('new_mark') }}">New mark</a></li>
           {% endblock %}
         {% endif %}
         {% if g.user.is_authenticated() %}

@@ -1,14 +1,15 @@
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+SITE_TITLE = 'Flaskmarks'
+SITE_FOOTER = 'Flaskmark awesome bookmark and feed app'
 
 CSRF_ENABLED = True
 SECRET_KEY = 'super-duper-secret-key'
 
-
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'flaskmarks.sqlite')
+SQLALCHEMY_DATABASE_URI = 'sqlite:///' +\
+                          os.path.join(basedir, 'flaskmarks.sqlite')
 SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
-
 
 SUGGESTIONS_COUNT = 1
 

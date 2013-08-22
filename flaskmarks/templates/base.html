@@ -2,7 +2,7 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8">
-  <title>Bookmarkapp - {{title}}</title>
+  <title>{{ config['SITE_TITLE'] }} - {{title}}</title>
   <link href="/static/css/normalize.css" rel="stylesheet" media="screen">
   <link href="/static/css/style.css" rel="stylesheet" media="screen">
   <script src="/static/js/jquery-2.0.1.min.js" type="text/javascript"></script>
@@ -10,6 +10,7 @@
 </head>
 <body>
   <div id="header">
+    <h1>{{ config['SITE_TITLE'] }}</h1>
     {% if g.user.is_authenticated() %}
     <div id="search">
         {% include "searchform.html" %}
@@ -22,6 +23,8 @@
       {% block content %}
       {% endblock %}
   </div>
-  <div id="footer">My awesome flask bookmark app</div>
+  <div id="footer">
+    {{ config['SITE_FOOTER'] }}
+  </div>
 </body>
 </html>

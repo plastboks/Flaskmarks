@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Add new bookmark</h1>
-<div id="new" class="bookmarkform">
-  <form action="{{ url_for('new_bookmark') }}" method="POST">
+<h1>Add new mark</h1>
+<div id="new" class="markform marksbox shadow4 roundcorner5">
+  <form action="{{ url_for('new_mark') }}" method="POST">
     {{form.hidden_tag()}}
     <p>
       {% for error in form.title.errors %}
         {{ error }} <br />
       {% endfor %}
-      {{ form.title.label('Title') }} <br />
+      {{ form.title.label() }} <br />
       {{ form.title(size=20) }}
       <span class="description">Left blank, the title will be retrieved automatically.</span>
     </p>
@@ -16,17 +16,24 @@
       {% for error in form.url.errors %}
         {{ error }} <br />
       {% endfor %}
-      {{ form.url.label('URL') }} <br />
+      {{ form.url.label() }} <br />
       {{ form.url(size=20) }}
     </p>
+
+      {% for error in form.type.errors %}
+        {{ error }} <br />
+      {% endfor %}
+      {{ form.type.label() }} <br />
+      {{ form.type() }}
+
     <p>
       {% for error in form.tags.errors %}
         {{ error }} <br />
       {% endfor %}
-      {{ form.tags.label('Tags') }} <br />
+      {{ form.tags.label() }} <br />
       {{ form.tags(size=20) }}
     </p>
-      <input type="submit" value="Add bookmark" />
+      <input type="submit" value="Add mark" />
   </form>
 </div>
 {% endblock %}
