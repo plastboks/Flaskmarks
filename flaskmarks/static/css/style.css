@@ -137,14 +137,22 @@ h2 {
 }
 
 #login input[type='text'],
-#login input[type='submit'],
 #login input[type='password'],
 #register input[type='text'],
-#register input[type='submit'],
 #register input[type='password'] {
+    padding: 4px;
     border: 1px solid gray;
+    width: 215px;
 }
 
+#login input[type='submit'],
+#register input[type='submit'] {
+    border: 1px solid dodgerblue;
+    background: lightskyblue;
+    color: dimgray;
+    width: 225px;
+    font-size: 1.05em;
+}
 
 /**
  *
@@ -296,9 +304,11 @@ h2 {
     width: 99%;
     background: #FBFBFB;
     border: 1px solid #E5E5E5;
-    margin: 2px 6px 16px 0px;
+    margin: 2px 6px 5px 0px;
     padding: 3px;
     font-size: 24px;
+    font-weight: 300;
+    color: #333;
 }
 
 .markform #type {
@@ -336,8 +346,11 @@ h2 {
 }
 
 .description {
+    margin: 0px;
+    padding: 0px;
     color: dimgray;
     font-size: 0.75em;
+    font-style: italic;
 }
 
 /**
