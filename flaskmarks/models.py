@@ -38,7 +38,7 @@ class User(db.Model):
 
     def recent(self):
         return self.my().order_by(desc(Mark.created))\
-                         .limit(self.recently).all()
+                        .limit(self.recently).all()
 
     def marks(self, page):
         return self.my().order_by(desc(Mark.clicks),
@@ -121,4 +121,3 @@ class Mark(db.Model):
 
     def __repr__(self):
         return '<Mark %r>' % (self.title)
-
