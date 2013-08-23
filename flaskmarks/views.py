@@ -100,8 +100,9 @@ def new_mark():
         m.owner_id = g.user.id
         m.created = datetime.utcnow()
         if form.tags.data:
-            m.tags = ' '.join([t.strip() for t in form.tags.data.strip().split(',')])\
-                      .lower()
+            m.tags = ' '.join([t.strip()
+                              for t in form.tags.data.strip().split(',')])\
+                        .lower()
         m.clicks = 0
         if not form.title.data:
             soup = BSoup(urlopen(form.url.data))
@@ -143,6 +144,7 @@ def view_mark(id):
                            title=m.title,
                            )
 
+
 @app.route('/mark/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit_mark(id):
@@ -175,8 +177,6 @@ def delete_mark(id):
         flash('Mark %s deleted' % (m.title), category='info')
         return redirect(url_for('marks'))
     abort(403)
-
-
 
 
 ##################
@@ -251,7 +251,7 @@ def profile():
         db.session.add(u)
         db.session.commit()
         flash('User %s updated' % (form.username.data), category='info')
-        return redirect(url_for('login'))
+        return redirect(url_for('profile'))
     return render_template('account/profile.html',
                            form=form,
                            title='Profile',

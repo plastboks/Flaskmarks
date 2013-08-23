@@ -15,44 +15,46 @@ pmm = 'Passwords must match'
 
 
 class LoginForm(Form):
-    username = TextField('username',
+    username = TextField('Username or Email',
                          [validators.Length(min=4, max=255)],
                          filters=[strip_filter])
-    password = PasswordField('password',
+    password = PasswordField('Password',
                              [validators.Length(min=1, max=255)],
                              filters=[strip_filter])
-    remember_me = BooleanField('remember_me', default=False)
+    remember_me = BooleanField('Remember me', default=False)
 
 
 class UserRegisterForm(Form):
-    username = TextField('username',
+    username = TextField('Username',
                          [validators.Length(min=4, max=32)],
                          filters=[strip_filter])
-    email = TextField('email',
+    email = TextField('Email',
                       [validators.Length(min=4, max=320),
                        validators.Email(message='Not a valid email address')],
                       filters=[strip_filter])
-    password = PasswordField('password',
+    password = PasswordField('Password',
                              [validators.Length(min=6, max=64),
                               validators.EqualTo('confirm',
                                                  message=pmm)],
                              filters=[strip_filter])
-    confirm = PasswordField('confirm',
+    confirm = PasswordField('Confirm Password',
                             filters=[strip_filter])
 
 
 class UserProfileForm(UserRegisterForm):
-    password = PasswordField('password',
+    password = PasswordField('Password',
                              [validators.Optional(),
                               validators.Length(min=6, max=64),
                               validators.EqualTo('confirm',
                                                  message=pmm)],
                              filters=[strip_filter])
-    per_page = SelectField('per_page',
+    per_page = SelectField('Items per page',
                            coerce=int,
                            choices=[(n, n) for n in range(10, 21)])
-    suggestion = BooleanField('suggestion', default=True)
-    recently = SelectField('recently',
+    suggestion = SelectField('Show suggestions',
+                             coerce=int,
+                             choices=[(n, n) for n in range(5)])
+    recently = SelectField('Recently added',
                            coerce=int,
                            choices=[(n, n) for n in range(5)])
 

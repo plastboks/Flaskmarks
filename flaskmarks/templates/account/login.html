@@ -5,15 +5,15 @@
   <form action="{{ url_for('login') }}" method="POST" class="roundcorner5 shadow4">
     {{form.hidden_tag()}}
     <p>
-      {{ form.username.label('Username or Email')}} <br />
+      {{ form.username.label()}} <br />
       {{ form.username(size=20) }}
     </p>
     <p>
-      {{ form.password.label('Password')}} <br />
+      {{ form.password.label()}} <br />
       {{ form.password(size=20) }}
     </p>
     <p>
-      {{ form.password.label('Remember me')}}
+      {{ form.remember_me.label()}}
       {{ form.remember_me() }}
     </p>
       <input type="submit" value="Login">

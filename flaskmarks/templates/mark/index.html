@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-{% if not marks.items and not 'Results' in header %}
+{% if not marks.items and not 'Mark results' in header %}
 <h1>Hello {{ g.user.username }}</h1>
-<h3>Click "New mark" to add a mark</h3>
+<h2>Click "New mark" to add a mark</h2>
 {% else %}
     <h1>{{ header }}</h1>
     {% if (g.user.recently or g.user.suggestion) and not 'Mark results' in header %}
@@ -11,9 +11,7 @@
     {% if marks.items %}
       {% include "mark/table.html" %}
     {% else %}
-      <h2>No results</h2>
-      <h3>Try again</h3>
-      {% include "searchform.html" %}
+      <h2>No results, try again</h2>
     {% endif %}
 {% endif %}
 {% endblock %}

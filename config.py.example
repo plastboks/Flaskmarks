@@ -11,6 +11,4 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' +\
                           os.path.join(basedir, 'flaskmarks.sqlite')
 SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 
-SUGGESTIONS_COUNT = 1
-
 CAN_REGISTER = True

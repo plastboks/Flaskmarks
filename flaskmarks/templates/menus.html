@@ -2,8 +2,7 @@
     <ul class="primarymenu">
         {% if g.user.is_authenticated() %}
           {% block secondarymenu %}
-                  <li><a href="{{ url_for('marks') }}">Marks</a></li>
-                  <li><a href="{{ url_for('new_mark') }}">New mark</a></li>
+              <li><a href="{{ url_for('new_mark') }}">New mark</a></li>
           {% endblock %}
         {% endif %}
         {% if g.user.is_authenticated() %}

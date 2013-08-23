@@ -18,7 +18,7 @@ class User(db.Model):
     password = db.Column(db.Unicode(255), nullable=False)
     last_logged = db.Column(db.DateTime)
     per_page = db.Column(db.SmallInteger, default=10)
-    suggestion = db.Column(db.Boolean, default=True)
+    suggestion = db.Column(db.SmallInteger, default=1)
     recently = db.Column(db.SmallInteger, default=2)
 
     marks = db.relationship('Mark', backref='owner', lazy='dynamic')
@@ -34,11 +34,11 @@ class User(db.Model):
     def suggestions(self):
         return self.my().filter(Mark.clicks == 0)\
                         .order_by(func.random())\
-                        .limit(config['SUGGESTIONS_COUNT']).all()
+                        .limit(self.suggestion).all()
 
     def recent(self):
         return self.my().order_by(desc(Mark.created))\
-                         .limit(self.recently).all()
+                        .limit(self.recently).all()
 
     def marks(self, page):
         return self.my().order_by(desc(Mark.clicks),
@@ -121,4 +121,3 @@ class Mark(db.Model):
 
     def __repr__(self):
         return '<Mark %r>' % (self.title)
-

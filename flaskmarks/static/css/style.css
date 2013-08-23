@@ -35,6 +35,12 @@ a {
 h1 {
     color: #585858;
     font-size: 1.5em;
+    font-weight: 300;
+}
+
+h2 {
+    font-weight: 300;
+    font-size: 1.2em;
 }
 
 /**
@@ -42,6 +48,13 @@ h1 {
  * Header area
  *
  */
+
+#header h1 {
+    font-size: 3em;
+    padding: 0;
+    margin: 15px 0px;
+}
+
 #header ul {
     list-style: none;
     padding-left: 0;
@@ -50,14 +63,23 @@ h1 {
 
 #header ul li {
     display: inline;
-    border: 1px solid lightgray;
-    padding: 2px 2px;
-    margin-right: 2px;
-    background: #FAFAFA;
-    font-size: 0.9em;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    border-bottom: 1px solid #F5F5F5;
+    padding: 2px 2px 2px 20px;
+    margin-right: 10px;
+    background: #FAFAFA url('../icons/bullet_orange.png') no-repeat 0px 2px;
+    font-size: 0.95em;
+    font-weight: 300;
+    //-webkit-border-radius: 5px;
+    //-moz-border-radius: 5px;
+    //border-radius: 5px;
+}
+
+#header ul li:nth-child(1) {
+    background: #FAFAFA url('../icons/bullet_add.png') no-repeat 0px 2px;
+}
+
+#header ul li:nth-last-child(1) {
+    background: #FAFAFA url('../icons/bullet_pink.png') no-repeat 0px 2px;
 }
 
 #header #search {
@@ -68,9 +90,11 @@ h1 {
 }
 
 #header #search input[type='text'] {
-    border: 1px solid lightgray;
+    border: 1px solid #F0F0F0;
     font-size: 14px;
-    width: 300px;
+    padding: 3px;
+    margin-right: 10px;
+    width: 340px;
 }
 
 #header #search input[type='submit'] {
@@ -113,14 +137,22 @@ h1 {
 }
 
 #login input[type='text'],
-#login input[type='submit'],
 #login input[type='password'],
 #register input[type='text'],
-#register input[type='submit'],
 #register input[type='password'] {
+    padding: 4px;
     border: 1px solid gray;
+    width: 215px;
 }
 
+#login input[type='submit'],
+#register input[type='submit'] {
+    border: 1px solid dodgerblue;
+    background: lightskyblue;
+    color: dimgray;
+    width: 225px;
+    font-size: 1.05em;
+}
 
 /**
  *
@@ -139,15 +171,15 @@ h1 {
 }
 
 #flashmessages ul .error {
-    border: 1px solid red;
+    border: 1px solid salmon;
     padding: 5px;
-    background: salmon;
+    background: #FDCCC7;
 }
 
 #flashmessages ul .info {
-    border: 1px solid green;
+    border: 1px solid #D6FF97;
     padding: 5px;
-    background: greenyellow;
+    background: #E6FFC1;
 }
 
 .extrabox {
@@ -272,9 +304,11 @@ h1 {
     width: 99%;
     background: #FBFBFB;
     border: 1px solid #E5E5E5;
-    margin: 2px 6px 16px 0px;
+    margin: 2px 6px 5px 0px;
     padding: 3px;
     font-size: 24px;
+    font-weight: 300;
+    color: #333;
 }
 
 .markform #type {
@@ -312,8 +346,11 @@ h1 {
 }
 
 .description {
+    margin: 0px;
+    padding: 0px;
     color: dimgray;
     font-size: 0.75em;
+    font-style: italic;
 }
 
 /**
@@ -363,6 +400,10 @@ h1 {
  * Profile area
  *
  */
+#profile {
+    font-weight: 300;
+}
+
 #profile .column {
     float: left; 
     margin-right: 20px;
@@ -388,6 +429,16 @@ h1 {
 #profile .column input[type="password"]{
     border: 1px solid grey;
 }
+
+#profile select{
+    border: 1px solid #E5E5E5;
+    background: transparent;
+    height: 30px;
+    width: 50px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+}
+
 
 #profile .submit {
     display: block;
