@@ -394,6 +394,12 @@ h2 {
     color: #5A5A5A;
 }
 
+#content .feedlist li img {
+    padding: 5px 5px;
+    float: right;
+    height: 200px;
+}
+
 
 /**
  *
