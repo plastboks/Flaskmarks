@@ -370,7 +370,10 @@ h2 {
     padding: 2px 0px 4px 2px;
     margin-bottom: 10px;
     border-bottom: 1px solid lightgray;
+    clear: both;
+    overflow: auto;
 }
+
 
 #content .feedlist ul .makebookmark a{
     float: right;
