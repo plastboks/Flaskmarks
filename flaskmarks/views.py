@@ -186,7 +186,7 @@ def delete_mark(id):
 @app.route('/mark/tag/<slug>/<int:page>')
 @login_required
 def mark_q_tag(slug, page=1):
-    m = g.user.tag(page, slug)
+    m = g.user.tag(slug, page)
     return render_template('mark/index.html',
                            title='Mark results',
                            header='Mark results for ' + slug,

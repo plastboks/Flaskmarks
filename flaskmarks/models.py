@@ -61,7 +61,7 @@ class User(db.Model):
     def mark_last_created(self):
         return self.my().order_by(desc(Mark.created)).first()
 
-    def tag(self, page, tag):
+    def tag(self, tag, page):
         return Mark.by_tag(page, self.id, self.per_page, tag)
 
     def string(self, page, string):
