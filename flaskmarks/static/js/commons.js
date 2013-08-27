@@ -24,4 +24,21 @@ $(function(){
         }
     });
 
+    if ($(".markform").length) {
+
+        var feedString = 'http://gdata.youtube.com/feeds/api/users/CHANNELNAME/uploads?max-results=30'
+
+        $("label[for='url']").append(
+          ' <a href="#" id="jqYoutube" style="font-size:0.7em; padding-left: 5px;">Want to make a Youtube feed?</a>'
+        );
+
+        $("#jqYoutube").on('click', function(){
+            $("#url").val(feedString);
+            $("input[value='feed']").attr('checked', 'checked');
+            $("#url").after(
+              '<span class="description">Remember to replace `CHANNELNAME` with something meaningful. </span>'
+            );
+        });
+    }
+
 });
