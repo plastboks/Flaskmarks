@@ -133,7 +133,12 @@ h2 {
     padding: 20px;
     width: 225px;
     border: 1px solid lavender;
-    background: whitesmoke;
+    background: #FAFAFA;
+}
+
+#login label,
+#register label {
+    color: gray;
 }
 
 #login input[type='text'],
@@ -141,7 +146,7 @@ h2 {
 #register input[type='text'],
 #register input[type='password'] {
     padding: 4px;
-    border: 1px solid gray;
+    border: 1px solid #e5e5e5;
     width: 215px;
 }
 
@@ -434,9 +439,13 @@ h2 {
     font-size: 0.9em;
 }
 
+#profile .column label {
+    color: gray;
+}
+
 #profile .column input[type="text"],
 #profile .column input[type="password"]{
-    border: 1px solid grey;
+    border: 1px solid #e5e5e5;
 }
 
 #profile select{
