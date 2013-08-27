@@ -23,7 +23,7 @@
                       <br />
                       {% if mark.tags %}
                         {% for w in mark.tags.split(' ') %}
-                          <a href="{{ url_for('mark_q_tag', slug = w) }}" class="tag">{{ w }}</a>
+                          <a href="{{ url_for('mark_q_tag', slug=w) }}" class="tag">{{ w }}</a>
                         {% endfor %}
                       {% endif %}
                       <span class="clone"><a href="{{ url_for('new_mark', url=mark.url, type=mark.type) }}">clone</a></span>
@@ -52,12 +52,12 @@
 </div>
 <div id="paginate">
 {% if marks.has_prev %}
-  <a href="{{ url_for(request.endpoint, page = 1, q = request.args.get('q')) }}"><<</a>
-  <a href="{{ url_for(request.endpoint, page = marks.prev_num, q = request.args.get('q')) }}"><</a>
+  <a href="{{ url_for(request.endpoint, slug=request.view_args.get('slug'), page=1, q=request.args.get('q')) }}"><<</a>
+  <a href="{{ url_for(request.endpoint, slug=request.view_args.get('slug'), page=marks.prev_num, q=request.args.get('q')) }}"><</a>
 {% endif %}
 Page {{ marks.page }} of {{ marks.pages }}
 {% if marks.has_next %}
-  <a href="{{ url_for(request.endpoint, page=marks.next_num, q = request.args.get('q')) }}">></a>
-  <a href="{{ url_for(request.endpoint, page = marks.pages, q = request.args.get('q')) }}">>></a>
+  <a href="{{ url_for(request.endpoint, slug=request.view_args.get('slug'), page=marks.next_num, q=request.args.get('q')) }}">></a>
+  <a href="{{ url_for(request.endpoint, slug=request.view_args.get('slug'), page=marks.pages, q=request.args.get('q')) }}">>></a>
 {% endif %}
 </div>
