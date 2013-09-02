@@ -57,6 +57,11 @@ class UserProfileForm(UserRegisterForm):
     recently = SelectField('Recently added',
                            coerce=int,
                            choices=[(n, n) for n in range(5)])
+    sort_type = SelectField('Sort type',
+                            coerce=unicode,
+                            choices=[('clicks', 'Clicks'),
+                                     ('dateasc', 'Date asc'),
+                                     ('datedesc', 'Date desc')])
 
 
 class MarkForm(Form):

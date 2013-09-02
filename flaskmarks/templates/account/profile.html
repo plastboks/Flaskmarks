@@ -61,6 +61,13 @@
         {{ form.recently.label() }}
         {{ form.recently() }}
       </p>
+      <p>
+        {% for error in form.sort_type.errors %}
+          {{ error }} <br />
+        {% endfor %}
+        {{ form.sort_type.label() }}
+        {{ form.sort_type() }}
+      </p>
     </div>
     <p class="submit">
       <input type="submit" value="Update" />

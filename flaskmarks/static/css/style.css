@@ -457,6 +457,10 @@ h2 {
     border: 1px solid #ccc;
 }
 
+#profile select#sort_type {
+    width: 100px;
+}
+
 
 #profile .submit {
     display: block;

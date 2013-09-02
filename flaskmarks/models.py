@@ -20,6 +20,7 @@ class User(db.Model):
     per_page = db.Column(db.SmallInteger, default=10)
     suggestion = db.Column(db.SmallInteger, default=1)
     recently = db.Column(db.SmallInteger, default=2)
+    sort_type = db.Column(db.Unicode(255), default=u'clicks')
 
     marks = db.relationship('Mark', backref='owner', lazy='dynamic')
 
@@ -41,9 +42,15 @@ class User(db.Model):
                         .limit(self.recently).all()
 
     def marks(self, page):
-        return self.my().order_by(desc(Mark.clicks),
-                                  desc(Mark.created))\
-                        .paginate(page, self.per_page, False)
+        base = self.my()
+        if self.sort_type == u'clicks':
+            base = base.order_by(desc(Mark.clicks))\
+                       .order_by(desc(Mark.created))
+        if self.sort_type == u'dateasc':
+            base = base.order_by(asc(Mark.created))
+        if self.sort_type == u'datedesc':
+            base = base.order_by(desc(Mark.created))
+        return base.paginate(page, self.per_page, False)
 
     def mid(self, id):
         return self.my().filter(Mark.id == id)\
