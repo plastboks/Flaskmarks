@@ -10,9 +10,13 @@
           <li class='link'><a href="{{ entry['links'][0]['href'] }}" rel="noreferrer" class="link" target="_blank">{{ entry['title'] }}</a></li>
           <li class='date'>{{ entry['published'] }} / {{ entry['updated'] }}</li>
           {% if entry['media_thumbnail'] %}
-            <li><a href="{{ entry['links'][0]['href'] }}" class="link"><img src='{{ entry['media_thumbnail'][0]['url'] }}' /></a></li>
+            <li class='image'><a href="{{ entry['links'][0]['href'] }}" class="link"><img src='{{ entry['media_thumbnail'][0]['url'] }}' /></a></li>
           {% endif %}
-          <li class='summary'><pre>{{ entry['summary'] }}</pre></li>
+          <li class='summary'>
+          {% autoescape false %}
+            <pre>{{ entry['summary'] }}</pre>
+          {% endautoescape %}
+          </li>
         </ul>
       </li>
   {% endfor %}
