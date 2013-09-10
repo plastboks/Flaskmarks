@@ -7,9 +7,9 @@ flask
 flask-login
 flask-sqlalchemy
 sqlalchemy-migrate
-flask-whooshalchemy
+WebHelpers2>=2.0b3
 flask-wtf
-WebHelpers2
+wtforms
 flup
 pep8
 feedparser

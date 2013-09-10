@@ -47,3 +47,6 @@ uwsgi.ini
 
 # exclude man dir for now
 man
+
+# vim files
+*.swp
