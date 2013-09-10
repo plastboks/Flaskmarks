@@ -6,11 +6,23 @@
   {% for entry in data['entries'] %}
       <li class='entry'>
         <ul>
-          <li class='makebookmark'><a href="{{ url_for('new_mark', title=entry['title'], url=entry['links'][0]['href']) }}" class="link"></a></li>
-          <li class='link'><a href="{{ entry['links'][0]['href'] }}" rel="noreferrer" class="link" target="_blank">{{ entry['title'] }}</a></li>
+          {% for link in entry['links'] %}
+            {% if link['rel'] == 'alternate' or link['rel'] == 'enclosure'%}
+                <li class='makebookmark'><a href="{{ url_for('new_mark', title=entry['title'], url=link['href']) }}" class="link"></a></li>
+            {% endif %}
+          {% endfor %}
+          {% for link in entry['links'] %}
+            {% if link['rel'] == 'alternate' or link['rel'] == 'enclosure'%}
+              <li class='link'><a href="{{ link['href'] }}" rel="noreferrer" class="link" target="_blank">{{ entry['title'] }}</a></li>
+            {% endif %}
+          {% endfor %}
           <li class='date'>{{ entry['published'] }} / {{ entry['updated'] }}</li>
           {% if entry['media_thumbnail'] %}
-            <li class='image'><a href="{{ entry['links'][0]['href'] }}" class="link"><img src='{{ entry['media_thumbnail'][0]['url'] }}' /></a></li>
+            {% for link in entry['links'] %}
+              {% if link['rel'] == 'alternate' or link['rel'] == 'enclosure'%}
+                <li class='image'><a href="{{ link['href'] }}" class="link" rel="noreferrer" target="_blank"><img src='{{ entry['media_thumbnail'][0]['url'] }}' /></a></li>
+              {% endif %}
+            {% endfor %}
           {% endif %}
           <li class='summary'>
           {% autoescape false %}
