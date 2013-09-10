@@ -70,8 +70,8 @@ class User(db.Model):
     def tag(self, tag, page):
         return Mark.by_tag(page, self.id, self.per_page, tag)
 
-    def string(self, page, string):
-        return Mark.by_string(page, self.id, self.per_page, string)
+    def string(self, page, string, marktype):
+        return Mark.by_string(page, self.id, self.per_page, string, marktype)
 
     def authenticate_user(self, password):
         manager = BCRYPTPasswordManager()

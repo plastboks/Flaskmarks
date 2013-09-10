@@ -85,7 +85,7 @@ h2 {
 #header #search {
     float: right;
     font-size: 0.9em;
-    margin-top: 20px;
+    margin-top: 15px;
     margin-right: 5px;
 }
 
@@ -101,7 +101,10 @@ h2 {
     display: none;
 }
 
-
+#header #search label {
+    font-size: 0.9em;
+    color: grey;
+}
 
 #header #primsection {
     margin-top: 10px;
