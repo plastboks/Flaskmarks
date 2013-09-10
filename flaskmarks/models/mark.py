@@ -5,6 +5,7 @@ from sqlalchemy import (
     desc,
 )
 
+
 class Mark(db.Model):
     __tablename__ = 'marks'
     id = db.Column(db.Integer, primary_key=True)
@@ -28,14 +29,17 @@ class Mark(db.Model):
                          .paginate(page, per_page, False)
 
     @classmethod
-    def by_string(self, page, oID, per_page, string):
+    def by_string(self, page, oID, per_page, string, marktype=False):
         string = "%"+string+"%"
-        return self.query.filter(self.owner_id == oID)\
+        base = self.query.filter(self.owner_id == oID)\
                          .filter(or_(self.title.like(string),
                                      self.tags.like(string),
-                                     self.url.like(string)))\
-                         .order_by(desc(self.clicks))\
-                         .paginate(page, per_page, False)
+                                     self.url.like(string)))
+        if marktype:
+            base = base.filter(self.type == marktype)
+        base = base.order_by(desc(self.clicks))\
+                   .paginate(page, per_page, False)
+        return base
 
     def __repr__(self):
         return '<Mark %r>' % (self.title)

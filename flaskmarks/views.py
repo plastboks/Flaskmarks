@@ -198,13 +198,15 @@ def mark_q_tag(slug, page=1):
 @login_required
 def search_string(page=1):
     q = request.args.get('q')
-    if not q:
+    t = request.args.get('type')
+
+    if not q and not t:
         return redirect(url_for('marks'))
 
-    m = g.user.string(page, q)
+    m = g.user.string(page, q, t)
     return render_template('mark/index.html',
                            title='Mark results',
-                           header='Mark results for ' + q,
+                           header="Mark results for %s - %s" % (q, t),
                            marks=m)
 
 
