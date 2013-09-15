@@ -55,6 +55,10 @@ class User(db.Model):
         return self.my().filter(Mark.id == id)\
                         .first()
 
+    def murl(self, string):
+        return self.my().filter(Mark.url == string)\
+                        .first()
+
     def mark_count(self):
         return self.my().count()
 

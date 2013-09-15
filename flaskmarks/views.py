@@ -95,6 +95,10 @@ def marks(page=1):
 def new_mark():
     form = MarkForm()
     if form.validate_on_submit():
+        if g.user.murl(form.url.data):
+            flash('Mark with this url (%s) already\
+                  exists' % (form.url.data), category='error')
+            return redirect(url_for('marks'))
         m = Mark()
         form.populate_obj(m)
         m.owner_id = g.user.id
@@ -153,6 +157,10 @@ def edit_mark(id):
     if not m:
         abort(403)
     if form.validate_on_submit():
+        if m.url != form.url.data and g.user.murl(form.url.data):
+            flash('Mark with this url (%s) already\
+                  exists' % (form.url.data), category='error')
+            return redirect(url_for('marks'))
         form.populate_obj(m)
         m.updated = datetime.utcnow()
         db.session.add(m)
