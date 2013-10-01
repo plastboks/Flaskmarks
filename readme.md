@@ -17,7 +17,7 @@ Install
 
 Ubuntu
 ======
-Installing this app on ubuntu make take a little more effort than `pip install -r requirements.txt`.
+Installing this app on ubuntu may take a little more effort than `pip install -r requirements.txt`.
 * run `sudo apt-get install python-virtualenv`
 * run `sudo apt-get install python2.7-dev`
 * run `sudo apt-get install build-essential`
