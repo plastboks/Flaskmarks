@@ -15,6 +15,12 @@ Install
 * run `python db_upgrade.py`
 * run `python run.py`
 
+Ubuntu
+======
+Installing this app on ubuntu make take a little more effort than `pip install -r requirements.txt`.
+* run `sudo apt-get install python-virtualenv`
+* run `sudo apt-get install python2.7-dev`
+* run `sudo apt-get install build-essential`
 
 Upgrade
 =======
@@ -32,9 +38,10 @@ This process runs trough the old database and copies it into the new. It is ther
 Deploy
 ======
 
-* make a copy of examples/uwsgi.ini.example and edit accordingly.
+* make a copy of examples/uwsgi.ini.example to app root and edit accordingly.
 * install uwsgi `pip install uwsgi` (globally?)
 * copy examples/flaskmarks.nginx.example to your nginx sites folder and enable
+* copy examples/uwsgi_params.example to your nginx config folder.
 * run `uwsgi uwsgi.ini`
 * restart nginx
 
