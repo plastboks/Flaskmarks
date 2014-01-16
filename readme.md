@@ -23,6 +23,10 @@ Upgrade
 =======
 This is done by running: `python db_migrate && python db_upgrade`. 
 
+Python and packages update
+==========================
+* run: `pip install --upgrade -r requirements.txt`
+
 Deploy
 ======
 * install uwsgi `pip install uwsgi` (globally?)
