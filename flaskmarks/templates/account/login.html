@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<div id="login">
+<section id="login">
   <h1>Login</h1>
   <form action="{{ url_for('login') }}" method="POST" class="roundcorner5 shadow4">
     {{form.hidden_tag()}}
@@ -18,5 +18,5 @@
     </p>
       <input type="submit" value="Login">
   </form>
-</div>
+</section>
 {% endblock %}

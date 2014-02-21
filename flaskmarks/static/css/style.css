@@ -49,19 +49,19 @@ h2 {
  *
  */
 
-#header h1 {
+header h1 {
     font-size: 3em;
     padding: 0;
     margin: 15px 0px;
 }
 
-#header ul {
+header ul {
     list-style: none;
     padding-left: 0;
     margin-left: 0;
 }
 
-#header ul li {
+header ul li {
     display: inline;
     border-bottom: 1px solid #F5F5F5;
     padding: 2px 2px 2px 20px;
@@ -74,22 +74,22 @@ h2 {
     //border-radius: 5px;
 }
 
-#header ul li:nth-child(1) {
+header ul li:nth-child(1) {
     background: #FAFAFA url('../icons/bullet_add.png') no-repeat 0px 2px;
 }
 
-#header ul li:nth-last-child(1) {
+header ul li:nth-last-child(1) {
     background: #FAFAFA url('../icons/bullet_pink.png') no-repeat 0px 2px;
 }
 
-#header #search {
+header #search {
     float: right;
     font-size: 0.9em;
     margin-top: 15px;
     margin-right: 5px;
 }
 
-#header #search input[type='text'] {
+header #search input[type='text'] {
     border: 1px solid #F0F0F0;
     font-size: 14px;
     padding: 3px;
@@ -97,23 +97,23 @@ h2 {
     width: 340px;
 }
 
-#header #search input[type='submit'] {
+header #search input[type='submit'] {
     display: none;
 }
 
-#header #search label {
+header #search label {
     font-size: 0.9em;
     color: grey;
 }
 
-#header #primsection {
+header #primsection {
     margin-top: 10px;
     padding: 5px 10px;;
     background: #FAFAFA;
     border: 1px solid #CCC;
 }
 
-#header #secsection {
+header #secsection {
 }
 
 
@@ -484,7 +484,7 @@ h2 {
  * Footer area
  *
  */
-#footer {
+footer {
     padding: 10px 0px;
     font-size: 0.7em;
     text-align: center;

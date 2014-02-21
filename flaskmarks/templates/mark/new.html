@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Add new mark</h1>
-<div id="new" class="markform marksbox shadow4 roundcorner5">
+<section id="new" class="markform marksbox shadow4 roundcorner5">
   <form action="{{ url_for('new_mark') }}" method="POST">
     {{form.hidden_tag()}}
     <p>
@@ -19,13 +19,13 @@
       {{ form.url.label() }} <br />
       {{ form.url(size=20) }}
     </p>
-
+    <p>
       {% for error in form.type.errors %}
         {{ error }} <br />
       {% endfor %}
       {{ form.type.label() }} <br />
       {{ form.type() }}
-
+    </p>
     <p>
       {% for error in form.tags.errors %}
         {{ error }} <br />
@@ -35,5 +35,5 @@
     </p>
       <input type="submit" value="Add mark" />
   </form>
-</div>
+</section>
 {% endblock %}

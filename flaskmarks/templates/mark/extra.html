@@ -1,6 +1,6 @@
-<div class="extrabox roundcorner5 shadow4">
+<section class="extrabox roundcorner5 shadow4">
   {% if g.user.suggestion and suggestions %}
-    <div id="suggestions">
+    <section id="suggestions">
     <h3>Random suggestion</h3>
       <table class="marks">
         <thead>
@@ -52,10 +52,10 @@
             {% endfor %}
         </tbody>
       </table>
-      </div>
+    </section>
   {% endif %}
   {% if g.user.recently and recently %}
-    <div id="recently">
+    <section id="recently">
     <h3>Recently added</h3>
       <table class="marks">
         <thead>
@@ -107,6 +107,6 @@
             {% endfor %}
         </tbody>
       </table>
-      </div>
+    </section>
   {% endif %}
-</div>
+</section>

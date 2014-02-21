@@ -2,7 +2,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div id="register">
+<section id="register">
   <h1>Register</h1>
   <form action="{{ url_for('register') }}" method="POST" class="roundcorner5 shadow4">
     {{form.hidden_tag()}}
@@ -34,5 +34,5 @@
     </p>
       <input type="submit" value="Register" />
   </form>
-</div>
+</section>
 {% endblock %}

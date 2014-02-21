@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>{{ mark.title }}</h1>
-<div id="view" class="marksbox roundcorner5 shadow4">
+<section id="view" class="marksbox roundcorner5 shadow4">
   <ul class="feedlist">
   {% for entry in data['entries'] %}
       <li class='entry'>
@@ -33,5 +33,5 @@
       </li>
   {% endfor %}
   </ul>
-</div>
+</section>
 {% endblock %}
