@@ -10,7 +10,7 @@ Install
 * run: `python db_create.py`.
 * run: `python db_migrate.py`.
 * run: `python db_upgrade.py`.
-* run: `python run:.py`.
+* run: `python run.py`.
 
 Ubuntu
 ======
