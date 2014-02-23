@@ -29,7 +29,7 @@ $(function(){
         var feedString = 'http://gdata.youtube.com/feeds/api/users/CHANNELNAME/uploads?max-results=30'
 
         $("label[for='url']").append(
-          ' <a href="#" id="jqYoutube" style="font-size:0.7em; padding-left: 5px;">Want to make a Youtube feed?</a>'
+          ' <a href="#" id="jqYoutube" style="font-size:0.7em; padding-left: 5px;">Youtube feed?</a>'
         );
 
         $("#jqYoutube").on('click', function(){

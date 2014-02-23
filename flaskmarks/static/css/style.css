@@ -1,7 +1,9 @@
 @charset "UTF-8";
 /* CSS Document */
 
-
+/**
+ * Commons
+ */
 body {
    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
    font-weight: 400;
@@ -43,12 +45,10 @@ h2 {
     font-size: 1.2em;
 }
 
-/**
- *
- * Header area
- *
- */
 
+/**
+ * Header
+ */
 header h1 {
     font-size: 3em;
     padding: 0;
@@ -69,9 +69,6 @@ header ul li {
     background: #FAFAFA url('../icons/bullet_orange.png') no-repeat 0px 2px;
     font-size: 0.95em;
     font-weight: 300;
-    //-webkit-border-radius: 5px;
-    //-moz-border-radius: 5px;
-    //border-radius: 5px;
 }
 
 header ul li:nth-child(1) {
@@ -118,9 +115,7 @@ header #secsection {
 
 
 /**
- *
- * Login/register area
- *
+ * Login/register.
  */
 #login h1 {
 }
@@ -162,10 +157,9 @@ header #secsection {
     font-size: 1.05em;
 }
 
+
 /**
- *
- * Content area
- *
+ * Content.
  */
 #flashmessages ul {
     list-style: none;
@@ -361,10 +355,9 @@ header #secsection {
     font-style: italic;
 }
 
+
 /**
- *
- * Feed section
- *
+ * Feed.
  */ 
 #content .feedlist {
     list-style: none;
@@ -381,7 +374,6 @@ header #secsection {
     clear: both;
     overflow: auto;
 }
-
 
 #content .feedlist ul .makebookmark a{
     float: right;
@@ -413,9 +405,7 @@ header #secsection {
 
 
 /**
- *
- * Profile area
- *
+ * Profile.
  */
 #profile {
     font-weight: 300;
@@ -479,10 +469,9 @@ header #secsection {
     color: dimgray;
 }
 
+
 /**
- *
- * Footer area
- *
+ * Footer.
  */
 footer {
     padding: 10px 0px;
