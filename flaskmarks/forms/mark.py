@@ -11,6 +11,7 @@ from wtforms import (
     RadioField,
     validators,
     HiddenField,
+    IntegerField,
 )
 
 
@@ -31,3 +32,4 @@ class MarkForm(Form):
     tags = TextField('Tags',
                      [validators.Length(min=0, max=255)],
                      filters=[strip_filter])
+    clicks = IntegerField('Clicks')
