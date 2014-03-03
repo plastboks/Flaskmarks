@@ -42,7 +42,10 @@ This app is heavily inspired by the flaks sqlalchemy tutorial @ http://blog.migu
 
 Branches
 ========
-There will at any given point be at least two branches in this repository. One master (stable) branch, and one develop branch. The develop branch might contain unfinished code and/or wonky solutions for features. I will strive to make shure that code merged into master is as good as possible (given the small size of this application).
+There will at any given point be at least two branches in this repository. One
+master (stable) branch, and one develop branch. The develop branch might contain
+unfinished code and/or wonky solutions. I will strive to make sure that code 
+merged into master is as stable as possible (given the small size of this application).
 
 Useful Links
 ============
