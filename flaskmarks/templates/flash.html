@@ -1,11 +1,11 @@
 <section id="flashmessages">
     {% with messages = get_flashed_messages(with_categories=True) %}
     {% if messages %}
-      <ul>
-      {% for message in messages %}
-          <li class="{{ message[0] }} roundcorner5">{{ message[1] }} </li>
-      {% endfor %}
-      </ul>
+        <ul>
+        {% for message in messages %}
+            <li class="{{ message[0] }} roundcorner5">{{ message[1] }} </li>
+        {% endfor %}
+        </ul>
     {% endif %}
     {% endwith %}
 </section>

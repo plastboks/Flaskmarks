@@ -2,76 +2,76 @@
 {% block content %}
 <h1>Profile</h1>
 <section id="profile">
-  <form action="{{ url_for('profile') }}" method="POST">
-    {{form.hidden_tag()}}
-    <section class="info roundcorner5 shadow4">
-      <p>Total marks: {{ mc }} (Bookmarks: {{ bc }}, Feeds: {{ fc }})</p>
-      <p>Last created mark: {{ lcm.created }}</p>
-      <p>Last logon: {{ g.user.last_logged }}</p>
-      {% if bc %}
-      {% endif %}
-    </section>
-    <section class="column roundcorner5 shadow4 clear">
-      <p>
-        {% for error in form.username.errors %}
-          {{ error }} <br />
-        {% endfor %}
-        {{ form.username.label() }} <br />
-        {{ form.username(size=20) }}
-      </p>
-      <p>
-        {% for error in form.email.errors %}
-          {{ error }} <br />
-        {% endfor %}
-        {{ form.email.error }}
-        {{ form.email.label() }} <br />
-        {{ form.email(size=20) }}
-      </p>
-      <p>
-        {% for error in form.password.errors %}
-          {{ error }} <br />
-        {% endfor %}
-        {{ form.password.label()}} <br />
-        {{ form.password(size=20) }}
-      </p>
-      <p>
-        {{ form.confirm.label()}} <br />
-        {{ form.confirm(size=20) }}
-      </p>
-    </section>
-    <section class="column roundcorner5 shadow4">
-      <p>
-        {% for error in form.per_page.errors %}
-          {{ error }} <br />
-        {% endfor %}
-        {{ form.per_page.label() }}
-        {{ form.per_page() }}
-      </p>
-      <p>
-        {% for error in form.suggestion.errors %}
-          {{ error }} <br />
-        {% endfor %}
-        {{ form.suggestion.label() }}
-        {{ form.suggestion() }}
-      </p>
-      <p>
-        {% for error in form.recently.errors %}
-          {{ error }} <br />
-        {% endfor %}
-        {{ form.recently.label() }}
-        {{ form.recently() }}
-      </p>
-      <p>
-        {% for error in form.sort_type.errors %}
-          {{ error }} <br />
-        {% endfor %}
-        {{ form.sort_type.label() }}
-        {{ form.sort_type() }}
-      </p>
-    </section>
-    <p class="submit">
-      <input type="submit" value="Update" />
-    </p>
-  </form>
+    <form action="{{ url_for('profile') }}" method="POST">
+        {{form.hidden_tag()}}
+        <section class="info roundcorner5 shadow4">
+            <p>Total marks: {{ mc }} (Bookmarks: {{ bc }}, Feeds: {{ fc }})</p>
+            <p>Last created mark: {{ lcm.created }}</p>
+            <p>Last logon: {{ g.user.last_logged }}</p>
+            {% if bc %}
+            {% endif %}
+        </section>
+        <section class="column roundcorner5 shadow4 clear">
+            <p>
+                {% for error in form.username.errors %}
+                    {{ error }} <br />
+                {% endfor %}
+                {{ form.username.label() }} <br />
+                {{ form.username(size=20) }}
+            </p>
+            <p>
+                {% for error in form.email.errors %}
+                    {{ error }} <br />
+                {% endfor %}
+                {{ form.email.error }}
+                {{ form.email.label() }} <br />
+                {{ form.email(size=20) }}
+            </p>
+            <p>
+                {% for error in form.password.errors %}
+                    {{ error }} <br />
+                {% endfor %}
+                {{ form.password.label()}} <br />
+                {{ form.password(size=20) }}
+            </p>
+            <p>
+                {{ form.confirm.label()}} <br />
+                {{ form.confirm(size=20) }}
+            </p>
+        </section>
+        <section class="column roundcorner5 shadow4">
+            <p>
+                {% for error in form.per_page.errors %}
+                    {{ error }} <br />
+                {% endfor %}
+                {{ form.per_page.label() }}
+                {{ form.per_page() }}
+            </p>
+            <p>
+                {% for error in form.suggestion.errors %}
+                    {{ error }} <br />
+                {% endfor %}
+                {{ form.suggestion.label() }}
+                {{ form.suggestion() }}
+            </p>
+            <p>
+                {% for error in form.recently.errors %}
+                    {{ error }} <br />
+                {% endfor %}
+                {{ form.recently.label() }}
+                {{ form.recently() }}
+            </p>
+            <p>
+                {% for error in form.sort_type.errors %}
+                    {{ error }} <br />
+                {% endfor %}
+                {{ form.sort_type.label() }}
+                {{ form.sort_type() }}
+            </p>
+        </section>
+        <p class="submit">
+            <input type="submit" value="Update" />
+        </p>
+    </form>
 </section>
 {% endblock %}

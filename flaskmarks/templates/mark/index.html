@@ -6,12 +6,12 @@
 {% else %}
     <h1>{{ header }}</h1>
     {% if (g.user.recently or g.user.suggestion) and not 'Mark results' in header %}
-      {% include "mark/extra.html" %}
+        {% include "mark/extra.html" %}
     {% endif %}
     {% if marks.items %}
-      {% include "mark/table.html" %}
+        {% include "mark/table.html" %}
     {% else %}
-      <h2>No results, try again</h2>
+        <h2>No results, try again</h2>
     {% endif %}
 {% endif %}
 {% endblock %}

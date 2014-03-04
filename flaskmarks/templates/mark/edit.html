@@ -2,37 +2,37 @@
 {% block content %}
 <h1>Edit Bookmark</h1>
 <section id="edit" class="markform shadow4 roundcorner5">
-  <form action="" method="POST">
-    {{form.hidden_tag()}}
-    <p>
-      {% for error in form.title.errors %}
-        {{ error }} <br />
-      {% endfor %}
-      {{ form.title.label('Title') }} <br />
-      {{ form.title(size=20) }}
-    </p>
-    <p>
-      {% for error in form.url.errors %}
-        {{ error }} <br />
-      {% endfor %}
-      {{ form.url.label('URL') }} <br />
-      {{ form.url(size=20) }}
-    </p>
-    <p>
-      {% for error in form.tags.errors %}
-        {{ error }} <br />
-      {% endfor %}
-      {{ form.tags.label('Tags') }} <br />
-      {{ form.tags(size=20) }}
-    </p>
-    <p>
-      {% for error in form.clicks.errors %}
-        {{ error }} <br />
-      {% endfor %}
-      {{ form.clicks.label('Clicks') }} <br />
-      {{ form.clicks(size=20) }}
-    </p>
-      <input type="submit" value="Edit bookmark" />
-  </form>
+    <form action="" method="POST">
+        {{form.hidden_tag()}}
+        <p>
+            {% for error in form.title.errors %}
+                {{ error }} <br />
+            {% endfor %}
+            {{ form.title.label('Title') }} <br />
+            {{ form.title(size=20) }}
+        </p>
+        <p>
+            {% for error in form.url.errors %}
+                {{ error }} <br />
+            {% endfor %}
+            {{ form.url.label('URL') }} <br />
+            {{ form.url(size=20) }}
+        </p>
+        <p>
+            {% for error in form.tags.errors %}
+                {{ error }} <br />
+            {% endfor %}
+            {{ form.tags.label('Tags') }} <br />
+            {{ form.tags(size=20) }}
+        </p>
+        <p>
+            {% for error in form.clicks.errors %}
+                {{ error }} <br />
+            {% endfor %}
+            {{ form.clicks.label('Clicks') }} <br />
+            {{ form.clicks(size=20) }}
+        </p>
+            <input type="submit" value="Edit bookmark" />
+    </form>
 </section>
 {% endblock %}
