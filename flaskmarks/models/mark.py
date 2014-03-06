@@ -4,6 +4,13 @@ from sqlalchemy import (
     or_,
     desc,
 )
+from sqlalchemy.orm import relationship
+
+
+association_table = db.Table('mark_tags', db.metadata,
+    db.Column('left_id', db.Integer, db.ForeignKey('marks.id')),
+    db.Column('right_id', db.Integer, db.ForeignKey('tags.id'))
+)
 
 
 class Mark(db.Model):
@@ -18,6 +25,10 @@ class Mark(db.Model):
     last_clicked = db.Column(db.DateTime)
     created = db.Column(db.DateTime)
     updated = db.Column(db.DateTime)
+
+    tags_tmp = relationship('Tag',
+                            secondary=association_table,
+                            backref='marks')
 
     @classmethod
     def by_tag(self, page, oID, per_page, tag):
