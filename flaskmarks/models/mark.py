@@ -26,7 +26,7 @@ class Mark(db.Model):
     created = db.Column(db.DateTime)
     updated = db.Column(db.DateTime)
 
-    tags_tmp = relationship('Tag',
+    ass_tags = relationship('Tag',
                             secondary=association_table,
                             backref='marks')
 
