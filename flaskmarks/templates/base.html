@@ -16,10 +16,9 @@
             {% include "searchform.html" %}
         </section>
         {% endif %}
-        {% include "menus.html" %}
     </header>
+    {% include "menus.html" %}
     <section id="content">
-        {% include "flash.html" %}
         {% block content %}
         {% endblock %}
     <section>

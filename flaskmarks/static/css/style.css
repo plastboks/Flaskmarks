@@ -8,7 +8,7 @@ body {
    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
    font-weight: 400;
    background: #eaeaea url('../images/bg.png');
-   width: 800px;
+   width: 920px;
    margin: 0 auto;
    padding-top: 10px;
 }
@@ -49,38 +49,21 @@ h2 {
 /**
  * Header
  */
+header {
+    position: relative;
+}
+
 header h1 {
     font-size: 3em;
     padding: 0;
     margin: 15px 0px;
 }
 
-header ul {
-    list-style: none;
-    padding-left: 0;
-    margin-left: 0;
-}
-
-header ul li {
-    display: inline;
-    border-bottom: 1px solid #F5F5F5;
-    padding: 2px 2px 2px 20px;
-    margin-right: 10px;
-    background: #FAFAFA url('../icons/bullet_orange.png') no-repeat 0px 2px;
-    font-size: 0.95em;
-    font-weight: 300;
-}
-
-header ul li:nth-child(1) {
-    background: #FAFAFA url('../icons/bullet_add.png') no-repeat 0px 2px;
-}
-
-header ul li:nth-last-child(1) {
-    background: #FAFAFA url('../icons/bullet_pink.png') no-repeat 0px 2px;
-}
 
 header #search {
-    float: right;
+    position: absolute;
+    top: 0px;
+    right: 0px;
     font-size: 0.9em;
     margin-top: 15px;
     margin-right: 5px;
@@ -101,13 +84,6 @@ header #search input[type='submit'] {
 header #search label {
     font-size: 0.9em;
     color: grey;
-}
-
-header #primsection {
-    margin-top: 10px;
-    padding: 5px 10px;;
-    background: #FAFAFA;
-    border: 1px solid #CCC;
 }
 
 header #secsection {
@@ -332,7 +308,10 @@ header #secsection {
     color: dimgray;
 }
 
+
 #content {
+    width: 750px;
+    float: right;
     padding-bottom: 10px;
 }
 
@@ -354,6 +333,42 @@ header #secsection {
     font-size: 0.75em;
     font-style: italic;
 }
+
+/**
+ * Sidebar.
+ */
+#sidebar {
+    clear: both;
+    float: left;
+    width: 150px;
+}
+
+#sidebar ul {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 10px;
+}
+
+#sidebar ul li {
+    padding: 5px 2px 5px 20px;
+    background: #FAFAFA url('../icons/bullet_orange.png') no-repeat 0px 2px;
+    font-size: 0.95em;
+    font-weight: 300;
+}
+
+#sidebar ul li:nth-child(1) {
+    background: #FAFAFA url('../icons/bullet_add.png') no-repeat 0px 2px;
+}
+
+#sidebar ul li:nth-last-child(1) {
+    background: #FAFAFA url('../icons/bullet_pink.png') no-repeat 0px 2px;
+}
+
+#sidebar {
+    background: #FAFAFA;
+    border: 1px solid #CCC;
+}
+
 
 
 /**

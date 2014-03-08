@@ -110,11 +110,11 @@ def new_mark():
                         .lower()
             """ Testing ass tags """
             ass_tags = []
-            for t in form.tags.data.strip().replace(',',' ').split(' '):
+            #for t in form.tags.data.strip().replace(',',' ').split(' '):
                 # Check for existing tags
                 # Create new instance of a Tag()
                 # Append this new tag / existing tag to this mark
-
+            
         m.clicks = 0
         if not form.title.data:
             soup = BSoup(urlopen(form.url.data))

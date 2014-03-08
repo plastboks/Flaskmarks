@@ -4,7 +4,9 @@
 <h1>Hello {{ g.user.username }}</h1>
 <h2>Click "New mark" to add a mark</h2>
 {% else %}
-    <h1>{{ header }}</h1>
+    {% if header %}
+        <h1>{{ header }}</h1>
+    {% endif %}
     {% if (g.user.recently or g.user.suggestion) and not 'Mark results' in header %}
         {% include "mark/extra.html" %}
     {% endif %}
