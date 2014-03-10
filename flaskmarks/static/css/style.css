@@ -51,6 +51,8 @@ h2 {
  */
 header {
     position: relative;
+    border-bottom: 1px solid ghostwhite;
+    margin-bottom: 20px;
 }
 
 header h1 {
@@ -70,7 +72,7 @@ header #search {
 }
 
 header #search input[type='text'] {
-    border: 1px solid #F0F0F0;
+    border: 1px solid lightgray;
     font-size: 14px;
     padding: 3px;
     margin-right: 10px;
@@ -164,6 +166,7 @@ header #secsection {
     padding: 10px;
     border: 1px solid #CCC;
     background: #FAFAFA;
+    margin-bottom: 20px;
 }
 
 .extrabox h3 {
@@ -179,10 +182,6 @@ header #secsection {
     padding: 10px;
     border: 1px solid #CCC;
     background: #FAFAFA;
-}
-
-.markslist {
-    margin-top: 20px;
 }
 
 .marks {
