@@ -38,11 +38,11 @@ class User(db.Model):
 
     def recent(self, page, type):
         if type == 'added':
-            base = self.my().order_by(asc(Mark.created))
+            base = self.my().order_by(desc(Mark.created))
             return base.paginate(page, self.per_page, False)
         if type == 'clicked':
             base = self.my().filter(Mark.clicks > 0)\
-                            .order_by(asc(Mark.last_clicked))
+                            .order_by(desc(Mark.last_clicked))
             return base.paginate(page, self.per_page, False)
         return False;
 
