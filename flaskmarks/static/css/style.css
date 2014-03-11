@@ -319,7 +319,7 @@ header #secsection {
 
 
 #content {
-    width: 750px;
+    width: 730px;
     float: right;
     padding-bottom: 10px;
 }
@@ -349,7 +349,7 @@ header #secsection {
 #sidebar {
     clear: both;
     float: left;
-    width: 150px;
+    width: 170px;
 }
 
 #sidebar ul {
@@ -365,7 +365,11 @@ header #secsection {
     font-weight: 300;
 }
 
-#sidebar ul li:nth-child(2) {
+#sidebar ul li:nth-child(1) {
+    background: #FAFAFA url('../icons/bullet_purple.png') no-repeat 0px 4px;
+}
+
+#sidebar ul li:nth-child(5) {
     background: #FAFAFA url('../icons/bullet_add.png') no-repeat 0px 4px;
 }
 
