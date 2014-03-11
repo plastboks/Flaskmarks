@@ -36,9 +36,14 @@ class User(db.Model):
                         .order_by(func.random())
         return base.paginate(page, self.per_page, False)
 
-    def recent(self, page):
-        base = self.my().order_by(desc(Mark.created))
-        return base.paginate(page, self.per_page, False)
+    def recently(self, page, type):
+        if type == 'added':
+            base = self.my().order_by(desc(Mark.created))
+            return base.paginate(page, self.per_page, False)
+        if type == 'clicked':
+            base = self.my().order_by(desc(Mark.last_clicked))
+            return base.paginate(page, self.per_page, False)
+        return False;
 
     def marks(self, page):
         base = self.my()
