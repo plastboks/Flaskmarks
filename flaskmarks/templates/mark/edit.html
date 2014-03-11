@@ -6,28 +6,28 @@
         {{form.hidden_tag()}}
         <p>
             {% for error in form.title.errors %}
-                {{ error }} <br />
+                <p class="error">{{ error }}</p>
             {% endfor %}
             {{ form.title.label('Title') }} <br />
             {{ form.title(size=20) }}
         </p>
         <p>
             {% for error in form.url.errors %}
-                {{ error }} <br />
+                <p class="error">{{ error }}</p>
             {% endfor %}
             {{ form.url.label('URL') }} <br />
             {{ form.url(size=20) }}
         </p>
         <p>
             {% for error in form.tags.errors %}
-                {{ error }} <br />
+                <p class="error">{{ error }}</p>
             {% endfor %}
             {{ form.tags.label('Tags') }} <br />
             {{ form.tags(size=20) }}
         </p>
         <p>
             {% for error in form.clicks.errors %}
-                {{ error }} <br />
+                <p class="error">{{ error }}</p>
             {% endfor %}
             {{ form.clicks.label('Clicks') }} <br />
             {{ form.clicks(size=20) }}

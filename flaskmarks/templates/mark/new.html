@@ -6,7 +6,7 @@
         {{form.hidden_tag()}}
         <p>
             {% for error in form.title.errors %}
-                {{ error }} <br />
+                <p class="error">{{ error }}</p>
             {% endfor %}
             {{ form.title.label() }} <br />
             {{ form.title(size=20) }}
@@ -14,21 +14,21 @@
         </p>
         <p>
             {% for error in form.url.errors %}
-                {{ error }} <br />
+                <p class="error">{{ error }}</p>
             {% endfor %}
             {{ form.url.label() }} <br />
             {{ form.url(size=20) }}
         </p>
         <p>
             {% for error in form.type.errors %}
-                {{ error }} <br />
+                <p class="error">{{ error }}</p>
             {% endfor %}
             {{ form.type.label() }} <br />
             {{ form.type() }}
         </p>
         <p>
             {% for error in form.tags.errors %}
-                {{ error }} <br />
+                <p class="error">{{ error }}</p>
             {% endfor %}
             {{ form.tags.label() }} <br />
             {{ form.tags(size=20) }}

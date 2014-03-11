@@ -14,14 +14,14 @@
         <section class="column roundcorner5 shadow4 clear">
             <p>
                 {% for error in form.username.errors %}
-                    {{ error }} <br />
+                    <p class="error">{{ error }}</p>
                 {% endfor %}
                 {{ form.username.label() }} <br />
                 {{ form.username(size=20) }}
             </p>
             <p>
                 {% for error in form.email.errors %}
-                    {{ error }} <br />
+                    <p class="error">{{ error }}</p>
                 {% endfor %}
                 {{ form.email.error }}
                 {{ form.email.label() }} <br />
@@ -29,7 +29,7 @@
             </p>
             <p>
                 {% for error in form.password.errors %}
-                    {{ error }} <br />
+                    <p class="error">{{ error }}</p>
                 {% endfor %}
                 {{ form.password.label()}} <br />
                 {{ form.password(size=20) }}
@@ -42,28 +42,28 @@
         <section class="column roundcorner5 shadow4">
             <p>
                 {% for error in form.per_page.errors %}
-                    {{ error }} <br />
+                    <p class="error">{{ error }}</p>
                 {% endfor %}
                 {{ form.per_page.label() }}
                 {{ form.per_page() }}
             </p>
             <p>
                 {% for error in form.suggestion.errors %}
-                    {{ error }} <br />
+                    <p class="error">{{ error }}</p>
                 {% endfor %}
                 {{ form.suggestion.label() }}
                 {{ form.suggestion() }}
             </p>
             <p>
                 {% for error in form.recently.errors %}
-                    {{ error }} <br />
+                    <p class="error">{{ error }}</p>
                 {% endfor %}
                 {{ form.recently.label() }}
                 {{ form.recently() }}
             </p>
             <p>
                 {% for error in form.sort_type.errors %}
-                    {{ error }} <br />
+                    <p class="error">{{ error }}</p>
                 {% endfor %}
                 {{ form.sort_type.label() }}
                 {{ form.sort_type() }}

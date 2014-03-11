@@ -46,6 +46,12 @@ h2 {
     font-size: 1.2em;
 }
 
+.error {
+    padding: 3px;
+    background: #FFC7B2;
+    border: 1px solid salmon;
+}
+
 
 /**
  * Header
