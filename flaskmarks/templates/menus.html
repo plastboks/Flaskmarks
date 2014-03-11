@@ -2,9 +2,9 @@
     <ul class="primarymenu">
         {% if g.user.is_authenticated() %}
             <li><a href="{{ url_for('marks') }}">Marks</a></li>
-            <li><a href="{{ url_for('last_clicked') }}">Last clicked</a></li>
-            <li><a href="{{ url_for('recently') }}">Recently added</a></li>
-            <li><a href="{{ url_for('suggestions') }}">Suggestions</a></li>
+            <li><a href="{{ url_for('recently_clicked') }}">Recently clicked</a></li>
+            <li><a href="{{ url_for('recently_added') }}">Recently added</a></li>
+            <li><a href="{{ url_for('mark_suggestions') }}">Suggestions</a></li>
             <li><a href="{{ url_for('new_mark') }}">New mark</a></li>
             <li><a href="{{ url_for('profile') }}">Profile</a></li>
             <li><a href="{{ url_for('logout') }}">Logout</a></li>
