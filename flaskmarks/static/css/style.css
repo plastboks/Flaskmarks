@@ -41,6 +41,7 @@ h1 {
 }
 
 h2 {
+    color: #585858;
     font-weight: 300;
     font-size: 1.2em;
 }
@@ -181,6 +182,13 @@ header #secsection {
     padding: 10px;
     border: 1px solid #CCC;
     background: #FAFAFA;
+}
+
+.marksbox h2 {
+    border-bottom: 1px solid #efefef;
+    padding-bottom: 5px;
+    margin-top: 5px;
+    margin-bottom: 20px;
 }
 
 .marks {
@@ -352,17 +360,17 @@ header #secsection {
 
 #sidebar ul li {
     padding: 5px 2px 5px 20px;
-    background: #FAFAFA url('../icons/bullet_orange.png') no-repeat 0px 2px;
+    background: #FAFAFA url('../icons/bullet_orange.png') no-repeat 0px 4px;
     font-size: 0.95em;
     font-weight: 300;
 }
 
-#sidebar ul li:nth-child(1) {
-    background: #FAFAFA url('../icons/bullet_add.png') no-repeat 0px 2px;
+#sidebar ul li:nth-child(2) {
+    background: #FAFAFA url('../icons/bullet_add.png') no-repeat 0px 4px;
 }
 
 #sidebar ul li:nth-last-child(1) {
-    background: #FAFAFA url('../icons/bullet_pink.png') no-repeat 0px 2px;
+    background: #FAFAFA url('../icons/bullet_pink.png') no-repeat 0px 4px;
 }
 
 #sidebar {
