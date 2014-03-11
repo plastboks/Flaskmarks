@@ -7,6 +7,7 @@ from wtforms import (
     TextField,
     PasswordField,
     SelectField,
+    HiddenField,
     validators,
 )
 
@@ -40,12 +41,8 @@ class UserProfileForm(UserRegisterForm):
     per_page = SelectField('Items per page',
                            coerce=int,
                            choices=[(n, n) for n in range(10, 21)])
-    suggestion = SelectField('Show suggestions',
-                             coerce=int,
-                             choices=[(n, n) for n in range(5)])
-    recently = SelectField('Recently added',
-                           coerce=int,
-                           choices=[(n, n) for n in range(5)])
+    suggestion = HiddenField('Show suggestions', 0)
+    recently = HiddenField('Recently added', 0)
     sort_type = SelectField('Sort type',
                             coerce=unicode,
                             choices=[('clicks', 'Clicks'),

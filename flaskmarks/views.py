@@ -97,7 +97,7 @@ def recently_clicked(page=1):
     return render_template('mark/index.html',
                            title='Marks - page %d' % page,
                            header='',
-                           marks=u.recently(page, 'added'))
+                           marks=u.recent(page, 'added'))
 
 
 @app.route('/recently')
@@ -108,7 +108,7 @@ def recently_added(page=1):
     return render_template('mark/index.html',
                            title='Marks - page %d' % page,
                            header='',
-                           marks=u.recently(page, 'clicked'))
+                           marks=u.recent(page, 'clicked'))
 
 
 @app.route('/suggestions')

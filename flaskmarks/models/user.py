@@ -36,7 +36,7 @@ class User(db.Model):
                         .order_by(func.random())
         return base.paginate(page, self.per_page, False)
 
-    def recently(self, page, type):
+    def recent(self, page, type):
         if type == 'added':
             base = self.my().order_by(desc(Mark.created))
             return base.paginate(page, self.per_page, False)
