@@ -197,89 +197,92 @@ header #secsection {
     margin-bottom: 20px;
 }
 
-.marks {
-    width: 100%;
+.markslist {
     font-size: 0.9em;
 }
 
-.marks th {
+.markslist ul {
+    display: table;
+    width: 100%;
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.markslist ul li.tablerow{
+    display: table-row;
     color: dimgray;
     text-align: left;
 }
 
-.marks thead {
-    display: none;
+.markslist ul li.column{
+    display: table-cell;
 }
 
-.marks tr {
-    height: 40px;
+.markslist .type {
+    padding: 2px 0px 2px 24px;
 }
 
-.marks .type {
-  width: 20px;
-  height: 20px;
-}
-
-.marks .feed {
+.markslist .feed {
   background: url('../icons/feed.png') no-repeat 0px 7px;
 }
 
-.marks .bookmark {
+.markslist .bookmark {
   background: url('../icons/book.png') no-repeat 0px 7px;
 }
 
-.marks .titlecolumn {
-    width: 620px;
+.markslist .title {
+    width: 610px;
 }
 
-.marks .titlecolumn .clickIncrement {
+.markslist .title .clickIncrement {
     font-size: 0.9;
     color: gray;
 }
 
-.marks .titlecolumn .tag {
+.markslist .title .tag {
     font-size: 0.75em;
     color: mediumvioletred;
 }
 
-.marks .titlecolumn a.link {
+.markslist .title a.link {
     color: lightslategray;
 }
 
-.marks .edit,
-.marks .actioncolumn a,
-.marks .delete {
+.markslist .edit,
+.markslist .actioncolumn a,
+.markslist .delete {
     font-size: 0.75em;
 }
 
-.marks .clickscolumn {
+.markslist .clicks {
     font-size: 0.75em;
     color: orangered;
     text-align: center;
     width: 40px;
 }
 
-.marks .lastvisit {
+.markslist .lastvisit {
     font-size: 0.75em;
     padding-left: 10px;
     color: gray;
 }
 
-.marks .clone {
+.markslist .clone {
     font-size: 0.75em;
     padding-left: 10px;
 }
 
-.marks .clone a {
+.markslist .clone a {
     color: #197ABA;
 }
 
-.marks .neverclick {
+.markslist .neverclick {
     font-size: 0.75em;
     color: orangered;
 }
 
-.marks .lastclick {
+.markslist .lastclick {
     font-size: 0.75em;
     color: olivedrab;
 }
