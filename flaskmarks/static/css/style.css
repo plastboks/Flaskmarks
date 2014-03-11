@@ -391,6 +391,10 @@ header #secsection {
     border: 1px solid #CCC;
 }
 
+#sidebar .active {
+    font-weight: bold;
+}
+
 
 
 /**
