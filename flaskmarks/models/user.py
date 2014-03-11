@@ -31,14 +31,14 @@ class User(db.Model):
     def my(self):
         return Mark.query.filter(Mark.owner_id == self.id)
 
-    def suggestions(self):
-        return self.my().filter(Mark.clicks == 0)\
-                        .order_by(func.random())\
-                        .limit(self.suggestion).all()
+    def suggestions(self, page):
+        base = self.my().filter(Mark.clicks == 0)\
+                        .order_by(func.random())
+        return base.paginate(page, self.per_page, False)
 
-    def recent(self):
-        return self.my().order_by(desc(Mark.created))\
-                        .limit(self.recently).all()
+    def recent(self, page):
+        base = self.my().order_by(desc(Mark.created))
+        return base.paginate(page, self.per_page, False)
 
     def marks(self, page):
         base = self.my()
