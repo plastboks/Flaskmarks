@@ -42,7 +42,7 @@ class User(db.Model):
             return base.paginate(page, self.per_page, False)
         if type == 'clicked':
             base = self.my().filter(Mark.clicks > 0)\
-                            .order_by(desc(Mark.last_clicked))
+                            .order_by(asc(Mark.last_clicked))
             return base.paginate(page, self.per_page, False)
         return False;
 
