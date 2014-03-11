@@ -1,6 +1,8 @@
 <form action="/search" method="GET">
     <input name="q" value="{{ request.args['q'] }}" type="text" class="roundcorner5" placeholder='Search'/><br />
-    <input name="type" value="bookmark" type="radio" id="bookmarkstype" {{ 'checked' if request.args['type'] == 'bookmark' else ''}} /><label for="bookmarkstype"> Bookmarks</label>
-    <input name="type" value="feed" type="radio" id="feedstype" {{ 'checked' if request.args['type'] == 'feed' else ''}} /><label for="feedstype"> Feeds</label>
+    <input name="type" value="bookmark" type="radio" id="bookmarkstype" {{ 'checked' if request.args['type'] == 'bookmark' else ''}} />
+    <label for="bookmarkstype"> Bookmarks</label>
+    <input name="type" value="feed" type="radio" id="feedstype" {{ 'checked' if request.args['type'] == 'feed' else ''}} />
+    <label for="feedstype"> Feeds</label>
     <input type="submit" value="Search" />
 </form>
