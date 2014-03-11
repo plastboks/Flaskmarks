@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>{{ mark.title }}</h1>
 <section id="view" class="marksbox roundcorner5 shadow4">
+    <h2>{{ mark.title }}</h2>
     <ul class="feedlist">
     {% for entry in data['entries'] %}
         <li class='entry'>

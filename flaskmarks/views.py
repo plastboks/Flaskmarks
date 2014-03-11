@@ -86,9 +86,40 @@ def marks(page=1):
     return render_template('mark/index.html',
                            title='Marks - page %d' % page,
                            header='',
-                           marks=u.marks(page),
-                           suggestions=u.suggestions(),
-                           recently=u.recent())
+                           marks=u.marks(page))
+
+
+@app.route('/clicked')
+@app.route('/clicked/<int:page>')
+@login_required
+def last_clicked(page=1):
+    u = g.user
+    return render_template('mark/index.html',
+                           title='Marks - page %d' % page,
+                           header='',
+                           marks=u.recent(page))
+
+
+@app.route('/recently')
+@app.route('/recently/<int:page>')
+@login_required
+def recently(page=1):
+    u = g.user
+    return render_template('mark/index.html',
+                           title='Marks - page %d' % page,
+                           header='',
+                           marks=u.recent(page))
+
+
+@app.route('/suggestions')
+@app.route('/suggestions/<int:page>')
+@login_required
+def suggestions(page=1):
+    u = g.user
+    return render_template('mark/index.html',
+                           title='Marks - page %d' % page,
+                           header='',
+                           marks=u.suggestions(page))
 
 
 @app.route('/mark/new', methods=['GET', 'POST'])

@@ -1,18 +1,18 @@
 <nav id="sidebar" class='shadow4 roundcorner5'>
     <ul class="primarymenu">
         {% if g.user.is_authenticated() %}
-          {% block secondarymenu %}
-              <li><a href="{{ url_for('new_mark') }}">New mark</a></li>
-          {% endblock %}
-        {% endif %}
-        {% if g.user.is_authenticated() %}
-        <li><a href="{{ url_for('profile') }}">Profile</a></li>
-        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            <li><a href="{{ url_for('marks') }}">Marks</a></li>
+            <li><a href="{{ url_for('last_clicked') }}">Last clicked</a></li>
+            <li><a href="{{ url_for('recently') }}">Recently added</a></li>
+            <li><a href="{{ url_for('suggestions') }}">Suggestions</a></li>
+            <li><a href="{{ url_for('new_mark') }}">New mark</a></li>
+            <li><a href="{{ url_for('profile') }}">Profile</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
         {% else %}
-        <li><a href="{{ url_for('login') }}">Login</a></li>
-        {% if config['CAN_REGISTER'] %}
-        <li><a href="{{ url_for('register') }}">Register</a></li>
-        {% endif %}
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            {% if config['CAN_REGISTER'] %}
+                <li><a href="{{ url_for('register') }}">Register</a></li>
+            {% endif %}
         {% endif %}
     </ul>
 </nav>
