@@ -296,6 +296,7 @@ header #secsection {
     margin-bottom: 5px;
 }
 
+.markform input[type='password'],
 .markform input[type='text'] {
     width: 99%;
     background: #FBFBFB;
@@ -305,6 +306,18 @@ header #secsection {
     font-size: 24px;
     font-weight: 300;
     color: #333;
+}
+
+.markform ul.infolist {
+    list-style: none;
+    font-size: 0.8em;
+    color: gray;
+    padding: 0px;
+}
+
+.markform ul.infolist li {
+    padding: 4px 2px 4px 20px;
+    background: #FAFAFA url('../icons/bullet_orange.png') no-repeat 0px 3px;
 }
 
 .markform #type {
@@ -442,72 +455,6 @@ header #secsection {
     padding: 5px 5px;
     float: right;
     height: 200px;
-}
-
-
-/**
- * Profile.
- */
-#profile {
-    font-weight: 300;
-}
-
-#profile .column {
-    float: left; 
-    margin-right: 20px;
-    border: 1px solid #CCC;
-    background: #FAFAFA;
-    padding: 10px;
-}
-
-#profile .info {
-    margin: 0px 0px 20px 0px;
-    border: 1px solid #CCC;
-    background: #FAFAFA;
-    padding: 10px;
-}
-
-#profile .info p {
-    padding: 0px;
-    margin: 3px;
-    font-size: 0.9em;
-}
-
-#profile .column label {
-    color: gray;
-}
-
-#profile .column input[type="text"],
-#profile .column input[type="password"]{
-    border: 1px solid #e5e5e5;
-}
-
-#profile select{
-    border: 1px solid #E5E5E5;
-    background: transparent;
-    height: 30px;
-    width: 50px;
-    overflow: hidden;
-    border: 1px solid #ccc;
-}
-
-#profile select#sort_type {
-    width: 100px;
-}
-
-
-#profile .submit {
-    display: block;
-    padding-top: 10px;
-    clear:both;
-}
-
-#profile .submit input[type="submit"]{
-    width: 100%;
-    font-size: 1.4em;
-    border: 1px solid dodgerblue;
-    background: lightskyblue;
-    color: dimgray;
 }
 
 
