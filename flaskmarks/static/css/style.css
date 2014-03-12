@@ -84,9 +84,10 @@ header #search {
 header #search input[type='text'] {
     border: 1px solid lightgray;
     font-size: 14px;
-    padding: 3px;
-    margin-right: 10px;
+    padding: 3px 0px 3px 3px;
     width: 340px;
+    font-size: 1.2em;
+    color: gray;
 }
 
 header #search input[type='submit'] {
@@ -96,9 +97,6 @@ header #search input[type='submit'] {
 header #search label {
     font-size: 0.9em;
     color: grey;
-}
-
-header #secsection {
 }
 
 
