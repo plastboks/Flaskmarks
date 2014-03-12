@@ -253,7 +253,7 @@ def search_string(page=1):
     m = g.user.string(page, q, t)
     return render_template('mark/index.html',
                            title='Mark results',
-                           header="Mark results for %s - %s" % (q, t),
+                           header="Mark results for '%s'" % (q),
                            marks=m)
 
 
