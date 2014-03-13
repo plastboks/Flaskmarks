@@ -48,8 +48,6 @@
                     <p class="error">{{ error }}</p>
                 {% endfor %}
                 {{ form.suggestion() }}
-            </p>
-            <p>
                 {% for error in form.recently.errors %}
                     <p class="error">{{ error }}</p>
                 {% endfor %}
@@ -61,8 +59,6 @@
                 {% endfor %}
                 {{ form.per_page.label() }}
                 {{ form.per_page() }}
-            </p>
-            <p>
                 {% for error in form.sort_type.errors %}
                     <p class="error">{{ error }}</p>
                 {% endfor %}
