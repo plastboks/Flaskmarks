@@ -40,7 +40,7 @@ class UserProfileForm(UserRegisterForm):
                              filters=[strip_filter])
     per_page = SelectField('Items per page',
                            coerce=int,
-                           choices=[(n, n) for n in range(10, 21)])
+                           choices=[(n, n) for n in range(10, 31)])
     suggestion = HiddenField('Show suggestions', 0)
     recently = HiddenField('Recently added', 0)
     sort_type = SelectField('Sort type',
