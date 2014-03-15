@@ -1,10 +1,14 @@
-Flask Bookmarks
+Flaskmarks
 ===============
 My simple (and self educational) Flask + sqlalchemy based bookmark and RSS feed app.
 
+Features
+========
+Flaskmarks is a small and neat "mark" managing application. Its purpose is to be a all-in-one bookmark and RSS feed repository. Storing all bookmarks and RSS feeds in one place, makes them accessible from all platforms and devices. This is by no means an original idea, but this is an interpretation of the problem.
+
 Install
 =======
-* Create and activate a virtualenv (ex: `. venv/bin/activate`).
+* Create and activate a python virtualenv.
 * make a copy of config.py.example to config.py and edit accordingly.
 * run: `pip install -r requirements.txt`.
 * run: `python db_create.py`.
@@ -21,7 +25,7 @@ Installing this app on ubuntu may take a little more effort than `pip install -r
 
 Upgrade
 =======
-This is done by running: `python db_migrate && python db_upgrade`. 
+* run: `python db_migrate && python db_upgrade`. 
 
 Python and packages update
 ==========================
