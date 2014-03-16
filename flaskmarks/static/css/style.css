@@ -393,10 +393,6 @@ header #search label {
     background: #FAFAFA url('../icons/bullet_purple.png') no-repeat 0px 4px;
 }
 
-#sidebar ul li:nth-child(5) {
-    background: #FAFAFA url('../icons/bullet_add.png') no-repeat 0px 4px;
-}
-
 #sidebar ul li:nth-last-child(1) {
     background: #FAFAFA url('../icons/bullet_pink.png') no-repeat 0px 4px;
 }
@@ -411,6 +407,35 @@ header #search label {
 }
 
 
+/**
+ * Submenu
+ */
+
+#submenu {
+    border: 1px solid #CCC;
+    background: #FAFAFA;
+    margin-bottom: 10px;
+}
+
+#submenu ul {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 10px;
+}
+
+#submenu ul li {
+    display: inline;
+    padding: 5px 2px 5px 20px;
+    background: #FAFAFA url('../icons/bullet_orange.png') no-repeat 0px 6px;
+}
+
+#submenu ul li:nth-child(4) {
+    background: #FAFAFA url('../icons/bullet_add.png') no-repeat 0px 4px;
+}
+
+#submenu .active {
+    font-weight: bold;
+}
 
 /**
  * Feed.
