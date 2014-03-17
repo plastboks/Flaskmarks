@@ -425,14 +425,15 @@ header #search label {
 
 #submenu ul li {
     display: inline;
-    padding: 5px 2px 5px 20px;
-    background: #FAFAFA url('../icons/bullet_orange.png') no-repeat 0px 6px;
-    font-size: 0.95em;
+    padding: 0px 2px 0px 20px;
+    margin-left: 10px;
+    background: #FAFAFA url('../icons/bullet_orange.png') no-repeat 0px 0px;
+    font-size: 0.90em;
     font-weight: 300;
 }
 
-#submenu ul li:nth-child(4) {
-    background: #FAFAFA url('../icons/bullet_add.png') no-repeat 0px 4px;
+#submenu ul li:nth-child(5) {
+    background: #FAFAFA url('../icons/bullet_add.png') no-repeat 0px 0px;
 }
 
 #submenu .active {
