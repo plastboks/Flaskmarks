@@ -427,6 +427,8 @@ header #search label {
     display: inline;
     padding: 5px 2px 5px 20px;
     background: #FAFAFA url('../icons/bullet_orange.png') no-repeat 0px 6px;
+    font-size: 0.95em;
+    font-weight: 300;
 }
 
 #submenu ul li:nth-child(4) {
