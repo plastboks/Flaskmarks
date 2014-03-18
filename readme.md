@@ -6,6 +6,13 @@ Features
 ========
 Flaskmarks is a small and neat "mark" managing application. Its purpose is to be a all-in-one bookmark and RSS feed repository. Storing all bookmarks and RSS feeds in one place, makes them accessible from all platforms and devices. This is by no means an original idea, but this is an interpretation of the problem.
 
+
+Thoughts and future
+===================
+After using this app daily for some time now, I have come to realize that some more functions might be handy.
+* Notes with revisions (from pulpy).
+* Calendar
+
 Install
 =======
 * Create and activate a python virtualenv.
