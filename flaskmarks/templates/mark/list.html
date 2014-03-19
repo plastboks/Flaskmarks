@@ -6,11 +6,11 @@
                 <li class='column title'>
                     {% if mark.type == 'bookmark' %}
                         <a href="{{ mark.url }}" class="link clickIncrement" target="_blank" data-id="{{ mark.id }}" data-url="/mark/inc" title="{{mark.title}}" rel="noreferrer">
-                            {{ mark.title|truncate(90) }}
+                            {{ mark.title|truncate(82) }}
                         </a>
                     {% elif mark.type == 'feed' %}
                         <a href="{{ url_for('view_mark', id=mark.id) }}" class="link clickIncrement" data-id="{{ mark.id }}" data-url="/mark/inc" title="{{mark.title}}" rel="noreferrer">
-                            {{ mark.title|truncate(90) }}
+                            {{ mark.title|truncate(82) }}
                         </a>
                     {% endif %}
                     <br />
