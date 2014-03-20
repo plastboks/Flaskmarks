@@ -2,7 +2,7 @@
 {% block content %}
 <section id="edit" class="markform marksbox shadow4 roundcorner5">
     <h2>Edit Bookmark</h2>
-    <form action="" method="POST">
+    <form action="{{ request.path }}" method="POST">
         {{form.hidden_tag()}}
         <p>
             {% for error in form.title.errors %}

@@ -24,7 +24,7 @@ $(function(){
         }
     });
 
-    if ($(".markform").length) {
+    if ($(".markform").length && !$("#edit.markform").length) {
 
         var feedString = 'http://gdata.youtube.com/feeds/api/users/CHANNELNAME/uploads?max-results=30'
 
