@@ -12,6 +12,7 @@ Thoughts and future
 After using this app daily for some time now, I have come to realize that some more functions might be handy.
 * Notes with revisions (from pulpy).
 * Calendar
+* Tags for all object types (revisions?)
 
 Install
 =======
