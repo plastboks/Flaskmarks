@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-<section id="login">
-    <h1>Login</h1>
-    <form action="{{ url_for('login') }}" method="POST" class="roundcorner5 shadow4">
+<section class="markform marksbox shadow4 roundcorner5">
+<h2>Login</h2>
+    <form action="{{ url_for('login') }}" method="POST">
         {{form.hidden_tag()}}
         <p>
             {{ form.username.label()}} <br />
