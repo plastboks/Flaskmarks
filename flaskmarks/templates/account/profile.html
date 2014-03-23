@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <section id="content">
-<section class="marksbox markform roundcorner5 shadow4 clear">
+<section class="contentbox markform roundcorner5 shadow4 clear">
     <h2>Profile - {{ g.user.username }}</h2>
     <form action="{{ url_for('profile') }}" method="POST">
         {{form.hidden_tag()}}

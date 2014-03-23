@@ -1,7 +1,7 @@
 <!-- extend from base layout -->
 {% extends "base.html" %}
 {% block content %}
-<section class="markform marksbox shadow4 roundcorner5">
+<section class="markform contentbox shadow4 roundcorner5">
 <h2>Register</h2>
     <form action="{{ url_for('register') }}" method="POST">
         {{form.hidden_tag()}}

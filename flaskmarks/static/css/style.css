@@ -186,13 +186,13 @@ header #search label {
     border-bottom: 1px solid whitesmoke;
 }
 
-.marksbox {
+.contentbox {
     padding: 10px;
     border: 1px solid #CCC;
     background: #FAFAFA;
 }
 
-.marksbox h2 {
+.contentbox h2 {
     border-bottom: 1px solid #efefef;
     padding-bottom: 5px;
     margin-top: 5px;

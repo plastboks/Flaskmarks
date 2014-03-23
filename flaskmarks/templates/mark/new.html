@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<section id="new" class="markform marksbox shadow4 roundcorner5">
+<section id="new" class="markform contentbox shadow4 roundcorner5">
     <h2>Add new mark</h2>
     <form action="{{ url_for('new_mark') }}" method="POST">
         {{form.hidden_tag()}}
