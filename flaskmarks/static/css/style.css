@@ -78,14 +78,13 @@ header #search {
     right: 0px;
     font-size: 0.9em;
     margin-top: 15px;
-    margin-right: 5px;
 }
 
 header #search input[type='text'] {
     border: 1px solid lightgray;
     font-size: 14px;
     padding: 3px 0px 3px 3px;
-    width: 340px;
+    width: 350px;
     font-size: 1.2em;
     color: gray;
 }
