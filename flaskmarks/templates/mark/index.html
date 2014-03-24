@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 {% include "mark/submenu.html" %}
-{% if not marks.items and not 'Mark results' in header %}
+{% if not marks.items and not 'Search results' in header %}
     <h2>No marks found.</h2>
 {% else %}
     {% if header %}

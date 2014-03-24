@@ -235,8 +235,8 @@ def delete_mark(id):
 def mark_q_tag(slug, page=1):
     m = g.user.tag(slug, page)
     return render_template('mark/index.html',
-                           title='Mark results',
-                           header='Mark results for ' + slug,
+                           title='Marks with tag: %s' % (slug),
+                           header='Marks with tag: %s' % (slug),
                            marks=m)
 
 
@@ -252,8 +252,8 @@ def search_string(page=1):
 
     m = g.user.string(page, q, t)
     return render_template('mark/index.html',
-                           title='Mark results',
-                           header="Mark results for '%s'" % (q),
+                           title='Search results for: %s' % (q),
+                           header="Search results for: '%s'" % (q),
                            marks=m)
 
 
