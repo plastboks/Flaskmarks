@@ -234,7 +234,7 @@ header #search label {
 }
 
 .markslist .title {
-    width: 610px;
+    width: 600px;
 }
 
 .markslist .title .clickIncrement {
@@ -258,7 +258,7 @@ header #search label {
 }
 
 .markslist .clicks {
-    font-size: 0.95em;
+    font-size: 0.75em;
     color: #808080;
     width: 40px;
 }
@@ -275,15 +275,15 @@ header #search label {
 }
 
 .markslist span.edit a {
-    color: #197ABA;
+    color: #C6C6C6;
 }
 
 .markslist span.delete a {
-    color: #197ABA;
+    color: #C6C6C6;
 }
 
 .markslist span.clone a {
-    color: #197ABA;
+    color: #C6C6C6;
 }
 
 .markslist .neverclick {
