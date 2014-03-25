@@ -218,6 +218,7 @@ header #search label {
 
 .markslist ul li.column{
     display: table-cell;
+    padding-top: 5px;
 }
 
 .markslist .type {
@@ -225,11 +226,11 @@ header #search label {
 }
 
 .markslist .feed {
-  background: url('../icons/feed.png') no-repeat 0px 7px;
+  background: url('../icons/feed.png') no-repeat 0px 12px;
 }
 
 .markslist .bookmark {
-  background: url('../icons/book.png') no-repeat 0px 7px;
+  background: url('../icons/book.png') no-repeat 0px 12px;
 }
 
 .markslist .title {
@@ -257,9 +258,8 @@ header #search label {
 }
 
 .markslist .clicks {
-    font-size: 0.75em;
-    color: orangered;
-    text-align: center;
+    font-size: 0.95em;
+    color: #808080;
     width: 40px;
 }
 
@@ -269,12 +269,20 @@ header #search label {
     color: gray;
 }
 
-.markslist .clone {
+.markslist span.action {
     font-size: 0.75em;
     padding-left: 10px;
 }
 
-.markslist .clone a {
+.markslist span.edit a {
+    color: #197ABA;
+}
+
+.markslist span.delete a {
+    color: #197ABA;
+}
+
+.markslist span.clone a {
     color: #197ABA;
 }
 
