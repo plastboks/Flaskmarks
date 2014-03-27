@@ -15,7 +15,7 @@ from flask.ext.login import LoginManager
 
 cache = Cache()
 app = Flask(__name__)
-cache.init_app(app, config={'CACHE_TYPE': 'null'})
+cache.init_app(app, config={'CACHE_TYPE': 'simple'})
 app.config.from_object('config')
 config = app.config
 lm = LoginManager()
