@@ -3,6 +3,7 @@
 <section id="content">
 <section class="contentbox markform roundcorner5 shadow4 clear">
     <h2>Profile - {{ g.user.username }}</h2>
+    {{ g.user.email | gravatar }}
     <form action="{{ url_for('profile') }}" method="POST">
         {{form.hidden_tag()}}
         <section>
