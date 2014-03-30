@@ -7,7 +7,6 @@ flask
 flask-login
 flask-sqlalchemy
 Flask-Cache
-Flask-Gravatar
 sqlalchemy-migrate
 WebHelpers2>=2.0b3
 flask-wtf

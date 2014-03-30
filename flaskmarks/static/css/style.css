@@ -494,6 +494,18 @@ header #search label {
     height: 200px;
 }
 
+/**
+ * Profile page
+ */
+
+section#info {
+    margin-bottom: 5px;
+    overflow: auto;
+}
+section#info img {
+    float: right;
+}
+
 
 /**
  * Footer.

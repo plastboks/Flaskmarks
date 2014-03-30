@@ -3,18 +3,18 @@
 <section id="content">
 <section class="contentbox markform roundcorner5 shadow4 clear">
     <h2>Profile - {{ g.user.username }}</h2>
-    {{ g.user.email | gravatar }}
+    <section id='info'>
+        <img src="{{ g.user.email | gravatar }}" title="gravatar" alt="gravatar" />
+        <ul class="infolist">
+            <li>Total marks: {{ mc }} (Bookmarks: {{ bc }}, Feeds: {{ fc }})</li>
+            <li>Last created mark: {{ lcm.created }}</li>
+            <li>Last logon: {{ g.user.last_logged }}</li>
+        </ul>
+        {% if bc %}
+        {% endif %}
+    </section>
     <form action="{{ url_for('profile') }}" method="POST">
         {{form.hidden_tag()}}
-        <section>
-            <ul class="infolist">
-                <li>Total marks: {{ mc }} (Bookmarks: {{ bc }}, Feeds: {{ fc }})</li>
-                <li>Last created mark: {{ lcm.created }}</li>
-                <li>Last logon: {{ g.user.last_logged }}</li>
-            </ul>
-            {% if bc %}
-            {% endif %}
-        </section>
         <section>
             <p>
                 {% for error in form.username.errors %}
