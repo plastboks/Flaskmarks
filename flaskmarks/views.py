@@ -30,7 +30,6 @@ from cryptacular.bcrypt import (
 
 from flaskmarks import (
     app,
-    cache,
     db,
     lm,
 )
@@ -82,7 +81,6 @@ def forbidden(error):
 @app.route('/marks')
 @app.route('/marks/<int:page>')
 @login_required
-@cache.memoize(50)
 def marks(page=1):
     u = g.user
     return render_template('mark/index.html',
@@ -94,7 +92,6 @@ def marks(page=1):
 @app.route('/clicked')
 @app.route('/clicked/<int:page>')
 @login_required
-@cache.memoize(50)
 def recently_clicked(page=1):
     u = g.user
     return render_template('mark/index.html',
@@ -106,7 +103,6 @@ def recently_clicked(page=1):
 @app.route('/recently')
 @app.route('/recently/<int:page>')
 @login_required
-@cache.memoize(50)
 def recently_added(page=1):
     u = g.user
     return render_template('mark/index.html',
@@ -118,7 +114,6 @@ def recently_added(page=1):
 @app.route('/suggestions')
 @app.route('/suggestions/<int:page>')
 @login_required
-@cache.memoize(50)
 def mark_suggestions(page=1):
     u = g.user
     return render_template('mark/index.html',
@@ -172,7 +167,6 @@ def new_mark():
 
 @app.route('/mark/view/<int:id>', methods=['GET'])
 @login_required
-@cache.memoize(50)
 def view_mark(id):
     m = g.user.mid(id)
     if not m:
