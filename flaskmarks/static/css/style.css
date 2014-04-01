@@ -46,6 +46,15 @@ h2 {
     font-size: 1.2em;
 }
 
+h2 .edit {
+    padding-left: 25px;
+    font-size: 0.7em;
+}
+
+h2 .edit a {
+    color: #A2A2A2;
+}
+
 .error {
     padding: 3px;
     background: #FFC7B2;
