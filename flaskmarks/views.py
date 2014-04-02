@@ -63,13 +63,13 @@ def before_request():
 
 @app.errorhandler(401)
 def unauthorized(error):
-    flash('Unauthorized access', category='error')
+    flash('Unauthorized access.', category='error')
     return redirect(url_for('login'))
 
 
 @app.errorhandler(403)
 def forbidden(error):
-    flash('Forbidden access', category='error')
+    flash('Forbidden access.', category='error')
     return redirect(url_for('marks'))
 
 
@@ -128,8 +128,8 @@ def new_mark():
     form = MarkForm()
     if form.validate_on_submit():
         if g.user.murl(form.url.data):
-            flash('Mark with this url (%s) already\
-                  exists' % (form.url.data), category='error')
+            flash('Mark with this url "%s" already\
+                  exists.' % (form.url.data), category='error')
             return redirect(url_for('marks'))
         m = Mark()
         form.populate_obj(m)
@@ -152,7 +152,7 @@ def new_mark():
             m.title = soup.title.string
         db.session.add(m)
         db.session.commit()
-        flash('New mark %s added' % (m.title), category='info')
+        flash('New mark: "%s", added.' % (m.title), category='info')
         return redirect(url_for('marks'))
     if request.args.get('url'):
         form.url.data = request.args.get('url')
@@ -198,13 +198,13 @@ def edit_mark(id):
     if form.validate_on_submit():
         if m.url != form.url.data and g.user.murl(form.url.data):
             flash('Mark with this url (%s) already\
-                  exists' % (form.url.data), category='error')
+                  exists.' % (form.url.data), category='error')
             return redirect(url_for('marks'))
         form.populate_obj(m)
         m.updated = datetime.utcnow()
         db.session.add(m)
         db.session.commit()
-        flash('Mark %s updated' % (form.title.data), category='info')
+        flash('Mark "%s" updated.' % (form.title.data), category='info')
         if form.referrer.data and is_safe_url(form.referrer.data):
             return redirect(form.referrer.data)
         return redirect(url_for('marks'))
@@ -221,7 +221,7 @@ def delete_mark(id):
     if m:
         db.session.delete(m)
         db.session.commit()
-        flash('Mark %s deleted' % (m.title), category='info')
+        flash('Mark "%s" deleted.' % (m.title), category='info')
         return redirect(url_for('marks'))
     abort(403)
 
@@ -299,7 +299,7 @@ def profile():
             del u.password
         db.session.add(u)
         db.session.commit()
-        flash('User %s updated' % (form.username.data), category='info')
+        flash('User "%s" updated.' % (form.username.data), category='info')
         return redirect(url_for('profile'))
     return render_template('account/profile.html',
                            form=form,
@@ -323,7 +323,7 @@ def register():
         u.password = pm.encode(form.password.data)
         db.session.add(u)
         db.session.commit()
-        flash('New user %s registered' % (form.username.data), category='info')
+        flash('New user "%s" registered.' % (form.username.data), category='info')
         return redirect(url_for('login'))
     return render_template('account/register.html',
                            form=form,
@@ -345,12 +345,12 @@ def login():
             u.last_logged = datetime.utcnow()
             db.session.add(u)
             db.session.commit()
-            flash('Successful login request for %s' % (u.username),
+            flash('Welcome %s.' % (u.username),
                   category='info')
             login_user(u, remember=form.remember_me.data)
             return redirect(url_for('marks'))
         else:
-            flash('Failed login request for %s' % (form.username.data),
+            flash('Failed login for %s.' % (form.username.data),
                   category='error')
             return redirect(url_for('login'))
     return render_template('account/login.html',
