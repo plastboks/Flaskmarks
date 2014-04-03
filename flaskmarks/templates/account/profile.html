@@ -7,8 +7,8 @@
         <img src="{{ g.user.email | gravatar }}" title="gravatar" alt="gravatar" />
         <ul class="infolist">
             <li>Total marks: {{ mc }} (Bookmarks: {{ bc }}, Feeds: {{ fc }})</li>
-            <li>Last created mark: {{ lcm.created }}</li>
-            <li>Last logon: {{ g.user.last_logged }}</li>
+            <li>Last created mark: {{ lcm.created | datetime }}</li>
+            <li>Last logon: {{ g.user.last_logged | datetime }}</li>
         </ul>
         {% if bc %}
         {% endif %}

@@ -5,13 +5,16 @@ from hashlib import md5
 
 
 @app.template_filter('date')
-def _jinja2_filter_datetime(date):
-    return date.strftime('%Y-%m-%d')
+def _jinja2_filter_date(dateobj):
+    return dateobj.strftime('%Y-%m-%d')
 
+@app.template_filter('datetime')
+def _jinja2_filter_datetime(dateobj):
+    return dateobj.strftime('%Y-%m-%d %H:%M:%S')
 
 @app.template_filter('datewords')
-def _jinja2_filter_dateinwords(date):
-    return time_ago_in_words(date, round=True, granularity='day')
+def _jinja2_filter_dateinwords(dateobj):
+    return time_ago_in_words(dateobj, round=True, granularity='day')
 
 @app.template_filter('gravatar')
 def _jinja_filter_gravatar(email):
