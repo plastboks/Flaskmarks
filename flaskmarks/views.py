@@ -222,6 +222,8 @@ def delete_mark(id):
         db.session.delete(m)
         db.session.commit()
         flash('Mark "%s" deleted.' % (m.title), category='info')
+        if request.referrer and is_safe_url(request.referrer):
+            return redirect(request.referrer)
         return redirect(url_for('marks'))
     abort(403)
 
