@@ -2,26 +2,29 @@
 {% block content %}
 <section id="view" class="contentbox roundcorner5 shadow4">
     <h2>{{ mark.title }} <span class="edit"><a href="{{ url_for('edit_mark', id=mark.id)}}">Edit</a></span></h2>
-    
     <ul class="feedlist">
     {% for entry in data['entries'] %}
         <li class='entry'>
             <ul>
                 {% for link in entry['links'] %}
                     {% if link['rel'] == 'alternate' or link['rel'] == 'enclosure'%}
-                        <li class='makebookmark'><a href="{{ url_for('new_mark', title=entry['title'], url=link['href']) }}" class="link"></a></li>
-                    {% endif %}
-                {% endfor %}
-                {% for link in entry['links'] %}
-                    {% if link['rel'] == 'alternate' or link['rel'] == 'enclosure'%}
-                        <li class='link'><a href="{{ link['href'] }}" rel="noreferrer" class="link" target="_blank">{{ entry['title'] }}</a></li>
+                        <li class='makebookmark'>
+                            <a href="{{ url_for('new_mark', title=entry['title'], url=link['href']) }}" class="link"></a>
+                        </li>
+                        <li class='link'>
+                            <a href="{{ link['href'] }}" rel="noreferrer" class="link" target="_blank">{{ entry['title'] }}</a>
+                        </li>
                     {% endif %}
                 {% endfor %}
                 <li class='date'>{{ entry['published'] }} / {{ entry['updated'] }}</li>
                 {% if entry['media_thumbnail'] %}
                     {% for link in entry['links'] %}
                         {% if link['rel'] == 'alternate' or link['rel'] == 'enclosure'%}
-                            <li class='image'><a href="{{ link['href'] }}" class="link" rel="noreferrer" target="_blank"><img src='{{ entry['media_thumbnail'][0]['url'] }}' /></a></li>
+                            <li class='image'>
+                                <a href="{{ link['href'] }}" class="link" rel="noreferrer" target="_blank">
+                                    <img src='{{ entry['media_thumbnail'][0]['url'] }}' />
+                                </a>
+                            </li>
                         {% endif %}
                     {% endfor %}
                 {% endif %}
