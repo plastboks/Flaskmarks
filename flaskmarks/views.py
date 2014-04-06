@@ -48,9 +48,9 @@ from models import (
 )
 
 
-################################
-# Preloaders and errorhandlers #
-################################
+#################################
+# Preloaders and error handlers #
+#################################
 @lm.user_loader
 def load_user(id):
     return User.query.get(int(id))
@@ -63,7 +63,10 @@ def before_request():
 
 @app.errorhandler(401)
 def unauthorized(error):
-    flash('Unauthorized access.', category='error')
+    if request.referrer \
+        and is_safe_url(request.referrer) \
+        and request.referrer is not "/":
+        flash('Unauthorized access.', category='error')
     return redirect(url_for('login'))
 
 
@@ -73,9 +76,9 @@ def forbidden(error):
     return redirect(url_for('marks'))
 
 
-#################
+#############
 # Mark CRUD #
-#################
+#############
 @app.route('/')
 @app.route('/index')
 @app.route('/marks')
