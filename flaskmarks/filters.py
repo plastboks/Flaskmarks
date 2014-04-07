@@ -12,6 +12,13 @@ def _jinja2_filter_date(dateobj):
 def _jinja2_filter_datetime(dateobj):
     return dateobj.strftime('%Y-%m-%d %H:%M:%S')
 
+@app.template_filter('datetimestr')
+def _jinja2_filter_datetimestr(datetimestr):
+    date_n_time = datetimestr.split('T')
+    time = date_n_time[1].split('.')
+    return date_n_time[0]+" "+time[0]
+
+
 @app.template_filter('datewords')
 def _jinja2_filter_dateinwords(dateobj):
     return time_ago_in_words(dateobj, round=True, granularity='day')

@@ -16,7 +16,8 @@
                         </li>
                     {% endif %}
                 {% endfor %}
-                <li class='date'>{{ entry['published'] }} / {{ entry['updated'] }}</li>
+                <li class='date'>Published:{{ entry['published'] | datetimestr }}</li>
+                <li class='date'>Updated: {{ entry['updated'] | datetimestr }}</li>
                 {% if entry['media_thumbnail'] %}
                     {% for link in entry['links'] %}
                         {% if link['rel'] == 'alternate' or link['rel'] == 'enclosure'%}
