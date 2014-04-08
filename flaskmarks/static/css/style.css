@@ -503,6 +503,12 @@ header #search label {
     height: 200px;
 }
 
+#content .feedlist li.stats ul li {
+    display: inline;
+    font-size: 0.70em;
+    padding-right: 10px;
+}
+
 /**
  * Profile page
  */

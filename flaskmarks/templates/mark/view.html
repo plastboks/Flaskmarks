@@ -18,6 +18,15 @@
                 {% endfor %}
                 <li class='date'>Published:{{ entry['published'] | datetimestr }}</li>
                 <li class='date'>Updated: {{ entry['updated'] | datetimestr }}</li>
+                {% if 'gdata.youtube.com' in mark.url %}
+                <li class='stats'>
+                    <ul>
+                        <li>VC: {{ entry['yt_statistics']['viewcount'] }}</li>
+                        <li>Favs: {{ entry['yt_statistics']['favoritecount']}}</li>
+                        <li>Duration: {{ entry['media_content'][0]['duration'] | sectomin}} min</li>
+                    </ul>
+                </li>
+                {% endif %}
                 {% if entry['media_thumbnail'] %}
                     {% for link in entry['links'] %}
                         {% if link['rel'] == 'alternate' or link['rel'] == 'enclosure'%}

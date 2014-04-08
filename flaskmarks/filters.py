@@ -18,6 +18,10 @@ def _jinja2_filter_datetimestr(datetimestr):
     time = date_n_time[1].split('.')
     return date_n_time[0]+" "+time[0]
 
+@app.template_filter('sectomin')
+def _jinja_filter_sectomin(sec):
+    return "%.2f" % (float(sec)/60)
+
 
 @app.template_filter('datewords')
 def _jinja2_filter_dateinwords(dateobj):
