@@ -465,7 +465,7 @@ header #search label {
     padding-left: 0;
 }
 
-#content .feedlist ul {
+#content .feedlist ul.entrylist {
     list-style: none;
     margin: 0;
     padding: 2px 0px 4px 2px;
@@ -501,6 +501,12 @@ header #search label {
     padding: 5px 5px;
     float: right;
     height: 200px;
+}
+
+#content .feedlist ul.statslist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 #content .feedlist li.stats ul li {
