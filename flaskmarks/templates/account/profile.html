@@ -6,7 +6,7 @@
     <section id='info'>
         <img src="{{ g.user.email | gravatar }}" title="gravatar" alt="gravatar" />
         <ul class="infolist">
-            <li>Total marks: {{ mc }} (Bookmarks: {{ bc }}, Feeds: {{ fc }})</li>
+            <li>Total marks: {{ bc+fc }} (Bookmarks: {{ bc }}, Feeds: {{ fc }})</li>
             <li>Last created mark: {{ lcm.created | datetime }}</li>
             <li>Last logon: {{ g.user.last_logged | datetime }}</li>
         </ul>

@@ -290,10 +290,6 @@ def ajax_mark_inc():
 @login_required
 def profile():
     u = g.user
-    mc = g.user.mark_count()
-    bc = g.user.bookmark_count()
-    fc = g.user.feed_count()
-    lcm = g.user.mark_last_created()
     form = UserProfileForm(obj=u)
     if form.validate_on_submit():
         form.populate_obj(u)
@@ -309,10 +305,9 @@ def profile():
     return render_template('account/profile.html',
                            form=form,
                            title='Profile',
-                           mc=mc,
-                           bc=bc,
-                           fc=fc,
-                           lcm=lcm,
+                           bc=g.user.bookmark_count(),
+                           fc=g.user.feed_count(),
+                           lcm=g.user.mark_last_created()
                            )
 
 
