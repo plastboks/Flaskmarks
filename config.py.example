@@ -12,3 +12,5 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' +\
 SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 
 CAN_REGISTER = True
+
+DEBUG_MODE = True
