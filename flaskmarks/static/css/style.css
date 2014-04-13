@@ -359,7 +359,7 @@ header #search label {
 
 
 #content {
-    width: 730px;
+    width: 770px;
     float: right;
     padding-bottom: 10px;
 }
@@ -389,13 +389,13 @@ header #search label {
 #sidebar {
     clear: both;
     float: left;
-    width: 170px;
+    width: 130px;
 }
 
 #sidebar ul {
     list-style: none;
     margin-left: 0;
-    padding-left: 10px;
+    padding-left: 15px;
 }
 
 #sidebar ul li {
@@ -446,6 +446,9 @@ header #search label {
     background: #FAFAFA url('../icons/bullet_orange.png') no-repeat 0px 0px;
     font-size: 0.90em;
     font-weight: 300;
+}
+#submenu ul li:nth-child(1) {
+    margin-left: 0px;
 }
 
 #submenu ul li:nth-child(5) {
