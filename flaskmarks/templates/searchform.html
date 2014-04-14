@@ -1,7 +1,7 @@
 <form action="/search" method="GET">
     <label for="q">
         Search:
-        <input id="q" name="q" value="{{ request.args['q'] }}" type="text" class="roundcorner5" placeholder='Keyword'/><br />
+        <input id="q" name="q" value="{{ request.args['q'] }}" type="text" class="roundcorner5 shadow4" placeholder='Keyword'/><br />
     </label>
     <div class="hidden">
         <input name="type" value="bookmark" type="radio" id="bookmarkstype" {{ 'checked' if request.args['type'] == 'bookmark' else ''}} />
