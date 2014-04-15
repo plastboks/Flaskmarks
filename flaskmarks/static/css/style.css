@@ -383,6 +383,14 @@ header #search label {
     font-style: italic;
 }
 
+.description-small {
+    margin: 0px;
+    padding: 0px;
+    color: dimgray;
+    font-size: 0.70em;
+    font-style: italic;
+}
+
 /**
  * Sidebar.
  */
