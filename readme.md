@@ -50,7 +50,8 @@ Deploy
 
 Credits
 =======
-This app is heavily inspired by the flaks sqlalchemy tutorial @ http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world. Icons used in this app is mainly from the FamFamFam icon package 'Silk Icons' (http://www.famfamfam.com/lab/icons/silk/)
+This app is heavily inspired by the flaks sqlalchemy tutorial @ [link](http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world).
+Icons used in this app is mainly from the FamFamFam icon package 'Silk Icons' [link](http://www.famfamfam.com/lab/icons/silk/)
 
 Branches
 ========
@@ -61,8 +62,8 @@ merged into master is as stable as possible (given the small size of this applic
 
 Useful Links
 ============
-* http://pythonhosted.org/Flask-Principal/
-* http://pythonhosted.org/Flask-SQLAlchemy/
-* http://jinja.pocoo.org/
-* http://jinja.pocoo.org/docs/templates/#builtin-filters
-* http://flask.pocoo.org/mailinglist/archive/2011/11/17/change-request-s-http-referer-header/#fc7dc5b7a1682ccbb4947a8013987761
+* [Flask Principal](http://pythonhosted.org/Flask-Principal/)
+* [Flask SQLAlchemy](http://pythonhosted.org/Flask-SQLAlchemy/)
+* [Jinja](http://jinja.pocoo.org/)
+* [Filters](http://jinja.pocoo.org/docs/templates/#builtin-filters)
+* [Flask and https](http://flask.pocoo.org/mailinglist/archive/2011/11/17/change-request-s-http-referer-header/#fc7dc5b7a1682ccbb4947a8013987761)
