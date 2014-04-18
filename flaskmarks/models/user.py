@@ -31,6 +31,9 @@ class User(db.Model):
     def my(self):
         return Mark.query.filter(Mark.owner_id == self.id)
 
+    def all_marks(self):
+        return self.my().all()
+
     def suggestions(self, page):
         base = self.my().filter(Mark.clicks == 0)\
                         .order_by(func.random())

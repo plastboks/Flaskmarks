@@ -125,6 +125,18 @@ def mark_suggestions(page=1):
                            marks=u.suggestions(page))
 
 
+@app.route('/popular_tags')
+@app.route('/popular_tags/<int:page>')
+@login_required
+def popular_tags(page=1):
+    u = g.user
+    m = u.all_marks()
+    return render_template('mark/popular_tags.html',
+                           title='Popular Tags - page %d' % page,
+                           header='',
+                           marks=m)
+
+
 @app.route('/mark/new', methods=['GET', 'POST'])
 @login_required
 def new_mark():
