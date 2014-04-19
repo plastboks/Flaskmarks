@@ -142,7 +142,7 @@ def popular_tags(page=1):
 def new_mark():
     form = MarkForm()
     if form.validate_on_submit():
-        if g.user.murl(form.url.data):
+        if g.user.q_marks_by_url(form.url.data):
             flash('Mark with this url "%s" already\
                   exists.' % (form.url.data), category='error')
             return redirect(url_for('marks'))
@@ -183,7 +183,7 @@ def new_mark():
 @app.route('/mark/view/<int:id>', methods=['GET'])
 @login_required
 def view_mark(id):
-    m = g.user.mid(id)
+    m = g.user.get_mark_by_id(id)
     if not m:
         abort(403)
     if m.type != 'feed':
@@ -206,12 +206,12 @@ def view_mark(id):
 @app.route('/mark/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
 def edit_mark(id):
-    m = g.user.mid(id)
+    m = g.user.get_mark_by_id(id)
     form = MarkForm(obj=m)
     if not m:
         abort(403)
     if form.validate_on_submit():
-        if m.url != form.url.data and g.user.murl(form.url.data):
+        if m.url != form.url.data and g.user.q_marks_by_url(form.url.data):
             flash('Mark with this url (%s) already\
                   exists.' % (form.url.data), category='error')
             return redirect(url_for('marks'))
@@ -232,7 +232,7 @@ def edit_mark(id):
 @app.route('/mark/delete/<int:id>')
 @login_required
 def delete_mark(id):
-    m = g.user.mid(id)
+    m = g.user.get_mark_by_id(id)
     if m:
         db.session.delete(m)
         db.session.commit()
@@ -250,7 +250,7 @@ def delete_mark(id):
 @app.route('/mark/tag/<slug>/<int:page>')
 @login_required
 def mark_q_tag(slug, page=1):
-    m = g.user.tag(slug, page)
+    m = g.user.q_marks_by_tag(slug, page)
     return render_template('mark/index.html',
                            title='Marks with tag: %s' % (slug),
                            header='Marks with tag: %s' % (slug),
@@ -267,7 +267,7 @@ def search_string(page=1):
     if not q and not t:
         return redirect(url_for('marks'))
 
-    m = g.user.string(page, q, t)
+    m = g.user.q_marks_by_string(page, q, t)
     return render_template('mark/index.html',
                            title='Search results for: %s' % (q),
                            header="Search results for: '%s'" % (q),
@@ -282,7 +282,7 @@ def search_string(page=1):
 def ajax_mark_inc():
     if request.args.get('id'):
         id = int(request.args.get('id'))
-        m = g.user.mid(id)
+        m = g.user.get_mark_by_id(id)
         if m:
             if not m.clicks:
                 m.clicks = 0
@@ -317,8 +317,8 @@ def profile():
     return render_template('account/profile.html',
                            form=form,
                            title='Profile',
-                           bc=g.user.bookmark_count(),
-                           fc=g.user.feed_count(),
+                           bc=g.user.get_bookmark_count(),
+                           fc=g.user.get_feed_count(),
                            lcm=g.user.mark_last_created()
                            )
 

@@ -60,31 +60,28 @@ class User(db.Model):
             base = base.order_by(desc(Mark.created))
         return base.paginate(page, self.per_page, False)
 
-    def mid(self, id):
+    def get_mark_by_id(self, id):
         return self.my().filter(Mark.id == id)\
                         .first()
 
-    def murl(self, string):
-        return self.my().filter(Mark.url == string)\
-                        .first()
-
-    def mark_count(self):
-        return self.my().count()
-
-    def bookmark_count(self):
+    def get_bookmark_count(self):
         return self.my().filter(Mark.type == 'bookmark').count()
 
-    def feed_count(self):
+    def get_feed_count(self):
         return self.my().filter(Mark.type == 'feed').count()
 
     def mark_last_created(self):
         return self.my().order_by(desc(Mark.created)).first()
 
-    def tag(self, tag, page):
+    def q_marks_by_tag(self, tag, page):
         return Mark.by_tag(page, self.id, self.per_page, tag)
 
-    def string(self, page, string, marktype):
+    def q_marks_by_string(self, page, string, marktype):
         return Mark.by_string(page, self.id, self.per_page, string, marktype)
+
+    def q_marks_by_url(self, string):
+        return self.my().filter(Mark.url == string)\
+                        .first()
 
     def authenticate_user(self, password):
         manager = BCRYPTPasswordManager()
