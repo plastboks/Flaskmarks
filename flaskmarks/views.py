@@ -225,6 +225,7 @@ def edit_mark(id):
         return redirect(url_for('marks'))
     form.referrer.data = request.referrer
     return render_template('mark/edit.html',
+                           mark = m,
                            title='Edit mark - %s' % m.title,
                            form=form)
 
@@ -237,8 +238,8 @@ def delete_mark(id):
         db.session.delete(m)
         db.session.commit()
         flash('Mark "%s" deleted.' % (m.title), category='info')
-        if request.referrer and is_safe_url(request.referrer):
-            return redirect(request.referrer)
+        #if request.referrer and is_safe_url(request.referrer):
+        #    return redirect(request.referrer)
         return redirect(url_for('marks'))
     abort(403)
 

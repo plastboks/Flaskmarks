@@ -25,9 +25,7 @@
                     {% else %}
                         <span class="neverclick">never</span>
                     {% endif %}
-                    <span class="action clone"><a href="{{ url_for('new_mark', url=mark.url, type=mark.type) }}">clone</a></span>
                     <span class="action edit"><a href="{{ url_for('edit_mark', id=mark.id) }}">edit</a></span>
-                    <span class="action delete"><a href="{{ url_for('delete_mark', id=mark.id) }}">delete</a></span>
                 </li>
                 <li class="column clicks">
                     <span>{{ mark.clicks }}</span>
