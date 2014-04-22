@@ -207,6 +207,28 @@ header #search label {
     margin-bottom: 20px;
 }
 
+.contentbox ul.actions {
+    padding: 0px 0px 10px 0px;
+    margin: 0;
+    font-size: 0.7em;
+}
+
+.contentbox ul.actions li {
+    display: inline;
+    padding-right: 5px;
+}
+
+.contentbox ul.actions li a {
+    padding: 5px;
+    border: 1px solid #B8B8C8;
+    background: #E6E6EF;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 2px 7px #D3D3D3;
+    box-shadow: 0 2px 7px #D3D3D3;
+}
+
 .markslist {
     font-size: 0.9em;
 }

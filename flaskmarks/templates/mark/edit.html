@@ -2,7 +2,7 @@
 {% block content %}
 <section id="edit" class="markform contentbox shadow4 roundcorner5">
     <h2>Edit Bookmark - {{ mark.title }}</h2>
-    <ul>
+    <ul class="actions">
         <li><span class="action clone"><a href="{{ url_for('new_mark', url=mark.url, type=mark.type) }}">Clone to new</a></span></li>
         <li><span class="action delete"><a href="{{ url_for('delete_mark', id=mark.id) }}">Delete</a></span></li>
     </ul>
