@@ -521,8 +521,9 @@ header #search label {
 }
 
 #content .feedlist ul .date {
-    font-size: 0.6em;
-    color: #D3D3D3;
+    font-size: 0.65em;
+    padding: 2px 0px;
+    color: mediumvioletred;
 }
 
 #content .feedlist ul .summary {
