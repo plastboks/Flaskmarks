@@ -17,7 +17,6 @@
                     {% endif %}
                 {% endfor %}
                 <li class='date'>Published:{{ entry['published'] | datetimestr }}</li>
-                <li class='date'>Updated: {{ entry['updated'] | datetimestr }}</li>
                 {% if 'gdata.youtube.com' in mark.url %}
                 <li class='stats'>
                     <ul class='statslist'>
