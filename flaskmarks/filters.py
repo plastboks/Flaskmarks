@@ -22,6 +22,10 @@ def _jinja2_filter_datetimestr(datetimestr):
 def _jinja_filter_sectomin(sec):
     return "%.2f" % (float(sec)/60)
 
+@app.template_filter('thousandsep')
+def _jinja_filter_sectomin(arg):
+    return '{0:,}'.format(int(arg))
+
 
 @app.template_filter('datewords')
 def _jinja2_filter_dateinwords(dateobj):
