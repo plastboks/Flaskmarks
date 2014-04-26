@@ -215,18 +215,12 @@ header #search label {
 
 .contentbox ul.actions li {
     display: inline;
-    padding-right: 5px;
+    padding-left: 10px;
+    background: #FAFAFA url('../icons/bullet_orange.png') no-repeat 0px -2px;
 }
 
 .contentbox ul.actions li a {
     padding: 5px;
-    border: 1px solid #B8B8C8;
-    background: #E6E6EF;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    -webkit-box-shadow: 0 2px 7px #D3D3D3;
-    box-shadow: 0 2px 7px #D3D3D3;
 }
 
 .markslist {
