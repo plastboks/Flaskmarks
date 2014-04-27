@@ -53,7 +53,6 @@ Deploy
 Credits
 =======
 This app is heavily inspired by the flaks sqlalchemy tutorial @ [link](http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world).
-Icons used in this app is mainly from the FamFamFam icon package 'Silk Icons' [link](http://www.famfamfam.com/lab/icons/silk/)
 
 Branches
 ========
@@ -61,6 +60,10 @@ There will at any given point be at least two branches in this repository. One
 master (stable) branch, and one develop branch. The develop branch might contain
 unfinished code and/or wonky solutions. I will strive to make sure that code 
 merged into master is as stable as possible (given the small size of this application).
+
+Included software
+* [jQuery](http://jquery.com)
+* [Some FamFamFam icons](http://www.famfamfam.com/lab/icons/silk/)
 
 Useful Links
 ============
