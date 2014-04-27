@@ -3,7 +3,6 @@ from datetime import datetime
 from webhelpers2.date import time_ago_in_words
 from hashlib import md5
 
-
 @app.template_filter('date')
 def _jinja2_filter_date(dateobj):
     return dateobj.strftime('%Y-%m-%d')
@@ -26,6 +25,13 @@ def _jinja_filter_sectomin(sec):
 def _jinja_filter_sectomin(arg):
     return '{0:,}'.format(int(arg))
 
+@app.template_filter('datewordsstr')
+def _jinja2_filter_dateinwordsstr(datetimestr):
+    date_n_time = datetimestr.split('T')
+    time = date_n_time[1].split('.')
+    date = date_n_time[0]+" "+time[0]
+    dateobj = datetime.strptime(date, "%Y-%m-%d %H:%M:%S")
+    return time_ago_in_words(dateobj, round=True, granularity='day')
 
 @app.template_filter('datewords')
 def _jinja2_filter_dateinwords(dateobj):
