@@ -2,7 +2,7 @@
 {% block content %}
 <section id="content">
 <section class="contentbox markform roundcorner5 shadow4 clear">
-    <h2>Profile - {{ g.user.username }}</h2>
+    <h2>Profile - {{ g.user.username }} ({{ g.user.email }})</h2>
     <section id='info'>
         <img src="{{ g.user.email | gravatar }}" title="gravatar" alt="gravatar" class="shadow4 roundcorner5"/>
         <ul class="infolist">
