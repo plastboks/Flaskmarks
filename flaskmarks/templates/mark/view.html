@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 <section id='view' class='contentbox roundcorner5 shadow4'>
-    <h2>{{ mark.title|truncate(70) }} <span class='edit'><a href='{{ url_for('edit_mark', id=mark.id)}}'>Edit</a></span></h2>
+    <nav id='toolbox'>
+        <ul>
+            <li><a href='{{ url_for('edit_mark', id=mark.id)}}'>Edit</a></li>
+        </ul>
+    </nav>
+    <h2>{{ mark.title|truncate(70) }}</h2>
     <ul class='feedlist'>
     {% for entry in data['entries'] %}
         <li class='entry'>

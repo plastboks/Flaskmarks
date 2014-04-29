@@ -375,10 +375,29 @@ header #search label {
 
 
 #content {
+    position: relative;
     width: 770px;
     float: right;
     padding-bottom: 10px;
 }
+
+#content #toolbox {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    -webkit-border-radius: 0px 5px 0px 5px;
+    -moz-border-radius: 0px 5px 0px 5px;
+    border-radius: 0px 5px 0px 5px;
+    background: #FFD0E9;
+    border: 1px solid #CCC;
+}
+
+#content #toolbox ul {
+    list-style: none;
+    margin: 0px;
+    padding: 5px;
+}
+
 
 #paginate {
     font-size: 0.7em;
