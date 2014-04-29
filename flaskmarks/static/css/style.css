@@ -390,6 +390,7 @@ header #search label {
     border-radius: 0px 5px 0px 5px;
     background: #FFD0E9;
     border: 1px solid #CCC;
+    font-size: 0.7em;
 }
 
 #content #toolbox ul {
@@ -398,6 +399,10 @@ header #search label {
     padding: 5px;
 }
 
+#content #toolbox ul li {
+    display: inline;
+    padding: 0px 5px;
+}
 
 #paginate {
     font-size: 0.7em;
