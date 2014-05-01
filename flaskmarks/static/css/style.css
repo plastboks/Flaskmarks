@@ -388,7 +388,7 @@ header #search label {
     -webkit-border-radius: 0px 5px 0px 5px;
     -moz-border-radius: 0px 5px 0px 5px;
     border-radius: 0px 5px 0px 5px;
-    background: #FFD0E9;
+    background: #e1e1e9;
     border: 1px solid #CCC;
     font-size: 0.7em;
 }
@@ -402,6 +402,16 @@ header #search label {
 #content #toolbox ul li {
     display: inline;
     padding: 0px 5px;
+}
+#content #toolbox ul li:not(:last-child) {
+    border-right: 1px solid #c1c1c9;
+}
+
+#content #toolbox ul li a {
+    font-weight: 100;
+}
+#content #toolbox ul li a:hover {
+    font-weight: 500;
 }
 
 #paginate {
