@@ -23,11 +23,13 @@
                 {% endfor %}
                 <li class='stats'>
                     <ul class='statslist'>
-                        <li class='date'>{{ entry['published'] | datewordsstr }} ago</li>
                         {% if 'gdata.youtube.com' in mark.url %}
-                        <li class='viewcount'>{{ entry['yt_statistics']['viewcount'] | thousandsep }} views</li>
-                        <li class='votes'>{{ entry['gd_rating']['numraters'] | thousandsep }} &hearts;</li>
-                        <li class='duration'>{{ entry['yt_duration']['seconds'] | sectomin}} min</li>
+                            <li class='date'>{{ entry['published'] | datewordsstr }} ago</li>
+                            <li class='viewcount'>{{ entry['yt_statistics']['viewcount'] | thousandsep }} views</li>
+                            <li class='votes'>{{ entry['gd_rating']['numraters'] | thousandsep }} &hearts;</li>
+                            <li class='duration'>{{ entry['yt_duration']['seconds'] | sectomin}} min</li>
+                        {% else %}
+                            <li class='date'>{{ entry['published'] }}</li>
                         {% endif %}
                     </ul>
                 </li>
