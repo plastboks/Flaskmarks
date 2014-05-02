@@ -25,8 +25,12 @@
                     <ul class='statslist'>
                         {% if 'gdata.youtube.com' in mark.url %}
                             <li class='date'>{{ entry['published'] | datewordsstr }} ago</li>
-                            <li class='viewcount'>{{ entry['yt_statistics']['viewcount'] | thousandsep }} views</li>
-                            <li class='votes'>{{ entry['gd_rating']['numraters'] | thousandsep }} &hearts;</li>
+                            {% if entry['yt_statistics'] %}
+                                <li class='viewcount'>{{ entry['yt_statistics']['viewcount'] | thousandsep }} views</li>
+                            {% endif %}
+                            {% if entry['gd_rating'] %}
+                                <li class='votes'>{{ entry['gd_rating']['numraters'] | thousandsep }} &hearts;</li>
+                            {% endif %}
                             <li class='duration'>{{ entry['yt_duration']['seconds'] | sectomin}} min</li>
                         {% else %}
                             <li class='date'>{{ entry['published'] }}</li>
