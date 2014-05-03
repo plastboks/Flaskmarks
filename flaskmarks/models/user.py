@@ -17,8 +17,6 @@ class User(db.Model):
     password = db.Column(db.Unicode(255), nullable=False)
     last_logged = db.Column(db.DateTime)
     per_page = db.Column(db.SmallInteger, default=10)
-    suggestion = db.Column(db.SmallInteger, default=1)
-    recently = db.Column(db.SmallInteger, default=2)
     sort_type = db.Column(db.Unicode(255), default=u'clicks')
 
     marks = db.relationship('Mark', backref='owner', lazy='dynamic')

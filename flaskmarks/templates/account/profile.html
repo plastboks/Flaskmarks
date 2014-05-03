@@ -45,16 +45,6 @@
         </section>
         <section>
             <p>
-                {% for error in form.suggestion.errors %}
-                    <p class="error">{{ error }}</p>
-                {% endfor %}
-                {{ form.suggestion() }}
-                {% for error in form.recently.errors %}
-                    <p class="error">{{ error }}</p>
-                {% endfor %}
-                {{ form.recently() }}
-            </p>
-            <p>
                 {% for error in form.per_page.errors %}
                     <p class="error">{{ error }}</p>
                 {% endfor %}
