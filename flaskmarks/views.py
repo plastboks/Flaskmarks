@@ -114,17 +114,6 @@ def recently_added(page=1):
                            marks=u.recent(page, 'added'))
 
 
-@app.route('/suggestions')
-@app.route('/suggestions/<int:page>')
-@login_required
-def mark_suggestions(page=1):
-    u = g.user
-    return render_template('mark/index.html',
-                           title='Marks - page %d' % page,
-                           header='',
-                           marks=u.suggestions(page))
-
-
 @app.route('/popular_tags')
 @app.route('/popular_tags/<int:page>')
 @login_required

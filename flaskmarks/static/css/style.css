@@ -509,7 +509,7 @@ header #search label {
     margin-left: 0px;
 }
 
-#submenu ul li:nth-child(5) {
+#submenu ul li:nth-child(4) {
     background: #FAFAFA url('../icons/bullet_add.png') no-repeat 0px 0px;
 }
 

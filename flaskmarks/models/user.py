@@ -34,11 +34,6 @@ class User(db.Model):
     def all_marks(self):
         return self.my().all()
 
-    def suggestions(self, page):
-        base = self.my().filter(Mark.clicks == 0)\
-                        .order_by(func.random())
-        return base.paginate(page, self.per_page, False)
-
     def recent(self, page, type):
         if type == 'added':
             base = self.my().order_by(desc(Mark.created))
