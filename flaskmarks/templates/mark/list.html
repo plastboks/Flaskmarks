@@ -25,7 +25,7 @@
                     {% else %}
                         <span class="neverclick">never</span>
                     {% endif %}
-                    <span class="action edit"><a href="{{ url_for('edit_mark', id=mark.id) }}">edit</a></span>
+                    <span class="action edit"><a href="{{ url_for('edit_mark', id=mark.id) }}" title='Edit'>edit</a></span>
                 </li>
                 <li class="column clicks">
                     <span>{{ mark.clicks }}</span>
