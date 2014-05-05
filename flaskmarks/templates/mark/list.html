@@ -18,6 +18,8 @@
                         {% for w in mark.tags.split(' ') %}
                             <a href="{{ url_for('mark_q_tag', slug=w) }}" class="tag">{{ w }}</a>
                         {% endfor %}
+                    {% else %}
+                        <span class='notags'>no tags</span>
                     {% endif %}
                     <span class="lastvisit">last visit:</span>
                     {% if mark.last_clicked %}
