@@ -272,6 +272,11 @@ header #search label {
     color: mediumvioletred;
 }
 
+.markslist .title .notags {
+    font-size: 0.75em;
+    color: #DCDCDC;
+}
+
 .markslist .title a.link {
     color: lightslategray;
 }
@@ -300,7 +305,11 @@ header #search label {
 }
 
 .markslist span.edit a {
-    color: #DCDCDC;
+    color: #CCC;
+}
+
+.markslist span.edit a:hover {
+    color: #555;
 }
 
 .markslist span.delete a {
