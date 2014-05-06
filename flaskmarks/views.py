@@ -325,10 +325,13 @@ def register():
         pm = bMan()
         form.populate_obj(u)
         u.password = pm.encode(form.password.data)
-        db.session.add(u)
-        db.session.commit()
-        flash('New user "%s" registered.' % (form.username.data), category='info')
-        return redirect(url_for('login'))
+        try:
+            db.session.add(u)
+            db.session.commit()
+            flash('New user "%s" registered.' % (form.username.data), category='info')
+            return redirect(url_for('login'))
+        except Exception as detail:
+            flash('Problem registering "%s".' % (form.username.data), category='error')
     return render_template('account/register.html',
                            form=form,
                            title='Register',
