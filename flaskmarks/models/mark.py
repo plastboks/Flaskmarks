@@ -12,6 +12,11 @@ association_table = db.Table('mark_tags', db.metadata,
     db.Column('right_id', db.Integer, db.ForeignKey('tags.id'))
 )
 
+association_table = db.Table('mark_meta', db.metadata,
+    db.Column('left_id', db.Integer, db.ForeignKey('meta.id')),
+    db.Column('right_id', db.Integer, db.ForeignKey('tags.id'))
+)
+
 
 class Mark(db.Model):
     __tablename__ = 'marks'
@@ -27,6 +32,10 @@ class Mark(db.Model):
     updated = db.Column(db.DateTime)
 
     ass_tags = relationship('Tag',
+                            secondary=association_table,
+                            backref='marks')
+
+    ass_meta = relationship('Meta',
                             secondary=association_table,
                             backref='marks')
 
