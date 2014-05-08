@@ -6,11 +6,11 @@ from sqlalchemy import (
 )
 
 
-class Tag(db.Model):
+class Meta(db.Model):
     __tablename__ = 'meta'
     id = db.Column(db.Integer, primary_key=True)
     key = db.Column(db.Unicode(255), nullable=False)
     value = db.Column(db.Unicode(255), nullable=False)
 
     def __repr__(self):
-        return '<Tag %r>' % (self.title)
+        return '<Meta %r>' % (self.title)
