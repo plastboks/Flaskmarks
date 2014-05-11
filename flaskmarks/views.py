@@ -130,6 +130,9 @@ def popular_tags(page=1):
 @login_required
 def new_mark():
     form = MarkForm()
+    """
+    POST
+    """
     if form.validate_on_submit():
         if g.user.q_marks_by_url(form.url.data):
             flash('Mark with this url "%s" already\
@@ -160,6 +163,9 @@ def new_mark():
         db.session.commit()
         flash('New mark: "%s", added.' % (m.title), category='info')
         return redirect(url_for('marks'))
+    """
+    GET
+    """
     if request.args.get('url'):
         form.url.data = request.args.get('url')
     if request.args.get('title'):

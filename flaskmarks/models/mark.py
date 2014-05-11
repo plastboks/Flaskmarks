@@ -5,15 +5,10 @@ from sqlalchemy import (
     desc,
 )
 from sqlalchemy.orm import relationship
-
+from flaskmarks.models.meta import Meta
 
 association_table = db.Table('mark_tags', db.metadata,
     db.Column('left_id', db.Integer, db.ForeignKey('marks.id')),
-    db.Column('right_id', db.Integer, db.ForeignKey('tags.id'))
-)
-
-association_table = db.Table('mark_meta', db.metadata,
-    db.Column('left_id', db.Integer, db.ForeignKey('meta.id')),
     db.Column('right_id', db.Integer, db.ForeignKey('tags.id'))
 )
 
@@ -31,11 +26,8 @@ class Mark(db.Model):
     created = db.Column(db.DateTime)
     updated = db.Column(db.DateTime)
 
+    metas = relationship('Meta', backref='mark', lazy='dynamic')
     ass_tags = relationship('Tag',
-                            secondary=association_table,
-                            backref='marks')
-
-    ass_meta = relationship('Meta',
                             secondary=association_table,
                             backref='marks')
 
