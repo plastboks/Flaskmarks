@@ -45,6 +45,7 @@ from models import (
     User,
     Mark,
     Tag,
+    Meta
 )
 
 
