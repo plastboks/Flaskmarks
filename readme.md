@@ -10,11 +10,13 @@ Features
 Thoughts and future
 ===================
 After using this app daily for some time now, I have come to realize that some more functions might be handy.
+* Classify the views, and cleanup code!
 * Separate Youtube type for expanding the features in the feed view. Features like pages etc. Also for easier youtube feedmark creations.
+* Meta system for extending marks with custom data (e.g youtube feeds args etc).
 * Tag cloud.
 * Notes with revisions (from pulpy).
 * Calendar
-* Tags for all object types (revisions?)
+* Tags for all object types.
 
 Install
 =======
