@@ -1,8 +1,8 @@
 <nav id="submenu" class='shadow4 roundcorner5'>
     <ul class="secondarymenu">
-            <li><a href="{{ url_for('marks') }}" class="{% if request.url_rule.rule == url_for('marks') %}active{% endif %}">All</a></li>
-            <li><a href="{{ url_for('recently_clicked') }}" class="{% if request.url_rule.rule == url_for('recently_clicked') %}active{% endif %}">Recently clicked</a></li>
-            <li><a href="{{ url_for('recently_added') }}" class="{% if request.url_rule.rule == url_for('recently_added') %}active{% endif %}">Recently added</a></li>
-            <li><a href="{{ url_for('new_mark') }}" class="{% if request.url_rule.rule == url_for('new_mark') %}active{% endif %}">New mark</a></li>
+            <li><a href="{{ url_for('marks') }}" class="{% if request.url_rule.rule in url_for('marks') %}active{% endif %}">All</a></li>
+            <li><a href="{{ url_for('recently_clicked') }}" class="{% if request.url_rule.rule in url_for('recently_clicked') %}active{% endif %}">Recently clicked</a></li>
+            <li><a href="{{ url_for('recently_added') }}" class="{% if request.url_rule.rule in url_for('recently_added') %}active{% endif %}">Recently added</a></li>
+            <li><a href="{{ url_for('new_mark') }}" class="{% if request.url_rule.rule in url_for('new_mark') %}active{% endif %}">New mark</a></li>
     </ul>
 </nav>
