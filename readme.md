@@ -7,16 +7,10 @@ Features
 "Flaskmarks" is a small and neat mark managing application. Its purpose is to be a all-in-one bookmark and RSS feed repository. Storing all bookmarks and RSS feeds in one place, makes them accessible from all platforms and devices. This is by no means an original idea, but this is an interpretation of the problem.
 
 
-Thoughts and future
+Pending Tasks
 ===================
-After using this app daily for some time now, I have come to realize that some more functions might be handy.
-* Classify the views, and cleanup code!
-* Separate Youtube type for expanding the features in the feed view. Features like pages etc. Also for easier youtube feedmark creations.
-* Meta system for extending marks with custom data (e.g youtube feeds args etc).
-* Tag cloud.
-* Notes with revisions (from pulpy).
-* Calendar
-* Tags for all object types.
+Please refer TODO.md
+
 
 Install
 =======
