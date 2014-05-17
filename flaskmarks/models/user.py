@@ -40,7 +40,7 @@ class User(db.Model):
             base = self.my().filter(Mark.clicks > 0)\
                             .order_by(desc(Mark.last_clicked))
             return base.paginate(page, self.per_page, False)
-        return False;
+        return False
 
     def marks(self, page):
         base = self.my()

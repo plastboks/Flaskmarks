@@ -7,10 +7,10 @@ from sqlalchemy import (
 from sqlalchemy.orm import relationship
 from flaskmarks.models.meta import Meta
 
-association_table = db.Table('mark_tags', db.metadata,
-    db.Column('left_id', db.Integer, db.ForeignKey('marks.id')),
-    db.Column('right_id', db.Integer, db.ForeignKey('tags.id'))
-)
+a_table = db.Table('mark_tags', db.metadata,
+                   db.Column('left_id', db.Integer, db.ForeignKey('marks.id')),
+                   db.Column('right_id', db.Integer, db.ForeignKey('tags.id'))
+                   )
 
 
 class Mark(db.Model):
@@ -28,7 +28,7 @@ class Mark(db.Model):
 
     metas = relationship('Meta', backref='mark', lazy='dynamic')
     ass_tags = relationship('Tag',
-                            secondary=association_table,
+                            secondary=a_table,
                             backref='marks')
 
     @classmethod

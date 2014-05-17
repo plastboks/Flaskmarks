@@ -1,4 +1,4 @@
-## @package flaskmarks
+# @package flaskmarks
 #
 # @version 0.12
 #
@@ -17,14 +17,25 @@ app = Flask(__name__)
 app.config.from_object('config')
 config = app.config
 
-# Debug mode
+"""
+Debug mode
+"""
 app.debug = config['DEBUG_MODE']
-# Toolbar
+
+"""
+Toolbar
+"""
 toolbar = DebugToolbarExtension(app)
-# Login manager
+
+"""
+Login manager
+"""
 lm = LoginManager()
 lm.init_app(app)
-# Database ORM
+
+"""
+Database ORM
+"""
 db = SQLAlchemy(app)
 
 from flaskmarks import (

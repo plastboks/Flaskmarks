@@ -66,7 +66,7 @@ def before_request():
 def unauthorized(error):
     if request.referrer \
         and is_safe_url(request.referrer) \
-        and request.referrer is not "/":
+            and request.referrer is not "/":
         flash('Unauthorized access.', category='error')
     return redirect(url_for('login'))
 
@@ -149,13 +149,12 @@ def new_mark():
                         .lower()
             """ Testing ass tags """
             ass_tags = []
-            for t in form.tags.data.strip().replace(',',' ').split(' '):
+            for t in form.tags.data.strip().replace(',', ' ').split(' '):
                 # Check for existing tags
                 # Create new instance of a Tag()
                 tag = Tag()
                 tag.title = t
                 db.session.add(tag)
-            
         m.clicks = 0
         if not form.title.data:
             soup = BSoup(urlopen(form.url.data))
@@ -223,9 +222,10 @@ def edit_mark(id):
         return redirect(url_for('marks'))
     form.referrer.data = request.referrer
     return render_template('mark/edit.html',
-                           mark = m,
+                           mark=m,
                            title='Edit mark - %s' % m.title,
-                           form=form)
+                           form=form
+                           )
 
 
 @app.route('/mark/delete/<int:id>')
@@ -236,8 +236,10 @@ def delete_mark(id):
         db.session.delete(m)
         db.session.commit()
         flash('Mark "%s" deleted.' % (m.title), category='info')
-        #if request.referrer and is_safe_url(request.referrer):
-        #    return redirect(request.referrer)
+        """
+        if request.referrer and is_safe_url(request.referrer):
+            return redirect(request.referrer)
+        """
         return redirect(url_for('marks'))
     abort(403)
 
@@ -335,10 +337,12 @@ def register():
         try:
             db.session.add(u)
             db.session.commit()
-            flash('New user "%s" registered.' % (form.username.data), category='info')
+            flash('New user "%s" registered.'
+                  % (form.username.data), category='info')
             return redirect(url_for('login'))
         except Exception as detail:
-            flash('Problem registering "%s".' % (form.username.data), category='error')
+            flash('Problem registering "%s".'
+                  % (form.username.data), category='error')
     return render_template('account/register.html',
                            form=form,
                            title='Register',
