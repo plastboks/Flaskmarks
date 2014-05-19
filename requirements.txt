@@ -11,6 +11,6 @@ sqlalchemy-migrate
 WebHelpers2>=2.0b3
 flask-wtf
 wtforms
-flup
+#flup
 pep8
 feedparser
