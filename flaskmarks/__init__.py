@@ -10,6 +10,8 @@
 
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.script import Manager
+from flask.ext.migrate import Migrate, MigrateCommand
 from flask.ext.login import LoginManager
 from flask_debugtoolbar import DebugToolbarExtension
 
@@ -37,6 +39,17 @@ lm.init_app(app)
 Database ORM
 """
 db = SQLAlchemy(app)
+
+"""
+DB migration
+"""
+migrate = Migrate(app, db)
+
+"""
+Manager
+"""
+manager = Manager(app)
+manager.add_command('db', MigrateCommand)
 
 from flaskmarks import (
     views,

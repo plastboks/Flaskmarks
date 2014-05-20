@@ -37,7 +37,7 @@ nosetests.xml
 
 # app spesific ignores
 config.py
-db_repository
+migrations
 uwsgi.ini
 
 # database spesific ignores

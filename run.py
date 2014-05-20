@@ -1,3 +1,4 @@
-from flaskmarks import app
+from flaskmarks import manager
 
-app.run()
+if __name__ == '__main__':
+    manager.run()

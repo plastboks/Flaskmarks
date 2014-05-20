@@ -1,12 +1,15 @@
 #requirements
 
 cryptacular
+migrate
 BeautifulSoup
 sqlalchemy==0.7.10
 flask
 flask-login
 flask-sqlalchemy
 flask-debugtoolbar
+flask-migrate
+flask-script
 sqlalchemy-migrate
 WebHelpers2>=2.0b3
 flask-wtf

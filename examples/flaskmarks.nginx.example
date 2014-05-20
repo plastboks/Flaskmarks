@@ -1,12 +1,45 @@
+# flaskmarks.conf
+
+upstream flaskmarks-site {
+    server 127.0.0.1:5001;
+}
+
 server {
 
-    listen 80;
-    server_name domain.com;
+    # optional ssl configuration
 
-    location / { try_files $uri @app; }
-    location @app {
-        include uwsgi_params;
-        uwsgi_pass unix:/tmp/flaskmarks.sock;
+    listen 443 ssl;
+    ssl_certificate /path/to/ssl/pem_file;
+    ssl_certificate_key /path/to/ssl/certificate_key;
+
+    # end of optional ssl configuration
+
+    server_name  example.com;
+
+    access_log  /home/example/env/access.log;
+
+    location / {
+        proxy_set_header        Host $http_host;
+        proxy_set_header        X-Real-IP $remote_addr;
+        proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header        X-Forwarded-Proto $scheme;
+
+        client_max_body_size    10m;
+        client_body_buffer_size 128k;
+        proxy_connect_timeout   60s;
+        proxy_send_timeout      90s;
+        proxy_read_timeout      90s;
+        proxy_buffering         off;
+        proxy_temp_file_write_size 64k;
+        proxy_pass http://flaskmarks-site;
+        proxy_redirect          off;
     }
 
+    location /static {
+	root                    /home/example/myapp/myapp;
+	expires                 30d;
+	add_header              Cache-Control public;
+	access_log              off;
+    }
 }
+
