@@ -1,14 +1,10 @@
 Flaskmarks
 ===============
-My simple (and self educational) Flask + sqlalchemy based bookmark and RSS feed app.
+My simple (and self educational) [Flask](http://flask.pocoo.org/) & [SQLAlchemy](http://www.sqlalchemy.org/) based bookmark and RSS feed app.
 
 Features
 ========
-"Flaskmarks" is a small and neat mark managing application. Its purpose is to be a all-in-one bookmark and RSS feed repository. Storing all bookmarks and RSS feeds in one place, makes them accessible from all platforms and devices. This is by no means an original idea, but this is an interpretation of the problem.
-
-Pending Tasks
-===================
-Please refer TODO.md
+"Flaskmarks" is a bookmark managing application. Its purpose is to be a all-in-one bookmark and RSS feed repository. Storing all bookmarks and RSS feeds in one place, makes them accessible from all platforms and devices. This is by no means an original idea, but this is an interpretation of the problem.
 
 Install
 =======
@@ -17,9 +13,7 @@ Install
 * run: `pip install -r requirements.txt`.
 * copy config.py.example to config.py and edit.
 * run: `python run.py db init`
-* run: `python run.py db migrate`
-* run: `python run.py db upgrade`
-* run: `python run.py runserver`.
+* run: `python run.py runserver`
 
 Ubuntu
 ======
@@ -30,7 +24,8 @@ Installing this app on ubuntu may take a little more effort than `pip install -r
 
 Upgrade
 =======
-* run: `python db_migrate && python db_upgrade`. 
+* run: `python run.py db migrate`
+* run: `python run.py db upgrade`
 
 Python and packages update
 ==========================
@@ -38,16 +33,8 @@ Python and packages update
 
 Deploy
 ======
-* install uwsgi `pip install uwsgi` (globally?)
-* copy examples/uwsgi.ini.example to app root and edit.
-* copy examples/flaskmarks.nginx.example to your nginx sites folder and enable.
-* copy examples/uwsgi_params.example to your nginx config folder.
-* run: `uwsgi uwsgi.ini`
-* restart nginx
-
-Credits
-=======
-This app is heavily inspired by the flaks sqlalchemy tutorial @ [link](http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world).
+* edit and install examples/flaskmarks.nginx.example
+* run: `python run.py runserver -p 5001`
 
 Branches
 ========
@@ -68,3 +55,4 @@ Useful Links
 * [Filters](http://jinja.pocoo.org/docs/templates/#builtin-filters)
 * [Flask and https](http://flask.pocoo.org/mailinglist/archive/2011/11/17/change-request-s-http-referer-header/#fc7dc5b7a1682ccbb4947a8013987761)
 * [Flask Migrate](http://flask-migrate.readthedocs.org/en/latest/)
+* [Nice Flask Tutorial](http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world)

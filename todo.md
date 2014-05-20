@@ -5,3 +5,4 @@
 - [ ] Notes with revisions (from pulpy).
 - [ ] Calendar
 - [ ] Tags for all object types.
+- [ ] Mobile views.
