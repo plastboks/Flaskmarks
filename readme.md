@@ -44,6 +44,7 @@ unfinished code and/or wonky solutions. I will strive to make sure that code
 merged into master is as stable as possible (given the small size of this application).
 
 Included software
+=================
 * [jQuery](http://jquery.com)
 * [Some FamFamFam icons](http://www.famfamfam.com/lab/icons/silk/)
 
