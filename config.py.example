@@ -1,18 +1,28 @@
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
+"""
+Site settings
+"""
 SITE_TITLE = 'Flaskmarks'
 SITE_FOOTER = 'Flaskmark awesome bookmark and feed app'
+CAN_REGISTER = True
 
-CSRF_ENABLED = True
-SECRET_KEY = 'super-duper-secret-key'
-
+"""
+Database
+"""
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' +\
                           os.path.join(basedir, 'flaskmarks.sqlite')
 SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 
-CAN_REGISTER = True
+"""
+Keys
+"""
+CSRF_ENABLED = True
+SECRET_KEY = 'super-duper-secret-key-CHANGE-ME'
 
+"""
+Debugging
+"""
 DEBUG_MODE = True
-
-DEBUG_TB_INTERCEPT_REDIRECTS = True
+DEBUG_TB_INTERCEPT_REDIRECTS = False
