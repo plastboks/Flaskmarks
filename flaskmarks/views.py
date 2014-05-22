@@ -144,17 +144,18 @@ def new_mark():
         m.owner_id = g.user.id
         m.created = datetime.utcnow()
         if form.tags.data:
+            tags = form.tags.data.strip().replace(',', ' ').split(' ')
+            """ Soon to be deprecated """
             m.tags = ' '.join([t.strip()
                               for t in form.tags.data.strip().split(',')])\
                         .lower()
             """ Testing ass tags """
             ass_tags = []
-            for t in form.tags.data.strip().replace(',', ' ').split(' '):
-                # Check for existing tags
-                # Create new instance of a Tag()
-                tag = Tag()
-                tag.title = t
+            for t in tags:
+                tag = Tag(t.lower())
+                ass_tags.append(tag)
                 db.session.add(tag)
+            m.ass_tags = ass_tags
         m.clicks = 0
         if not form.title.data:
             soup = BSoup(urlopen(form.url.data))
