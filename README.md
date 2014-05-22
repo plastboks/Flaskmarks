@@ -14,6 +14,7 @@ Install
 * copy config.py.example to config.py and edit.
 * run: `python run.py db init`
 * run: `python run.py db migrate`
+* run: `python run.py db upgrade`
 * run: `python run.py runserver`
 
 Ubuntu

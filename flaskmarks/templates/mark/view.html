@@ -7,6 +7,15 @@
         </ul>
     </nav>
     <h2>{{ mark.title|truncate(70) }}</h2>
+    <nav id="tags">
+        {% if mark.tags %}
+            <ul>
+            {% for w in mark.tags.split(' ') %}
+                <li><a href="{{ url_for('mark_q_tag', slug=w) }}" class="tag">{{ w }}</a></li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    </nav>
     <ul class='feedlist'>
     {% for entry in data['entries'] %}
         <li class='entry'>

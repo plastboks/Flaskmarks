@@ -82,6 +82,9 @@ def forbidden(error):
 #############
 @app.route('/')
 @app.route('/index')
+def webroot():
+    return redirect(url_for('marks'))
+
 @app.route('/marks')
 @app.route('/marks/<int:page>')
 @login_required

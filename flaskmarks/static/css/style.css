@@ -423,6 +423,21 @@ header #search label {
     font-weight: 500;
 }
 
+#content #tags ul {
+    list-style: none;
+    margin: -15px 0px 0px 0px;
+    padding: 0px 5px 15px 5px;
+}
+
+#content #tags ul li {
+    display: inline;
+}
+
+#content #tags ul li a{
+    font-size: 0.7em;
+    color: mediumvioletred;
+}
+
 #paginate {
     font-size: 0.7em;
     padding: 20px 0px 0px 0px;
@@ -560,7 +575,7 @@ header #search label {
 #content .feedlist ul .date {
     font-size: 0.65em;
     padding: 2px 0px;
-    color: mediumvioletred;
+    color: olivedrab;
 }
 
 #content .feedlist ul .summary {
