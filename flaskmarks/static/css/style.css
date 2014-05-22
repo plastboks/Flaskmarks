@@ -277,6 +277,11 @@ header #search label {
     color: #DCDCDC;
 }
 
+.markslist .taglist li {
+    display: inline;
+    padding: 0px 5px;
+}
+
 .markslist .title a.link {
     color: lightslategray;
 }

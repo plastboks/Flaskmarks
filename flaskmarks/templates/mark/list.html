@@ -21,6 +21,11 @@
                     {% else %}
                         <span class='notags'>no tags</span>
                     {% endif %}
+                    {% if mark.ass_tags %}
+                        {% for m in mark.ass_tags %}
+                            <a href="{{ url_for('mark_q_tag', slug=m.title) }}" class="tag">{{ m.title }}</a>
+                        {% endfor %}
+                    {% endif %}
                     <span class="lastvisit">last visit:</span>
                     {% if mark.last_clicked %}
                         <span class="lastclick">{{ mark.last_clicked | datewords }}</span>
