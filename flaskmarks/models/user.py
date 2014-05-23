@@ -7,6 +7,7 @@ from sqlalchemy import (
 )
 from cryptacular.bcrypt import BCRYPTPasswordManager
 from flaskmarks.models.mark import Mark
+from flaskmarks.models.tag import Tag
 
 
 class User(db.Model):
@@ -75,6 +76,9 @@ class User(db.Model):
     def q_marks_by_url(self, string):
         return self.my().filter(Mark.url == string)\
                         .first()
+
+    def all_tags(self):
+        return Tag.query.all()
 
     def authenticate_user(self, password):
         manager = BCRYPTPasswordManager()

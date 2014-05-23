@@ -129,6 +129,10 @@ def popular_tags(page=1):
                            header='',
                            marks=m)
 
+@app.route('/tags')
+@login_required
+def tags():
+    return g.user.all_tags()
 
 @app.route('/mark/new', methods=['GET', 'POST'])
 @login_required
@@ -218,6 +222,16 @@ def edit_mark(id):
             return redirect(url_for('marks'))
         form.populate_obj(m)
         m.updated = datetime.utcnow()
+        """ Ass Tags """
+        tags = form.tags.data.strip().replace(',', ' ').split(' ')
+        ass_tags = []
+        for t in tags:
+            tag = Tag.check(t.lower())
+            if not tag:
+                tag = Tag(t.lower())
+                db.session.add(tag)
+            ass_tags.append(tag)
+        m.ass_tags = ass_tags
         db.session.add(m)
         db.session.commit()
         flash('Mark "%s" updated.' % (form.title.data), category='info')

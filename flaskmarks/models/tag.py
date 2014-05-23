@@ -14,5 +14,9 @@ class Tag(db.Model):
     def __init__(self, title):
         self.title = title
 
+    @classmethod
+    def check(self, title):
+        return self.query.filter(Tag.title == title).first()
+
     def __repr__(self):
         return '<Tag %r>' % (self.title)
