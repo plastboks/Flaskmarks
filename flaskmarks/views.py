@@ -118,21 +118,13 @@ def recently_added(page=1):
                            marks=u.recent(page, 'added'))
 
 
-@app.route('/popular_tags')
-@app.route('/popular_tags/<int:page>')
-@login_required
-def popular_tags(page=1):
-    u = g.user
-    m = u.all_marks()
-    return render_template('mark/popular_tags.html',
-                           title='Popular Tags - page %d' % page,
-                           header='',
-                           marks=m)
-
-@app.route('/tags')
+@app.route('/tags', methods=['GET'])
 @login_required
 def tags():
-    return g.user.all_tags()
+    return render_template('mark/popular_tags.html',
+                           title='Popular Tags',
+                           header='',
+                           tags=g.user.all_tags())
 
 @app.route('/mark/new', methods=['GET', 'POST'])
 @login_required

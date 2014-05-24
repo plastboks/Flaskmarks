@@ -1,11 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
 {% include "mark/submenu.html" %}
-    {% if marks %}
-        {% for m in marks %}
-            {{ m.tags }}
-        {% endfor %}
-    {% else %}
-        <h2>No results, try again</h2>
-    {% endif %}
+    <section class="contentbox markslist roundcorner5 shadow4">
+        <h2>Tags</h2>
+        <p>No available yet...</p>
+    </section>
 {% endblock %}
