@@ -3,6 +3,14 @@
 {% include "mark/submenu.html" %}
     <section class="contentbox markslist roundcorner5 shadow4">
         <h2>Tags</h2>
-        <p>No available yet...</p>
+        {% if tags %}
+            <ul>
+            {% for f in tags %}
+                <li class="count-{{ f.marks | length }}">{{ f.title }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p> No tags</p>
+        {% endif %}
     </section>
 {% endblock %}

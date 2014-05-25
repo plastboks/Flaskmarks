@@ -78,7 +78,7 @@ class User(db.Model):
                         .first()
 
     def all_tags(self):
-        return Tag.query.all()
+        return Tag.query.filter(Tag.marks.any(owner_id = self.id)).all()
 
     def authenticate_user(self, password):
         manager = BCRYPTPasswordManager()

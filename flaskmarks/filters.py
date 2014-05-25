@@ -9,6 +9,11 @@ def _jinja2_filter_date(dateobj):
     return dateobj.strftime('%Y-%m-%d')
 
 
+@app.template_filter('length')
+def _jinja2_filter_date(list):
+    return len(list)
+
+
 @app.template_filter('datetime')
 def _jinja2_filter_datetime(dateobj):
     return dateobj.strftime('%Y-%m-%d %H:%M:%S')
