@@ -143,7 +143,12 @@ def new_mark():
         m.owner_id = g.user.id
         m.created = datetime.utcnow()
         if form.tags.data:
-            tags = form.tags.data.strip().replace(',', ' ').split(' ')
+            """ Uniquify tags string """
+            form_tags = form.tags.data.strip().replace(',', ' ').split(' ')
+            tag_keys = {}
+            for t in form_tags:
+                tag_keys[t] = 1
+            tags = tag_keys.keys()
             """ Soon to be deprecated """
             m.tags = ' '.join([t.strip()
                               for t in form.tags.data.strip().split(',')])\
