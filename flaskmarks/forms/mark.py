@@ -47,6 +47,4 @@ class MarkForm(Form):
     tags = TextField('Tags',
                      [validators.Length(min=0, max=255)],
                      filters=[strip_filter])
-    ass_tags = TextField('Tags',
-                         [validators.Length(min=0, max=255)])
     clicks = IntegerField('Clicks')

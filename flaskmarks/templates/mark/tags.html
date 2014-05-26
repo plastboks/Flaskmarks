@@ -3,14 +3,16 @@
 {% include "mark/submenu.html" %}
     <section class="contentbox markslist roundcorner5 shadow4">
         <h2>Tags</h2>
+        <section id="tagcloud">
         {% if tags %}
             <ul>
             {% for f in tags %}
-                <li class="count-{{ f.marks | length }}">{{ f.title }}</li>
+                <li class="count-{{ f.marks | length }}" {{ f.marks | tagsize }} >{{ f.title }}</li>
             {% endfor %}
             </ul>
         {% else %}
             <p> No tags</p>
         {% endif %}
+        </section>
     </section>
 {% endblock %}

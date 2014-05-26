@@ -38,13 +38,6 @@
             {{ form.tags(size=20) }}
         </p>
         <p>
-            {% for error in form.ass_tags.errors %}
-                <p class="error">{{ error }}</p>
-            {% endfor %}
-            {{ form.ass_tags.label() }} <br />
-            {{ form.ass_tags(size=20) }}
-        </p>
-        <p>
             {% for error in form.clicks.errors %}
                 <p class="error">{{ error }}</p>
             {% endfor %}

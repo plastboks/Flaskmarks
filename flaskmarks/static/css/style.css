@@ -443,6 +443,17 @@ header #search label {
     color: mediumvioletred;
 }
 
+#content #tagcloud {
+    padding: 0px 10px 10px 10px;
+}
+#content #tagcloud ul {
+}
+#content #tagcloud ul li {
+    display: inline-block;
+    padding: 5px;
+}
+
+
 #paginate {
     font-size: 0.7em;
     padding: 20px 0px 0px 0px;
