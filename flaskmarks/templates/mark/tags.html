@@ -6,8 +6,10 @@
         <section id="tagcloud">
         {% if tags %}
             <ul>
-            {% for f in tags %}
-                <li class="count-{{ f.marks | length }}" {{ f.marks | tagsize }} >{{ f.title }}</li>
+            {% for t in tags %}
+                <li class="count-{{ t.marks | length }}" {{ t.marks | tagsize }} >
+                    <a href="{{ url_for('mark_q_tag', slug=t.title) }}">{{ t.title }}</a>
+                </li>
             {% endfor %}
             </ul>
         {% else %}
