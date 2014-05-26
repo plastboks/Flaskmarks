@@ -121,7 +121,7 @@ def recently_added(page=1):
 @app.route('/tags', methods=['GET'])
 @login_required
 def tags():
-    return render_template('mark/popular_tags.html',
+    return render_template('mark/tags.html',
                            title='Popular Tags',
                            header='',
                            tags=g.user.all_tags())
