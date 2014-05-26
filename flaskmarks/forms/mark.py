@@ -4,6 +4,7 @@ from flaskmarks.forms.base import (
 )
 
 from wtforms import (
+    Field,
     TextField,
     BooleanField,
     PasswordField,
@@ -14,6 +15,20 @@ from wtforms import (
     IntegerField,
 )
 
+class TagListField(Field):
+    widget = TextField()
+
+    def _value(self):
+        if self.data:
+            return u', '.join(self.data)
+        else:
+            return u''
+
+    def process_formdata(self, valuelist):
+        if valuelist:
+            self.data = [x.strip() for x in valuelist[0].split(',')]
+        else:
+            self.data = []
 
 class MarkForm(Form):
     referrer = HiddenField([validators.URL(require_tld=False)])
@@ -32,4 +47,6 @@ class MarkForm(Form):
     tags = TextField('Tags',
                      [validators.Length(min=0, max=255)],
                      filters=[strip_filter])
+    ass_tags = TextField('Tags',
+                         [validators.Length(min=0, max=255)])
     clicks = IntegerField('Clicks')
