@@ -43,4 +43,8 @@ $(function(){
         });
     }
 
+    if ($("form").length) {
+        $("form").find("input[type='text']").first().focus();
+    }
+
 });
