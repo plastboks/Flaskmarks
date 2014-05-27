@@ -149,11 +149,6 @@ def new_mark():
             for t in form_tags:
                 tag_keys[t] = 1
             tags = tag_keys.keys()
-            """ Soon to be deprecated """
-            m.tags = ' '.join([t.strip()
-                              for t in form.tags.data.strip().split(',')])\
-                        .lower()
-            """ Testing ass tags """
             ass_tags = []
             for t in tags:
                 tag = Tag(t.lower())
