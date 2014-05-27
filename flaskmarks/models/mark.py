@@ -31,27 +31,5 @@ class Mark(db.Model):
                             secondary=ass_tbl,
                             backref='marks')
 
-    @classmethod
-    def by_tag(self, page, oID, per_page, tag):
-        tag = "%"+tag+"%"
-        return self.query.filter(and_(
-                                 self.tags.like(tag),
-                                 self.owner_id == oID))\
-                         .order_by(desc(self.clicks))\
-                         .paginate(page, per_page, False)
-
-    @classmethod
-    def by_string(self, page, oID, per_page, string, marktype=False):
-        string = "%"+string+"%"
-        base = self.query.filter(self.owner_id == oID)\
-                         .filter(or_(self.title.like(string),
-                                     self.tags.like(string),
-                                     self.url.like(string)))
-        if marktype:
-            base = base.filter(self.type == marktype)
-        base = base.order_by(desc(self.clicks))\
-                   .paginate(page, per_page, False)
-        return base
-
     def __repr__(self):
         return '<Mark %r>' % (self.title)

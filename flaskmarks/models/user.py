@@ -30,18 +30,11 @@ class User(db.Model):
     def my_marks(self):
         return Mark.query.filter(Mark.owner_id == self.id)
 
+    def my_tags(self):
+        return Tag.query.filter(Tag.marks.any(owner_id = self.id))
+
     def all_marks(self):
         return self.my_marks().all()
-
-    def recent(self, page, type):
-        if type == 'added':
-            base = self.my_marks().order_by(desc(Mark.created))
-            return base.paginate(page, self.per_page, False)
-        if type == 'clicked':
-            base = self.my_marks().filter(Mark.clicks > 0)\
-                            .order_by(desc(Mark.last_clicked))
-            return base.paginate(page, self.per_page, False)
-        return False
 
     def marks(self, page):
         base = self.my_marks()
@@ -54,11 +47,20 @@ class User(db.Model):
             base = base.order_by(desc(Mark.created))
         return base.paginate(page, self.per_page, False)
 
-    def get_mark_by_id(self, id):
-        return self.my_marks().filter(Mark.id == id)\
-                        .first()
+    def recent_marks(self, page, type):
+        if type == 'added':
+            base = self.my_marks().order_by(desc(Mark.created))
+            return base.paginate(page, self.per_page, False)
+        if type == 'clicked':
+            base = self.my_marks().filter(Mark.clicks > 0)\
+                            .order_by(desc(Mark.last_clicked))
+            return base.paginate(page, self.per_page, False)
+        return False
 
-    def get_bookmark_count(self):
+    def get_mark_by_id(self, id):
+        return self.my_marks().filter(Mark.id == id).first()
+
+    def get_mark_count(self):
         return self.my_marks().filter(Mark.type == 'bookmark').count()
 
     def get_feed_count(self):
@@ -71,14 +73,17 @@ class User(db.Model):
         return Mark.by_tag(page, self.id, self.per_page, tag)
 
     def q_marks_by_string(self, page, string, marktype):
-        return Mark.by_string(page, self.id, self.per_page, string, marktype)
+        string = "%"+string+"%"
+        base = self.my_marks().filter(or_(Mark.title.like(string),
+                                          Mark.url.like(string)))
+        return base.order_by(desc(Mark.clicks))\
+                   .paginate(page, self.per_page, False)
 
     def q_marks_by_url(self, string):
-        return self.my_marks().filter(Mark.url == string)\
-                        .first()
+        return self.my_marks().filter(Mark.url == string).first()
 
     def all_tags(self):
-        return Tag.query.filter(Tag.marks.any(owner_id = self.id)).all()
+        return self.my_tags().all()
 
     def authenticate_user(self, password):
         manager = BCRYPTPasswordManager()

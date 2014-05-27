@@ -104,7 +104,7 @@ def recently_clicked(page=1):
     return render_template('mark/index.html',
                            title='Marks - page %d' % page,
                            header='',
-                           marks=u.recent(page, 'clicked'))
+                           marks=u.recent_marks(page, 'clicked'))
 
 
 @app.route('/recently')
@@ -115,7 +115,7 @@ def recently_added(page=1):
     return render_template('mark/index.html',
                            title='Marks - page %d' % page,
                            header='',
-                           marks=u.recent(page, 'added'))
+                           marks=u.recent_marks(page, 'added'))
 
 
 @app.route('/tags', methods=['GET'])
@@ -340,7 +340,7 @@ def profile():
     return render_template('account/profile.html',
                            form=form,
                            title='Profile',
-                           bc=g.user.get_bookmark_count(),
+                           bc=g.user.get_mark_count(),
                            fc=g.user.get_feed_count(),
                            lcm=g.user.mark_last_created()
                            )
