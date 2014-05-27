@@ -27,24 +27,24 @@ class User(db.Model):
         return self.query.filter(or_(User.username == uname,
                                      User.email == uname)).first()
 
-    def my(self):
+    def my_marks(self):
         return Mark.query.filter(Mark.owner_id == self.id)
 
     def all_marks(self):
-        return self.my().all()
+        return self.my_marks().all()
 
     def recent(self, page, type):
         if type == 'added':
-            base = self.my().order_by(desc(Mark.created))
+            base = self.my_marks().order_by(desc(Mark.created))
             return base.paginate(page, self.per_page, False)
         if type == 'clicked':
-            base = self.my().filter(Mark.clicks > 0)\
+            base = self.my_marks().filter(Mark.clicks > 0)\
                             .order_by(desc(Mark.last_clicked))
             return base.paginate(page, self.per_page, False)
         return False
 
     def marks(self, page):
-        base = self.my()
+        base = self.my_marks()
         if self.sort_type == u'clicks':
             base = base.order_by(desc(Mark.clicks))\
                        .order_by(desc(Mark.created))
@@ -55,17 +55,17 @@ class User(db.Model):
         return base.paginate(page, self.per_page, False)
 
     def get_mark_by_id(self, id):
-        return self.my().filter(Mark.id == id)\
+        return self.my_marks().filter(Mark.id == id)\
                         .first()
 
     def get_bookmark_count(self):
-        return self.my().filter(Mark.type == 'bookmark').count()
+        return self.my_marks().filter(Mark.type == 'bookmark').count()
 
     def get_feed_count(self):
-        return self.my().filter(Mark.type == 'feed').count()
+        return self.my_marks().filter(Mark.type == 'feed').count()
 
     def mark_last_created(self):
-        return self.my().order_by(desc(Mark.created)).first()
+        return self.my_marks().order_by(desc(Mark.created)).first()
 
     def q_marks_by_tag(self, tag, page):
         return Mark.by_tag(page, self.id, self.per_page, tag)
@@ -74,7 +74,7 @@ class User(db.Model):
         return Mark.by_string(page, self.id, self.per_page, string, marktype)
 
     def q_marks_by_url(self, string):
-        return self.my().filter(Mark.url == string)\
+        return self.my_marks().filter(Mark.url == string)\
                         .first()
 
     def all_tags(self):
