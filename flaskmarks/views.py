@@ -207,6 +207,9 @@ def edit_mark(id):
     form = MarkForm(obj=m)
     if not m:
         abort(403)
+    """
+    POST
+    """
     if form.validate_on_submit():
         if m.url != form.url.data and g.user.q_marks_by_url(form.url.data):
             flash('Mark with this url (%s) already\
@@ -230,6 +233,9 @@ def edit_mark(id):
         if form.referrer.data and is_safe_url(form.referrer.data):
             return redirect(form.referrer.data)
         return redirect(url_for('marks'))
+    """
+    GET
+    """
     form.referrer.data = request.referrer
     return render_template('mark/edit.html',
                            mark=m,
@@ -314,6 +320,9 @@ def ajax_mark_inc():
 def profile():
     u = g.user
     form = UserProfileForm(obj=u)
+    """
+    POST
+    """
     if form.validate_on_submit():
         form.populate_obj(u)
         if form.password.data:
@@ -325,6 +334,9 @@ def profile():
         db.session.commit()
         flash('User "%s" updated.' % (form.username.data), category='info')
         return redirect(url_for('profile'))
+    """
+    GET
+    """
     return render_template('account/profile.html',
                            form=form,
                            title='Profile',
@@ -339,6 +351,9 @@ def register():
     if not app.config['CAN_REGISTER']:
         abort(403)
     form = UserRegisterForm()
+    """
+    POST
+    """
     if form.validate_on_submit():
         u = User()
         pm = bMan()
@@ -353,6 +368,9 @@ def register():
         except Exception as detail:
             flash('Problem registering "%s".'
                   % (form.username.data), category='error')
+    """
+    GET
+    """
     return render_template('account/register.html',
                            form=form,
                            title='Register',
@@ -367,6 +385,9 @@ def login():
     if g.user.is_authenticated():
         return redirect(url_for('marks'))
     form = LoginForm()
+    """
+    POST
+    """
     if form.validate_on_submit():
         u = User.by_uname_or_email(form.username.data)
         if u and u.authenticate_user(form.password.data):
@@ -381,6 +402,9 @@ def login():
             flash('Failed login for %s.' % (form.username.data),
                   category='error')
             return redirect(url_for('login'))
+    """
+    GET
+    """
     return render_template('account/login.html',
                            title='Login',
                            form=form,
