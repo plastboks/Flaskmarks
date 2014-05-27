@@ -14,11 +14,6 @@
                         </a>
                     {% endif %}
                     <br />
-                    {% if mark.tags and not mark.ass_tags %}
-                        {% for w in mark.tags.split(' ') %}
-                            <a href="{{ url_for('mark_q_tag', slug=w) }}" class="tag integrated">{{ w }}</a>
-                        {% endfor %}
-                    {% endif %}
                     {% if mark.ass_tags %}
                         {% for m in mark.ass_tags %}
                             <a href="{{ url_for('mark_q_tag', slug=m.title) }}" class="tag foreign">{{ m.title }}</a>
