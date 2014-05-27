@@ -267,11 +267,10 @@ def delete_mark(id):
 @app.route('/mark/tag/<slug>/<int:page>')
 @login_required
 def mark_q_tag(slug, page=1):
-    m = g.user.q_marks_by_tag(slug, page)
     return render_template('mark/index.html',
                            title='Marks with tag: %s' % (slug),
                            header='Marks with tag: %s' % (slug),
-                           marks=m)
+                           marks=g.user.q_marks_by_tag(slug, page))
 
 
 @app.route('/search', methods=['GET'])

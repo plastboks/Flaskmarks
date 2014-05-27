@@ -70,8 +70,8 @@ class User(db.Model):
         return self.my_marks().order_by(desc(Mark.created)).first()
 
     def q_marks_by_tag(self, tag, page):
-        return Mark.by_tag(page, self.id, self.per_page, tag)
-
+        return self.my_tags().all()
+            
     def q_marks_by_string(self, page, string, marktype):
         string = "%"+string+"%"
         base = self.my_marks().filter(or_(Mark.title.like(string),
