@@ -85,6 +85,7 @@ def forbidden(error):
 def webroot():
     return redirect(url_for('marks'))
 
+
 @app.route('/marks')
 @app.route('/marks/<int:page>')
 @login_required
@@ -125,6 +126,7 @@ def tags():
                            title='Popular Tags',
                            header='',
                            tags=g.user.all_tags())
+
 
 @app.route('/mark/new', methods=['GET', 'POST'])
 @login_required
