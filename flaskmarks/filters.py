@@ -13,12 +13,14 @@ def _jinja2_filter_date(dateobj):
 def _jinja2_filter_date(list):
     return len(list)
 
+
 @app.template_filter('tagsize')
 def _jinja2_filter_date(list):
     size = (len(list))
     if size <= 1:
         size = 2
     return "style=font-size:%dpx" % (size * 5)
+
 
 @app.template_filter('datetime')
 def _jinja2_filter_datetime(dateobj):
