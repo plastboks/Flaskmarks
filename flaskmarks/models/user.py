@@ -31,7 +31,7 @@ class User(db.Model):
         return Mark.query.filter(Mark.owner_id == self.id)
 
     def my_tags(self):
-        return Tag.query.filter(Tag.marks.any(owner_id = self.id))
+        return Tag.query.filter(Tag.marks.any(owner_id=self.id))
 
     def all_marks(self):
         return self.my_marks().all()
@@ -53,7 +53,7 @@ class User(db.Model):
             return base.paginate(page, self.per_page, False)
         if type == 'clicked':
             base = self.my_marks().filter(Mark.clicks > 0)\
-                            .order_by(desc(Mark.last_clicked))
+                                  .order_by(desc(Mark.last_clicked))
             return base.paginate(page, self.per_page, False)
         return False
 
@@ -70,8 +70,9 @@ class User(db.Model):
         return self.my_marks().order_by(desc(Mark.created)).first()
 
     def q_marks_by_tag(self, tag, page):
-        return self.my_tags().all()
-            
+        return self.my_marks().filter(Mark.ass_tags.any(title=tag))\
+                              .paginate(page, self.per_page, False)
+
     def q_marks_by_string(self, page, string, marktype):
         string = "%"+string+"%"
         base = self.my_marks().filter(or_(Mark.title.like(string),
