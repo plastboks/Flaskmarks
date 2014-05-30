@@ -145,17 +145,24 @@ def new_mark():
         m.owner_id = g.user.id
         m.created = datetime.utcnow()
         if form.tags.data:
+            ass_tags = []
+            tag_keys = {}
+
             """ Uniquify tags string """
             form_tags = form.tags.data.strip().replace(',', ' ').split(' ')
-            tag_keys = {}
             for t in form_tags:
                 tag_keys[t] = 1
             tags = tag_keys.keys()
-            ass_tags = []
+            """
+            Run through tags and create them
+            There should be some sort of test, which stops multiple tags
+            to exist.
+            """
             for t in tags:
                 tag = Tag(t.lower())
                 ass_tags.append(tag)
                 db.session.add(tag)
+            """ Lastly add the tags """
             m.ass_tags = ass_tags
         m.clicks = 0
         if not form.title.data:
