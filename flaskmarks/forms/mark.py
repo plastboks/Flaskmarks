@@ -37,19 +37,18 @@ class TagListField(TextField):
 
     def process_formdata(self, valuelist):
         if valuelist:
-            ass_tags = []
+            tags = []
             tag_keys = {}
             form_tags = valuelist[0].strip().replace(',', ' ').split(' ')
             for t in form_tags:
                 tag_keys[t] = 1
-            tags = tag_keys.keys()
-            for t in tags:
+            for t in tag_keys.keys():
                 tag = Tag.check(t.lower())
                 if not tag:
                     tag = Tag(t.lower())
                     db.session.add(tag)
-                ass_tags.append(tag)
-            self.data = ass_tags
+                tags.append(tag)
+            self.data = tags
         else:
             self.data = []
 
@@ -68,9 +67,6 @@ class MarkForm(Form):
                       coerce=unicode,
                       choices=[('bookmark', 'Bookmark'), ('feed', 'Feed')],
                       default='bookmark')
-    tags = TextField('Tags',
-                     [validators.Length(min=0, max=255)],
-                     filters=[strip_filter])
-    ass_tags = TagListField('Tags',
-                            [validators.Length(min=0, max=255)])
+    tags = TagListField('Tags',
+                        [validators.Length(min=0, max=255)])
     clicks = IntegerField('Clicks')

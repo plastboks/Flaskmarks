@@ -14,8 +14,8 @@
                         </a>
                     {% endif %}
                     <br />
-                    {% if mark.ass_tags %}
-                        {% for m in mark.ass_tags %}
+                    {% if mark.tags %}
+                        {% for m in mark.tags %}
                             <a href="{{ url_for('mark_q_tag', slug=m.title) }}" class="tag foreign">{{ m.title }}</a>
                         {% endfor %}
                     {% endif %}

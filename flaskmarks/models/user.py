@@ -70,7 +70,7 @@ class User(db.Model):
         return self.my_marks().order_by(desc(Mark.created)).first()
 
     def q_marks_by_tag(self, tag, page):
-        return self.my_marks().filter(Mark.ass_tags.any(title=tag))\
+        return self.my_marks().filter(Mark.tags.any(title=tag))\
                               .paginate(page, self.per_page, False)
 
     def q_marks_by_string(self, page, string, marktype):

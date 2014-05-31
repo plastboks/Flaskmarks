@@ -8,9 +8,9 @@
     </nav>
     <h2>{{ mark.title|truncate(70) }}</h2>
     <nav id="tags">
-        {% if mark.ass_tags %}
+        {% if mark.tags %}
             <ul>
-            {% for t in mark.ass_tags %}
+            {% for t in mark.tags %}
                 <li><a href="{{ url_for('mark_q_tag', slug=t.title) }}" class="tag">{{ t.title }}</a></li>
             {% endfor %}
             </ul>

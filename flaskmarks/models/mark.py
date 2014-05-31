@@ -20,16 +20,15 @@ class Mark(db.Model):
     type = db.Column(db.Unicode(255), nullable=False)
     title = db.Column(db.Unicode(255), nullable=False)
     url = db.Column(db.Unicode(512), nullable=False)
-    tags = db.Column(db.Unicode(512))
     clicks = db.Column(db.Integer, default=0)
     last_clicked = db.Column(db.DateTime)
     created = db.Column(db.DateTime)
     updated = db.Column(db.DateTime)
 
     metas = relationship('Meta', backref='mark', lazy='dynamic')
-    ass_tags = relationship('Tag',
-                            secondary=ass_tbl,
-                            backref='marks')
+    tags = relationship('Tag',
+                        secondary=ass_tbl,
+                        backref='marks')
 
     def __repr__(self):
         return '<Mark %r>' % (self.title)
