@@ -144,26 +144,6 @@ def new_mark():
         form.populate_obj(m)
         m.owner_id = g.user.id
         m.created = datetime.utcnow()
-        if form.tags.data:
-            ass_tags = []
-            tag_keys = {}
-
-            """ Uniquify tags string """
-            form_tags = form.tags.data.strip().replace(',', ' ').split(' ')
-            for t in form_tags:
-                tag_keys[t] = 1
-            tags = tag_keys.keys()
-            """
-            Run through tags and create them
-            There should be some sort of test, which stops multiple tags
-            to exist.
-            """
-            for t in tags:
-                tag = Tag(t.lower())
-                ass_tags.append(tag)
-                db.session.add(tag)
-            """ Lastly add the tags """
-            m.ass_tags = ass_tags
         m.clicks = 0
         if not form.title.data:
             soup = BSoup(urlopen(form.url.data))
@@ -226,16 +206,6 @@ def edit_mark(id):
             return redirect(url_for('marks'))
         form.populate_obj(m)
         m.updated = datetime.utcnow()
-        """ Ass Tags """
-        tags = form.tags.data.strip().replace(',', ' ').split(' ')
-        ass_tags = []
-        for t in tags:
-            tag = Tag.check(t.lower())
-            if not tag:
-                tag = Tag(t.lower())
-                db.session.add(tag)
-            ass_tags.append(tag)
-        m.ass_tags = ass_tags
         db.session.add(m)
         db.session.commit()
         flash('Mark "%s" updated.' % (form.title.data), category='info')

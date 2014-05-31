@@ -26,14 +26,14 @@
             {{ form.type() }}
         </p>
         <p>
-            {% for error in form.tags.errors %}
+            {% for error in form.ass_tags.errors %}
                 <p class="error">{{ error }}</p>
             {% endfor %}
-            {{ form.tags.label() }} <br />
-            {{ form.tags(size=20) }}
+            {{ form.ass_tags.label() }} <br />
+            {{ form.ass_tags(size=20) }}
             <span class="description-small">Space or comma separated.</span>
         </p>
-            <input type="submit" value="Submit" />
+           <input type="submit" value="Submit" />
     </form>
 </section>
 {% endblock %}
