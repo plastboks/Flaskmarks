@@ -13,5 +13,9 @@ class Meta(db.Model):
     name = db.Column(db.Unicode(255), nullable=False)
     value = db.Column(db.Unicode(255), nullable=False)
 
+    def __init__(self, name, value):
+        self.name = name
+        self.value = value
+
     def __repr__(self):
         return '<Meta %r>' % (self.title)
