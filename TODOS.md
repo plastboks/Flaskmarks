@@ -1,11 +1,12 @@
 - [ ] Export / Import marks.
+- [ ] RESTful everything.
 - [ ] Classify the views, and cleanup code!
 - [ ] Separate Youtube type for expanding the features in the feed view. Features like pages etc. Also for easier youtube feedmark creations.
 - [ ] Meta system for extending marks with custom data (e.g youtube feeds args etc).
-- [ ] Tag cloud.
+- [*] Tag cloud.
 - [ ] Notes with revisions (from pulpy).
 - [ ] Calendar
-- [ ] Tags for all object types.
+- [*] Tags for all object types.
 - [ ] Mobile views.
 - [ ] Update screenshots.
 - [ ] Write tests...
