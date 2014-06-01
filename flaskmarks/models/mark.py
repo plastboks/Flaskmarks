@@ -7,7 +7,7 @@ from sqlalchemy import (
 from sqlalchemy.orm import relationship
 from flaskmarks.models.meta import Meta
 
-ass_tbl = db.Table('mark_tags', db.metadata,
+ass_tbl = db.Table('marks_tags', db.metadata,
                    db.Column('left_id', db.Integer, db.ForeignKey('marks.id')),
                    db.Column('right_id', db.Integer, db.ForeignKey('tags.id'))
                    )
