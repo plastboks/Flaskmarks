@@ -23,11 +23,12 @@ from wtforms import (
     IntegerField,
 )
 
-"""
-Code inspired from WTForms Documentation.
-http://wtforms.simplecodes.com/docs/1.0.2/fields.html#custom-fields
-"""
+
 class TagListField(TextField):
+    """
+    Code inspired from WTForms Documentation.
+    http://wtforms.simplecodes.com/docs/1.0.2/fields.html#custom-fields
+    """
 
     def _value(self):
         if self.data:
