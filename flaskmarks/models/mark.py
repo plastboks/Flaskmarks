@@ -28,6 +28,7 @@ class Mark(db.Model):
     metas = relationship('Meta', backref='mark', lazy='dynamic')
     tags = relationship('Tag',
                         secondary=ass_tbl,
+                        lazy='subquery',
                         backref='marks')
 
     def __repr__(self):
