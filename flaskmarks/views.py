@@ -16,6 +16,7 @@ from urllib import urlopen
 from datetime import datetime
 from urlparse import urlparse, urljoin
 import feedparser
+import json
 
 from flask.ext.login import (
     login_user,
@@ -328,6 +329,18 @@ def profile():
                            fc=g.user.get_feed_count(),
                            lcm=g.user.mark_last_created()
                            )
+
+
+@app.route('/export', methods=['GET'])
+@login_required
+def export():
+    u = g.user
+    return json.dumps([{'title': m.title,
+                        'type': m.type,
+                        'url': m.url,
+                        'clicks': m.clicks,
+                        'tags': json.dumps([t.title for t in m.tags])}
+                      for m in u.all_marks()])
 
 
 @app.route('/register', methods=['GET', 'POST'])
