@@ -2,6 +2,11 @@
 {% block content %}
 <section id="content">
 <section class="contentbox markform roundcorner5 shadow4 clear">
+    <nav id='toolbox'>
+        <ul>
+            <li><a href="{{ url_for('export') }}">Export all marks</a></li>
+        </ul>
+    </nav>
     <h2>Profile - {{ g.user.username }} ({{ g.user.email }})</h2>
     <section id='info'>
         <img src="{{ g.user.email | gravatar }}" title="gravatar" alt="gravatar" class="shadow4 roundcorner5"/>
