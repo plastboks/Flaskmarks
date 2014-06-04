@@ -331,7 +331,7 @@ def profile():
                            )
 
 
-@app.route('/export', methods=['GET'])
+@app.route('/export.json', methods=['GET'])
 @login_required
 def export():
     u = g.user
