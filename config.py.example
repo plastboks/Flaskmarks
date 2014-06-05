@@ -9,10 +9,14 @@ SITE_FOOTER = 'Flaskmark awesome bookmark and feed app'
 CAN_REGISTER = True
 
 """
-Database
+Database settings.
 """
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' +\
-                          os.path.join(basedir, 'flaskmarks.sqlite')
+## SQLiTE
+SQLALCHEMY_DATABASE_URI = 'sqlite:///' +  os.path.join(basedir, 'flaskmarks.sqlite')
+## MySQL
+# SQLALCHEMY_DATABASE_URI = 'mysql://username:password@server/db'
+## PostgreSQL
+# SQLALCHEMY_DATABASE_URI = 'postgresql://username:password@server/db'
 
 """
 Keys
