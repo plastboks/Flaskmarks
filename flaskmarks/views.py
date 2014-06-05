@@ -10,6 +10,7 @@ from flask import (
     current_app,
     abort,
     jsonify,
+    json
 )
 
 from BeautifulSoup import BeautifulSoup as BSoup
@@ -353,7 +354,35 @@ def import_marks():
     POST
     """
     if form.validate_on_submit():
-        print ""  # do some interesting things
+        try:
+            data = json.loads(form.file.data.read())
+        except Exception as detail:
+            flash('%s' % (detail), category='error')
+            return redirect(url_for('profile'))
+        """ TEST ZONE """
+        count = 0
+        for c in data['marks']:
+            m = Mark()
+            m.owner_id = u.id
+            m.created = datetime.utcnow()
+            m.title = c['title']
+            m.type = c['type']
+            m.url = c['url']
+            m.clicks = c['clicks']
+            """ TAGS """
+            tags = []
+            for t in c['tags']:
+                tag = Tag.check(t.lower())
+                if not tag:
+                    tag = Tag(t.lower())
+                    db.session.add(tag)
+                tags.append(tag)
+            m.tags = tags
+            count += 1
+            db.session.add(m)
+        db.session.commit()
+        flash('%s marks imported' % (count), category='info')
+        return redirect(url_for('profile'))
     """
     GET
     """
