@@ -8,8 +8,12 @@ from wtforms import (
     PasswordField,
     SelectField,
     HiddenField,
+    validators
+)
+from flask_wtf.file import (
     FileField,
-    validators,
+    FileAllowed,
+    FileRequired
 )
 
 
@@ -50,4 +54,6 @@ class UserProfileForm(UserRegisterForm):
 
 
 class MarksImportForm(Form):
-    file = FileField('Import file (Json)')
+    file = FileField('Import file (Json)', validators=[
+                     FileRequired(),
+                     FileAllowed(['json'], 'Only json files')])
