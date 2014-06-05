@@ -337,16 +337,17 @@ def profile():
 @login_required
 def export_marks():
     u = g.user
-    return jsonify(marks=[{'title': m.title,
-                           'type': m.type,
-                           'url': m.url,
-                           'clicks': m.clicks,
-                           'created': m.created.strftime('%s'),
-                           'updated': m.updated.strftime('%s') if m.updated else '',
-                           'last_clicked': m.last_clicked.strftime('%s') if m.last_clicked else '',
-                           'tags': [t.title for t in m.tags],
-                           'metas': [meta.name for meta in m.metas]}
-                          for m in u.all_marks()])
+    d = [{'title': m.title,
+          'type': m.type,
+          'url': m.url,
+          'clicks': m.clicks,
+          'created': m.created.strftime('%s'),
+          'updated': m.updated.strftime('%s') if m.updated else '',
+          'last_clicked': m.last_clicked.strftime('%s') if m.last_clicked else '',
+          'tags': [t.title for t in m.tags],
+          'metas': [meta.name for meta in m.metas]}
+         for m in u.all_marks()]
+    return jsonify(marks=d)
 
 
 @app.route('/marks/import', methods=['GET', 'POST'])
@@ -372,7 +373,7 @@ def import_marks():
             m.type = c['type']
             m.url = c['url']
             m.clicks = c['clicks']
-            m.created = datetime.fromtimestamp(int(c['created'])) 
+            m.created = datetime.fromtimestamp(int(c['created']))
             if c['updated']:
                 m.updated = datetime.fromtimestamp(int(c['updated']))
             if c['last_clicked']:
