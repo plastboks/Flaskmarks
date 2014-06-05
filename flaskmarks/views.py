@@ -341,7 +341,11 @@ def export_marks():
                            'type': m.type,
                            'url': m.url,
                            'clicks': m.clicks,
-                           'tags': [t.title for t in m.tags]}
+                           'created': m.created,
+                           'updated': m.updated.strftime('%s') if m.updated else '',
+                           'last_clicked': m.last_clicked.strftime('%s') if m.last_clicked else '',
+                           'tags': [t.title for t in m.tags],
+                           'metas': [meta.name for meta in m.metas]}
                           for m in u.all_marks()])
 
 
@@ -364,11 +368,15 @@ def import_marks():
         for c in data['marks']:
             m = Mark()
             m.owner_id = u.id
-            m.created = datetime.utcnow()
             m.title = c['title']
             m.type = c['type']
             m.url = c['url']
             m.clicks = c['clicks']
+            m.created = datetime.fromtimestamp(int(c['created'])) 
+            if c['updated']:
+                m.updated = datetime.fromtimestamp(int(c['updated']))
+            if c['last_clicked']:
+                m.last_clicked = datetime.fromtimestamp(int(c['last_clicked']))
             """ TAGS """
             tags = []
             for t in c['tags']:
@@ -380,7 +388,7 @@ def import_marks():
             m.tags = tags
             count += 1
             db.session.add(m)
-        db.session.commit()
+            db.session.commit()
         flash('%s marks imported' % (count), category='info')
         return redirect(url_for('profile'))
     """
