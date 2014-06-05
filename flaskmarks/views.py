@@ -1,5 +1,6 @@
 from flask import (
     render_template,
+    make_response,
     flash,
     redirect,
     session,
@@ -9,7 +10,6 @@ from flask import (
     current_app,
     abort,
     jsonify,
-    json
 )
 
 from BeautifulSoup import BeautifulSoup as BSoup
@@ -336,12 +336,12 @@ def profile():
 @login_required
 def export_marks():
     u = g.user
-    return json.dumps([{'title': m.title,
-                        'type': m.type,
-                        'url': m.url,
-                        'clicks': m.clicks,
-                        'tags': [t.title for t in m.tags]}
-                      for m in u.all_marks()])
+    return jsonify(marks=[{'title': m.title,
+                           'type': m.type,
+                           'url': m.url,
+                           'clicks': m.clicks,
+                           'tags': [t.title for t in m.tags]}
+                          for m in u.all_marks()])
 
 
 @app.route('/marks/import', methods=['GET', 'POST'])
@@ -353,7 +353,7 @@ def import_marks():
     POST
     """
     if form.validate_on_submit():
-        print "" # do some interesting things
+        print ""  # do some interesting things
     """
     GET
     """
