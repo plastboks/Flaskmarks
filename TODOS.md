@@ -10,3 +10,4 @@
 - [ ] Mobile views.
 - [ ] Update screenshots.
 - [ ] Write tests...
+- [ ] Rewrite jQuery code to vanilla javascript.
