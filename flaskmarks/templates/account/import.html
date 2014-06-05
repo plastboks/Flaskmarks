@@ -3,7 +3,7 @@
 <section id="content">
     <section class="contentbox markform roundcorner5 shadow4 clear">
         <h2>Import marks</h2>
-        <form action="{{ url_for('import_marks') }}" method="POST">
+        <form action="{{ url_for('import_marks') }}" method="POST" enctype="multipart/form-data">
             {{form.hidden_tag()}}
             <p>
                 {{ form.file.label() }} <br />
