@@ -8,6 +8,7 @@ from wtforms import (
     PasswordField,
     SelectField,
     HiddenField,
+    FileField,
     validators,
 )
 
@@ -46,3 +47,7 @@ class UserProfileForm(UserRegisterForm):
                             choices=[('clicks', 'Clicks'),
                                      ('dateasc', 'Date asc'),
                                      ('datedesc', 'Date desc')])
+
+
+class MarksImportForm(Form):
+    file = FileField('Import file (Json)')

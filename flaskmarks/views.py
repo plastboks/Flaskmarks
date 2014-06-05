@@ -9,6 +9,7 @@ from flask import (
     current_app,
     abort,
     jsonify,
+    json
 )
 
 from BeautifulSoup import BeautifulSoup as BSoup
@@ -16,7 +17,6 @@ from urllib import urlopen
 from datetime import datetime
 from urlparse import urlparse, urljoin
 import feedparser
-import json
 
 from flask.ext.login import (
     login_user,
@@ -40,6 +40,7 @@ from forms import (
     MarkForm,
     UserRegisterForm,
     UserProfileForm,
+    MarksImportForm
 )
 
 from models import (
@@ -331,16 +332,33 @@ def profile():
                            )
 
 
-@app.route('/export.json', methods=['GET'])
+@app.route('/marks/export.json', methods=['GET'])
 @login_required
-def export():
+def export_marks():
     u = g.user
     return json.dumps([{'title': m.title,
                         'type': m.type,
                         'url': m.url,
                         'clicks': m.clicks,
-                        'tags': json.dumps([t.title for t in m.tags])}
+                        'tags': [t.title for t in m.tags]}
                       for m in u.all_marks()])
+
+
+@app.route('/marks/import', methods=['GET', 'POST'])
+@login_required
+def import_marks():
+    u = g.user
+    form = MarksImportForm(obj=u)
+    """
+    POST
+    """
+    if form.validate_on_submit():
+        print "" # do some interesting things
+    """
+    GET
+    """
+    return render_template('account/import.html',
+                           form=form)
 
 
 @app.route('/register', methods=['GET', 'POST'])

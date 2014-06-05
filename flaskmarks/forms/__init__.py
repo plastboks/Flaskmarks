@@ -5,4 +5,5 @@ from flaskmarks.forms.mark import MarkForm
 from flaskmarks.forms.user import (
     UserProfileForm,
     UserRegisterForm,
+    MarksImportForm
 )
