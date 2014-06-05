@@ -11,7 +11,6 @@ Install
 * Create and activate a python virtualenv.
 * make a copy of config.py.example to config.py and edit accordingly.
 * run: `pip install -r requirements.txt`.
-* copy config.py.example to config.py and edit.
 * run: `python run.py db init`
 * run: `python run.py db migrate`
 * run: `python run.py db upgrade`
@@ -19,22 +18,20 @@ Install
 
 Ubuntu
 ======
-Installing this app on ubuntu may take a little more effort than `pip install -r requirements.txt`.
-* run: `sudo apt-get install python-virtualenv`
-* run: `sudo apt-get install python2.7-dev`
-* run: `sudo apt-get install build-essential`
+Installing this app on ubuntu may take a little more effort than `pip install -r requirements.txt`. On some systems the following packages need to be installed:
+* run: `sudo apt-get install python-virtualenv python2.7-dev build-essential`
 
 Upgrade
 =======
 * run: `python run.py db migrate`
 * run: `python run.py db upgrade`
 
-Python and packages update
-==========================
+Package updates
+===============
 * run: `pip install --upgrade -r requirements.txt`
 
-Deploy
-======
+Simple deployment with nginx
+============================
 * edit and install examples/flaskmarks.nginx.example
 * run: `python run.py runserver -p 5001`
 
