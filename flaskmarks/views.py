@@ -341,7 +341,7 @@ def export_marks():
                            'type': m.type,
                            'url': m.url,
                            'clicks': m.clicks,
-                           'created': m.created,
+                           'created': m.created.strftime('%s'),
                            'updated': m.updated.strftime('%s') if m.updated else '',
                            'last_clicked': m.last_clicked.strftime('%s') if m.last_clicked else '',
                            'tags': [t.title for t in m.tags],
