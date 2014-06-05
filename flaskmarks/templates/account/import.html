@@ -6,6 +6,9 @@
         <form action="{{ url_for('import_marks') }}" method="POST" enctype="multipart/form-data">
             {{form.hidden_tag()}}
             <p>
+                {% for error in form.file.errors %}
+                    <p class="error">{{ error }}</p>
+                {% endfor %}
                 {{ form.file.label() }} <br />
                 {{ form.file() }}
             </p>
