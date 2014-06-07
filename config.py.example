@@ -11,11 +11,11 @@ CAN_REGISTER = True
 """
 Database settings.
 """
-## SQLiTE
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' +  os.path.join(basedir, 'flaskmarks.sqlite')
-## MySQL
+# SQLiTE
+SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'flaskmarks.sqlite')
+# MySQL
 # SQLALCHEMY_DATABASE_URI = 'mysql://username:password@server/db'
-## PostgreSQL
+# PostgreSQL
 # SQLALCHEMY_DATABASE_URI = 'postgresql://username:password@server/db'
 
 """
