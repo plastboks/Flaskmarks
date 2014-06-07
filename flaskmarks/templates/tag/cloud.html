@@ -1,13 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-{% include "mark/submenu.html" %}
+{% include "tag/submenu.html" %}
     <section class="contentbox markslist roundcorner5 shadow4">
-        <h2>Tags</h2>
         <section id="tagcloud">
         {% if tags %}
             <ul>
             {% for t in tags %}
-                <li class="count-{{ t.marks | length }}" {{ t.marks | tagsize }} >
+                <li>
                     <a href="{{ url_for('mark_q_tag', slug=t.title) }}">{{ t.title }}</a>
                 </li>
             {% endfor %}

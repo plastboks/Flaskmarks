@@ -335,6 +335,34 @@ header #search label {
     color: olivedrab;
 }
 
+.tagslist ul {
+    display: table;
+    width: 100%;
+    list-style: none;
+    padding: 0px 5px;
+    margin: 0px;
+}
+
+.tagslist ul li.tablerow{
+    display: table-row;
+    color: dimgray;
+    text-align: left;
+}
+
+.tagslist ul li.column{
+    display: table-cell;
+    padding-top: 5px;
+}
+
+.tagslist .title {
+    width: 500px;
+}
+.tagslist .count {
+    font-size: 0.75em;
+    color: #808080;
+    width: 40px;
+}
+
 .markform {
   padding: 20px;  
 }

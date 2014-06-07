@@ -122,15 +122,6 @@ def recently_added(page=1):
                            marks=u.recent_marks(page, 'added'))
 
 
-@app.route('/tags', methods=['GET'])
-@login_required
-def tags():
-    return render_template('mark/tags.html',
-                           title='Popular Tags',
-                           header='',
-                           tags=g.user.all_tags())
-
-
 @app.route('/mark/new', methods=['GET', 'POST'])
 @login_required
 def new_mark():
@@ -246,6 +237,29 @@ def delete_mark(id):
         """
         return redirect(url_for('marks'))
     abort(403)
+
+
+################
+# Tags section #
+################
+@app.route('/tagcloud', methods=['GET'])
+@login_required
+def tagcloud():
+    return render_template('tag/cloud.html',
+                           title='Tag cloud',
+                           header='',
+                           tags=g.user.all_tags())
+
+
+@app.route('/tagsbyclicks', methods=['GET'])
+@app.route('/tagbyclicks/<int:page>')
+@login_required
+def tags_by_click(page=1):
+    u = g.user
+    return render_template('tag/index.html',
+                           title='Tags - page %d' % page,
+                           header='',
+                           tags=u.tags_by_click(page))
 
 
 ##################

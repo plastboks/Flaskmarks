@@ -86,6 +86,10 @@ class User(db.Model):
     def all_tags(self):
         return self.my_tags().all()
 
+    def tags_by_click(self, page):
+        return self.my_tags().order_by(Tag.marks.any(Mark.clicks))\
+                             .paginate(page, self.per_page, False)
+
     def authenticate_user(self, password):
         manager = BCRYPTPasswordManager()
         return manager.check(self.password, password)

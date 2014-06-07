@@ -1,0 +1,27 @@
+<section class="contentbox tagslist roundcorner5 shadow4">
+    <ul>
+    {% for tag in tags.items %}
+        <li class="tablerow">
+            <ul>
+                <li class='column title'>
+                    <a href="{{ url_for('mark_q_tag', slug=tag.title) }}" class="link">{{ tag.title }}</a>
+                </li>
+                <li class="column count">
+                    <span>{{ tag.marks | length }}</span>
+                </li>
+            </ul>
+        </li>
+    {% endfor %}
+    <ul>
+</section>
+<section id="paginate">
+{% if tags.has_prev %}
+    <a href="{{ url_for(request.endpoint, slug=request.view_args.get('slug'), page=1, q=request.args.get('q'), type=request.args.get('type')) }}"><<</a>
+    <a href="{{ url_for(request.endpoint, slug=request.view_args.get('slug'), page=tags.prev_num, q=request.args.get('q'), type=request.args.get('type')) }}"><</a>
+{% endif %}
+Page {{ tags.page }} of {{ tags.pages }}
+{% if tags.has_next %}
+    <a href="{{ url_for(request.endpoint, slug=request.view_args.get('slug'), page=tags.next_num, q=request.args.get('q'), type=request.args.get('type')) }}">></a>
+    <a href="{{ url_for(request.endpoint, slug=request.view_args.get('slug'), page=tags.pages, q=request.args.get('q'), type=request.args.get('type')) }}">>></a>
+{% endif %}
+</section>
