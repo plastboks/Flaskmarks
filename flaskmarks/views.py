@@ -313,40 +313,9 @@ def ajax_mark_inc():
     return jsonify(status='error')
 
 
-################
-# User section #
-################
-@app.route('/profile', methods=['GET', 'POST'])
-@login_required
-def profile():
-    u = g.user
-    form = UserProfileForm(obj=u)
-    """
-    POST
-    """
-    if form.validate_on_submit():
-        form.populate_obj(u)
-        if form.password.data:
-            pm = bMan()
-            u.password = pm.encode(form.password.data)
-        else:
-            del u.password
-        db.session.add(u)
-        db.session.commit()
-        flash('User "%s" updated.' % (form.username.data), category='info')
-        return redirect(url_for('profile'))
-    """
-    GET
-    """
-    return render_template('account/profile.html',
-                           form=form,
-                           title='Profile',
-                           bc=g.user.get_mark_count(),
-                           fc=g.user.get_feed_count(),
-                           lcm=g.user.mark_last_created()
-                           )
-
-
+###########################
+# Import / Export Section #
+###########################
 @app.route('/marks/export.json', methods=['GET'])
 @login_required
 def export_marks():
@@ -392,6 +361,40 @@ def import_marks():
     """
     return render_template('account/import.html',
                            form=form)
+
+
+################
+# User section #
+################
+@app.route('/profile', methods=['GET', 'POST'])
+@login_required
+def profile():
+    u = g.user
+    form = UserProfileForm(obj=u)
+    """
+    POST
+    """
+    if form.validate_on_submit():
+        form.populate_obj(u)
+        if form.password.data:
+            pm = bMan()
+            u.password = pm.encode(form.password.data)
+        else:
+            del u.password
+        db.session.add(u)
+        db.session.commit()
+        flash('User "%s" updated.' % (form.username.data), category='info')
+        return redirect(url_for('profile'))
+    """
+    GET
+    """
+    return render_template('account/profile.html',
+                           form=form,
+                           title='Profile',
+                           bc=g.user.get_mark_count(),
+                           fc=g.user.get_feed_count(),
+                           lcm=g.user.mark_last_created()
+                           )
 
 
 @app.route('/register', methods=['GET', 'POST'])
