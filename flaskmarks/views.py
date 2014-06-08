@@ -378,29 +378,10 @@ def import_marks():
         except Exception as detail:
             flash('%s' % (detail), category='error')
             return redirect(url_for('profile'))
-        """ TEST ZONE """
         count = 0
         for c in data['marks']:
             m = Mark()
-            m.owner_id = u.id
-            m.title = c['title']
-            m.type = c['type']
-            m.url = c['url']
-            m.clicks = c['clicks']
-            m.created = datetime.fromtimestamp(int(c['created']))
-            if c['updated']:
-                m.updated = datetime.fromtimestamp(int(c['updated']))
-            if c['last_clicked']:
-                m.last_clicked = datetime.fromtimestamp(int(c['last_clicked']))
-            """ TAGS """
-            tags = []
-            for t in c['tags']:
-                tag = Tag.check(t.lower())
-                if not tag:
-                    tag = Tag(t.lower())
-                    db.session.add(tag)
-                tags.append(tag)
-            m.tags = tags
+            m.insert_from_import(u.id, c)
             count += 1
             db.session.add(m)
             db.session.commit()

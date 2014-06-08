@@ -5,7 +5,9 @@ from sqlalchemy import (
     desc,
 )
 from sqlalchemy.orm import relationship
+from datetime import datetime
 from flaskmarks.models.meta import Meta
+from flaskmarks.models.tag import Tag
 
 ass_tbl = db.Table('marks_tags', db.metadata,
                    db.Column('left_id', db.Integer, db.ForeignKey('marks.id')),
@@ -30,6 +32,27 @@ class Mark(db.Model):
                         secondary=ass_tbl,
                         lazy='joined',
                         backref='marks')
+
+    def insert_from_import(self, owner_id, data):
+        self.owner_id = owner_id
+        self.title = data['title']
+        self.type = data['type']
+        self.url = data['url']
+        self.clicks = data['clicks']
+        self.created = datetime.fromtimestamp(int(data['created']))
+        if data['updated']:
+            self.updated = datetime.fromtimestamp(int(data['updated']))
+        if data['last_clicked']:
+            self.last_clicked = datetime.fromtimestamp(int(data['last_clicked']))
+        """ TAGS """
+        tags = []
+        for t in data['tags']:
+            tag = Tag.check(t.lower())
+            if not tag:
+                tag = Tag(t.lower())
+                db.session.add(tag)
+            tags.append(tag)
+        self.tags = tags
 
     def __repr__(self):
         return '<Mark %r>' % (self.title)
