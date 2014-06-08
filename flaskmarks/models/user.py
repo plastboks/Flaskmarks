@@ -87,7 +87,7 @@ class User(db.Model):
         return self.my_tags().all()
 
     def tags_by_click(self, page):
-        return self.my_tags().order_by(Tag.marks.any(Mark.clicks))\
+        return self.my_tags().order_by(desc(Tag.marks.any(Mark.clicks)))\
                              .paginate(page, self.per_page, False)
 
     def authenticate_user(self, password):
