@@ -4,8 +4,8 @@
 <section class="contentbox markform roundcorner5 shadow4 clear">
     <nav id='toolbox'>
         <ul>
-            <li><a href="{{ url_for('export_marks') }}">Export all marks</a></li>
-            <li><a href="{{ url_for('import_marks') }}">Import marks</a></li>
+            <li><a href="{{ url_for('marks.export_marks') }}">Export all marks</a></li>
+            <li><a href="{{ url_for('marks.import_marks') }}">Import marks</a></li>
         </ul>
     </nav>
     <h2>Profile - {{ g.user.username }} ({{ g.user.email }})</h2>

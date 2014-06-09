@@ -7,7 +7,7 @@
             <ul>
             {% for t in tags %}
                 <li>
-                    <a href="{{ url_for('mark_q_tag', slug=t.title) }}">{{ t.title }}</a>
+                    <a href="{{ url_for('marks.mark_q_tag', slug=t.title) }}">{{ t.title }}</a>
                 </li>
             {% endfor %}
             </ul>

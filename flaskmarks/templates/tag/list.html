@@ -4,7 +4,7 @@
         <li class="tablerow">
             <ul>
                 <li class='column title'>
-                    <a href="{{ url_for('mark_q_tag', slug=tag.title) }}" class="link">{{ tag.title }}</a>
+                    <a href="{{ url_for('marks.mark_q_tag', slug=tag.title) }}" class="link">{{ tag.title }}</a>
                 </li>
                 <li class="column count">
                     <span>{{ tag.marks | length }}</span>
