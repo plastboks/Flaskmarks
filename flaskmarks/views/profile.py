@@ -1,8 +1,15 @@
 # flaskmarks/views/profile.py
 
-from flask import Blueprint, render_template, g
+from flask import (
+    Blueprint,
+    render_template,
+    g, 
+    flash,
+    redirect,
+    url_for,
+)
 from flask.ext.login import login_required
-from flaskmarks import config
+from flaskmarks import config, db
 from ..forms import (
     UserRegisterForm,
     UserProfileForm,
@@ -28,7 +35,7 @@ def userprofile():
         db.session.add(u)
         db.session.commit()
         flash('User "%s" updated.' % (form.username.data), category='info')
-        return redirect(url_for('profile'))
+        return redirect(url_for('profile.userprofile'))
     """
     GET
     """
@@ -59,7 +66,7 @@ def register():
             db.session.commit()
             flash('New user "%s" registered.'
                   % (form.username.data), category='info')
-            return redirect(url_for('login'))
+            return redirect(url_for('auth.login'))
         except Exception as detail:
             flash('Problem registering "%s".'
                   % (form.username.data), category='error')
