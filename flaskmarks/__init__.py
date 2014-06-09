@@ -59,5 +59,7 @@ from flaskmarks import (
 
 from .views.profile import profile
 from .views.auth import auth
+from .views.tags import tags
 app.register_blueprint(profile)
 app.register_blueprint(auth)
+app.register_blueprint(tags)

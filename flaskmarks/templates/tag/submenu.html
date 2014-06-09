@@ -1,6 +1,6 @@
 <nav id="submenu" class='shadow4 roundcorner5'>
     <ul class="secondarymenu">
-            <li><a href="{{ url_for('tagcloud') }}" class="{% if request.url_rule.rule in url_for('tagcloud') %}active{% endif %}">Cloud</a></li>
-            <li><a href="{{ url_for('tags_by_click') }}" class="{% if request.url_rule.rule in url_for('tags_by_click') %}active{% endif %}">Tags by click</a></li>
+            <li><a href="{{ url_for('tags.cloud') }}" class="{% if request.url_rule.rule in url_for('tags.cloud') %}active{% endif %}">Cloud</a></li>
+            <li><a href="{{ url_for('tags.by_clicks') }}" class="{% if request.url_rule.rule in url_for('tags.by_clicks') %}active{% endif %}">Tags by click</a></li>
     </ul>
 </nav>

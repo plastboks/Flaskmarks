@@ -2,7 +2,7 @@
     <ul class="primarymenu">
         {% if g.user.is_authenticated() %}
             <li><a href="{{ url_for('marks') }}" class="{% if request.url_rule.rule == url_for('marks') %}active{% endif %}">Marks</a></li>
-            <li><a href="{{ url_for('tagcloud') }}" class="{% if request.url_rule.rule == url_for('tagcloud') %}active{% endif %}">Tags</a></li>
+            <li><a href="{{ url_for('tags.cloud') }}" class="{% if request.url_rule.rule == url_for('tags.cloud') %}active{% endif %}">Tags</a></li>
             <li><a href="{{ url_for('profile.userprofile') }}" class="{% if request.url_rule.rule == url_for('profile.userprofile') %}active{% endif %}">Profile</a></li>
             <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
         {% else %}
