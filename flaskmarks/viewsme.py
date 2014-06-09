@@ -363,48 +363,6 @@ def import_marks():
                            form=form)
 
 
-
-########################
-# Login/logout section #
-########################
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if g.user.is_authenticated():
-        return redirect(url_for('marks'))
-    form = LoginForm()
-    """
-    POST
-    """
-    if form.validate_on_submit():
-        u = User.by_uname_or_email(form.username.data)
-        if u and u.authenticate_user(form.password.data):
-            u.last_logged = datetime.utcnow()
-            db.session.add(u)
-            db.session.commit()
-            flash('Welcome %s.' % (u.username),
-                  category='info')
-            login_user(u, remember=form.remember_me.data)
-            return redirect(url_for('marks'))
-        else:
-            flash('Failed login for %s.' % (form.username.data),
-                  category='error')
-            return redirect(url_for('login'))
-    """
-    GET
-    """
-    return render_template('profile/login.html',
-                           title='Login',
-                           form=form,
-                           )
-
-
-@app.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for('login'))
-
-
 #################
 # Other Section #
 #################
