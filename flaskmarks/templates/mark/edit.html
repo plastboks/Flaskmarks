@@ -3,8 +3,8 @@
 <section id="edit" class="markform contentbox shadow4 roundcorner5">
     <nav id='toolbox'>
         <ul>
-            <li><a href="{{ url_for('new_mark', url=mark.url, type=mark.type) }}">Clone to new</a></li>
-            <li><a href="{{ url_for('delete_mark', id=mark.id) }}">Delete</a></li>
+            <li><a href="{{ url_for('marks.new_mark', url=mark.url, type=mark.type) }}">Clone to new</a></li>
+            <li><a href="{{ url_for('marks.delete_mark', id=mark.id) }}">Delete</a></li>
         </ul>
     </nav>
     <h2>Edit Bookmark - {{ mark.title|truncate(50) }}</h2>

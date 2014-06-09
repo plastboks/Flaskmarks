@@ -3,7 +3,7 @@
 <section id='view' class='contentbox roundcorner5 shadow4'>
     <nav id='toolbox'>
         <ul>
-            <li><a href='{{ url_for('edit_mark', id=mark.id)}}' title='Edit'>Edit</a></li>
+            <li><a href='{{ url_for('marks.edit_mark', id=mark.id)}}' title='Edit'>Edit</a></li>
         </ul>
     </nav>
     <h2>{{ mark.title|truncate(70) }}</h2>
@@ -11,7 +11,7 @@
         {% if mark.tags %}
             <ul>
             {% for t in mark.tags %}
-                <li><a href="{{ url_for('mark_q_tag', slug=t.title) }}" class="tag">{{ t.title }}</a></li>
+                <li><a href="{{ url_for('marks.mark_q_tag', slug=t.title) }}" class="tag">{{ t.title }}</a></li>
             {% endfor %}
             </ul>
         {% endif %}
@@ -23,7 +23,7 @@
                 {% for link in entry['links'] %}
                     {% if link['rel'] == 'alternate' or link['rel'] == 'enclosure'%}
                         <li class='makebookmark'>
-                            <a href='{{ url_for('new_mark', title=entry['title'], url=link['href']) }}' title='Save as bookmark' class='link'></a>
+                            <a href='{{ url_for('marks.new_mark', title=entry['title'], url=link['href']) }}' title='Save as bookmark' class='link'></a>
                         </li>
                         <li class='link'>
                             <a href='{{ link['href'] }}' rel='noreferrer' class='link' target='_blank' title='{{ entry['title']}}'>{{ entry['title']|truncate(70) }}</a>

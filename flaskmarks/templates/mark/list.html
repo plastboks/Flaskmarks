@@ -9,14 +9,14 @@
                             {{ mark.title|truncate(82) }}
                         </a>
                     {% elif mark.type == 'feed' %}
-                        <a href="{{ url_for('view_mark', id=mark.id) }}" class="link clickIncrement" data-id="{{ mark.id }}" data-url="/mark/inc" title="{{mark.title}}" rel="noreferrer">
+                        <a href="{{ url_for('marks.view_mark', id=mark.id) }}" class="link clickIncrement" data-id="{{ mark.id }}" data-url="/mark/inc" title="{{mark.title}}" rel="noreferrer">
                             {{ mark.title|truncate(82) }}
                         </a>
                     {% endif %}
                     <br />
                     {% if mark.tags %}
                         {% for m in mark.tags %}
-                            <a href="{{ url_for('mark_q_tag', slug=m.title) }}" class="tag foreign">{{ m.title }}</a>
+                            <a href="{{ url_for('marks.mark_q_tag', slug=m.title) }}" class="tag foreign">{{ m.title }}</a>
                         {% endfor %}
                     {% endif %}
                     <span class="lastvisit">last visit:</span>
@@ -25,7 +25,7 @@
                     {% else %}
                         <span class="neverclick">never</span>
                     {% endif %}
-                    <span class="action edit"><a href="{{ url_for('edit_mark', id=mark.id) }}" title='Edit'>edit</a></span>
+                    <span class="action edit"><a href="{{ url_for('marks.edit_mark', id=mark.id) }}" title='Edit'>edit</a></span>
                 </li>
                 <li class="column clicks">
                     <span>{{ mark.clicks }}</span>
