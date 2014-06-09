@@ -3,7 +3,7 @@
 {% block content %}
 <section class="markform contentbox shadow4 roundcorner5">
 <h2>Register</h2>
-    <form action="{{ url_for('register') }}" method="POST">
+    <form action="{{ url_for('profile.register') }}" method="POST">
         {{form.hidden_tag()}}
         <p>
             {% for error in form.username.errors %}

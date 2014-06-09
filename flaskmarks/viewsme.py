@@ -359,73 +359,9 @@ def import_marks():
     """
     GET
     """
-    return render_template('account/import.html',
+    return render_template('profile/import.html',
                            form=form)
 
-
-################
-# User section #
-################
-@app.route('/profile', methods=['GET', 'POST'])
-@login_required
-def profile():
-    u = g.user
-    form = UserProfileForm(obj=u)
-    """
-    POST
-    """
-    if form.validate_on_submit():
-        form.populate_obj(u)
-        if form.password.data:
-            pm = bMan()
-            u.password = pm.encode(form.password.data)
-        else:
-            del u.password
-        db.session.add(u)
-        db.session.commit()
-        flash('User "%s" updated.' % (form.username.data), category='info')
-        return redirect(url_for('profile'))
-    """
-    GET
-    """
-    return render_template('account/profile.html',
-                           form=form,
-                           title='Profile',
-                           bc=g.user.get_mark_count(),
-                           fc=g.user.get_feed_count(),
-                           lcm=g.user.mark_last_created()
-                           )
-
-
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    if not app.config['CAN_REGISTER']:
-        abort(403)
-    form = UserRegisterForm()
-    """
-    POST
-    """
-    if form.validate_on_submit():
-        u = User()
-        pm = bMan()
-        form.populate_obj(u)
-        u.password = pm.encode(form.password.data)
-        try:
-            db.session.add(u)
-            db.session.commit()
-            flash('New user "%s" registered.'
-                  % (form.username.data), category='info')
-            return redirect(url_for('login'))
-        except Exception as detail:
-            flash('Problem registering "%s".'
-                  % (form.username.data), category='error')
-    """
-    GET
-    """
-    return render_template('account/register.html',
-                           form=form,
-                           title='Register',
-                           )
 
 
 ########################
@@ -456,7 +392,7 @@ def login():
     """
     GET
     """
-    return render_template('account/login.html',
+    return render_template('profile/login.html',
                            title='Login',
                            form=form,
                            )

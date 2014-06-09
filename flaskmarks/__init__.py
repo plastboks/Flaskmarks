@@ -52,7 +52,10 @@ manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 
 from flaskmarks import (
-    views,
+    viewsme,
     models,
     filters,
 )
+
+from .views.profile import profile
+app.register_blueprint(profile)

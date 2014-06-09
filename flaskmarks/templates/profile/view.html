@@ -19,7 +19,7 @@
             <li>Last logon: {{ g.user.last_logged | datetime }}</li>
         </ul>
     </section>
-    <form action="{{ url_for('profile') }}" method="POST">
+    <form action="{{ url_for('profile.userprofile') }}" method="POST">
         {{form.hidden_tag()}}
         <section>
             <p>
