@@ -4,9 +4,9 @@
             <li><a href="{{ url_for('marks') }}" class="{% if request.url_rule.rule == url_for('marks') %}active{% endif %}">Marks</a></li>
             <li><a href="{{ url_for('tagcloud') }}" class="{% if request.url_rule.rule == url_for('tagcloud') %}active{% endif %}">Tags</a></li>
             <li><a href="{{ url_for('profile.userprofile') }}" class="{% if request.url_rule.rule == url_for('profile.userprofile') %}active{% endif %}">Profile</a></li>
-            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
         {% else %}
-            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('auth.login') }}">Login</a></li>
             {% if config['CAN_REGISTER'] %}
                 <li><a href="{{ url_for('profile.register') }}">Register</a></li>
             {% endif %}
