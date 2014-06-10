@@ -64,19 +64,3 @@ def load_user(id):
 def before_request():
     g.user = current_user
 
-
-@app.errorhandler(401)
-def unauthorized(error):
-    if request.referrer \
-        and is_safe_url(request.referrer) \
-            and request.referrer is not "/":
-        flash('Unauthorized access.', category='error')
-    return redirect(url_for('login'))
-
-
-@app.errorhandler(403)
-def forbidden(error):
-    flash('Forbidden access.', category='error')
-    return redirect(url_for('marks'))
-
-
