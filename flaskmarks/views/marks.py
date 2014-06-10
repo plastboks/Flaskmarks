@@ -58,7 +58,7 @@ marks = Blueprint('marks', __name__)
 @marks.route('/')
 @marks.route('/index')
 def webroot():
-    return redirect(url_for('marks'))
+    return redirect(url_for('marks.allmarks'))
 
 
 @marks.route('/marks')
