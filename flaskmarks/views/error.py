@@ -10,15 +10,10 @@ from flask import (
 )
 
 from flaskmarks.core.setup import db
+from flaskmarks.core.error import is_safe_url
 from urlparse import urlparse, urljoin
 
 error = Blueprint('error', __name__)
-
-def is_safe_url(target):
-    ref_url = urlparse(request.host_url)
-    test_url = urlparse(urljoin(request.host_url, target))
-    return test_url.scheme in ('http', 'https') and\
-        ref_url.netloc == test_url.netloc
 
 @error.errorhandler(401)
 def unauthorized(error):
@@ -33,5 +28,3 @@ def unauthorized(error):
 def forbidden(error):
     flash('Forbidden access.', category='error')
     return redirect(url_for('marks'))
-
-
