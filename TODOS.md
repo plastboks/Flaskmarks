@@ -1,6 +1,6 @@
-- [ ] Export / Import marks.
+- [x] Export / Import marks.
 - [ ] RESTful everything.
-- [ ] Classify or Blueprint the views, and cleanup code!
+- [x] (Classify or) Blueprint the views, and cleanup code!
 - [ ] Separate Youtube type for expanding the features in the feed view. Features like pages etc. Also for easier youtube feedmark creations.
 - [ ] Meta system for extending marks with custom data (e.g youtube feeds args etc).
 - [x] Tag cloud.
