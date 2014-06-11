@@ -14,16 +14,16 @@ from flask.ext.login import (
     logout_user
 )
 from datetime import datetime
-from flaskmarks import db
-from ..forms import LoginForm
-from ..models import User
+from flaskmarks.core.setup import db
+from flaskmarks.forms import LoginForm
+from flaskmarks.models import User
 
 auth = Blueprint('auth', __name__)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if g.user.is_authenticated():
-        return redirect(url_for('marks'))
+        return redirect(url_for('marks.allmarks'))
     form = LoginForm()
     """
     POST
@@ -37,7 +37,7 @@ def login():
             flash('Welcome %s.' % (u.username),
                   category='info')
             login_user(u, remember=form.remember_me.data)
-            return redirect(url_for('marks'))
+            return redirect(url_for('marks.allmarks'))
         else:
             flash('Failed login for %s.' % (form.username.data),
                   category='error')

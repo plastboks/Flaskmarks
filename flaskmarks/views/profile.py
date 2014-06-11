@@ -9,8 +9,8 @@ from flask import (
     url_for,
 )
 from flask.ext.login import login_required
-from flaskmarks import config, db
-from ..forms import (
+from flaskmarks.core.setup import config, db
+from flaskmarks.forms import (
     UserRegisterForm,
     UserProfileForm,
 )

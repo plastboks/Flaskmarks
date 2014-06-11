@@ -1,15 +1,6 @@
-from flaskmarks.forms.base import (
-    Form,
-    strip_filter,
-)
-
-from flaskmarks import (
-    db
-)
-
-from flaskmarks.models.tag import (
-    Tag
-)
+from flaskmarks.forms.base import Form, strip_filter
+from flaskmarks.core.setup import db
+from flaskmarks.models.tag import Tag
 
 from wtforms import (
     Field,

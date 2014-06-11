@@ -9,7 +9,7 @@ from flask import (
     url_for,
 )
 
-from flaskmarks import db
+from flaskmarks.core.setup import db
 from urlparse import urlparse, urljoin
 
 error = Blueprint('error', __name__)

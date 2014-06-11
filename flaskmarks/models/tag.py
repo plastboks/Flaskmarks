@@ -1,4 +1,4 @@
-from flaskmarks import db, config
+from flaskmarks.core.setup import db, config
 from sqlalchemy import (
     and_,
     or_,

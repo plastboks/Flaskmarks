@@ -29,13 +29,13 @@ from cryptacular.bcrypt import (
     BCRYPTPasswordManager as bMan,
 )
 
-from flaskmarks import (
+from flaskmarks.core.setup import (
     app,
     db,
     lm,
 )
 
-from ..forms import (
+from flaskmarks.forms import (
     LoginForm,
     MarkForm,
     UserRegisterForm,
@@ -43,7 +43,7 @@ from ..forms import (
     MarksImportForm
 )
 
-from ..models import (
+from flaskmarks.models import (
     User,
     Mark,
     Tag,
