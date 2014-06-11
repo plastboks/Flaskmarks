@@ -20,6 +20,7 @@ from flaskmarks.models import User
 
 auth = Blueprint('auth', __name__)
 
+
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if g.user.is_authenticated():
@@ -56,5 +57,3 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('auth.login'))
-
-

@@ -52,6 +52,7 @@ from flaskmarks.models import (
 
 marks = Blueprint('marks', __name__)
 
+
 ########
 # CRUD #
 ########

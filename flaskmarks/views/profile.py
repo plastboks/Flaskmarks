@@ -3,7 +3,7 @@
 from flask import (
     Blueprint,
     render_template,
-    g, 
+    g,
     flash,
     redirect,
     url_for,
@@ -16,6 +16,7 @@ from flaskmarks.forms import (
 )
 
 profile = Blueprint('profile', __name__)
+
 
 @profile.route('/profile', methods=['GET', 'POST'])
 @login_required

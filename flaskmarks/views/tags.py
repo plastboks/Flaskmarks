@@ -9,6 +9,7 @@ from flask.ext.login import login_required
 
 tags = Blueprint('tags', __name__)
 
+
 @tags.route('/tagcloud', methods=['GET'])
 @login_required
 def cloud():

@@ -15,6 +15,7 @@ from urlparse import urlparse, urljoin
 
 error = Blueprint('error', __name__)
 
+
 @error.errorhandler(401)
 def unauthorized(error):
     if request.referrer \
