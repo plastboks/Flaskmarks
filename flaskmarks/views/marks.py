@@ -29,11 +29,8 @@ from cryptacular.bcrypt import (
     BCRYPTPasswordManager as bMan,
 )
 
-from flaskmarks.core.setup import (
-    app,
-    db,
-    lm,
-)
+from flaskmarks.core.setup import app, db
+from flaskmarks.core.error import is_safe_url
 
 from flaskmarks.forms import (
     LoginForm,
@@ -324,11 +321,3 @@ def mark_meta(id):
     if b:
         return render_template('meta.html', url=b.url)
     abort(403)
-
-
-# yanked from flask.pocoo.org/snippets/62
-def is_safe_url(target):
-    ref_url = urlparse(request.host_url)
-    test_url = urlparse(urljoin(request.host_url, target))
-    return test_url.scheme in ('http', 'https') and\
-        ref_url.netloc == test_url.netloc
