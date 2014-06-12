@@ -11,3 +11,4 @@
 - [ ] Update screenshots.
 - [ ] Write tests...
 - [ ] Rewrite jQuery code to vanilla javascript.
+- [ ] Changeable icons not determined by type.
