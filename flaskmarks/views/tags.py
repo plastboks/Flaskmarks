@@ -10,7 +10,7 @@ from flask.ext.login import login_required
 tags = Blueprint('tags', __name__)
 
 
-@tags.route('/tagcloud', methods=['GET'])
+@tags.route('/tags/cloud', methods=['GET'])
 @login_required
 def cloud():
     return render_template('tag/cloud.html',
@@ -19,8 +19,8 @@ def cloud():
                            tags=g.user.all_tags())
 
 
-@tags.route('/tagsbyclicks', methods=['GET'])
-@tags.route('/tagsbyclicks/<int:page>')
+@tags.route('/tags/sort/clicks', methods=['GET'])
+@tags.route('/tags/sort/clicks/<int:page>')
 @login_required
 def by_clicks(page=1):
     u = g.user
