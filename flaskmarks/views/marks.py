@@ -53,17 +53,14 @@ from flaskmarks.models import (
 marks = Blueprint('marks', __name__)
 
 
-########
-# CRUD #
-########
 @marks.route('/')
 @marks.route('/index')
 def webroot():
     return redirect(url_for('marks.allmarks'))
 
 
-@marks.route('/marks')
-@marks.route('/marks/<int:page>')
+@marks.route('/marks/all')
+@marks.route('/marks/all/<int:page>')
 @login_required
 def allmarks(page=1):
     u = g.user
@@ -73,8 +70,8 @@ def allmarks(page=1):
                            marks=u.marks(page))
 
 
-@marks.route('/clicked')
-@marks.route('/clicked/<int:page>')
+@marks.route('/marks/sort/clicked')
+@marks.route('/marks/sort/clicked/<int:page>')
 @login_required
 def recently_clicked(page=1):
     u = g.user
@@ -84,8 +81,8 @@ def recently_clicked(page=1):
                            marks=u.recent_marks(page, 'clicked'))
 
 
-@marks.route('/recently')
-@marks.route('/recently/<int:page>')
+@marks.route('/marks/sort/recently')
+@marks.route('/marks/sort/recently/<int:page>')
 @login_required
 def recently_added(page=1):
     u = g.user
@@ -93,6 +90,33 @@ def recently_added(page=1):
                            title='Marks - page %d' % page,
                            header='',
                            marks=u.recent_marks(page, 'added'))
+
+
+@marks.route('/marks/search/tag/<slug>')
+@marks.route('/marks/search/tag/<slug>/<int:page>')
+@login_required
+def mark_q_tag(slug, page=1):
+    return render_template('mark/index.html',
+                           title='Marks with tag: %s' % (slug),
+                           header='Marks with tag: %s' % (slug),
+                           marks=g.user.q_marks_by_tag(slug, page))
+
+
+@marks.route('/marks/search/string', methods=['GET'])
+@marks.route('/marks/search/string/<int:page>', methods=['GET'])
+@login_required
+def search_string(page=1):
+    q = request.args.get('q')
+    t = request.args.get('type')
+
+    if not q and not t:
+        return redirect(url_for('marks.allmarks'))
+
+    m = g.user.q_marks_by_string(page, q, t)
+    return render_template('mark/index.html',
+                           title='Search results for: %s' % (q),
+                           header="Search results for: '%s'" % (q),
+                           marks=m)
 
 
 @marks.route('/mark/new', methods=['GET', 'POST'])
@@ -210,36 +234,6 @@ def delete_mark(id):
         """
         return redirect(url_for('marks.allmarks'))
     abort(403)
-
-
-##########
-# Search #
-##########
-@marks.route('/mark/tag/<slug>')
-@marks.route('/mark/tag/<slug>/<int:page>')
-@login_required
-def mark_q_tag(slug, page=1):
-    return render_template('mark/index.html',
-                           title='Marks with tag: %s' % (slug),
-                           header='Marks with tag: %s' % (slug),
-                           marks=g.user.q_marks_by_tag(slug, page))
-
-
-@marks.route('/search', methods=['GET'])
-@marks.route('/search/<int:page>', methods=['GET'])
-@login_required
-def search_string(page=1):
-    q = request.args.get('q')
-    t = request.args.get('type')
-
-    if not q and not t:
-        return redirect(url_for('marks.allmarks'))
-
-    m = g.user.q_marks_by_string(page, q, t)
-    return render_template('mark/index.html',
-                           title='Search results for: %s' % (q),
-                           header="Search results for: '%s'" % (q),
-                           marks=m)
 
 
 ########
