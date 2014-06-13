@@ -1,13 +1,14 @@
 - [x] Export / Import marks.
 - [ ] RESTful everything.
 - [x] Blueprint the views, and cleanup code!
-- [ ] Separate Youtube type for expanding the features in the feed view. Features like pages etc. Also for easier youtube feedmark creations.
-- [ ] Meta system for extending marks with custom data (e.g youtube feeds args etc).
+- [ ] Separate YouTube type for expanding the features in the feed view. Features like pages etc. Also for easier YouTube feedmark creations.
+- [ ] Meta system for extending marks with custom data (ex: YouTube feeds args etc..).
+- [ ] Meta system for extending user objects with custom data (preferences etc..)
 - [x] Tag cloud.
 - [ ] Notes with revisions (from pulpy).
 - [ ] Calendar
 - [x] Tags for all object types.
 - [ ] Bootstrapify all templates.
-- [ ] Update screenshots.
+- [ ] Update screen shots.
 - [ ] Write tests...
 - [ ] Changeable icons not determined by type.
