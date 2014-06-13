@@ -56,4 +56,5 @@ Useful Links
 * [Flask and https](http://flask.pocoo.org/mailinglist/archive/2011/11/17/change-request-s-http-referer-header/#fc7dc5b7a1682ccbb4947a8013987761)
 * [Flask Migrate](http://flask-migrate.readthedocs.org/en/latest/)
 * [Nice Flask Tutorial](http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world)
+* [Flask online book](http://exploreflask.com/index.html)
 * [Flask Blueprints](http://flask.pocoo.org/docs/blueprints/)
