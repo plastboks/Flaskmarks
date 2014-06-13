@@ -7,8 +7,7 @@
 - [ ] Notes with revisions (from pulpy).
 - [ ] Calendar
 - [x] Tags for all object types.
-- [ ] Mobile views.
+- [ ] Bootstrapify all templates.
 - [ ] Update screenshots.
 - [ ] Write tests...
-- [ ] Rewrite jQuery code to vanilla javascript.
 - [ ] Changeable icons not determined by type.
