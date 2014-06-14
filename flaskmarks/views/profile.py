@@ -9,7 +9,7 @@ from flask import (
     url_for,
 )
 from flask.ext.login import login_required
-from ..core.setup import config, db
+from ..core.setup import config, db, bcrypt
 from ..forms import UserRegisterForm, UserProfileForm
 
 profile = Blueprint('profile', __name__)
@@ -26,8 +26,7 @@ def userprofile():
     if form.validate_on_submit():
         form.populate_obj(u)
         if form.password.data:
-            pm = bMan()
-            u.password = pm.encode(form.password.data)
+            u.password = bcrypt.generate_password_hash(form.password.data)
         else:
             del u.password
         db.session.add(u)
@@ -56,9 +55,8 @@ def register():
     """
     if form.validate_on_submit():
         u = User()
-        pm = bMan()
         form.populate_obj(u)
-        u.password = pm.encode(form.password.data)
+        u.password = bcrypt.generate_password_hash(form.password.data)
         try:
             db.session.add(u)
             db.session.commit()

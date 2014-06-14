@@ -1,6 +1,5 @@
 #requirements
 
-cryptacular
 BeautifulSoup
 sqlalchemy
 flask
@@ -9,6 +8,7 @@ flask-sqlalchemy
 flask-debugtoolbar
 flask-migrate
 flask-script
+flask-bcrypt
 sqlalchemy-migrate
 WebHelpers2
 flask-wtf

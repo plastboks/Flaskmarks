@@ -1,8 +1,7 @@
 # flaskmarks/models/user.py
 
 from sqlalchemy import or_, desc, asc, func
-from cryptacular.bcrypt import BCRYPTPasswordManager
-from ..core.setup import db, config
+from ..core.setup import db, config, bcrypt
 from .mark import Mark
 from .tag import Tag
 
@@ -88,8 +87,7 @@ class User(db.Model):
                              .paginate(page, self.per_page, False)
 
     def authenticate_user(self, password):
-        manager = BCRYPTPasswordManager()
-        return manager.check(self.password, password)
+        return bcrypt.check_password_hash(self.password, password)
 
     def is_authenticated(self):
         return True

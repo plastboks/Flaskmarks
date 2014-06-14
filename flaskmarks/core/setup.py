@@ -5,6 +5,7 @@ from flask.ext.script import Manager
 from flask.ext.migrate import Migrate, MigrateCommand
 from flask.ext.login import LoginManager
 from flask_debugtoolbar import DebugToolbarExtension
+from flask.ext.bcrypt import Bcrypt
 from .. import app
 
 app.config.from_object('config')
@@ -41,3 +42,8 @@ Manager
 """
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
+
+"""
+Bcrypt
+"""
+bcrypt = Bcrypt(app)
