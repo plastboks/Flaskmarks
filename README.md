@@ -4,7 +4,7 @@ My simple (and self educational) [Flask](http://flask.pocoo.org/) & [SQLAlchemy]
 
 Features
 ========
-"Flaskmarks" is a bookmark managing application. Its purpose is to be a all-in-one bookmark and RSS feed repository. Storing all bookmarks and RSS feeds in one place, makes them accessible from all platforms and devices. This is by no means an original idea, but this is an interpretation of the problem.
+"Flaskmarks" is a bookmark managing application. Its purpose is to be a all-in-one bookmark and RSS feed repository. Storing all bookmarks and RSS feeds in one place and make them accessible from all platforms and devices. This is by no means an original idea, but this is an interpretation of the problem.
 
 Install
 =======
@@ -18,7 +18,7 @@ Install
 
 Ubuntu
 ======
-Installing this app on ubuntu may take a little more effort than `pip install -r requirements.txt`. On some systems the following packages need to be installed:
+Installing this app on a Ubuntu server may take a little more effort than `pip install -r requirements.txt`. On some systems the following packages need to be installed:
 * run: `sudo apt-get install python-virtualenv python2.7-dev build-essential`
 
 Upgrade
@@ -41,11 +41,6 @@ There will at any given point be at least two branches in this repository. One
 master (stable) branch, and one develop branch. The develop branch might contain
 unfinished code and/or wonky solutions. I will strive to make sure that code 
 merged into master is as stable as possible (given the small size of this application).
-
-Included software
-=================
-* [jQuery](http://jquery.com)
-* [Some FamFamFam icons](http://www.famfamfam.com/lab/icons/silk/)
 
 Useful Links
 ============
