@@ -28,6 +28,7 @@ from ..core.error import is_safe_url
 from ..forms import (
     LoginForm,
     MarkForm,
+    MarkEditForm,
     UserRegisterForm,
     UserProfileForm,
     MarksImportForm
