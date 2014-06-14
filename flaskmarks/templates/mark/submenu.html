@@ -1,8 +1,0 @@
-<nav id="submenu" class='shadow4 roundcorner5'>
-    <ul class="secondarymenu">
-            <li><a href="{{ url_for('marks.allmarks') }}" class="{% if request.url_rule.rule in url_for('marks.allmarks') %}active{% endif %}">All</a></li>
-            <li><a href="{{ url_for('marks.recently_clicked') }}" class="{% if request.url_rule.rule in url_for('marks.recently_clicked') %}active{% endif %}">Recently clicked</a></li>
-            <li><a href="{{ url_for('marks.recently_added') }}" class="{% if request.url_rule.rule in url_for('marks.recently_added') %}active{% endif %}">Recently added</a></li>
-            <li><a href="{{ url_for('marks.new_mark') }}" class="{% if request.url_rule.rule in url_for('marks.new_mark') %}active{% endif %}">New mark</a></li>
-    </ul>
-</nav>

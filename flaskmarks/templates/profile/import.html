@@ -1,21 +1,9 @@
 {% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 {% block content %}
-<section id="content">
-    <section class="contentbox markform roundcorner5 shadow4 clear">
+    <div class="container" role="main">
+        {% include "flash.html" %}
         <h2>Import marks</h2>
-        <form action="{{ url_for('marks.import_marks') }}" method="POST" enctype="multipart/form-data">
-            {{form.hidden_tag()}}
-            <p>
-                {% for error in form.file.errors %}
-                    <p class="error">{{ error }}</p>
-                {% endfor %}
-                {{ form.file.label() }} <br />
-                {{ form.file() }}
-            </p>
-            <p class="submit">
-                <input type="submit" value="Import" />
-            </p>
-        </form>
-    </section>
-</section>
+        {{ wtf.quick_form(form,  button_map={'submit_button': 'primary'}) }}
+    </div>
 {% endblock %}

@@ -1,50 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
-<section id="edit" class="markform contentbox shadow4 roundcorner5">
-    <nav id='toolbox'>
-        <ul>
-            <li><a href="{{ url_for('marks.new_mark', url=mark.url, type=mark.type) }}">Clone to new</a></li>
-            <li><a href="{{ url_for('marks.delete_mark', id=mark.id) }}">Delete</a></li>
-        </ul>
-    </nav>
-    <h2>Edit Bookmark - {{ mark.title|truncate(50) }}</h2>
-    <form action="{{ request.path }}" method="POST">
-        {{form.hidden_tag()}}
-        <p>
-            {% for error in form.title.errors %}
-                <p class="error">{{ error }}</p>
-            {% endfor %}
-            {{ form.title.label() }} <br />
-            {{ form.title(size=20) }}
-        </p>
-        <p>
-            {% for error in form.url.errors %}
-                <p class="error">{{ error }}</p>
-            {% endfor %}
-            {{ form.url.label() }} <br />
-            {{ form.url(size=20) }}
-        </p>
-        <p>
-            {% for error in form.type.errors %}
-                <p class="error">{{ error }}</p>
-            {% endfor %}
-            {{ form.type() }}
-        </p>
-        <p>
-            {% for error in form.tags.errors %}
-                <p class="error">{{ error }}</p>
-            {% endfor %}
-            {{ form.tags.label() }} <br />
-            {{ form.tags(size=20) }}
-        </p>
-        <p>
-            {% for error in form.clicks.errors %}
-                <p class="error">{{ error }}</p>
-            {% endfor %}
-            {{ form.clicks.label() }} <br />
-            {{ form.clicks(size=20) }}
-        </p>
-            <input type="submit" value="Submit" />
-    </form>
-</section>
+    <div class="container" role="main">
+        {% include "flash.html" %}
+        <h2>Edit Bookmark - {{ mark.title|truncate(50) }}</h2>
+        <form action="{{ request.path }}" method="POST">
+            {{form.hidden_tag()}}
+            <p>
+                {% for error in form.title.errors %}
+                    <p class="error">{{ error }}</p>
+                {% endfor %}
+                {{ form.title.label() }} <br />
+                {{ form.title(size=20) }}
+            </p>
+            <p>
+                {% for error in form.url.errors %}
+                    <p class="error">{{ error }}</p>
+                {% endfor %}
+                {{ form.url.label() }} <br />
+                {{ form.url(size=20) }}
+            </p>
+            <p>
+                {% for error in form.type.errors %}
+                    <p class="error">{{ error }}</p>
+                {% endfor %}
+                {{ form.type() }}
+            </p>
+            <p>
+                {% for error in form.tags.errors %}
+                    <p class="error">{{ error }}</p>
+                {% endfor %}
+                {{ form.tags.label() }} <br />
+                {{ form.tags(size=20) }}
+            </p>
+            <p>
+                {% for error in form.clicks.errors %}
+                    <p class="error">{{ error }}</p>
+                {% endfor %}
+                {{ form.clicks.label() }} <br />
+                {{ form.clicks(size=20) }}
+            </p>
+                <input type="submit" value="Submit" />
+        </form>
+    </div>
 {% endblock %}

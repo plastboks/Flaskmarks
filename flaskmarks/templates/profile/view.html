@@ -1,74 +1,19 @@
 {% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 {% block content %}
-<section id="content">
-<section class="contentbox markform roundcorner5 shadow4 clear">
-    <nav id='toolbox'>
-        <ul>
-            <li><a href="{{ url_for('marks.export_marks') }}">Export all marks</a></li>
-            <li><a href="{{ url_for('marks.import_marks') }}">Import marks</a></li>
-        </ul>
-    </nav>
-    <h2>Profile - {{ g.user.username }} ({{ g.user.email }})</h2>
-    <section id='info'>
-        <img src="{{ g.user.email | gravatar }}" title="gravatar" alt="gravatar" class="shadow4 roundcorner5"/>
-        <ul class="infolist">
-            <li>Total marks: {{ bc+fc }} (Bookmarks: {{ bc }}, Feeds: {{ fc }})</li>
-            {% if lcm %}
-            <li>Last created mark: {{ lcm.created | datetime }}</li>
-            {% endif %}
-            <li>Last logon: {{ g.user.last_logged | datetime }}</li>
-        </ul>
-    </section>
-    <form action="{{ url_for('profile.userprofile') }}" method="POST">
-        {{form.hidden_tag()}}
-        <section>
-            <p>
-                {% for error in form.username.errors %}
-                    <p class="error">{{ error }}</p>
-                {% endfor %}
-                {{ form.username.label() }} <br />
-                {{ form.username(size=20) }}
-            </p>
-            <p>
-                {% for error in form.email.errors %}
-                    <p class="error">{{ error }}</p>
-                {% endfor %}
-                {{ form.email.error }}
-                {{ form.email.label() }} <br />
-                {{ form.email(size=20) }}
-            </p>
-            <p>
-                {% for error in form.password.errors %}
-                    <p class="error">{{ error }}</p>
-                {% endfor %}
-                {{ form.password.label()}} <br />
-                {{ form.password(size=20) }}
-            </p>
-            <p>
-                {{ form.confirm.label()}} <br />
-                {{ form.confirm(size=20) }}
-            </p>
+    <div class="container" role="main">
+        {% include "flash.html" %}
+        <h2>Profile - {{ g.user.username }} ({{ g.user.email }})</h2>
+        <section id='info'>
+            <img src="{{ g.user.email | gravatar }}" title="gravatar" alt="gravatar" class="shadow4 roundcorner5"/>
+            <ul class="infolist">
+                <li>Total marks: {{ bc+fc }} (Bookmarks: {{ bc }}, Feeds: {{ fc }})</li>
+                {% if lcm %}
+                <li>Last created mark: {{ lcm.created | datetime }}</li>
+                {% endif %}
+                <li>Last logon: {{ g.user.last_logged | datetime }}</li>
+            </ul>
         </section>
-        <section>
-            <p>
-                {% for error in form.per_page.errors %}
-                    <p class="error">{{ error }}</p>
-                {% endfor %}
-                {{ form.per_page.label() }}
-                {{ form.per_page() }}
-            </p>
-            <p>
-                {% for error in form.sort_type.errors %}
-                    <p class="error">{{ error }}</p>
-                {% endfor %}
-                {{ form.sort_type.label() }}
-                {{ form.sort_type() }}
-            </p>
-        </section>
-        <p class="submit">
-            <input type="submit" value="Update" />
-        </p>
-    </form>
-</section>
-</section>
+        {{ wtf.quick_form(form,  button_map={'submit_button': 'primary'}) }}
+    </div>
 {% endblock %}

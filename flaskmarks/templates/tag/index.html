@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-{% include "tag/submenu.html" %}
-{% if 1 == 2 %}
-    <h2>No tags</h2>
-{% else %}
-    {% include "tag/list.html" %}
-{% endif %}
+    <div class="container" role="main">
+        {% include "flash.html" %}
+        {% if 1 == 2 %}
+            <h2>No tags</h2>
+        {% else %}
+            {% include "tag/list.html" %}
+        {% endif %}
+    </div>
 {% endblock %}

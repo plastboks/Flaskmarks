@@ -14,6 +14,7 @@ from wtforms import (
     validators,
     HiddenField,
     IntegerField,
+    SubmitField
 )
 
 
@@ -63,4 +64,8 @@ class MarkForm(Form):
                       default='bookmark')
     tags = TagListField('Tags',
                         [validators.Length(min=0, max=255)])
+    submit_button = SubmitField('Save')
+
+
+class MarkEditForm(MarkForm):
     clicks = IntegerField('Clicks')

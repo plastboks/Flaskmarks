@@ -9,9 +9,10 @@ flask-debugtoolbar
 flask-migrate
 flask-script
 flask-bcrypt
+flask-bootstrap
+flask-wtf==0.9.2
 sqlalchemy-migrate
 WebHelpers2
-flask-wtf
 wtforms
 #flup
 pep8

@@ -5,7 +5,8 @@ from wtforms import (
     PasswordField,
     SelectField,
     HiddenField,
-    validators
+    validators,
+    SubmitField
 )
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from .base import Form, strip_filter
@@ -27,6 +28,7 @@ class UserRegisterForm(Form):
                              filters=[strip_filter])
     confirm = PasswordField('Confirm Password',
                             filters=[strip_filter])
+    submit_button = SubmitField('Register')
 
 
 class UserProfileForm(UserRegisterForm):
@@ -45,9 +47,11 @@ class UserProfileForm(UserRegisterForm):
                             choices=[('clicks', 'Clicks'),
                                      ('dateasc', 'Date asc'),
                                      ('datedesc', 'Date desc')])
+    submit_button = SubmitField('Update')
 
 
 class MarksImportForm(Form):
     file = FileField('Import file (Json)', validators=[
                      FileRequired(),
                      FileAllowed(['json'], 'Only json files')])
+    submit_button = SubmitField('Upload')

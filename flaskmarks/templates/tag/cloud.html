@@ -1,19 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-{% include "tag/submenu.html" %}
-    <section class="contentbox markslist roundcorner5 shadow4">
-        <section id="tagcloud">
+    <div class="container" role="main">
+        {% include "flash.html" %}
         {% if tags %}
-            <ul>
             {% for t in tags %}
-                <li>
-                    <a href="{{ url_for('marks.mark_q_tag', slug=t.title) }}">{{ t.title }}</a>
-                </li>
+                <a href="{{ url_for('marks.mark_q_tag', slug=t.title) }}"><span class="label label-primary">{{ t.title }}</span></a>
             {% endfor %}
-            </ul>
         {% else %}
-            <p> No tags</p>
+            <h3>No tags</h3>
         {% endif %}
-        </section>
-    </section>
+    </div>
 {% endblock %}

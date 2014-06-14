@@ -1,16 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-{% include "mark/submenu.html" %}
-{% if not marks.items and not 'Search results' in header %}
-    <h2>No marks found.</h2>
-{% else %}
-    {% if header %}
-        <h2>{{ header }}</h2>
-    {% endif %}
-    {% if marks.items %}
-        {% include "mark/list.html" %}
-    {% else %}
-        <h2>No results, try again</h2>
-    {% endif %}
-{% endif %}
+    <div class="container" role="main">
+        {% include "flash.html" %}
+        {% if marks.items %}
+            {% include "mark/list.html" %}
+        {% else %}
+            <h3>No marks found...</h3>
+        {% endif %}
+    </div>
 {% endblock %}

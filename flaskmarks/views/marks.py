@@ -174,7 +174,7 @@ def view_mark(id):
 @login_required
 def edit_mark(id):
     m = g.user.get_mark_by_id(id)
-    form = MarkForm(obj=m)
+    form = MarkEditForm(obj=m)
     if not m:
         abort(403)
     """

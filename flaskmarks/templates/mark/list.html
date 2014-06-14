@@ -1,48 +1,35 @@
-<section class="contentbox markslist roundcorner5 shadow4">
-    <ul>
+<div class="list-group">
     {% for mark in marks.items %}
-        <li class="tablerow">
-            <ul class="type {{mark.type}}">
-                <li class='column title'>
-                    {% if mark.type == 'bookmark' %}
-                        <a href="{{ mark.url }}" class="link clickIncrement" target="_blank" data-id="{{ mark.id }}" data-url="/mark/inc" title="{{mark.title}}" rel="noreferrer">
-                            {{ mark.title|truncate(82) }}
-                        </a>
-                    {% elif mark.type == 'feed' %}
-                        <a href="{{ url_for('marks.view_mark', id=mark.id) }}" class="link clickIncrement" data-id="{{ mark.id }}" data-url="/mark/inc" title="{{mark.title}}" rel="noreferrer">
-                            {{ mark.title|truncate(82) }}
-                        </a>
-                    {% endif %}
-                    <br />
-                    {% if mark.tags %}
-                        {% for m in mark.tags %}
-                            <a href="{{ url_for('marks.mark_q_tag', slug=m.title) }}" class="tag foreign">{{ m.title }}</a>
-                        {% endfor %}
-                    {% endif %}
-                    <span class="lastvisit">last visit:</span>
-                    {% if mark.last_clicked %}
-                        <span class="lastclick">{{ mark.last_clicked | datewords }}</span>
-                    {% else %}
-                        <span class="neverclick">never</span>
-                    {% endif %}
-                    <span class="action edit"><a href="{{ url_for('marks.edit_mark', id=mark.id) }}" title='Edit'>edit</a></span>
-                </li>
-                <li class="column clicks">
-                    <span>{{ mark.clicks }}</span>
-                </li>
-            </ul>
-        </li>
+    {% if mark.type == 'bookmark' %}
+    <a class="list-group-item clickIncrement" href="{{ mark.url }}" target="_blank" data-id="{{ mark.id }}" data-url="/mark/inc" rel="noreferrer">
+    {% else %}
+    <a class="list-group-item clickIncrement" href="{{ url_for('marks.view_mark', id=mark.id) }}" data-id="{{ mark.id }}" data-url="/mark/inc">
+    {% endif %}
+        <span class="badge">{{ mark.clicks }}</span>
+        <h4 class="list-group-item-heading">
+            {% if mark.type == 'bookmark' %}
+                <span class="glyphicon glyphicon-book"></span>
+            {% else %}
+                <span class="glyphicon glyphicon-tree-conifer"></span>
+            {% endif %}
+            {{ mark.title|truncate(82) }}</h4>
+        {% if mark.tags %}
+            {% for m in mark.tags %}
+                <div class="btn-group btn-group-xs">
+                    <span class="label label-default">{{ m.title }}</span>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </a>
     {% endfor %}
-    <ul>
-</section>
-<section id="paginate">
+</div>
+
+<ul class="pager">
 {% if marks.has_prev %}
-    <a href="{{ url_for(request.endpoint, slug=request.view_args.get('slug'), page=1, q=request.args.get('q'), type=request.args.get('type')) }}"><<</a>
-    <a href="{{ url_for(request.endpoint, slug=request.view_args.get('slug'), page=marks.prev_num, q=request.args.get('q'), type=request.args.get('type')) }}"><</a>
+    <li><a href="{{ url_for(request.endpoint, slug=request.view_args.get('slug'), page=marks.prev_num, q=request.args.get('q'), type=request.args.get('type')) }}">Previous</a></li>
 {% endif %}
-Page {{ marks.page }} of {{ marks.pages }}
 {% if marks.has_next %}
-    <a href="{{ url_for(request.endpoint, slug=request.view_args.get('slug'), page=marks.next_num, q=request.args.get('q'), type=request.args.get('type')) }}">></a>
-    <a href="{{ url_for(request.endpoint, slug=request.view_args.get('slug'), page=marks.pages, q=request.args.get('q'), type=request.args.get('type')) }}">>></a>
+    <li><a href="{{ url_for(request.endpoint, slug=request.view_args.get('slug'), page=marks.next_num, q=request.args.get('q'), type=request.args.get('type')) }}">Next</a></li>
 {% endif %}
-</section>
+</ul>
+

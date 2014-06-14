@@ -1,27 +1,8 @@
-<!DOCTYPE HTML>
-<html lang="en-US">
-    <head>
-        <meta charset="UTF-8">
-        <title>{{ config['SITE_TITLE'] }} - {{title}}</title>
-        <link href="/static/css/normalize.css" rel="stylesheet" media="screen">
-        <link href="/static/css/style.css" rel="stylesheet" media="screen">
-        <script src="/static/js/jquery-2.1.0.min.js" type="text/javascript"></script>
-        <script src="/static/js/commons.js" type="text/javascript"></script>
-    </head>
-    <body>
-        <header>
-            <h1><a href="{{ url_for('marks.allmarks') }}">{{ config['SITE_TITLE'] }}</a></h1>
-            {% if g.user.is_authenticated() %}
-            <section id="search">
-                {% include "searchform.html" %}
-            </section>
-            {% endif %}
-        </header>
-        {% include "flash.html" %}
-        {% include "menus.html" %}
-        <section id="content">
-            {% block content %}{% endblock %}
-            <footer>{{ config['SITE_FOOTER'] }}</footer>
-        </section>
-    </body>
-</html>
+{% extends "bootstrap/base.html" %}
+{% block title %}{{ config['SITE_TITLE'] }} - {{title}}{% endblock %}
+
+{% block navbar %}{% include "navbar.html" %}{% endblock %}
+
+{% block content %}{% endblock %}
+
+{% include "footer.html" %}

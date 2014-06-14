@@ -1,0 +1,62 @@
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ url_for('marks.webroot') }}">{{ config['SITE_TITLE'] }}</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                {% if g.user.is_authenticated() %}
+                    <li class="active dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Marks<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ url_for('marks.allmarks') }}">All</a></li>
+                            <li><a href="{{ url_for('marks.recently_clicked') }}">Recently clicked</a></li>
+                            <li><a href="{{ url_for('marks.recently_added') }}">Recently added</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{ url_for('marks.new_mark') }}">New mark</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tags<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ url_for('tags.cloud') }}">Cloud</a></li>
+                            <li><a href="{{ url_for('tags.by_clicks') }}">By clicks</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+                    {% if config['CAN_REGISTER'] %}
+                        <li><a href="{{ url_for('profile.register') }}">Register</a></li>
+                    {% endif %}
+                {% endif %}
+            </ul>
+            {% if g.user.is_authenticated() %}
+                {% include "searchform.html" %}
+            {% endif %}
+            <ul class="nav navbar-nav navbar-right">
+                {% if g.user.is_authenticated() %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ url_for('profile.userprofile') }}">Show</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{ url_for('marks.export_marks') }}">Export all marks</a></li>
+                            <li><a href="{{ url_for('marks.import_marks') }}">Import marks</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+                        </ul>
+                    </li>
+                {% endif %}
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>

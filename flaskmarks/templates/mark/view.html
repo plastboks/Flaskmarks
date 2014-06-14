@@ -1,70 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
-<section id='view' class='contentbox roundcorner5 shadow4'>
-    <nav id='toolbox'>
-        <ul>
-            <li><a href='{{ url_for('marks.edit_mark', id=mark.id)}}' title='Edit'>Edit</a></li>
-        </ul>
-    </nav>
-    <h2>{{ mark.title|truncate(70) }}</h2>
-    <nav id="tags">
+    <div class="container" role="main">
+        {% include "flash.html" %}
+        <h2>{{ mark.title|truncate(70) }}</h2>
         {% if mark.tags %}
-            <ul>
-            {% for t in mark.tags %}
-                <li><a href="{{ url_for('marks.mark_q_tag', slug=t.title) }}" class="tag">{{ t.title }}</a></li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-    </nav>
-    <ul class='feedlist'>
-    {% for entry in data['entries'] %}
-        <li class='entry'>
-            <ul class='entrylist'>
-                {% for link in entry['links'] %}
-                    {% if link['rel'] == 'alternate' or link['rel'] == 'enclosure'%}
-                        <li class='makebookmark'>
-                            <a href='{{ url_for('marks.new_mark', title=entry['title'], url=link['href']) }}' title='Save as bookmark' class='link'></a>
-                        </li>
-                        <li class='link'>
-                            <a href='{{ link['href'] }}' rel='noreferrer' class='link' target='_blank' title='{{ entry['title']}}'>{{ entry['title']|truncate(70) }}</a>
-                        </li>
-                    {% endif %}
+            <div class="btn-group">
+                {% for t in mark.tags %}
+                    <a href="{{ url_for('marks.mark_q_tag', slug=t.title) }}" class="btn btn-default" role="button">{{ t.title }}</a>
                 {% endfor %}
-                <li class='stats'>
-                    <ul class='statslist'>
-                        {% if 'gdata.youtube.com' in mark.url %}
-                            <li class='date'>{{ entry['published'] | datewordsstr }} ago</li>
-                            {% if entry['yt_statistics'] %}
-                                <li class='viewcount'>{{ entry['yt_statistics']['viewcount'] | thousandsep }} views</li>
+            </div>
+        {% endif %}
+        <div class="row">
+            {% for entry in data['entries'] %}
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    {% if entry['media_thumbnail'] %}
+                        <img class="media-object" src="{{ entry['media_thumbnail'][0]['url'] }}" alt="...">
+                    {% endif %}
+                    <div class="caption">
+                        {% for link in entry['links'] %}
+                            {% if link['rel'] == 'alternate' or link['rel'] == 'enclosure'%}
+                                <h3><a href="{{ link['href'] }}">{{ entry['title'] | truncate(20) }}</a></h3>
                             {% endif %}
-                            {% if entry['gd_rating'] %}
-                                <li class='votes'>{{ entry['gd_rating']['numraters'] | thousandsep }} &hearts;</li>
-                            {% endif %}
-                            <li class='duration'>{{ entry['yt_duration']['seconds'] | sectomin}} min</li>
-                        {% else %}
-                            <li class='date'>{{ entry['published'] }}</li>
-                        {% endif %}
-                    </ul>
-                </li>
-                {% if entry['media_thumbnail'] %}
-                    {% for link in entry['links'] %}
-                        {% if link['rel'] == 'alternate' or link['rel'] == 'enclosure'%}
-                            <li class='image'>
-                                <a href='{{ link['href'] }}' class='link' rel='noreferrer' target='_blank' title='{{ link['href'] }}'>
-                                    <img src='{{ entry['media_thumbnail'][0]['url'] }}' />
-                                </a>
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-                <li class='summary'>
-                {% autoescape false %}
-                    <pre>{{ entry['summary'] }}</pre>
-                {% endautoescape %}
-                </li>
-            </ul>
-        </li>
-    {% endfor %}
-    </ul>
-</section>
+                        {% endfor %}
+                        <p>
+                            {{ entry['summary'] | truncate(60) }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
