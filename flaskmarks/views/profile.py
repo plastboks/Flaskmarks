@@ -32,7 +32,7 @@ def userprofile():
             del u.password
         db.session.add(u)
         db.session.commit()
-        flash('User "%s" updated.' % (form.username.data), category='sucess')
+        flash('User "%s" updated.' % (form.username.data), category='success')
         return redirect(url_for('profile.userprofile'))
     """
     GET
