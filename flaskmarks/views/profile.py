@@ -11,6 +11,7 @@ from flask import (
 from flask.ext.login import login_required
 from ..core.setup import config, db, bcrypt
 from ..forms import UserRegisterForm, UserProfileForm
+from ..models import User
 
 profile = Blueprint('profile', __name__)
 
