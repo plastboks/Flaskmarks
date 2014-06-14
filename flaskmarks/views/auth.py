@@ -36,12 +36,12 @@ def login():
             db.session.add(u)
             db.session.commit()
             flash('Welcome %s.' % (u.username),
-                  category='info')
+                  category='success')
             login_user(u, remember=form.remember_me.data)
             return redirect(url_for('marks.allmarks'))
         else:
             flash('Failed login for %s.' % (form.username.data),
-                  category='error')
+                  category='danger')
             return redirect(url_for('auth.login'))
     """
     GET

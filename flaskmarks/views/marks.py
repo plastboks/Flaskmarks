@@ -111,7 +111,7 @@ def new_mark():
     if form.validate_on_submit():
         if g.user.q_marks_by_url(form.url.data):
             flash('Mark with this url "%s" already\
-                  exists.' % (form.url.data), category='error')
+                  exists.' % (form.url.data), category='danger')
             return redirect(url_for('marks.allmarks'))
         m = Mark()
         form.populate_obj(m)
@@ -129,7 +129,7 @@ def new_mark():
             m.title = soup.title.string
         db.session.add(m)
         db.session.commit()
-        flash('New mark: "%s", added.' % (m.title), category='info')
+        flash('New mark: "%s", added.' % (m.title), category='success')
         return redirect(url_for('marks.allmarks'))
     """
     GET
@@ -181,13 +181,13 @@ def edit_mark(id):
     if form.validate_on_submit():
         if m.url != form.url.data and g.user.q_marks_by_url(form.url.data):
             flash('Mark with this url (%s) already\
-                  exists.' % (form.url.data), category='error')
+                  exists.' % (form.url.data), category='danger')
             return redirect(url_for('marks.allmarks'))
         form.populate_obj(m)
         m.updated = datetime.utcnow()
         db.session.add(m)
         db.session.commit()
-        flash('Mark "%s" updated.' % (form.title.data), category='info')
+        flash('Mark "%s" updated.' % (form.title.data), category='success')
         if form.referrer.data and is_safe_url(form.referrer.data):
             return redirect(form.referrer.data)
         return redirect(url_for('marks.allmarks'))
@@ -271,7 +271,7 @@ def import_marks():
         try:
             data = json.loads(form.file.data.read())
         except Exception as detail:
-            flash('%s' % (detail), category='error')
+            flash('%s' % (detail), category='danger')
             return redirect(url_for('profile.view'))
         count = 0
         for c in data['marks']:
@@ -280,7 +280,7 @@ def import_marks():
             count += 1
             db.session.add(m)
             db.session.commit()
-        flash('%s marks imported' % (count), category='info')
+        flash('%s marks imported' % (count), category='success')
         return redirect(url_for('profile.view'))
     """
     GET

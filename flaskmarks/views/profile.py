@@ -32,7 +32,7 @@ def userprofile():
             del u.password
         db.session.add(u)
         db.session.commit()
-        flash('User "%s" updated.' % (form.username.data), category='info')
+        flash('User "%s" updated.' % (form.username.data), category='sucess')
         return redirect(url_for('profile.userprofile'))
     """
     GET
@@ -62,11 +62,11 @@ def register():
             db.session.add(u)
             db.session.commit()
             flash('New user "%s" registered.'
-                  % (form.username.data), category='info')
+                  % (form.username.data), category='success')
             return redirect(url_for('auth.login'))
         except Exception as detail:
             flash('Problem registering "%s".'
-                  % (form.username.data), category='error')
+                  % (form.username.data), category='danger')
     """
     GET
     """
