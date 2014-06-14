@@ -19,9 +19,6 @@ from urllib import urlopen
 from datetime import datetime
 from urlparse import urlparse, urljoin
 import feedparser
-from cryptacular.bcrypt import (
-    BCRYPTPasswordManager as bMan,
-)
 
 from ..core.setup import app, db
 from ..core.error import is_safe_url
