@@ -69,3 +69,4 @@ class MarkForm(Form):
 
 class MarkEditForm(MarkForm):
     clicks = IntegerField('Clicks')
+    submit_button = SubmitField('Save')
