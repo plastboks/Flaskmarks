@@ -1,14 +1,10 @@
-from flaskmarks.forms.base import (
-    Form,
-    strip_filter
-)
-
 from wtforms import (
     TextField,
     BooleanField,
     PasswordField,
     validators,
 )
+from .base import Form, strip_filter
 
 
 class LoginForm(Form):

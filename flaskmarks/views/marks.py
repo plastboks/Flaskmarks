@@ -12,40 +12,27 @@ from flask import (
     jsonify,
     json
 )
+from flask.ext.login import login_user, logout_user, login_required
 
 from BeautifulSoup import BeautifulSoup as BSoup
 from urllib import urlopen
 from datetime import datetime
 from urlparse import urlparse, urljoin
 import feedparser
-
-from flask.ext.login import (
-    login_user,
-    logout_user,
-    login_required,
-)
-
 from cryptacular.bcrypt import (
     BCRYPTPasswordManager as bMan,
 )
 
-from flaskmarks.core.setup import app, db
-from flaskmarks.core.error import is_safe_url
-
-from flaskmarks.forms import (
+from ..core.setup import app, db
+from ..core.error import is_safe_url
+from ..forms import (
     LoginForm,
     MarkForm,
     UserRegisterForm,
     UserProfileForm,
     MarksImportForm
 )
-
-from flaskmarks.models import (
-    User,
-    Mark,
-    Tag,
-    Meta
-)
+from ..models import User, Mark, Tag, Meta
 
 marks = Blueprint('marks', __name__)
 

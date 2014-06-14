@@ -9,9 +9,9 @@ from flask import (
     url_for,
 )
 
-from flaskmarks.core.setup import db
-from flaskmarks.core.error import is_safe_url
 from urlparse import urlparse, urljoin
+from ..core.setup import db
+from ..core.error import is_safe_url
 
 error = Blueprint('error', __name__)
 

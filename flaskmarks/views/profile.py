@@ -9,11 +9,8 @@ from flask import (
     url_for,
 )
 from flask.ext.login import login_required
-from flaskmarks.core.setup import config, db
-from flaskmarks.forms import (
-    UserRegisterForm,
-    UserProfileForm,
-)
+from ..core.setup import config, db
+from ..forms import UserRegisterForm, UserProfileForm
 
 profile = Blueprint('profile', __name__)
 

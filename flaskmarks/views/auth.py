@@ -14,9 +14,9 @@ from flask.ext.login import (
     logout_user
 )
 from datetime import datetime
-from flaskmarks.core.setup import db
-from flaskmarks.forms import LoginForm
-from flaskmarks.models import User
+from ..core.setup import db
+from ..forms import LoginForm
+from ..models import User
 
 auth = Blueprint('auth', __name__)
 

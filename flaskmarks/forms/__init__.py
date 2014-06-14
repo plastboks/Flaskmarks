@@ -1,8 +1,8 @@
 # package
 
-from flaskmarks.forms.login import LoginForm
-from flaskmarks.forms.mark import MarkForm
-from flaskmarks.forms.user import (
+from .login import LoginForm
+from .mark import MarkForm
+from .user import (
     UserProfileForm,
     UserRegisterForm,
     MarksImportForm

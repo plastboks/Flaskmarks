@@ -1,4 +1,4 @@
-from flaskmarks.core.setup import app
+from .setup import app
 from datetime import datetime
 from webhelpers2.date import time_ago_in_words
 from hashlib import md5

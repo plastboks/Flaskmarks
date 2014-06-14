@@ -1,7 +1,4 @@
-from flaskmarks.forms.base import (
-    Form,
-    strip_filter
-)
+# flaskmarks/forms/user.py
 
 from wtforms import (
     TextField,
@@ -10,11 +7,8 @@ from wtforms import (
     HiddenField,
     validators
 )
-from flask_wtf.file import (
-    FileField,
-    FileAllowed,
-    FileRequired
-)
+from flask_wtf.file import FileField, FileAllowed, FileRequired
+from .base import Form, strip_filter
 
 
 class UserRegisterForm(Form):

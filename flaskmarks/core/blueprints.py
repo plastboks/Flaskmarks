@@ -2,7 +2,7 @@
 
 from .setup import app
 
-from flaskmarks.views import (
+from ..views import (
     profile,
     auth,
     tags,

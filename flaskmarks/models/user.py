@@ -1,13 +1,10 @@
-from flaskmarks.core.setup import db, config
-from sqlalchemy import (
-    or_,
-    desc,
-    asc,
-    func,
-)
+# flaskmarks/models/user.py
+
+from sqlalchemy import or_, desc, asc, func
 from cryptacular.bcrypt import BCRYPTPasswordManager
-from flaskmarks.models.mark import Mark
-from flaskmarks.models.tag import Tag
+from ..core.setup import db, config
+from .mark import Mark
+from .tag import Tag
 
 
 class User(db.Model):

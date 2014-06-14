@@ -1,13 +1,11 @@
-from flaskmarks.core.setup import db, config
-from sqlalchemy import (
-    and_,
-    or_,
-    desc,
-)
+# flaskmarks/models/mark.py
+
+from sqlalchemy import and_, or_, desc
 from sqlalchemy.orm import relationship
 from datetime import datetime
-from flaskmarks.models.meta import Meta
-from flaskmarks.models.tag import Tag
+from ..core.setup import db, config
+from .meta import Meta
+from .tag import Tag
 
 ass_tbl = db.Table('marks_tags', db.metadata,
                    db.Column('left_id', db.Integer, db.ForeignKey('marks.id')),

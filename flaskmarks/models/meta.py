@@ -1,9 +1,7 @@
-from flaskmarks.core.setup import db, config
-from sqlalchemy import (
-    and_,
-    or_,
-    desc,
-)
+# flaskmarks/models/meta.py
+
+from sqlalchemy import and_, or_, desc
+from ..core.setup import db, config
 
 
 class Meta(db.Model):
