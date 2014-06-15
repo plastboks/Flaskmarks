@@ -292,7 +292,7 @@ def import_marks():
 #########
 # Other #
 #########
-@marks.route('/redirect/<int:id>')
+@marks.route('/mark/redirect/<int:id>')
 @login_required
 def mark_redirect(id):
     url = url_for('marks.mark_meta', id=id)
@@ -302,7 +302,13 @@ def mark_redirect(id):
 @marks.route('/meta/<int:id>')
 @login_required
 def mark_meta(id):
-    b = g.user.bid(id)
-    if b:
-        return render_template('meta.html', url=b.url)
+    m = g.user.get_mark_by_id(id)
+    if m:
+        if not m.clicks:
+            m.clicks = 0
+        m.last_clicked = datetime.utcnow()
+        m.clicks += 1
+        db.session.add(m)
+        db.session.commit()
+        return render_template('meta.html', url=m.url)
     abort(403)

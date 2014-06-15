@@ -3,7 +3,7 @@
     <li class="list-group-item">
         <h4 class="list-group-item-heading">
         {% if mark.type == 'bookmark' %}
-        <a class="list-group-item list-group-item-warning clickIncrement" href="{{ mark.url }}" target="_blank" data-id="{{ mark.id }}" data-url="/mark/inc" rel="noreferrer">
+        <a class="list-group-item list-group-item-info clickIncrement" href="{{ url_for('marks.mark_redirect', id=mark.id) }}" target="_blank" data-id="{{ mark.id }}" data-url="/mark/inc" rel="noreferrer">
             <span class="badge">{{ mark.clicks }}</span>
             <span class="glyphicon glyphicon-book"></span>
             {{ mark.title|truncate(82) }}
