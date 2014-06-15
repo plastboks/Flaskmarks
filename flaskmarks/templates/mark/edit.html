@@ -4,6 +4,12 @@
     <div class="container" role="main">
         {% include "flash.html" %}
         <h2>Edit Bookmark - {{ mark.title|truncate(50) }}</h2>
+        <div class="btn-toolbar btn-group-xs" role="toolbar">
+            <div class="btn-group btn-group-xs">
+                <a href="{{ url_for('marks.new_mark', url=mark.url, type=mark.type) }}" class="btn btn-info">Clone to new</a>
+                <a href="{{ url_for('marks.delete_mark', id=mark.id) }}" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
         {{ wtf.quick_form(form,  button_map={'submit_button': 'primary'}) }}
     </div>
 {% endblock %}
