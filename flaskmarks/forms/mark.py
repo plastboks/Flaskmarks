@@ -58,15 +58,31 @@ class MarkForm(Form):
                      validators.URL(require_tld=False,
                                     message='Not a valid URL')],
                     filters=[strip_filter])
-    type = RadioField('Type',
-                      coerce=unicode,
-                      choices=[('bookmark', 'Bookmark'), ('feed', 'Feed')],
-                      default='bookmark')
     tags = TagListField('Tags',
                         [validators.Length(min=0, max=255)])
     submit_button = SubmitField('Save')
 
 
 class MarkEditForm(MarkForm):
+    clicks = IntegerField('Clicks')
+    submit_button = SubmitField('Save')
+
+
+class YoutubeForm(Form):
+    referrer = HiddenField([validators.URL(require_tld=False)])
+    title = TextField('Title',
+                      [validators.Length(min=0, max=255)],
+                      filters=[strip_filter])
+    url = TextField('URL',
+                    [validators.Length(min=4, max=512),
+                     validators.URL(require_tld=False,
+                                    message='Not a valid URL')],
+                    filters=[strip_filter])
+    tags = TagListField('Tags',
+                        [validators.Length(min=0, max=255)])
+    submit_button = SubmitField('Save')
+
+
+class YoutubeEditForm(YoutubeForm):
     clicks = IntegerField('Clicks')
     submit_button = SubmitField('Save')

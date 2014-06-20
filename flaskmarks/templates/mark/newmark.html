@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container" role="main">
         {% include "flash.html" %}
-        <h2>Add new mark</h2>
+        <h2>{{ title }}</h2>
         {{ wtf.quick_form(form,  button_map={'submit_button': 'primary'}) }}
     </div>
 {% endblock %}
