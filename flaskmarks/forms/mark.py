@@ -68,12 +68,12 @@ class MarkEditForm(MarkForm):
     submit_button = SubmitField('Save')
 
 
-class YoutubeForm(Form):
+class YoutubeMarkForm(Form):
     referrer = HiddenField([validators.URL(require_tld=False)])
     title = TextField('Title',
                       [validators.Length(min=0, max=255)],
                       filters=[strip_filter])
-    url = TextField('URL',
+    url = TextField('User/Channel',
                     [validators.Length(min=4, max=512),
                      validators.URL(require_tld=False,
                                     message='Not a valid URL')],
@@ -83,6 +83,6 @@ class YoutubeForm(Form):
     submit_button = SubmitField('Save')
 
 
-class YoutubeEditForm(YoutubeForm):
+class YoutubeEditForm(YoutubeMarkForm):
     clicks = IntegerField('Clicks')
     submit_button = SubmitField('Save')

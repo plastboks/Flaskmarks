@@ -26,6 +26,7 @@ from ..forms import (
     LoginForm,
     MarkForm,
     MarkEditForm,
+    YoutubeMarkForm,
     UserRegisterForm,
     UserProfileForm,
     MarksImportForm
@@ -104,7 +105,7 @@ def search_string(page=1):
 @marks.route('/mark/new', methods=['GET'])
 @login_required
 def new_mark():
-    return render_template('mark/selector.html',
+    return render_template('mark/new_selector.html',
                            title='Select new mark type')
 
 @marks.route('/mark/new/bookmark', methods=['GET', 'POST'])
@@ -141,7 +142,7 @@ def new_bookmark():
     """
     GET
     """
-    return render_template('mark/newmark.html',
+    return render_template('mark/new_mark.html',
                            title='New Bookmark',
                            form=form)
 
@@ -180,7 +181,7 @@ def new_feed():
     """
     GET
     """
-    return render_template('mark/newmark.html',
+    return render_template('mark/new_mark.html',
                            title='New Feed',
                            form=form)
 
@@ -188,6 +189,41 @@ def new_feed():
 @marks.route('/mark/new/youtube', methods=['GET', 'POST'])
 @login_required
 def new_youtube():
+    form = YoutubeMarkForm()
+    """
+    POST
+    """
+    if form.validate_on_submit():
+        if g.user.q_marks_by_url(form.url.data):
+            flash('Mark with this url "%s" already\
+                  exists.' % (form.url.data), category='danger')
+            return redirect(url_for('marks.allmarks'))
+        m = Mark()
+        form.populate_obj(m)
+        m.owner_id = g.user.id
+        m.created = datetime.utcnow()
+        m.type = 'bookmark'
+        m.clicks = 0
+
+        """ Meta test area """
+        clicks = Meta('clicks', 0)
+        db.session.add(clicks)
+        m.metas = [clicks]
+
+        if not form.title.data:
+            soup = BSoup(urlopen(form.url.data))
+            m.title = soup.title.string
+        db.session.add(m)
+        db.session.commit()
+        flash('New mark: "%s", added.' % (m.title), category='success')
+        return redirect(url_for('marks.allmarks'))
+    """
+    GET
+    """
+    return render_template('mark/new_youtube.html',
+                           title='New Youtube feed',
+                           form=form)
+
     return "not yet"
 
 @marks.route('/mark/view/<int:id>', methods=['GET'])
