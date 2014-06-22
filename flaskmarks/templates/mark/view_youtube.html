@@ -2,39 +2,61 @@
 {% block content %}
     <div class="container" role="main">
         {% include "flash.html" %}
-        <h2>{{ mark.title }}</h2>
-        {% if mark.tags %}
-            <div class="btn-group">
-                {% for t in mark.tags %}
-                    <a href="{{ url_for('marks.mark_q_tag', slug=t.title) }}" class="btn btn-default" role="button">{{ t.title }}</a>
-                {% endfor %}
-            </div>
-        {% endif %}
+        <h2>{{ mark.title }}
+            {% if mark.tags %}
+                <div class="btn-group">
+                    {% for t in mark.tags %}
+                        <a href="{{ url_for('marks.mark_q_tag', slug=t.title) }}" class="btn btn-default btn-xs btn-primary" role="button">{{ t.title }}</a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </h2>
         <div class="row">
-            {% for entry in data['entries'] %}
-            <div class="col-sm-6 col-md-4">
+            {% for i, entry in data['entries'] | enumerate %}
+            <div class="col-sm-9 col-md-6">
                 <div class="thumbnail">
                     {% if entry['media_thumbnail'] %}
-                        <img class="media-object img-rounded" src="{{ entry['media_thumbnail'][0]['url'] }}" alt="thumbnail">
+                        <img class="media-object img-rounded img-responsive" src="{{ entry['media_thumbnail'][0]['url'] }}" alt="thumbnail">
                     {% endif %}
                     <div class="caption">
-                        <ul class='statslist'>
+                        <ul class='statslist list-inline'>
                             <li class='date'>{{ entry['published'] | datewordsstr }} ago</li>
                             {% if entry['yt_statistics'] %}
                                 <li class='viewcount'>{{ entry['yt_statistics']['viewcount'] | thousandsep }} views</li>
                             {% endif %}
                             {% if entry['gd_rating'] %}
-                                <li class='votes'>{{ entry['gd_rating']['numraters'] | thousandsep }} &hearts;</li>
+                                <li class='votes'>&hearts;{{ entry['gd_rating']['numraters'] | thousandsep }}</li>
                             {% endif %}
                             <li class='duration'>{{ entry['yt_duration']['seconds'] | sectomin}} min</li>
                         </ul>
                         {% for link in entry['links'] %}
                             {% if link['rel'] == 'alternate' or link['rel'] == 'enclosure'%}
-                                <h3><a href="{{ link['href'] }}" title="{{ entry['title'] }}">{{ entry['title'] }}</a></h3>
+                                <h3><a href="{{ link['href'] }}" title="{{ entry['title'] }}">{{ entry['title'] | truncate(37) }}</a></h3>
                             {% endif %}
                         {% endfor %}
                         <p>
-                            {{ entry['summary'] | truncate(60) }}
+                            <!-- Button trigger modal -->
+                            <button class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#desc-{{i}}-Modal">
+                                More info
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="desc-{{i}}-Modal" tabindex="-1" role="dialog" aria-labelledby="desc-{{i}}-ModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="desc-{{i}}-ModalLabel">{{ entry['title'] }}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <pre>{{ entry['summary'] }}</pre>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </p>
                     </div>
                 </div>

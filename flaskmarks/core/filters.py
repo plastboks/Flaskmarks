@@ -63,3 +63,8 @@ def _jinja_filter_gravatar(email):
     url = 'https://www.gravatar.com/avatar/'
     params = '?d=mm&s='+str(100)
     return url + md5(email).hexdigest() + params
+
+@app.template_filter('enumerate')
+def _jinja_filter_enumerate(list):
+    return enumerate(list)
+

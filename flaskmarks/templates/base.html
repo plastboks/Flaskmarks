@@ -3,12 +3,12 @@
 
 {% block styles %}
     {{ super() }}
-    <link rel="stylesheet" href="{{url_for('static', filename='css/mystyle.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/mystyles.css')}}" />
 {% endblock %}
 
 {% block scripts %}
     {{super()}}
-    <script src="{{url_for('static', filename='js/myscripts.js')}}"></script>script>
+    <script src="{{url_for('static', filename='js/myscripts.js')}}"></script>
 {% endblock %}
 
 {% block navbar %}{% include "navbar.html" %}{% endblock %}
