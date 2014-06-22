@@ -2,6 +2,7 @@
 
 from sqlalchemy import and_, or_, desc
 from sqlalchemy.orm import relationship
+from sqlalchemy.ext.associationproxy import association_proxy
 from datetime import datetime
 from ..core.setup import db, config
 from .meta import Meta
