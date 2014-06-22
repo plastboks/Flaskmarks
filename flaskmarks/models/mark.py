@@ -31,8 +31,14 @@ class Mark(db.Model):
                         lazy='joined',
                         backref='marks')
 
-    def insert_from_import(self, owner_id, data):
-        self.owner_id = owner_id
+    def __init__(self, owner, created=False):
+        self.owner = owner
+        if created:
+            self.created = created
+        else:
+            self.created = datetime.utcnow()
+
+    def insert_from_import(self, data):
         self.title = data['title']
         self.type = data['type']
         self.url = data['url']

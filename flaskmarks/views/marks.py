@@ -104,27 +104,34 @@ def search_string(page=1):
 
 @marks.route('/mark/new', methods=['GET'])
 @login_required
-def new_mark():
+def new_mark_selector():
     return render_template('mark/new_selector.html',
                            title='Select new mark type')
 
-@marks.route('/mark/new/bookmark', methods=['GET', 'POST'])
+
+@marks.route('/mark/new/<string:type>', methods=['GET', 'POST'])
 @login_required
-def new_bookmark():
-    form = MarkForm()
+def new_mark(type):
+    valid_types = ['bookmark', 'feed', 'youtube']
+    if not type in valid_types:
+        abort(404)
+
+    if type == 'youtube':
+        form = YoutubeMarkForm()
+    else:
+        form = MarkForm()
     """
     POST
     """
     if form.validate_on_submit():
+        """ Check if a mark with this urs exists."""
         if g.user.q_marks_by_url(form.url.data):
             flash('Mark with this url "%s" already\
                   exists.' % (form.url.data), category='danger')
             return redirect(url_for('marks.allmarks'))
-        m = Mark()
+        m = Mark(g.user.id)
         form.populate_obj(m)
-        m.owner_id = g.user.id
-        m.created = datetime.utcnow()
-        m.type = 'bookmark'
+        m.type = type
         m.clicks = 0
 
         """ Meta test area """
@@ -137,94 +144,16 @@ def new_bookmark():
             m.title = soup.title.string
         db.session.add(m)
         db.session.commit()
-        flash('New mark: "%s", added.' % (m.title), category='success')
+        flash('New %s: "%s", added.'
+              % (type, m.title), category='success')
         return redirect(url_for('marks.allmarks'))
     """
     GET
     """
-    return render_template('mark/new_mark.html',
-                           title='New Bookmark',
+    return render_template('mark/new_%s.html' % (type),
+                           title='New %s' % (type),
                            form=form)
 
-
-@marks.route('/mark/new/feed', methods=['GET', 'POST'])
-@login_required
-def new_feed():
-    form = MarkForm()
-    """
-    POST
-    """
-    if form.validate_on_submit():
-        if g.user.q_marks_by_url(form.url.data):
-            flash('Mark with this url "%s" already\
-                  exists.' % (form.url.data), category='danger')
-            return redirect(url_for('marks.allmarks'))
-        m = Mark()
-        form.populate_obj(m)
-        m.owner_id = g.user.id
-        m.created = datetime.utcnow()
-        m.type = 'feed'
-        m.clicks = 0
-
-        """ Meta test area """
-        clicks = Meta('clicks', 0)
-        db.session.add(clicks)
-        m.metas = [clicks]
-
-        if not form.title.data:
-            soup = BSoup(urlopen(form.url.data))
-            m.title = soup.title.string
-        db.session.add(m)
-        db.session.commit()
-        flash('New mark: "%s", added.' % (m.title), category='success')
-        return redirect(url_for('marks.allmarks'))
-    """
-    GET
-    """
-    return render_template('mark/new_mark.html',
-                           title='New Feed',
-                           form=form)
-
-
-@marks.route('/mark/new/youtube', methods=['GET', 'POST'])
-@login_required
-def new_youtube():
-    form = YoutubeMarkForm()
-    """
-    POST
-    """
-    if form.validate_on_submit():
-        if g.user.q_marks_by_url(form.url.data):
-            flash('Mark with this url "%s" already\
-                  exists.' % (form.url.data), category='danger')
-            return redirect(url_for('marks.allmarks'))
-        m = Mark()
-        form.populate_obj(m)
-        m.owner_id = g.user.id
-        m.created = datetime.utcnow()
-        m.type = 'bookmark'
-        m.clicks = 0
-
-        """ Meta test area """
-        clicks = Meta('clicks', 0)
-        db.session.add(clicks)
-        m.metas = [clicks]
-
-        if not form.title.data:
-            soup = BSoup(urlopen(form.url.data))
-            m.title = soup.title.string
-        db.session.add(m)
-        db.session.commit()
-        flash('New mark: "%s", added.' % (m.title), category='success')
-        return redirect(url_for('marks.allmarks'))
-    """
-    GET
-    """
-    return render_template('mark/new_youtube.html',
-                           title='New Youtube feed',
-                           form=form)
-
-    return "not yet"
 
 @marks.route('/mark/view/<int:id>', methods=['GET'])
 @login_required
@@ -356,8 +285,8 @@ def import_marks():
             return redirect(url_for('profile.view'))
         count = 0
         for c in data['marks']:
-            m = Mark()
-            m.insert_from_import(u.id, c)
+            m = Mark(u.id)
+            m.insert_from_import(c)
             count += 1
             db.session.add(m)
             db.session.commit()

@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container" role="main">
         {% include "flash.html" %}
-        <h2>Edit Bookmark - {{ mark.title|truncate(50) }}</h2>
+        <h2>Edit {{ mark.type }} - {{ mark.title|truncate(50) }}</h2>
         <div class="btn-toolbar btn-group-xs" role="toolbar">
             <div class="btn-group btn-group-xs">
                 <a href="{{ url_for('marks.new_mark', url=mark.url, type=mark.type) }}" class="btn btn-info">Clone to new</a>

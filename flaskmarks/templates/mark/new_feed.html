@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+    <div class="container" role="main">
+        {% include "flash.html" %}
+        <h2>{{ title }}</h2>
+        {{ wtf.quick_form(form,  button_map={'submit_button': 'primary'}) }}
+    </div>
+{% endblock %}
