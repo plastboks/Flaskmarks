@@ -16,17 +16,17 @@
             <ul class="nav navbar-nav">
                 {% if g.user.is_authenticated() %}
                     <li class="active dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Marks<b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-bookmark"></span> Marks<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ url_for('marks.allmarks') }}">All</a></li>
                             <li><a href="{{ url_for('marks.recently_clicked') }}">Recently clicked</a></li>
                             <li><a href="{{ url_for('marks.recently_added') }}">Recently added</a></li>
                             <li class="divider"></li>
-                            <li><a href="{{ url_for('marks.new_mark_selector') }}">New mark</a></li>
+                            <li><a href="{{ url_for('marks.new_mark_selector') }}"><span class="glyphicon glyphicon-plus"></span> New mark</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tags<b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-tags"></span> Tags<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ url_for('tags.cloud') }}">Cloud</a></li>
                             <li><a href="{{ url_for('tags.by_clicks') }}">By clicks</a></li>
@@ -47,12 +47,12 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ url_for('profile.userprofile') }}">Show</a></li>
+                            <li><a href="{{ url_for('profile.userprofile') }}"><span class="glyphicon glyphicon-dashboard"></span> Show</a></li>
                             <li class="divider"></li>
-                            <li><a href="{{ url_for('marks.export_marks') }}">Export all marks</a></li>
-                            <li><a href="{{ url_for('marks.import_marks') }}">Import marks</a></li>
+                            <li><a href="{{ url_for('marks.import_marks') }}"><span class="glyphicon glyphicon-import"></span> Import marks</a></li>
+                            <li><a href="{{ url_for('marks.export_marks') }}"><span class="glyphicon glyphicon-export"></span> Export marks</a></li>
                             <li class="divider"></li>
-                            <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+                            <li><a href="{{ url_for('auth.logout') }}"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
                         </ul>
                     </li>
                 {% endif %}

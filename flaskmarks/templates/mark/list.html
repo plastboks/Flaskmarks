@@ -5,13 +5,17 @@
         {% if mark.type not in mark.valid_feed_types %}
         <a class="list-group-item list-group-item-default clickIncrement" href="{{ url_for('marks.mark_redirect', id=mark.id) }}" target="_blank" data-id="{{ mark.id }}" data-url="/mark/inc" rel="noreferrer">
             <span class="badge">{{ mark.metas | get_clicks }}</span>
-            <span class="glyphicon glyphicon-book"></span>
+            <span class="glyphicon glyphicon-link"></span>
             {{ mark.title|truncate(82) }}
         </a>
         {% elif mark.type in mark.valid_feed_types %}
         <a class="list-group-item list-group-item-default clickIncrement" href="{{ url_for('marks.view_mark', id=mark.id, type=mark.type) }}" data-id="{{ mark.id }}" data-url="/mark/inc">
             <span class="badge">{{ mark.metas | get_clicks }}</span>
-            <span class="glyphicon glyphicon-tree-conifer"></span>
+            {% if mark.type == 'youtube' %}
+                <span class="glyphicon glyphicon-film"></span>
+            {% else %}
+                <span class="glyphicon glyphicon-tree-deciduous"></span>
+            {% endif %}
             {{ mark.title|truncate(82) }}
         </a>
         {% endif %}
