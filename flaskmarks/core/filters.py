@@ -58,15 +58,10 @@ def _jinja2_filter_dateinwords(dateobj):
     return time_ago_in_words(dateobj, round=True, granularity='day')
 
 
-@app.template_filter('gravatar')
-def _jinja_filter_gravatar(email):
-    url = 'https://www.gravatar.com/avatar/'
-    params = '?d=mm&s='+str(100)
-    return url + md5(email).hexdigest() + params
-
 @app.template_filter('enumerate')
 def _jinja_filter_enumerate(list):
     return enumerate(list)
+
 
 @app.template_filter('get_clicks')
 def _jinja_filter_get_clicks(metas):

@@ -56,12 +56,9 @@ class User(db.Model):
     def get_mark_by_id(self, id):
         return self.my_marks().filter(Mark.id == id).first()
 
-    def get_mark_count(self):
-        return self.my_marks().filter(Mark.type == 'bookmark').count()
-
-    def get_feed_count(self):
-        return self.my_marks().filter(Mark.type == 'feed').count()
-
+    def get_mark_type_count(self, type):
+        return self.my_marks().filter(Mark.type == type).count()
+        
     def mark_last_created(self):
         return self.my_marks().order_by(desc(Mark.created)).first()
 

@@ -40,8 +40,9 @@ def userprofile():
     return render_template('profile/view.html',
                            form=form,
                            title='Profile',
-                           bc=g.user.get_mark_count(),
-                           fc=g.user.get_feed_count(),
+                           bc=g.user.get_mark_type_count('bookmark'),
+                           fc=g.user.get_mark_type_count('feed'),
+                           yc=g.user.get_mark_type_count('youtube'),
                            lcm=g.user.mark_last_created()
                            )
 

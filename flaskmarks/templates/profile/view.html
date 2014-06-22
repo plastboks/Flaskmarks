@@ -4,16 +4,13 @@
     <div class="container" role="main">
         {% include "flash.html" %}
         <h2>Profile - {{ g.user.username }} ({{ g.user.email }})</h2>
-        <section id='info'>
-            <img src="{{ g.user.email | gravatar }}" title="gravatar" alt="gravatar" class="shadow4 roundcorner5"/>
-            <ul class="infolist">
-                <li>Total marks: {{ bc+fc }} (Bookmarks: {{ bc }}, Feeds: {{ fc }})</li>
-                {% if lcm %}
-                <li>Last created mark: {{ lcm.created | datetime }}</li>
-                {% endif %}
-                <li>Last logon: {{ g.user.last_logged | datetime }}</li>
-            </ul>
-        </section>
+        <ul class="infolist list-group">
+            <li class="list-group-item"><strong>Total marks:</strong> {{ bc+fc+yc }} (Bookmarks: {{ bc }}, Feeds: {{ fc }}, Youtubes: {{ yc }})</li>
+            {% if lcm %}
+            <li class="list-group-item"><strong>Last created mark:</strong> {{ lcm.created | datetime }}</li>
+            {% endif %}
+            <li class="list-group-item"><strong>Last logon:</strong> {{ g.user.last_logged | datetime }}</li>
+        </ul>
         {{ wtf.quick_form(form,  button_map={'submit_button': 'primary'}) }}
     </div>
 {% endblock %}
