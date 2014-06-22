@@ -31,8 +31,11 @@ class Mark(db.Model):
                         lazy='joined',
                         backref='marks')
 
-    def __init__(self, owner, created=False):
-        self.owner = owner
+    valid_types = ['bookmark', 'feed', 'youtube']
+    valid_feed_types = ['feed', 'youtube']
+
+    def __init__(self, owner_id, created=False):
+        self.owner_id = owner_id
         if created:
             self.created = created
         else:

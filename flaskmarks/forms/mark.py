@@ -48,6 +48,16 @@ class TagListField(TextField):
             self.data = []
 
 
+class YoutubeChannelField(TextField):
+
+    def process_formdata(self, valuelist):
+        data = valuelist[0].strip()
+        url = "http://gdata.youtube.com/feeds/api/users/%s/uploads"\
+                % (data)
+        url = url + "?max-results=30"
+        self.data = url
+
+
 class MarkForm(Form):
     referrer = HiddenField([validators.URL(require_tld=False)])
     title = TextField('Title',
@@ -73,10 +83,8 @@ class YoutubeMarkForm(Form):
     title = TextField('Title',
                       [validators.Length(min=0, max=255)],
                       filters=[strip_filter])
-    url = TextField('User/Channel',
-                    [validators.Length(min=4, max=512),
-                     validators.URL(require_tld=False,
-                                    message='Not a valid URL')],
+    url = YoutubeChannelField('User/Channel',
+                    [validators.Length(min=3, max=255)],
                     filters=[strip_filter])
     tags = TagListField('Tags',
                         [validators.Length(min=0, max=255)])

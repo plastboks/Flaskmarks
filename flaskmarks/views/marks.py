@@ -112,8 +112,8 @@ def new_mark_selector():
 @marks.route('/mark/new/<string:type>', methods=['GET', 'POST'])
 @login_required
 def new_mark(type):
-    valid_types = ['bookmark', 'feed', 'youtube']
-    if not type in valid_types:
+    u = g.user
+    if not type in m.valid_types:
         abort(404)
 
     if type == 'youtube':
@@ -129,7 +129,7 @@ def new_mark(type):
             flash('Mark with this url "%s" already\
                   exists.' % (form.url.data), category='danger')
             return redirect(url_for('marks.allmarks'))
-        m = Mark(g.user.id)
+        m = Mark(u.id)
         form.populate_obj(m)
         m.type = type
         m.clicks = 0
@@ -155,14 +155,16 @@ def new_mark(type):
                            form=form)
 
 
-@marks.route('/mark/view/<int:id>', methods=['GET'])
+@marks.route('/mark/view/<int:id>/<string:type>', methods=['GET'])
 @login_required
-def view_mark(id):
+def view_mark(id, type):
     m = g.user.get_mark_by_id(id)
     if not m:
         abort(403)
-    if m.type != 'feed':
+
+    if m.type not in m.valid_feed_types:
         abort(404)
+
     data = feedparser.parse(m.url)
     if m:
         if not m.clicks:
@@ -171,7 +173,7 @@ def view_mark(id):
         m.clicks += 1
         db.session.add(m)
         db.session.commit()
-    return render_template('mark/view.html',
+    return render_template('mark/view_%s.html' % (type),
                            mark=m,
                            data=data,
                            title=m.title,

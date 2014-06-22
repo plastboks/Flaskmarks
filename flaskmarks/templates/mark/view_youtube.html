@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container" role="main">
+        {% include "flash.html" %}
+        <h2>{{ mark.title|truncate(70) }}</h2>
+        {% if mark.tags %}
+            <div class="btn-group">
+                {% for t in mark.tags %}
+                    <a href="{{ url_for('marks.mark_q_tag', slug=t.title) }}" class="btn btn-default" role="button">{{ t.title }}</a>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <div class="row">
+            {% for entry in data['entries'] %}
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    {% if entry['media_thumbnail'] %}
+                        <img class="media-object" src="{{ entry['media_thumbnail'][0]['url'] }}" alt="thumbnail">
+                    {% endif %}
+                    <div class="caption">
+                        <ul class='statslist'>
+                            <li class='date'>{{ entry['published'] | datewordsstr }} ago</li>
+                            {% if entry['yt_statistics'] %}
+                                <li class='viewcount'>{{ entry['yt_statistics']['viewcount'] | thousandsep }} views</li>
+                            {% endif %}
+                            {% if entry['gd_rating'] %}
+                                <li class='votes'>{{ entry['gd_rating']['numraters'] | thousandsep }} &hearts;</li>
+                            {% endif %}
+                            <li class='duration'>{{ entry['yt_duration']['seconds'] | sectomin}} min</li>
+                        </ul>
+                        {% for link in entry['links'] %}
+                            {% if link['rel'] == 'alternate' or link['rel'] == 'enclosure'%}
+                                <h3><a href="{{ link['href'] }}">{{ entry['title'] | truncate(20) }}</a></h3>
+                            {% endif %}
+                        {% endfor %}
+                        <p>
+                            {{ entry['summary'] | truncate(60) }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
