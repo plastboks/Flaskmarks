@@ -1,6 +1,16 @@
 {% extends "bootstrap/base.html" %}
 {% block title %}{{ config['SITE_TITLE'] }} - {{title}}{% endblock %}
 
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/mystyle.css')}}">
+{% endblock %}
+
+{% block scripts %}
+    {{super()}}
+    <script src="{{url_for('static', filename='js/myscripts.js')}}"></script>script>
+{% endblock %}
+
 {% block navbar %}{% include "navbar.html" %}{% endblock %}
 
 {% block content %}{% endblock %}
