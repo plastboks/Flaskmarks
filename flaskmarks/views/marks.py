@@ -134,11 +134,6 @@ def new_mark(type):
         m.type = type
         m.clicks = 0
 
-        """ Meta test area """
-        clicks = Meta('clicks', 0)
-        db.session.add(clicks)
-        m.metas = [clicks]
-
         if not form.title.data:
             soup = BSoup(urlopen(form.url.data))
             m.title = soup.title.string

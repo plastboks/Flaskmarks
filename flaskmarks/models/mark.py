@@ -36,6 +36,9 @@ class Mark(db.Model):
 
     def __init__(self, owner_id, created=False):
         self.owner_id = owner_id
+        clicks = Meta('clicks', 0)
+        db.session.add(clicks)
+        self.metas.append(clicks)
         if created:
             self.created = created
         else:
