@@ -4,6 +4,6 @@
     <div class="container" role="main">
         {% include "flash.html" %}
         <h2>Import marks</h2>
-        {{ wtf.quick_form(form,  button_map={'submit_button': 'primary'}) }}
+        {{ wtf.quick_form(form,  button_map={'submit_button': 'primary'}, enctype='multipart/form-data') }}
     </div>
 {% endblock %}
