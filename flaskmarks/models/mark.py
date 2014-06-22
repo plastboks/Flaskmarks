@@ -3,7 +3,7 @@
 from sqlalchemy import and_, or_, desc
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.associationproxy import association_proxy
-from datetime import datetime
+from datetime import datetime as dt
 from ..core.setup import db, config
 from .meta import Meta
 from .tag import Tag
@@ -43,7 +43,7 @@ class Mark(db.Model):
         if created:
             self.created = created
         else:
-            self.created = datetime.utcnow()
+            self.created = dt.utcnow()
 
     def insert_from_import(self, data):
         self.title = data['title']
@@ -58,11 +58,11 @@ class Mark(db.Model):
         db.session.add(clicks)
         self.metas = [clicks]
 
-        self.created = datetime.fromtimestamp(int(data['created']))
+        self.created = dt.fromtimestamp(int(data['created']))
         if data['updated']:
-            self.updated = datetime.fromtimestamp(int(data['updated']))
+            self.updated = dt.fromtimestamp(int(data['updated']))
         if data['last_clicked']:
-            self.last_clicked = datetime.fromtimestamp(int(data['last_clicked']))
+            self.last_clicked = dt.fromtimestamp(int(data['last_clicked']))
         """ TAGS """
         tags = []
         for t in data['tags']:

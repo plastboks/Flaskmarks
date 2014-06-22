@@ -53,7 +53,7 @@ class YoutubeChannelField(TextField):
     def process_formdata(self, valuelist):
         data = valuelist[0].strip()
         url = "http://gdata.youtube.com/feeds/api/users/%s/uploads"\
-                % (data)
+              % (data)
         url = url + "?max-results=30"
         self.data = url
 
@@ -84,8 +84,8 @@ class YoutubeMarkForm(Form):
                       [validators.Length(min=0, max=255)],
                       filters=[strip_filter])
     url = YoutubeChannelField('User/Channel',
-                    [validators.Length(min=3, max=255)],
-                    filters=[strip_filter])
+                              [validators.Length(min=3, max=255)],
+                              filters=[strip_filter])
     tags = TagListField('Tags',
                         [validators.Length(min=0, max=255)])
     submit_button = SubmitField('Save')

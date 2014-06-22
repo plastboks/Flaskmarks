@@ -113,7 +113,7 @@ def new_mark_selector():
 @login_required
 def new_mark(type):
     u = g.user
-    if not type in ['bookmark', 'feed', 'youtube']:
+    if type not in ['bookmark', 'feed', 'youtube']:
         abort(404)
 
     if type == 'youtube':
