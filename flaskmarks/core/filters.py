@@ -68,3 +68,8 @@ def _jinja_filter_gravatar(email):
 def _jinja_filter_enumerate(list):
     return enumerate(list)
 
+@app.template_filter('get_clicks')
+def _jinja_filter_get_clicks(metas):
+    for m in metas:
+        if m.name == 'clicks':
+            return m.value

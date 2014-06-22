@@ -16,4 +16,4 @@ class Meta(db.Model):
         self.value = value
 
     def __repr__(self):
-        return '<Meta %r>' % (self.title)
+        return '<Meta %r>' % (self.name)

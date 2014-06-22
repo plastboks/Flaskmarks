@@ -25,7 +25,7 @@ class Mark(db.Model):
     created = db.Column(db.DateTime)
     updated = db.Column(db.DateTime)
 
-    metas = relationship('Meta', backref='mark', lazy='dynamic')
+    metas = relationship('Meta', backref='mark', lazy='joined')
     tags = relationship('Tag',
                         secondary=ass_tbl,
                         lazy='joined',
@@ -49,6 +49,11 @@ class Mark(db.Model):
             self.type = 'youtube'
         self.url = data['url']
         self.clicks = data['clicks']
+
+        clicks = Meta('clicks', data['clicks'])
+        db.session.add(clicks)
+        self.metas = [clicks]
+
         self.created = datetime.fromtimestamp(int(data['created']))
         if data['updated']:
             self.updated = datetime.fromtimestamp(int(data['updated']))
