@@ -293,7 +293,7 @@ def import_marks():
             db.session.add(m)
             db.session.commit()
         flash('%s marks imported' % (count), category='success')
-        return redirect(url_for('profile.view'))
+        return redirect(url_for('profile.userprofile'))
     """
     GET
     """
