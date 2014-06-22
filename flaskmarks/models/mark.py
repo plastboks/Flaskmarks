@@ -44,6 +44,9 @@ class Mark(db.Model):
     def insert_from_import(self, data):
         self.title = data['title']
         self.type = data['type']
+        """ try to catch the wrongfully placed youtube feeds"""
+        if 'gdata.youtube.com' in data['url']:
+            self.type = 'youtube'
         self.url = data['url']
         self.clicks = data['clicks']
         self.created = datetime.fromtimestamp(int(data['created']))
