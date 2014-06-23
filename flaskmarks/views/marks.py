@@ -31,7 +31,7 @@ from ..forms import (
     UserProfileForm,
     MarksImportForm
 )
-from ..models import User, Mark, Tag, Meta
+from ..models import Mark
 
 marks = Blueprint('marks', __name__)
 

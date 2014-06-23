@@ -17,6 +17,7 @@ class User(db.Model):
     sort_type = db.Column(db.Unicode(255), default=u'clicks')
 
     marks = db.relationship('Mark', backref='owner', lazy='dynamic')
+    metas = db.relationship('UserMeta', backref='user', lazy='joined')
 
     @classmethod
     def by_uname_or_email(self, uname):

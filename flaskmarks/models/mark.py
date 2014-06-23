@@ -5,7 +5,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.ext.associationproxy import association_proxy
 from datetime import datetime as dt
 from ..core.setup import db, config
-from .meta import Meta
+from .meta import MarksMeta
 from .tag import Tag
 
 ass_tbl = db.Table('marks_tags', db.metadata,
@@ -26,7 +26,7 @@ class Mark(db.Model):
     created = db.Column(db.DateTime)
     updated = db.Column(db.DateTime)
 
-    metas = relationship('Meta', backref='mark', lazy='joined')
+    metas = relationship('MarksMeta', backref='mark', lazy='joined')
     tags = relationship('Tag',
                         secondary=ass_tbl,
                         lazy='joined',
@@ -37,7 +37,7 @@ class Mark(db.Model):
 
     def __init__(self, owner_id, created=False):
         self.owner_id = owner_id
-        clicks = Meta('clicks', 0)
+        clicks = MarksMeta('clicks', 0)
         db.session.add(clicks)
         self.metas.append(clicks)
         if created:
@@ -54,7 +54,7 @@ class Mark(db.Model):
         self.url = data['url']
         self.clicks = data['clicks']
 
-        clicks = Meta('clicks', data['clicks'])
+        clicks = MarksMeta('clicks', data['clicks'])
         db.session.add(clicks)
         self.metas = [clicks]
 
