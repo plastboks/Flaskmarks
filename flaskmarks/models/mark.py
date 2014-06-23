@@ -50,7 +50,7 @@ class Mark(db.Model):
             self.type = 'youtube'
         self.url = data['url']
         self.clicks = data['clicks']
-        
+
         for meta in self.metas:
             if meta.name == 'clicks':
                 meta.value = data['clicks']
