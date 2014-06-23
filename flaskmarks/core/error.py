@@ -22,13 +22,13 @@ def unauthorized(error):
     if request.referrer \
         and is_safe_url(request.referrer) \
             and request.referrer is not "/":
-        flash('Unauthorized access.', category='error')
+        flash('Unauthorized access.', category='danger')
     return redirect(url_for('auth.login'))
 
 
 @app.errorhandler(403)
 def forbidden(error):
-    flash('Forbidden access.', category='error')
+    flash('Forbidden access.', category='danger')
     return redirect(url_for('marks.allmarks'))
 
 
