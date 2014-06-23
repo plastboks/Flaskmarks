@@ -2,7 +2,7 @@
 
 from sqlalchemy import or_, desc, asc, func
 from ..core.setup import db, config, bcrypt
-from .mark import Mark
+from .mark import Mark, MarksMeta
 from .tag import Tag
 
 
@@ -36,7 +36,7 @@ class User(db.Model):
     def marks(self, page):
         base = self.my_marks()
         if self.sort_type == u'clicks':
-            base = base.order_by(desc(Mark.clicks))\
+            base = base.order_by(desc(Mark.metas.any(MarksMeta.name == 'clicks')))\
                        .order_by(desc(Mark.created))
         if self.sort_type == u'dateasc':
             base = base.order_by(asc(Mark.created))
@@ -49,7 +49,7 @@ class User(db.Model):
             base = self.my_marks().order_by(desc(Mark.created))
             return base.paginate(page, self.per_page, False)
         if type == 'clicked':
-            base = self.my_marks().filter(Mark.clicks > 0)\
+            base = self.my_marks().filter(Mark.metas.clicks > 0)\
                                   .order_by(desc(Mark.last_clicked))
             return base.paginate(page, self.per_page, False)
         return False
@@ -71,7 +71,7 @@ class User(db.Model):
         string = "%"+string+"%"
         base = self.my_marks().filter(or_(Mark.title.like(string),
                                           Mark.url.like(string)))
-        return base.order_by(desc(Mark.clicks))\
+        return base.order_by(desc(Mark.metas.clicks))\
                    .paginate(page, self.per_page, False)
 
     def q_marks_by_url(self, string):
@@ -81,7 +81,7 @@ class User(db.Model):
         return self.my_tags().all()
 
     def tags_by_click(self, page):
-        return self.my_tags().order_by(desc(Tag.marks.any(Mark.clicks)))\
+        return self.my_tags().order_by(desc(Tag.marks.any(Mark.metas.clicks)))\
                              .paginate(page, self.per_page, False)
 
     def authenticate_user(self, password):

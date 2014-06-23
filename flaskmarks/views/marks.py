@@ -132,7 +132,6 @@ def new_mark(type):
         m = Mark(u.id)
         form.populate_obj(m)
         m.type = type
-        m.clicks = 0
 
         if not form.title.data:
             soup = BSoup(urlopen(form.url.data))
@@ -162,10 +161,11 @@ def view_mark(id, type):
 
     data = feedparser.parse(m.url)
     if m:
-        if not m.clicks:
-            m.clicks = 0
-        m.last_clicked = datetime.utcnow()
-        m.clicks += 1
+        for meta in m.metas:
+            if meta.name == 'clicks':
+                meta.value = int(meta.value) + 1
+            if meta.name == 'last_clicked':
+                meta.value = datetime.utcnow()
         db.session.add(m)
         db.session.commit()
     return render_template('mark/view_%s.html' % (type),
@@ -235,10 +235,11 @@ def ajax_mark_inc():
         id = int(request.args.get('id'))
         m = g.user.get_mark_by_id(id)
         if m:
-            if not m.clicks:
-                m.clicks = 0
-            m.last_clicked = datetime.utcnow()
-            m.clicks += 1
+            for meta in m.metas:
+                if meta.name == 'clicks':
+                    meta.value = int(meta.value) + 1
+                if meta.name == 'last_clicked':
+                    meta.value = datetime.utcnow()
             db.session.add(m)
             db.session.commit()
             return jsonify(status='success')
@@ -259,9 +260,8 @@ def export_marks():
           'clicks': m.clicks,
           'created': m.created.strftime('%s'),
           'updated': m.updated.strftime('%s') if m.updated else '',
-          'last_clicked': m.last_clicked.strftime('%s') if m.last_clicked else '',
           'tags': [t.title for t in m.tags],
-          'metas': [meta.name for meta in m.metas]}
+          'metas': [{meta.name: meta.value} for meta in m.metas]}
          for m in u.all_marks()]
     return jsonify(marks=d)
 
@@ -311,10 +311,11 @@ def mark_redirect(id):
 def mark_meta(id):
     m = g.user.get_mark_by_id(id)
     if m:
-        if not m.clicks:
-            m.clicks = 0
-        m.last_clicked = datetime.utcnow()
-        m.clicks += 1
+        for meta in m.metas:
+            if meta.name == 'clicks':
+                meta.value = int(meta.value) + 1
+            if meta.name == 'last_clicked':
+                meta.value = datetime.utcnow()
         db.session.add(m)
         db.session.commit()
         return render_template('meta.html', url=m.url)
