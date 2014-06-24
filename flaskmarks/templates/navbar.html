@@ -45,7 +45,7 @@
             <ul class="nav navbar-nav navbar-right">
                 {% if g.user.is_authenticated() %}
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile<b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> Profile<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="{{ url_for('profile.userprofile') }}"><span class="glyphicon glyphicon-dashboard"></span> Show</a></li>
                             <li class="divider"></li>
