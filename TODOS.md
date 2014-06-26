@@ -1,3 +1,4 @@
+- [ ] Get sorting and listing to work (again) after 'metadata in separate table' migration.
 - [ ] RESTful everything.
 - [ ] Separate YouTube type for expanding the features in the feed view. Features like pages etc. Also for easier YouTube feedmark creations.
 - [ ] Meta system for extending marks with custom data (ex: YouTube feeds args etc..).
