@@ -71,7 +71,7 @@ class User(db.Model):
         string = "%"+string+"%"
         base = self.my_marks().filter(or_(Mark.title.like(string),
                                           Mark.url.like(string)))
-        return base.order_by(desc(Mark.metas.clicks))\
+        return base.order_by(desc(Mark.metas.any(MarksMeta.name == 'clicks')))\
                    .paginate(page, self.per_page, False)
 
     def q_marks_by_url(self, string):
