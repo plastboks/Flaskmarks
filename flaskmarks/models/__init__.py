@@ -3,4 +3,3 @@
 from .user import User
 from .mark import Mark
 from .tag import Tag
-from .meta import MarksMeta, UserMeta

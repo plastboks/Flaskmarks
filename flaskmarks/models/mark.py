@@ -5,7 +5,6 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.ext.associationproxy import association_proxy
 from datetime import datetime as dt
 from ..core.setup import db, config
-from .meta import MarksMeta
 from .tag import Tag
 
 ass_tbl = db.Table('marks_tags', db.metadata,
@@ -21,10 +20,11 @@ class Mark(db.Model):
     type = db.Column(db.Unicode(255), nullable=False)
     title = db.Column(db.Unicode(255), nullable=False)
     url = db.Column(db.Unicode(512), nullable=False)
+    clicks = db.Column(db.Integer, default=0)
+    last_clicked = db.Column(db.DateTime)
     created = db.Column(db.DateTime)
     updated = db.Column(db.DateTime)
 
-    metas = relationship('MarksMeta', backref='mark', lazy='joined')
     tags = relationship('Tag',
                         secondary=ass_tbl,
                         lazy='joined',
@@ -35,8 +35,6 @@ class Mark(db.Model):
 
     def __init__(self, owner_id, created=False):
         self.owner_id = owner_id
-        self.metas.append(MarksMeta('clicks', 0))
-        self.metas.append(MarksMeta('last_clicked', False))
         if created:
             self.created = created
         else:
@@ -50,16 +48,12 @@ class Mark(db.Model):
             self.type = 'youtube'
         self.url = data['url']
         self.clicks = data['clicks']
-
-        for meta in self.metas:
-            if meta.name == 'clicks':
-                meta.value = data['clicks']
-
         self.created = dt.fromtimestamp(int(data['created']))
+
         if data['updated']:
             self.updated = dt.fromtimestamp(int(data['updated']))
         if data['last_clicked']:
-            self.metas.append(MarksMeta('last_clicked', dt.fromtimestamp(int(data['last_clicked']))))
+            self.last_clicked = dt.fromtimestamp(int(data['last_clicked']))
 
         """ TAGS """
         tags = []
